@@ -16,11 +16,11 @@ export const environment = {
   appPreviewDocsUrl: 'https://preview.keenthemes.com/metronic8/angular/docs',
   appPreviewChangelogUrl: 'https://preview.keenthemes.com/metronic8/angular/docs/changelog',
   appDemos: {
-    'demo1': {
+    'stss-base-template-ui': {
       'title': 'Demo 1',
       'description': 'Default Dashboard',
       'published': true,
-      'thumbnail': './assets/media/demos/demo1.png'
+      'thumbnail': './assets/media/demos/stss-base-template-ui.png'
     },
 
     'stss-base-template-ui': {
@@ -79,74 +79,74 @@ export const environment = {
       'thumbnail': './assets/media/demos/demo9.png'
     },
 
-    'demo10': {
+    'stss-base-template-ui0': {
       'title': 'Demo 10',
       'description': 'Modern Dashboard',
       'published': false,
-      'thumbnail': './assets/media/demos/demo10.png'
+      'thumbnail': './assets/media/demos/stss-base-template-ui0.png'
     },
 
-    'demo11': {
+    'stss-base-template-ui1': {
       'title': 'Demo 11',
       'description': 'Light Dashboard',
       'published': false,
-      'thumbnail': './assets/media/demos/demo11.png'
+      'thumbnail': './assets/media/demos/stss-base-template-ui1.png'
     },
 
-    'demo12': {
+    'stss-base-template-ui2': {
       'title': 'Demo 12',
       'description': 'Reporting System',
       'published': false,
-      'thumbnail': './assets/media/demos/demo12.png'
+      'thumbnail': './assets/media/demos/stss-base-template-ui2.png'
     },
 
-    'demo13': {
+    'stss-base-template-ui3': {
       'title': 'Demo 13',
       'description': 'Classic Dashboard',
       'published': false,
-      'thumbnail': './assets/media/demos/demo13.png'
+      'thumbnail': './assets/media/demos/stss-base-template-ui3.png'
     },
 
-    'demo14': {
+    'stss-base-template-ui4': {
       'title': 'Demo 14',
       'description': 'Creative Dashboard',
       'published': false,
-      'thumbnail': './assets/media/demos/demo14.png'
+      'thumbnail': './assets/media/demos/stss-base-template-ui4.png'
     },
 
-    'demo15': {
+    'stss-base-template-ui5': {
       'title': 'Demo 15',
       'description': 'Minimalistic Dashboard',
       'published': false,
-      'thumbnail': './assets/media/demos/demo15.png'
+      'thumbnail': './assets/media/demos/stss-base-template-ui5.png'
     },
 
-    'demo16': {
+    'stss-base-template-ui6': {
       'title': 'Demo 16',
       'description': 'Modern Dashboard',
       'published': false,
-      'thumbnail': './assets/media/demos/demo16.png'
+      'thumbnail': './assets/media/demos/stss-base-template-ui6.png'
     },
 
-    'demo17': {
+    'stss-base-template-ui7': {
       'title': 'Demo 17',
       'description': 'Backend System',
       'published': false,
-      'thumbnail': './assets/media/demos/demo17.png'
+      'thumbnail': './assets/media/demos/stss-base-template-ui7.png'
     },
 
-    'demo18': {
+    'stss-base-template-ui8': {
       'title': 'Demo 18',
       'description': 'System Dashboard',
       'published': false,
-      'thumbnail': './assets/media/demos/demo18.png'
+      'thumbnail': './assets/media/demos/stss-base-template-ui8.png'
     },
 
-    'demo19': {
+    'stss-base-template-ui9': {
       'title': 'Demo 19',
       'description': 'Light Dashboard',
       'published': false,
-      'thumbnail': './assets/media/demos/demo19.png'
+      'thumbnail': './assets/media/demos/stss-base-template-ui9.png'
     },
 
     'stss-base-template-ui0': {
