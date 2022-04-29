@@ -5,7 +5,9 @@
         id="kt_header"
         [ngClass]="headerCSSClasses"
         class="header align-items-stretch"
-        data-kt-sticky="true" data-kt-sticky-name="header" data-kt-sticky-offset="{default: '200px', lg: '300px'}"
+        data-kt-sticky="true"
+        data-kt-sticky-name="header"
+        data-kt-sticky-offset="{default: '200px', lg: '300px'}"
         #ktHeader
       ></app-header>
 
@@ -29,18 +31,3 @@
 
 <app-scripts-init></app-scripts-init>
 <app-scroll-top></app-scroll-top>
-
-<!-- begin:: Drawers -->
-<app-activity-drawer></app-activity-drawer>
-<app-messenger-drawer></app-messenger-drawer>
-<!-- end:: Drawers -->
-
-<!-- end:: Engage -->
-<app-engages></app-engages>
-<!-- end:: Engage -->
-
-<!-- begin:: Modals -->
-<app-main-modal></app-main-modal>
-<app-invite-users-modal></app-invite-users-modal>
-<app-upgrade-plan-modal></app-upgrade-plan-modal>
-<!-- end:: Modals -->
