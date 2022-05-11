@@ -3,3 +3,11 @@
 
 // Replace above style with this SCSS file to enable dark mode styles
 //@import "./assets/sass/style.dark";
+
+body{
+    background-color: $secondary-local;
+}
+
+.footer{
+    background-color: $white;
+}
