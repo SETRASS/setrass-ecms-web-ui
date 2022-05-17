@@ -1,6 +1,6 @@
 {
   "name": "stss-base-template-ui",
-  "version": "8.0.38",
+  "version": "0.0.1",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",

@@ -17,6 +17,8 @@ $gray-800: 										    if(isDarkMode(), #CDCDDE, #3F4254) !default;
 $gray-900: 										    if(isDarkMode(), #FFFFFF, #181C32) !default;
 $text-muted:                                        $gray-500 !default;
 
+$secondary-local:                                   #EBEFF1;
+
 // Dark Mode
 $dark-mode-page-bg-color:                           #151521 !default;
 

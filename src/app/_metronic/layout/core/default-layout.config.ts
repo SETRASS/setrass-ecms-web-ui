@@ -159,7 +159,7 @@ export const DefaultLayoutConfig: ILayout = {
     primaryColor: '#009EF7',
     darkSkinEnabled: true,
     body: {
-      backgroundImage: 'assets/media/patterns/header-bg.jpg'
+      backgroundImage: 'assets/media/patterns/header-bg-2.jpg'
     }
   },
   loader: {
