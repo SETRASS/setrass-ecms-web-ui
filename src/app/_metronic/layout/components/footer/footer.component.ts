@@ -9,6 +9,7 @@ import { LayoutService } from '../../core/layout.service';
 export class FooterComponent implements OnInit {
   footerContainerCssClasses: string = '';
   currentDateStr: string = new Date().getFullYear().toString();
+  systemName: string = 'Sistema Electrónico de Gestión de Casos Laborales';
   constructor(private layout: LayoutService) {}
 
   ngOnInit(): void {
