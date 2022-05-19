@@ -10,7 +10,7 @@ body {
     padding: 0px;
     font-size: $root-font-size !important;
     font-weight: $font-weight-base;
-  font-family: 'Pluto Sans', sans-serif;
+  font-family: 'Pluto Sans Bold', sans-serif;
     // Tablet mode
     @include media-breakpoint-down(lg) {
         font-size: $root-font-size-lg !important;
