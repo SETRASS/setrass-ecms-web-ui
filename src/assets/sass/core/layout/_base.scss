@@ -10,7 +10,7 @@ body {
     padding: 0px;
     font-size: $root-font-size !important;
     font-weight: $font-weight-base;
-  font-family: 'Pluto Sans', sans-serif;
+  font-family: 'Pluto Sans Bold', sans-serif;
     // Tablet mode
     @include media-breakpoint-down(lg) {
         font-size: $root-font-size-lg !important;
@@ -45,12 +45,4 @@ router-outlet {
 canvas {
     user-select: none;
 }
-@font-face {
-  font-family: 'Pluto Sans Bold';
-  src: url('PlutoSansBold.eot');
-  src: url('PlutoSansBold.eot?#iefix') format('embedded-opentype'),
-  url('PlutoSansBold.woff') format('woff'),
-  url('PlutoSansBold.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-}
+
