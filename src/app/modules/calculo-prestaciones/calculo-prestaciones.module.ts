@@ -1,10 +1,16 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { DatosTrabajadorComponent } from './components/datos-trabajador/datos-trabajador.component';
+import {WidgetsModule} from "../../_metronic/partials";
+
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    DatosTrabajadorComponent
+  ],
   imports: [
-    CommonModule
+    CommonModule,
+    WidgetsModule
   ]
 })
 export class CalculoPrestacionesModule { }
