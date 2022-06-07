@@ -59,6 +59,6 @@ const routes: Routes = [
     NgbTooltipModule,
     TranslateModule,
   ],
-  exports: [RouterModule],
+  exports: [RouterModule, FooterComponent, HeaderComponent],
 })
 export class LayoutModule {}
