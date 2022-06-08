@@ -1,1 +1,545 @@
-<p>datos-empleador works!</p>
+<div class="card shadow-sm">
+  <div class="card-header">
+    <h3 class="card-title">Datos de la empresa</h3>
+    <!--<div class="card-toolbar">
+      <button type="button" class="btn btn-sm btn-light">
+        Action
+      </button>
+    </div>-->
+  </div>
+  <div class="card-body">
+    <!--begin::Stepper-->
+    <div #kt_stepper_vertical class="stepper stepper-pills stepper-column d-flex flex-column flex-lg-row" >
+      <!--begin::Aside-->
+      <div class="d-flex flex-row-auto w-100 w-lg-300px">
+        <!--begin::Nav-->
+        <div class="stepper-nav flex-cente">
+          <!--begin::Step 1-->
+          <div class="stepper-item me-5 current" data-kt-stepper-element="nav">
+            <!--begin::Line-->
+            <div class="stepper-line w-40px"></div>
+            <!--end::Line-->
+
+            <!--begin::Icon-->
+            <div class="stepper-icon w-40px h-40px" >
+              <i class="stepper-check fas fa-check">checked</i>
+              <span class="stepper-number">1</span>
+            </div>
+            <!--end::Icon-->
+
+            <!--begin::Label-->
+            <div class="stepper-label">
+              <h3 class="stepper-title">
+                Datos de la empresa
+              </h3>
+
+              <div class="stepper-desc">
+               
+              </div>
+            </div>
+            <!--end::Label-->
+          </div>
+          <!--end::Step 1-->
+
+          <!--begin::Step 2-->
+          <div class="stepper-item me-5" data-kt-stepper-element="nav">
+            <!--begin::Line-->
+            <div class="stepper-line w-40px"></div>
+            <!--end::Line-->
+
+            <!--begin::Icon-->
+            <div class="stepper-icon w-40px h-40px">
+              <i class="stepper-check fas fa-check"></i>
+              <span class="stepper-number">2</span>
+            </div>
+            <!--begin::Icon-->
+
+            <!--begin::Label-->
+            <div class="stepper-label">
+              <h3 class="stepper-title">
+                Datos del trabajador
+              </h3>
+
+              <div class="stepper-desc">
+
+              </div>
+            </div>
+            <!--end::Label-->
+          </div>
+          <!--end::Step 2-->
+
+          <!--begin::Step 3-->
+          <div class="stepper-item me-5" data-kt-stepper-element="nav">
+            <!--begin::Line-->
+            <div class="stepper-line w-40px"></div>
+            <!--end::Line-->
+
+            <!--begin::Icon-->
+            <div class="stepper-icon w-40px h-40px">
+              <i class="stepper-check fas fa-check"></i>
+              <span class="stepper-number">3</span>
+            </div>
+            <!--begin::Icon-->
+
+            <!--begin::Label-->
+            <div class="stepper-label">
+              <h3 class="stepper-title">
+                Datos salariales
+              </h3>
+
+              <div class="stepper-desc">
+
+              </div>
+            </div>
+            <!--end::Label-->
+          </div>
+          <!--end::Step 3-->
+
+          <!--begin::Step 4-->
+          <div class="stepper-item me-5" data-kt-stepper-element="nav">
+            <!--begin::Line-->
+            <div class="stepper-line w-40px"></div>
+            <!--end::Line-->
+
+            <!--begin::Icon-->
+            <div class="stepper-icon w-40px h-40px">
+              <i class="stepper-check fas fa-check"></i>
+              <span class="stepper-number">4</span>
+            </div>
+            <!--begin::Icon-->
+
+            <!--begin::Label-->
+            <div class="stepper-label">
+              <h3 class="stepper-title">
+                Salario en especie
+              </h3>
+
+              <div class="stepper-desc">
+
+              </div>
+            </div>
+            <!--end::Label-->
+          </div>
+          <!--end::Step 4-->
+        </div>
+        <!--end::Nav-->
+      </div>
+
+      <!--begin::Content-->
+      <div class="flex-row-fluid">
+        <!--begin::Form-->
+        <form class="form" novalidate="novalidate">
+          <!--begin::Group-->
+          <div class="">
+            <!--begin:: Datos empresa-->
+            <div class="flex-column gap-5 current" data-kt-stepper-element="content">
+              <!--begin::Input group-->
+              <div class="row mb-10">
+                <div class="col-sm-12 col-lg-3">
+                  <!--begin::Label-->
+                <label class="form-label">Nombre de la empresa</label>
+                <!--end::Label-->
+
+                <!--begin::Input-->
+                <input type="text" class="form-control form-control-solid" name="input1" placeholder="" value=""/>
+                <!--end::Input-->
+                </div>
+                <div class="col-sm-12 col-lg-3">
+                  <!--begin::Label-->
+                  <label class="form-label">RTN</label>
+                  <!--end::Label-->
+
+                  <!--begin::Input-->
+                  <input type="text" class="form-control form-control-solid" name="input2" placeholder="" value=""/>
+                  <!--end::Input-->
+                </div>
+                <div class="col-sm-12 col-lg-3">
+                  <!--begin::Label-->
+                  <label class="form-label">Actividad económica</label>
+                  <!--end::Label-->
+
+                  <!--begin::Input-->
+                  <select type="text" class="form-select form-select-solid" name="input2" placeholder="">
+                    <option value="">Industria</option>
+                  </select>
+                  <!--end::Input-->
+                </div>
+                <div class="col-sm-12 col-lg-3">
+                  <!--begin::Label-->
+                  <label class="form-label">Tamaño de la empresa</label>
+                  <!--end::Label-->
+
+                  <!--begin::Input-->
+                  <select type="text" class="form-select form-select-solid" name="input2" placeholder="">
+                    <option value="">0 a 10 Empleados</option>
+                    <option value="">11 a 20 Empleados</option>
+                    <option value="">22 a 30 Empleados</option>
+                  </select>
+                  <!--end::Input-->
+                </div>
+              </div>
+              <!--end::Input group-->
+            </div>
+            <!--begin:: Datos trabajador-->
+            <div class="flex-column gap-5" data-kt-stepper-element="content">
+              
+              <div class="row mb-10">
+                <div class="col-sm-12 col-lg-3">
+                  <!--begin::Label-->
+                  <label class="form-label">Tipo identificación</label>
+                  <!--end::Label-->
+                  <!--begin::Input-->
+                  <select name="" id="" class="form-select form-select-solid">
+                    <option value="">DNI</option>
+                    <option value="">CARNET DE RESIDENTE</option>
+                  </select>
+                  <!--end::Input-->
+                </div>
+                <div class="col-sm-12 col-lg-3">
+                  <!--begin::Label-->
+                  <label class="form-label">Número de identificación</label>
+                  <!--end::Label-->
+
+                  <!--begin::Input-->
+                  <input type="text" class="form-control form-control-solid" name="input1" placeholder="" value=""/>
+                  <!--end::Input-->
+                </div>
+                <div class="col-sm-12 col-lg-3">
+                  <!--begin::Label-->
+                  <label class="form-label">Nombre del trabajador</label>
+                  <!--end::Label-->
+
+                  <!--begin::Input-->
+                  <input type="text" class="form-control form-control-solid" name="input3" placeholder="" value=""/>
+                  <!--end::Input-->
+                </div>
+                <div class="col-sm-12 col-lg-3">
+                  <!--begin::Label-->
+                  <label class="form-label">Edad</label>
+                  <!--end::Label-->
+
+                  <!--begin::Input-->
+                  <input type="text" class="form-control form-control-solid" name="input3" placeholder="" value=""/>
+                  <!--end::Input-->
+                </div>
+              </div>
+              <div class="row mb-10">
+                <div class="col-sm-12 col-lg-3">
+                  <!--begin::Label-->
+                  <label class="form-label">Sexo</label>
+                  <!--end::Label-->
+                  <!--begin::Input-->
+                  <select name="" id="" class="form-select form-select-solid">
+                    <option value="">Masculino</option>
+                    <option value="">Femenino</option>
+                  </select>
+                  <!--end::Input-->
+                </div>
+                <div class="col-sm-12 col-lg-3">
+                  <!--begin::Label-->
+                  <label class="form-label">Departamento</label>
+                  <!--end::Label-->
+                  <!--begin::Input-->
+                  <select name="" id="" class="form-select form-select-solid">
+                    <option value="">Comayagua</option>
+                    <option value="">Francisco Morazán</option>
+                  </select>
+                  <!--end::Input-->
+                </div>
+                <div class="col-sm-12 col-lg-3">
+                  <!--begin::Label-->
+                  <label class="form-label">Municipio</label>
+                  <!--end::Label-->
+                  <!--begin::Input-->
+                  <select name="" id="" class="form-select form-select-solid">
+                    <option value="">Comayagua</option>
+                    <option value="">Distrito central</option>
+                  </select>
+                  <!--end::Input-->
+                </div>
+              </div>
+              <!-- <div class="fv-row mb-10">
+                
+              </div> -->
+              
+            </div>
+            <!--begin::Step 1-->
+
+            <!--begin:: Datos Salariales-->
+            <div class="flex-column gap-5" data-kt-stepper-element="content">
+              <div class="row mb-10">
+                <div class="col-sm-12 col-lg-3">
+                  <!--begin::Label-->
+                  <label class="form-label">Fecha de inicio</label>
+                  <!--end::Label-->
+                  <!--begin::Input-->
+                  <input type="date" class="form-control form-control-solid" name="input1" placeholder="" value=""/>
+                  
+                  <!--end::Input-->
+                </div>
+                <div class="col-sm-12 col-lg-3">
+                  <!--begin::Label-->
+                  <label class="form-label">Fecha de despido</label>
+                  <!--end::Label-->
+
+                  <!--begin::Input-->
+                  <input type="date" class="form-control form-control-solid" name="input1" placeholder="" value=""/>
+                  <!--end::Input-->
+                </div>
+                <div class="col-sm-12 col-lg-3">
+                  <!--begin::Label-->
+                  <label class="form-label">¿Recibe un salario fijo?</label>
+                  <!--end::Label-->
+
+                  <!--begin::Input-->
+                  <select 
+                    [(ngModel)]="haveSalary" 
+                    [ngModelOptions]="{standalone: true}"
+                    class="form-select form-select-solid">
+                    <option *ngFor="let option of salaryOptions">{{option}}</option>
+                  </select>
+            
+                  <!--end::Input-->
+                </div>
+                <div class="col-sm-12 col-lg-3">
+                  <!--begin::Label-->
+                  <label class="form-label">Salario</label>
+                  <!--end::Label-->
+
+                  <!--begin::Input-->
+                  <input type="number" class="form-control form-control-solid" name="input3" placeholder="L. 18,000.00" value=""/>
+                  <!--end::Input-->
+                </div>
+              </div>
+              <div *ngIf="haveSalary === 'NO'" class="row mb-10">
+                <div class="col-12">
+                  <div class="row mb-10">
+                    <b>Ingrese los salarios recibidos en los últimos seis meses.</b>
+                  </div>
+                  <div class="row mb-10">
+                    <div class="col-sm-12 col-lg-3">
+                      <!--begin::Label-->
+                      <label class="form-label">Salario Mes 1</label>
+                      <!--end::Label-->
+                      <!--begin::Input-->
+                      <input type="number" class="form-control form-control-solid" name="input1" placeholder="" value=""/>
+                      
+                      <!--end::Input-->
+                    </div>
+                    <div class="col-sm-12 col-lg-3">
+                      <!--begin::Label-->
+                      <label class="form-label">Salario Mes 2</label>
+                      <!--end::Label-->
+                      <!--begin::Input-->
+                      <input type="number" class="form-control form-control-solid" name="input1" placeholder="" value=""/>
+                      
+                      <!--end::Input-->
+                    </div>
+                    <div class="col-sm-12 col-lg-3">
+                      <!--begin::Label-->
+                      <label class="form-label">Salario Mes 3</label>
+                      <!--end::Label-->
+                      <!--begin::Input-->
+                      <input type="number" class="form-control form-control-solid" name="input1" placeholder="" value=""/>
+                      
+                      <!--end::Input-->
+                    </div>
+                    <div class="col-sm-12 col-lg-3">
+                      <!--begin::Label-->
+                      <label class="form-label">Salario Mes 4</label>
+                      <!--end::Label-->
+                      <!--begin::Input-->
+                      <input type="number" class="form-control form-control-solid" name="input1" placeholder="" value=""/>
+                      
+                      <!--end::Input-->
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-12 col-lg-3">
+                      <!--begin::Label-->
+                      <label class="form-label">Salario Mes 5</label>
+                      <!--end::Label-->
+                      <!--begin::Input-->
+                      <input type="number" class="form-control form-control-solid" name="input1" placeholder="" value=""/>
+                      
+                      <!--end::Input-->
+                    </div>
+                    <div class="col-sm-12 col-lg-3">
+                      <!--begin::Label-->
+                      <label class="form-label">Salario Mes 6</label>
+                      <!--end::Label-->
+                      <!--begin::Input-->
+                      <input type="number" class="form-control form-control-solid" name="input1" placeholder="" value=""/>
+                      
+                      <!--end::Input-->
+                    </div>
+                  </div>
+                  <div class="row mt-10 d-flex justify-content-end">
+                    <div class="col-6 d-flex justify-content-end">
+                      <a href="#" class="btn btn-primary">Cálcular salario promedio</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row mb-10">
+                <div class="col-12">
+                  <div class="row mb-10">
+                    <b>Seleccione los beneficios a los que gozó.</b>
+                  </div>
+                  <div class="row mb-10">
+                    <div class="col-sm-12">
+                      <ul class="nav nav-tabs nav-line-tabs nav-line-tabs-2x mb-5 fs-6">
+                        <li class="nav-item" role="presentation">
+                          <button class="nav-link active" data-bs-toggle="tab" role="tab" data-bs-target="#kt_tab_pane_4">Comisiones</button>
+                        </li>
+                        <li class="nav-item">
+                          <button class="nav-link" data-bs-toggle="tab" role="tab" data-bs-target="#kt_tab_pane_5">Horas Extras</button>
+                        </li>
+                        <li class="nav-item">
+                          <button class="nav-link" data-bs-toggle="tab" role="tab" data-bs-target="#kt_tab_pane_6">Bonificaciones</button>
+                        </li>
+                      </ul>
+                      <div class="tab-content" id="myTabContent">
+                          <div class="tab-pane fade show active" id="kt_tab_pane_4" role="tabpanel">
+                            <div class="row mb-10">
+                              <div class="col-12 mt-5">
+                                <b>Ingrese la cantidad de comisiones de los últimos seis meses.</b>
+                              </div>
+                            </div>
+                            <div class="row mb-10">
+                              <div class="col-sm-12 col-lg-3">
+                                <label class="form-label">Comision Mes 1</label>
+                                <input type="number" class="form-control form-control-solid" name="input1" placeholder="0" value="0"/>
+                              </div>
+                              <div class="col-sm-12 col-lg-3">
+                                <label class="form-label">Comision Mes 2</label>
+                                <input type="number" class="form-control form-control-solid" name="input1" placeholder="0" value="0"/>
+                              </div>
+                              <div class="col-sm-12 col-lg-3">
+                                <label class="form-label">Comision Mes 3</label>
+                                <input type="number" class="form-control form-control-solid" name="input1" placeholder="0" value="0"/>
+                              </div>
+                              <div class="col-sm-12 col-lg-3">
+                                <label class="form-label">Comision Mes 4</label>
+                                <input type="number" class="form-control form-control-solid" name="input1" placeholder="0" value="0"/>
+                              </div>
+                            </div>
+                            <div class="row mb-10">
+                              <div class="col-sm-12 col-lg-3">
+                                <label class="form-label">Comision Mes 5</label>
+                                <input type="number" class="form-control form-control-solid" name="input1" placeholder="0" value="0"/>
+                              </div>
+                              <div class="col-sm-12 col-lg-3">
+                                <label class="form-label">Comision Mes 6</label>
+                                <input type="number" class="form-control form-control-solid" name="input1" placeholder="0" value="0"/>
+                              </div>
+                            </div>
+                            <div class="row mb-10">
+                              <div class="col-sm-12 col-lg-3">
+                                <b>Comisiones Promedio</b>
+                              </div>
+                              <div class="col-sm-12 col-lg-9">
+                                ∑(M1 + M2 + M3 + M4 + M5 + M6) ÷ 6      =  <b>L. 18,000.00</b>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="tab-pane fade" id="kt_tab_pane_5" role="tabpanel">
+                              Nulla est ullamco ut irure incididunt nulla Lorem Lorem minim irure officia enim reprehenderit.
+                          </div>
+                          <div class="tab-pane fade" id="kt_tab_pane_6" role="tabpanel">
+                              Sint sit mollit irure quis est nostrud cillum consequat Lorem esse do quis dolor esse fugiat sunt do.
+                          </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--begin::Datos Salariales-->
+
+            <!--begin:: Salario en especie-->
+            <div class="flex-column gap-5" data-kt-stepper-element="content">
+              <!--begin::subtitle group-->
+              <div class="row mb-10">
+                <div class="col-12">
+                  <b>Seleccione la opción a la que usted aplica</b>
+                </div>
+              </div>
+              <!--end::Subtitle group-->
+              <!--begin::Input group-->
+              <div class="row mb-10">
+                <div class="col-sm-12 col-lg-4">
+                  <button type="button" class="btn btn-light block" style="width: 100%;">Alimentación</button>
+                </div>
+                <div class="col-sm-12 col-lg-4">
+                  <button type="button" class="btn btn-light" style="width: 100%;">Vivienda</button>
+                </div>
+                <div class="col-sm-12 col-lg-4">
+                  <button href="#" class="btn btn-light" style="width: 100%;">Vivienda + Alimentación</button>
+                </div>
+              </div>
+              <div class="row mb-10">
+                <div class="col-sm-12 col-lg-4">
+                  <button href="#" class="btn btn-light" style="width: 100%;">No aplica</button>
+                </div>
+              </div>
+              <div class="row mb-10">
+                <div class="col-12">
+                  <div class="row mb-10">
+                    <b>¿Cuántos tiempos de comida recibe?</b>
+                  </div>
+                  <div class="row mb-10">
+                    <div class="col-sm-12 col-lg-4">
+                      <button href="#" class="btn btn-light" style="width: 100%;">1 tiempo de comida</button>
+                    </div>
+                    <div class="col-sm-12 col-lg-4">
+                      <button href="#" class="btn btn-light" style="width: 100%;">2 o más tiempos de comida</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!--end::Input group-->
+            </div>
+            <!--begin:: Salario en especie-->
+          </div>
+          <!--end::Group-->
+
+          <!--begin::Actions-->
+          <div class="d-flex justify-content-end gap-5">
+            <!--begin::Wrapper-->
+            <div class="">
+              <button type="button" class="btn btn-light btn-active-light-primary" data-kt-stepper-action="previous">
+                Regresar
+              </button>
+            </div>
+            <!--end::Wrapper-->
+
+            <!--begin::Wrapper-->
+            <div>
+              <button type="button" class="btn btn-primary" data-kt-stepper-action="submit">
+                        <span class="indicator-label">
+                          Realizar cálculo
+                        </span>
+                <span class="indicator-progress">
+                          Espere un momento, por favor... <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                        </span>
+              </button>
+
+              <button type="button" class="btn btn-primary" data-kt-stepper-action="next">
+                Siguiente
+              </button>
+            </div>
+            <!--end::Wrapper-->
+          </div>
+          <!--end::Actions-->
+        </form>
+        <!--end::Form-->
+      </div>
+    </div>
+    <!--end::Stepper-->
+  </div>
+  <!--<div class="card-footer d-flex justify-content-end gap-5">
+    <a href="#" class="btn btn-secondary" *ngIf="currentStep > 1">Regresar</a>
+    <a href="#" class="btn btn-primary">Siguiente</a>
+  </div>-->
+</div>
