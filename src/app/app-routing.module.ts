@@ -5,6 +5,10 @@ import { DatosTrabajadorComponent} from "./modules/calculo-prestaciones/componen
 
 export const routes: Routes = [
   {
+    path: "calculo-prestaciones",
+    loadChildren: () => import('./modules/calculo-prestaciones/calculo-prestaciones.module').then(m => m.CalculoPrestacionesModule)
+  },
+  {
     path: 'error',
     loadChildren: () =>
       import('./modules/errors/errors.module').then((m) => m.ErrorsModule),
