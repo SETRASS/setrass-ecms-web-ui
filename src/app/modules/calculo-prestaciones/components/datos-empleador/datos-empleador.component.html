@@ -49,7 +49,7 @@
 
             <!--begin::Icon-->
             <div class="stepper-icon w-40px h-40px">
-              <i class="stepper-check fas fa-check"></i>
+              <i class="stepper-check fas fa-check">checked</i>
               <span class="stepper-number">2</span>
             </div>
             <!--begin::Icon-->
@@ -76,7 +76,7 @@
 
             <!--begin::Icon-->
             <div class="stepper-icon w-40px h-40px">
-              <i class="stepper-check fas fa-check"></i>
+              <i class="stepper-check fas fa-check">checked</i>
               <span class="stepper-number">3</span>
             </div>
             <!--begin::Icon-->
@@ -103,7 +103,7 @@
 
             <!--begin::Icon-->
             <div class="stepper-icon w-40px h-40px">
-              <i class="stepper-check fas fa-check"></i>
+              <i class="stepper-check fas fa-check">checked</i>
               <span class="stepper-number">4</span>
             </div>
             <!--begin::Icon-->
@@ -469,18 +469,19 @@
               <!--begin::Input group-->
               <div class="row mb-10">
                 <div class="col-sm-12 col-lg-4">
-                  <button type="button" class="btn btn-light block" style="width: 100%;">Alimentación</button>
+                  <button type="button" class="btn btn-light-primary w-100" data-kt-docs-advanced-forms="interactive">Alimentación</button>
+                  
                 </div>
                 <div class="col-sm-12 col-lg-4">
-                  <button type="button" class="btn btn-light" style="width: 100%;">Vivienda</button>
+                  <button type="button" class="btn btn-light-primary w-100" data-kt-docs-advanced-forms="interactive">Vivienda</button>
                 </div>
                 <div class="col-sm-12 col-lg-4">
-                  <button href="#" class="btn btn-light" style="width: 100%;">Vivienda + Alimentación</button>
+                  <button type="button" class="btn btn-light-primary w-100" data-kt-docs-advanced-forms="interactive">Vivienda + Alimentación</button>
                 </div>
               </div>
               <div class="row mb-10">
                 <div class="col-sm-12 col-lg-4">
-                  <button href="#" class="btn btn-light" style="width: 100%;">No aplica</button>
+                  <button type="button" class="btn btn-light-primary w-100" data-kt-docs-advanced-forms="interactive">No aplica</button>
                 </div>
               </div>
               <div class="row mb-10">
@@ -490,10 +491,20 @@
                   </div>
                   <div class="row mb-10">
                     <div class="col-sm-12 col-lg-4">
-                      <button href="#" class="btn btn-light" style="width: 100%;">1 tiempo de comida</button>
+                      <!--begin::Option-->
+                      <input type="radio" class="btn-check" name="tiempo"   id="kt_radio_buttons_2_option_1"/>
+                      <label class="btn btn-outline btn-outline-dashed btn-outline-default" for="kt_radio_buttons_2_option_1">
+                        <span>1 tiempo de comida</span>
+                      </label>
+                      <!--end::Option-->
                     </div>
                     <div class="col-sm-12 col-lg-4">
-                      <button href="#" class="btn btn-light" style="width: 100%;">2 o más tiempos de comida</button>
+                      <!--begin::Option-->
+                      <input type="radio" class="btn-check" name="tiempo"   id="kt_radio_buttons_2_option_2"/>
+                      <label class="btn btn-outline btn-outline-dashed btn-outline-default" for="kt_radio_buttons_2_option_2">
+                        <span>2 o más tiempos de comida</span>
+                      </label>
+                      <!--end::Option-->
                     </div>
                   </div>
                 </div>
