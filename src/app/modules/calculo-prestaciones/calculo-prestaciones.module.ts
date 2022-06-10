@@ -9,13 +9,15 @@ import { DatosTrabajadorComponent } from './components/datos-trabajador/datos-tr
 import { DatosEmpleadorComponent } from './components/datos-empleador/datos-empleador.component';
 import { CalculoPrestacionesComponent } from './pages/calculo-prestaciones/calculo-prestaciones.component';
 import {LayoutModule} from "../../_metronic/layout";
+import { DerechosIdemnizacionesComponent } from './components/derechos-idemnizaciones/derechos-idemnizaciones.component';
 
 
 @NgModule({
   declarations: [
     DatosTrabajadorComponent,
     DatosEmpleadorComponent,
-    CalculoPrestacionesComponent
+    CalculoPrestacionesComponent,
+    DerechosIdemnizacionesComponent
   ],
   imports: [
     CommonModule,
