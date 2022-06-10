@@ -12,10 +12,11 @@ import { AppComponent } from './app.component';
 import { environment } from 'src/environments/environment';
 // #fake-start#
 import { FakeAPIService } from './_fake/fake-api.service';
+import { CalculoSalarialComponent } from './components/calculo-salarial/calculo-salarial.component';
 // #fake-end#
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, CalculoSalarialComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
