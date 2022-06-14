@@ -15,7 +15,7 @@ import { FakeAPIService } from './_fake/fake-api.service';
 // #fake-end#
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent,],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
