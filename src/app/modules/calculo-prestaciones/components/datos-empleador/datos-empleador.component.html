@@ -128,7 +128,7 @@
       <!--begin::Content-->
       <div class="flex-row-fluid">
         <!--begin::Form-->
-        <form class="form" novalidate="novalidate">
+        <form class="form" [formGroup]="formEmployer" novalidate="novalidate">
           <!--begin::Group-->
           <div class="">
             <!--begin:: Datos empresa-->
@@ -139,9 +139,18 @@
                   <!--begin::Label-->
                 <label class="form-label">Nombre de la empresa</label>
                 <!--end::Label-->
-
                 <!--begin::Input-->
-                <input type="text" class="form-control form-control-solid" name="input1" placeholder="" value=""/>
+                <input 
+                  formControlName="companyName"
+                  [class.is-valid]="isCompanyNameValid" 
+                  [class.is-invalid]="isCompanyNameInvalid" 
+                  type="text"  
+                  class="form-control form-control-solid" 
+                  placeholder=""/>
+                  <span 
+                    *ngIf="isCompanyNameInvalid"
+                    class="text-danger"
+                    >Este campo es requerido</span>
                 <!--end::Input-->
                 </div>
                 <div class="col-sm-12 col-lg-3">
@@ -150,7 +159,12 @@
                   <!--end::Label-->
 
                   <!--begin::Input-->
-                  <input type="text" class="form-control form-control-solid" name="input2" placeholder="" value=""/>
+                  <input
+                    formControlName="rtnNumber"
+                    [class.is-valid]="isRtnNumberValid" 
+                    [class.is-invalid]="isRtnNumberInvalid" 
+                    type="text" class="form-control form-control-solid" 
+                    placeholder="" value=""/>
                   <!--end::Input-->
                 </div>
                 <div class="col-sm-12 col-lg-3">
@@ -182,7 +196,6 @@
             </div>
             <!--begin:: Datos trabajador-->
             <div class="flex-column gap-5" data-kt-stepper-element="content">
-              
               <div class="row mb-10">
                 <div class="col-sm-12 col-lg-3">
                   <!--begin::Label-->
@@ -201,7 +214,12 @@
                   <!--end::Label-->
 
                   <!--begin::Input-->
-                  <input type="text" class="form-control form-control-solid" name="input1" placeholder="" value=""/>
+                  <input 
+                    formControlName="identityNumber"
+                    type="text" 
+                    class="form-control form-control-solid"
+                    placeholder="" 
+                  />
                   <!--end::Input-->
                 </div>
                 <div class="col-sm-12 col-lg-3">
@@ -322,7 +340,7 @@
                       <label class="form-label">Salario Mes 1</label>
                       <!--end::Label-->
                       <!--begin::Input-->
-                      <input type="number" class="form-control form-control-solid" name="input1" placeholder="" value=""/>
+                      <input type="number" class="form-control form-control-solid" placeholder=""/>
                       
                       <!--end::Input-->
                     </div>

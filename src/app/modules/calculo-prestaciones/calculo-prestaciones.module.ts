@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 // Custom modules
 import {WidgetsModule} from "../../_metronic/partials";
 import {CalculoPrestacionesRoutingModule} from "./calculo-prestaciones-routing.module";
@@ -22,6 +22,7 @@ import { DerechosIdemnizacionesComponent } from './components/derechos-idemnizac
   imports: [
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
     WidgetsModule,
     CalculoPrestacionesRoutingModule,
     LayoutModule
