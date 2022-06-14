@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { DatosTrabajadorComponent} from "./modules/calculo-prestaciones/components/datos-trabajador/datos-trabajador.component";
 import { CalculoSalarialComponent } from './modules/calculo-prestaciones/components/calculo-salarial/calculo-salarial.component';
+import { OtrosDerechosComponent } from './modules/calculo-prestaciones/components/otros-derechos/otros-derechos.component';
 
 
 export const routes: Routes = [
@@ -24,6 +25,9 @@ export const routes: Routes = [
   },
   {
     path: 'calculo-salarial', component: CalculoSalarialComponent, pathMatch: 'full'
+  },
+  {
+    path: 'otros-derechos', component: OtrosDerechosComponent, pathMatch: 'full'
   },
   { path: '**', redirectTo: 'error/404' },
 ];

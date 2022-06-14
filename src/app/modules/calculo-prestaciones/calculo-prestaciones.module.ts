@@ -10,6 +10,7 @@ import { DatosEmpleadorComponent } from './components/datos-empleador/datos-empl
 import { CalculoPrestacionesComponent } from './pages/calculo-prestaciones/calculo-prestaciones.component';
 import {LayoutModule} from "../../_metronic/layout";
 import { CalculoSalarialComponent } from './components/calculo-salarial/calculo-salarial.component';
+import { OtrosDerechosComponent } from './components/otros-derechos/otros-derechos.component';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { CalculoSalarialComponent } from './components/calculo-salarial/calculo-
     DatosTrabajadorComponent,
     DatosEmpleadorComponent,
     CalculoPrestacionesComponent,
-    CalculoSalarialComponent
+    CalculoSalarialComponent,
+    OtrosDerechosComponent
   ],
   imports: [
     CommonModule,
