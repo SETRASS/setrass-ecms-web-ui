@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { ToolbarService } from 'src/app/_metronic/layout/components/toolbar/toolbar.service';
 
 @Component({
   selector: 'app-calculo-prestaciones',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CalculoPrestacionesComponent implements OnInit {
 
-  constructor() { }
+  
+
+  constructor(public toolbarService: ToolbarService) { }
 
   ngOnInit(): void {
+
   }
+
+
 
 }

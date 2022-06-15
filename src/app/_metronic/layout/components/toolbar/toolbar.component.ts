@@ -5,7 +5,12 @@ import {
   OnInit,
   ViewChild,
 } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+
+import { format } from 'date-fns';
+
 import { LayoutService } from '../../core/layout.service';
+import { ToolbarService } from './toolbar.service';
 
 @Component({
   selector: 'app-toolbar',
@@ -19,13 +24,15 @@ export class ToolbarComponent implements OnInit, AfterViewInit {
   };
   toolbarContainerCssClasses: string = '';
   pageTitleCssClasses: string = '';
+  userType: string = '';
 
-  constructor(private layout: LayoutService) {}
+  constructor(private layout: LayoutService, private toolbarService: ToolbarService) {}
 
   ngOnInit(): void {
     this.toolbarContainerCssClasses = this.layout.getStringCSSClasses('toolbarContainer');
     this.pageTitleCssClasses = this.layout.getStringCSSClasses('pageTitle');
     this.pageTitleAttributes = this.layout.getHTMLAttributes('pageTitle');
+    this.userType = this.toolbarService.userTypeOf;
   }
 
   ngAfterViewInit() {
@@ -40,5 +47,13 @@ export class ToolbarComponent implements OnInit, AfterViewInit {
         }
       }
     }
+  }
+
+  get getCurrentDateTime(){
+    return format(new Date(), "dd/MM/yyyy - hh:mm aaaaa'm'");
+  }
+
+  getUserType(event: any){
+    this.toolbarService.userTypeOf = event.target.value;
   }
 }

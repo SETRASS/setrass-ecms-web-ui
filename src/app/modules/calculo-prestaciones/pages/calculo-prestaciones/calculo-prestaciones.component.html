@@ -1,4 +1,5 @@
-<app-datos-empleador></app-datos-empleador>
+<app-datos-empleador *ngIf="toolbarService.userTypeOf === 'empleador'"></app-datos-empleador>
+<app-datos-trabajador *ngIf="toolbarService.userTypeOf === 'trabajador'" ></app-datos-trabajador>
 <br>
 <app-calculo-salarial></app-calculo-salarial>
 <br>

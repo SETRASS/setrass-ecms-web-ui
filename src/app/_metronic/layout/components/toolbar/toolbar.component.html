@@ -10,15 +10,15 @@
   ></app-page-title>
 
   <div class="d-flex flex-column align-items-end justify-content-between py-3 py-md-1">
-    <h6 class="text-white" style="font-weight: 700;" >22/2/2022 - 2:44 PM</h6>
+    <h6 class="text-white" style="font-weight: 700; text-transform:uppercase;" >{{getCurrentDateTime}}</h6>
     <div class="d-flex align-items-center justify-content-between">
       <select class="form-select m-3 btn-bg-white" name="" id="">
         <option value="">Despido</option>
         <option value="">Renuncia</option>
       </select>
-      <select class="form-select btn-bg-white" name="" id="">
-        <option value="">Empleador</option>
-        <option value="">Trabajador</option>
+      <select class="form-select btn-bg-white" (change)="getUserType($event)">
+        <option value="trabajador">Trabajador</option>
+        <option value="empleador">Empleador</option>
       </select>
     </div>
   </div>
