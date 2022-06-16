@@ -30,24 +30,34 @@ export class DatosEmpleadorComponent implements OnInit {
 
 
   ngAfterViewInit(): void{
-    
     const stepper = new StepperComponent(this.stepper.nativeElement, this.stepperOptions);
-
     stepper.on("kt.stepper.next", () => stepper.goNext());
     stepper.on("kt.stepper.previous", () => stepper.goPrev());
   }
   
+
   ngOnInit(): void { 
 
   }
 
   private formBuild () {
     this.formEmployer = this.formBuilder.group({
-      companyName: ['',[Validators.required]],
-      rtnNumber: [0, [Validators.required, Validators.maxLength(14)]],
-      economicActivity: [['Industria','Ganaderia'], [Validators.required]],
+      companyData: this.formBuilder.group({
+        companyName: ['',[Validators.required]],
+        rtnNumber: ['', [
+          Validators.required, 
+          Validators.minLength(14), 
+          Validators.maxLength(14)
+        ]],
+        economicActivity: ['', [Validators.required]],
+        companySize:['', [Validators.required]]
+      }),
+      
       typeIdentity: [['DNI','CARNET RESIDENTE'], [Validators.required]],
-      identityNumber: [0, [Validators.required]],
+      identityNumber: ["", [
+        Validators.required,
+        Validators.minLength(14)
+      ]],
       employeeName: ['', [Validators.required]],
       employeeAge: [0, [Validators.required]],
       employeeSex: ['Masculino', [Validators.required]],
@@ -67,13 +77,13 @@ export class DatosEmpleadorComponent implements OnInit {
   }
 
   get isCompanyNameValid(){
-    return this.formEmployer.controls.companyName.touched && 
-    this.formEmployer.controls.companyName.valid; 
+    return this.formEmployer.get('companyData.companyName')?.touched && 
+    this.formEmployer.get('companyData.companyName')?.valid; 
   }
 
   get isCompanyNameInvalid(){
-    return this.formEmployer.controls.companyName.touched && 
-    this.formEmployer.controls.companyName.invalid;
+    return this.formEmployer.get('companyData.companyName')?.touched && 
+    this.formEmployer.get('companyData.companyName')?.invalid;
   }
 
   get isRtnNumberValid(){
@@ -84,6 +94,16 @@ export class DatosEmpleadorComponent implements OnInit {
   get isRtnNumberInvalid(){
     return this.formEmployer.controls.rtnNumber.touched && 
     this.formEmployer.controls.rtnNumber.invalid;
+  }
+  
+  get isEconomicActivityValid(){
+    return this.formEmployer.controls.economicActivity.touched && 
+    this.formEmployer.controls.economicActivity.valid;
+  }
+  
+  get isEconomicActivityInvalid(){
+    return this.formEmployer.controls.economicActivity.touched && 
+    this.formEmployer.controls.economicActivity.invalid;
   }
 
 }

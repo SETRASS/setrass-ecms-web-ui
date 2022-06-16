@@ -134,24 +134,24 @@
             <!--begin:: Datos empresa-->
             <div class="flex-column gap-5 current" data-kt-stepper-element="content">
               <!--begin::Input group-->
-              <div class="row mb-10">
+              <div formGroupName="companyData" class="row mb-10">
                 <div class="col-sm-12 col-lg-3">
                   <!--begin::Label-->
-                <label class="form-label">Nombre de la empresa</label>
-                <!--end::Label-->
-                <!--begin::Input-->
-                <input 
-                  formControlName="companyName"
-                  [class.is-valid]="isCompanyNameValid" 
-                  [class.is-invalid]="isCompanyNameInvalid" 
-                  type="text"  
-                  class="form-control form-control-solid" 
-                  placeholder=""/>
-                  <span 
-                    *ngIf="isCompanyNameInvalid"
-                    class="text-danger"
-                    >Este campo es requerido</span>
-                <!--end::Input-->
+                  <label class="form-label">Nombre de la empresa</label>
+                  <!--end::Label-->
+                  <!--begin::Input-->
+                  <input 
+                    formControlName="companyName"
+                    [class.is-valid]="isCompanyNameValid" 
+                    [class.is-invalid]="isCompanyNameInvalid" 
+                    type="text"  
+                    class="form-control form-control-solid" 
+                    placeholder="Empresa XYZ"/>
+                    <span 
+                      *ngIf="isCompanyNameInvalid"
+                      class="text-danger"
+                      >Este campo es requerido</span>
+                  <!--end::Input-->
                 </div>
                 <div class="col-sm-12 col-lg-3">
                   <!--begin::Label-->
@@ -164,7 +164,7 @@
                     [class.is-valid]="isRtnNumberValid" 
                     [class.is-invalid]="isRtnNumberInvalid" 
                     type="text" class="form-control form-control-solid" 
-                    placeholder="" value=""/>
+                    placeholder="Número de RTN" value=""/>
                   <!--end::Input-->
                 </div>
                 <div class="col-sm-12 col-lg-3">
@@ -173,8 +173,15 @@
                   <!--end::Label-->
 
                   <!--begin::Input-->
-                  <select type="text" class="form-select form-select-solid" name="input2" placeholder="">
-                    <option value="">Industria</option>
+                  <select 
+                    formControlName="economicActivity" 
+                    [class.is-valid]="isEconomicActivityValid"
+                    [class.is-invalid]="isEconomicActivityInvalid"
+                    type="text" 
+                    class="form-select form-select-solid" 
+                    placeholder="">
+                    <option value="Seleccione una actividad" disabled>Seleccione una actividad</option>
+                    <option value="Industria">Industria</option>
                   </select>
                   <!--end::Input-->
                 </div>
@@ -554,7 +561,7 @@
                         </span>
               </button>
 
-              <button type="button" class="btn btn-primary" data-kt-stepper-action="next">
+              <button disabled="formEmployer.invalid" type="button" class="btn btn-primary" data-kt-stepper-action="next">
                 Siguiente
               </button>
             </div>
