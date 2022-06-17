@@ -69,12 +69,12 @@ export class DatosEmpleadorComponent implements OnInit {
         endDate: [0, [Validators.required]],
         haveFixedSalary: ['SI', [Validators.required]],
         salary: [0, [Validators.required]],
-        monthlySalaryAverage1: [0, [null]],
-        monthlySalaryAverage2: [0, [null]],
-        monthlySalaryAverage3: [0, [null]],
-        monthlySalaryAverage4: [0, [null]],
-        monthlySalaryAverage5: [0, [null]],
-        monthlySalaryAverage6: [0, [null]],
+        monthlySalaryAverage1: [0, []],
+        monthlySalaryAverage2: [0, []],
+        monthlySalaryAverage3: [0, []],
+        monthlySalaryAverage4: [0, []],
+        monthlySalaryAverage5: [0, []],
+        monthlySalaryAverage6: [0, []],
       }),
       speciesSalary: this.formBuilder.group({
         
@@ -123,13 +123,13 @@ export class DatosEmpleadorComponent implements OnInit {
   }
   
   get isEconomicActivityValid(){
-    return this.formEmployer.controls.economicActivity.touched && 
-    this.formEmployer.controls.economicActivity.valid;
+    return this.formEmployer.get('companyData.economicActivity')?.touched && 
+    this.formEmployer.get('companyData.economicActivity')?.valid;
   }
   
   get isEconomicActivityInvalid(){
-    return this.formEmployer.controls.economicActivity.touched && 
-    this.formEmployer.controls.economicActivity.invalid;
+    return this.formEmployer.get('companyData.economicActivity')?.touched && 
+    this.formEmployer.get('companyData.economicActivity')?.invalid;
   }
 
 }
