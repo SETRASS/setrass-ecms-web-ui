@@ -49,30 +49,56 @@ export class DatosEmpleadorComponent implements OnInit {
           Validators.minLength(14), 
           Validators.maxLength(14)
         ]],
-        economicActivity: ['', [Validators.required]],
+        economicActivity: ['', [Validators.required,]],
         companySize:['', [Validators.required]]
       }),
-      
-      typeIdentity: [['DNI','CARNET RESIDENTE'], [Validators.required]],
-      identityNumber: ["", [
-        Validators.required,
-        Validators.minLength(14)
-      ]],
-      employeeName: ['', [Validators.required]],
-      employeeAge: [0, [Validators.required]],
-      employeeSex: ['Masculino', [Validators.required]],
-      department: ['', [Validators.required]],
-      municipality: [0, [Validators.required]],
-      startDate: [0, [Validators.required]],
-      endDate: [0, [Validators.required]],
-      haveFixedSalary: ['SI', [Validators.required]],
-      salary: [0, [Validators.required]],
-      monthlySalaryAverage1: [0, [Validators.required]],
-      monthlySalaryAverage2: [0, [Validators.required]],
-      monthlySalaryAverage3: [0, [Validators.required]],
-      monthlySalaryAverage4: [0, [Validators.required]],
-      monthlySalaryAverage5: [0, [Validators.required]],
-      monthlySalaryAverage6: [0, [Validators.required]],
+      employeeData: this.formBuilder.group({
+        typeIdentity: [['DNI','CARNET RESIDENTE'], [Validators.required]],
+        identityNumber: ["", [
+          Validators.required,
+          Validators.minLength(14)
+        ]],
+        employeeName: ['', [Validators.required]],
+        employeeAge: [0, [Validators.required]],
+        employeeSex: ['Masculino', [Validators.required]]
+      }),
+      salaryData: this.formBuilder.group({
+        department: ['', [Validators.required]],
+        municipality: [0, [Validators.required]],
+        startDate: [0, [Validators.required]],
+        endDate: [0, [Validators.required]],
+        haveFixedSalary: ['SI', [Validators.required]],
+        salary: [0, [Validators.required]],
+        monthlySalaryAverage1: [0, [null]],
+        monthlySalaryAverage2: [0, [null]],
+        monthlySalaryAverage3: [0, [null]],
+        monthlySalaryAverage4: [0, [null]],
+        monthlySalaryAverage5: [0, [null]],
+        monthlySalaryAverage6: [0, [null]],
+      }),
+      speciesSalary: this.formBuilder.group({
+        
+      })
+    });
+
+    this.formEmployer.get('salaryData.haveFixedSalary')?.valueChanges
+    .subscribe(value => {
+      console.log(value);
+      if(value === 'NO'){
+        this.formEmployer.get('salaryData.monthlySalaryAverage1')?.setValidators([Validators.required]);
+        this.formEmployer.get('salaryData.monthlySalaryAverage2')?.setValidators([Validators.required]);
+        this.formEmployer.get('salaryData.monthlySalaryAverage3')?.setValidators([Validators.required]);
+        this.formEmployer.get('salaryData.monthlySalaryAverage4')?.setValidators([Validators.required]);
+        this.formEmployer.get('salaryData.monthlySalaryAverage5')?.setValidators([Validators.required]);
+        this.formEmployer.get('salaryData.monthlySalaryAverage6')?.setValidators([Validators.required]);
+      }else{
+        this.formEmployer.get('salaryData.monthlySalaryAverage1')?.setValidators(null);
+        this.formEmployer.get('salaryData.monthlySalaryAverage2')?.setValidators(null);
+        this.formEmployer.get('salaryData.monthlySalaryAverage3')?.setValidators(null);
+        this.formEmployer.get('salaryData.monthlySalaryAverage4')?.setValidators(null);
+        this.formEmployer.get('salaryData.monthlySalaryAverage5')?.setValidators(null);
+        this.formEmployer.get('salaryData.monthlySalaryAverage6')?.setValidators(null);
+      }
     });
   }
 
@@ -87,13 +113,13 @@ export class DatosEmpleadorComponent implements OnInit {
   }
 
   get isRtnNumberValid(){
-    return this.formEmployer.controls.rtnNumber.touched && 
-    this.formEmployer.controls.rtnNumber.valid;
+    return this.formEmployer.get('companyData.rtnNumber')?.touched && 
+    this.formEmployer.get('companyData.rtnNumber')?.valid;
   }
   
   get isRtnNumberInvalid(){
-    return this.formEmployer.controls.rtnNumber.touched && 
-    this.formEmployer.controls.rtnNumber.invalid;
+    return this.formEmployer.get('companyData.rtnNumber')?.touched && 
+    this.formEmployer.get('companyData.rtnNumber')?.invalid;
   }
   
   get isEconomicActivityValid(){
