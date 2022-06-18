@@ -2,6 +2,8 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
 
 import { IStepperOptions, StepperComponent, ToggleComponent } from 'src/app/_metronic/kt/components';
+import { NgSelectConfig, NgSelectModule } from '@ng-select/ng-select';
+
 
 @Component({
   selector: 'app-datos-empleador',
@@ -10,8 +12,9 @@ import { IStepperOptions, StepperComponent, ToggleComponent } from 'src/app/_met
 })
 export class DatosEmpleadorComponent implements OnInit {
 
+  // Variables
   @ViewChild('kt_stepper_vertical') stepper: ElementRef;
-
+  formEmployer: FormGroup;
   public currentStep : Number = 1;
   private stepperOptions: IStepperOptions = {
     startIndex: 1,
@@ -22,9 +25,58 @@ export class DatosEmpleadorComponent implements OnInit {
   };
   salaryOptions:String[] = ['SI', 'NO'];
   haveSalary: string = 'SI';
-  formEmployer: FormGroup;
+  economicActivityList = [
+    'Agricultura, Silvicultura, Caza y Pesca',
+    'Agricultura, Silvicultura, Caza y Pesca',
+    'Agricultura, Silvicultura, Caza y Pesca',
+    'Agricultura, Silvicultura, Caza y Pesca',
+    'Explotación de minas y canteras',
+    'Explotación de minas y canteras',
+    'Explotación de minas y canteras',
+    'Explotación de minas y canteras',
+    'Industria manufacturera',
+    'Industria manufacturera',
+    'Industria manufacturera',
+    'Industria manufacturera',
+    'Industria manufacturera',
+    'Regionalizado',
+    'Electricidad, Gas y Agua',
+    'Electricidad, Gas y Agua',
+    'Electricidad, Gas y Agua',
+    'Electricidad, Gas y Agua',
+    'Construcción',
+    'Construcción',
+    'Construcción',
+    'Construcción',
+    'Comercio al por Mayor y Menor, Restaurantes y Hoteles',
+    'Comercio al por Mayor y Menor, Restaurantes y Hoteles',
+    'Comercio al por Mayor y Menor, Restaurantes y Hoteles',
+    'Comercio al por Mayor y Menor, Restaurantes y Hoteles',
+    'Transporte, Almacenamiento y Comunicaciones',
+    'Transporte, Almacenamiento y Comunicaciones',
+    'Transporte, Almacenamiento y Comunicaciones',
+    'Transporte, Almacenamiento y Comunicaciones',
+    'Establecimientos Financieros, Bienes Inmuebles y Servicios prestados a las Empresas',
+    'Establecimientos Financieros, Bienes Inmuebles y Servicios prestados a las Empresas',
+    'Establecimientos Financieros, Bienes Inmuebles y Servicios prestados a las Empresas',
+    'Establecimientos Financieros, Bienes Inmuebles y Servicios prestados a las Empresas',
+    'Servicios comunales sociales y personales, seguridad y limpieza',
+    'Servicios comunales sociales y personales, seguridad y limpieza',
+    'Servicios comunales sociales y personales, seguridad y limpieza',
+    'Servicios comunales sociales y personales, seguridad y limpieza',
+    'Actividades de investigación y seguridad, actividad de limpieza de edificios',
+    'Actividades de investigación y seguridad, actividad de limpieza de edificios',
+    'Actividades de investigación y seguridad, actividad de limpieza de edificios',
+    'Actividades de investigación y seguridad, actividad de limpieza de edificios',
+    'Actividades de hospitales',
+    'Actividades de hospitales',
+    'Actividades de hospitales',
+    'Actividades de hospitales',
+    'Empresas a cogidas a la Ley de Zonas Libres'
+  ];
   
-  constructor(private formBuilder : FormBuilder) {
+  constructor(private formBuilder : FormBuilder,
+    private config: NgSelectConfig) {
     this.formBuild();
   }
 

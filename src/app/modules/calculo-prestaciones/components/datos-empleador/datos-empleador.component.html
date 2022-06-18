@@ -166,6 +166,11 @@
                     type="text" class="form-control form-control-solid" 
                     placeholder="Número de RTN" value=""/>
                   <!--end::Input-->
+                  <span 
+                      *ngIf="isRtnNumberInvalid"
+                      class="text-danger"
+                      >Este campo es requerido
+                  </span>
                 </div>
                 <div class="col-sm-12 col-lg-3">
                   <!--begin::Label-->
@@ -173,7 +178,7 @@
                   <!--end::Label-->
 
                   <!--begin::Input-->
-                  <select 
+                  <ng-select 
                     formControlName="economicActivity" 
                     [class.is-valid]="isEconomicActivityValid"
                     [class.is-invalid]="isEconomicActivityInvalid"
@@ -181,8 +186,8 @@
                     class="form-select form-select-solid" 
                     placeholder="">
                     <option value="Seleccione una actividad" disabled>Seleccione una actividad</option>
-                    <option value="Industria">Industria</option>
-                  </select>
+                    <ng-option *ngFor="let value of economicActivityList" value="{{value}}">{{value}}</ng-option>
+                  </ng-select>
                   <!--end::Input-->
                 </div>
                 <div class="col-sm-12 col-lg-3">
@@ -191,7 +196,10 @@
                   <!--end::Label-->
 
                   <!--begin::Input-->
-                  <select type="text" class="form-select form-select-solid" name="input2" placeholder="">
+                  <select 
+                    type="text" 
+                    class="form-select form-select-solid"  
+                    placeholder="">
                     <option value="">0 a 10 Empleados</option>
                     <option value="">11 a 20 Empleados</option>
                     <option value="">22 a 30 Empleados</option>
@@ -561,7 +569,7 @@
                         </span>
               </button>
 
-              <button disabled="formEmployer.invalid" type="button" class="btn btn-primary" data-kt-stepper-action="next">
+              <button type="button" class="btn btn-primary" data-kt-stepper-action="next">
                 Siguiente
               </button>
             </div>

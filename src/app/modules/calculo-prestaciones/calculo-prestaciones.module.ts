@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 // Custom modules
 import {WidgetsModule} from "../../_metronic/partials";
 import {CalculoPrestacionesRoutingModule} from "./calculo-prestaciones-routing.module";
+import { NgSelectModule } from '@ng-select/ng-select';
 // Components
 import { DatosTrabajadorComponent } from './components/datos-trabajador/datos-trabajador.component';
 import { DatosEmpleadorComponent } from './components/datos-empleador/datos-empleador.component';
@@ -26,6 +27,7 @@ import { OtrosDerechosComponent } from './components/otros-derechos/otros-derech
   imports: [
     CommonModule,
     FormsModule,
+    NgSelectModule,
     ReactiveFormsModule,
     WidgetsModule,
     CalculoPrestacionesRoutingModule,
