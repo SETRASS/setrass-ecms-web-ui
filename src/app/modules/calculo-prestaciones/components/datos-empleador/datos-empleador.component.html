@@ -217,8 +217,8 @@
               <!--end::Input group-->
             </div>
             <!--begin:: Datos trabajador-->
-            <div class="flex-column gap-5" data-kt-stepper-element="content">
-              <div formGroupName="employeeData" class="row mb-10">
+            <div formGroupName="employeeData" class="flex-column gap-5" data-kt-stepper-element="content">
+              <div class="row mb-10">
                 <div class="col-sm-12 col-lg-3">
                   <!--begin::Label-->
                   <label class="form-label">Tipo identificación</label>
@@ -309,9 +309,10 @@
                   <!--end::Label-->
                   <!--begin::Input-->
                   <ng-select 
-                    [(ngModel)]="locationSelected" 
-                    class="form-select form-select-solid"
-                    (change)="getLocation"
+                    formControlName="department"
+                    class=""
+                    (change)="getLocation($event)"
+                    app
                     >
                     <ng-option 
                       *ngFor="let location  of locations"  
@@ -326,8 +327,8 @@
                   <label class="form-label">Municipio</label>
                   <!--end::Label-->
                   <!--begin::Input-->
-                  <ng-select class="form-select form-select-solid">
-                    <ng-option *ngFor=""  [value]=""></ng-option>
+                  <ng-select class="">
+                    <ng-option *ngFor="let value of currentMunicipios"  [value]="value.location.id">{{value.location.name}}</ng-option>
                   </ng-select>
                   <!--end::Input-->
                 </div>

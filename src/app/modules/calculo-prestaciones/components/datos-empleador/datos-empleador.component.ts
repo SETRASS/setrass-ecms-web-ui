@@ -30,6 +30,7 @@ export class DatosEmpleadorComponent implements OnInit {
   locations: any[] = [];
 
   locationSelected: string;
+  currentMunicipios: any[];
 
   constructor(private lookupsService: LookupsService,
               private formBuilder : FormBuilder) {
@@ -74,10 +75,10 @@ export class DatosEmpleadorComponent implements OnInit {
         employeeSex: ['Masculino', [Validators.required]],
         employeeTelephone: ['', [Validators.required, Validators.minLength(8)]],
         employeeEmail: ['', [Validators.required, Validators.email]],
-      }),
-      salaryData: this.formBuilder.group({
         department: ['', [Validators.required]],
         municipality: [0, [Validators.required]],
+      }),
+      salaryData: this.formBuilder.group({
         startDate: [0, [Validators.required]],
         endDate: [0, [Validators.required]],
         haveFixedSalary: ['SI', [Validators.required]],
@@ -153,6 +154,12 @@ export class DatosEmpleadorComponent implements OnInit {
     this.formEmployer.get('companyData.economicActivity')?.invalid;
   }
 
-  getLocation(){}
+  getMunicipios(id:string){
+    return this.locations.find(val => val.location.id === id).children;
+  }
+
+  getLocation(event: any){
+    this.currentMunicipios = this.getMunicipios(event);
+  }
 
 }
