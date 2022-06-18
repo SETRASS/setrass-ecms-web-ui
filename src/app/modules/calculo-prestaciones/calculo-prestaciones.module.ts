@@ -14,6 +14,7 @@ import { DerechosIdemnizacionesComponent } from './components/derechos-idemnizac
 import { CalculoSalarialComponent } from './components/calculo-salarial/calculo-salarial.component';
 import { OtrosDerechosComponent } from './components/otros-derechos/otros-derechos.component';
 import { ServicesModule } from '../services/services.module';
+import { CalculoGeneradoComponent } from './components/calculo-generado/calculo-generado.component';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { ServicesModule } from '../services/services.module';
     CalculoPrestacionesComponent,
     DerechosIdemnizacionesComponent,
     CalculoSalarialComponent,
-    OtrosDerechosComponent
+    OtrosDerechosComponent,
+    CalculoGeneradoComponent
   ],
   imports: [
     CommonModule,
