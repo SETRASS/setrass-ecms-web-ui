@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class ToolbarService {
-  userTypeOf: string = 'trabajador';
+  userTypeOf: string = 'empleador';
 
   constructor() { }
 }

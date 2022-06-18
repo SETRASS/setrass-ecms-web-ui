@@ -2,7 +2,7 @@
 // `ng build` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
-const API_BASE = "http://localhost:5000";
+const API_BASE = "http://10.152.1.202:8081";
 
 export const environment = {
   production: false,
@@ -11,6 +11,7 @@ export const environment = {
   API: {
     LOOKUPS: `${API_BASE}/lookups`,
     SALARY_HISTORY_CATALOG: `${API_BASE}/salary-history-catalog`,
+    ECONOMIC_ACTIVITY:`${API_BASE}/ea-catalog/v1/all`
   },
   USERDATA_KEY: 'authf649fc9a5f55',
   isMockEnabled: true,

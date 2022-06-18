@@ -2,7 +2,6 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
 
 import { IStepperOptions, StepperComponent, ToggleComponent } from 'src/app/_metronic/kt/components';
-import { NgSelectConfig, NgSelectModule } from '@ng-select/ng-select';
 
 
 @Component({
@@ -75,8 +74,7 @@ export class DatosEmpleadorComponent implements OnInit {
     'Empresas a cogidas a la Ley de Zonas Libres'
   ];
   
-  constructor(private formBuilder : FormBuilder,
-    private config: NgSelectConfig) {
+  constructor(private formBuilder : FormBuilder) {
     this.formBuild();
   }
 
@@ -96,11 +94,7 @@ export class DatosEmpleadorComponent implements OnInit {
     this.formEmployer = this.formBuilder.group({
       companyData: this.formBuilder.group({
         companyName: ['',[Validators.required]],
-        rtnNumber: ['', [
-          Validators.required, 
-          Validators.minLength(14), 
-          Validators.maxLength(14)
-        ]],
+        rtnNumber: ['', [Validators.required, Validators.minLength(14), Validators.maxLength(14)]],
         economicActivity: ['', [Validators.required,]],
         companySize:['', [Validators.required]]
       }),
@@ -111,8 +105,11 @@ export class DatosEmpleadorComponent implements OnInit {
           Validators.minLength(14)
         ]],
         employeeName: ['', [Validators.required]],
+        employeeLastName: ['', [Validators.required]],
         employeeAge: [0, [Validators.required]],
-        employeeSex: ['Masculino', [Validators.required]]
+        employeeSex: ['Masculino', [Validators.required]],
+        employeeTelephone: ['', [Validators.required, Validators.minLength(8)]],
+        employeeEmail: ['', [Validators.required, Validators.email]],
       }),
       salaryData: this.formBuilder.group({
         department: ['', [Validators.required]],
@@ -164,6 +161,10 @@ export class DatosEmpleadorComponent implements OnInit {
     this.formEmployer.get('companyData.companyName')?.invalid;
   }
 
+  get companyName(){
+    return this.formEmployer.get('companyData.companyName');
+  }
+
   get isRtnNumberValid(){
     return this.formEmployer.get('companyData.rtnNumber')?.touched && 
     this.formEmployer.get('companyData.rtnNumber')?.valid;
@@ -174,6 +175,10 @@ export class DatosEmpleadorComponent implements OnInit {
     this.formEmployer.get('companyData.rtnNumber')?.invalid;
   }
   
+  get rtnNumber(){
+    return this.formEmployer.get('companyData.rtnNumber');
+  }
+
   get isEconomicActivityValid(){
     return this.formEmployer.get('companyData.economicActivity')?.touched && 
     this.formEmployer.get('companyData.economicActivity')?.valid;
