@@ -13,6 +13,7 @@ import {LayoutModule} from "../../_metronic/layout";
 import { DerechosIdemnizacionesComponent } from './components/derechos-idemnizaciones/derechos-idemnizaciones.component';
 import { CalculoSalarialComponent } from './components/calculo-salarial/calculo-salarial.component';
 import { OtrosDerechosComponent } from './components/otros-derechos/otros-derechos.component';
+import { ServicesModule } from '../services/services.module';
 
 
 @NgModule({
@@ -30,6 +31,7 @@ import { OtrosDerechosComponent } from './components/otros-derechos/otros-derech
     NgSelectModule,
     ReactiveFormsModule,
     WidgetsModule,
+    ServicesModule,
     CalculoPrestacionesRoutingModule,
     LayoutModule
   ],

@@ -25,57 +25,11 @@ export class DatosEmpleadorComponent implements OnInit {
   };
   salaryOptions:String[] = ['SI', 'NO'];
   haveSalary: string = 'SI';
-  economicActivityList = [
-    'Agricultura, Silvicultura, Caza y Pesca',
-    'Agricultura, Silvicultura, Caza y Pesca',
-    'Agricultura, Silvicultura, Caza y Pesca',
-    'Agricultura, Silvicultura, Caza y Pesca',
-    'Explotación de minas y canteras',
-    'Explotación de minas y canteras',
-    'Explotación de minas y canteras',
-    'Explotación de minas y canteras',
-    'Industria manufacturera',
-    'Industria manufacturera',
-    'Industria manufacturera',
-    'Industria manufacturera',
-    'Industria manufacturera',
-    'Regionalizado',
-    'Electricidad, Gas y Agua',
-    'Electricidad, Gas y Agua',
-    'Electricidad, Gas y Agua',
-    'Electricidad, Gas y Agua',
-    'Construcción',
-    'Construcción',
-    'Construcción',
-    'Construcción',
-    'Comercio al por Mayor y Menor, Restaurantes y Hoteles',
-    'Comercio al por Mayor y Menor, Restaurantes y Hoteles',
-    'Comercio al por Mayor y Menor, Restaurantes y Hoteles',
-    'Comercio al por Mayor y Menor, Restaurantes y Hoteles',
-    'Transporte, Almacenamiento y Comunicaciones',
-    'Transporte, Almacenamiento y Comunicaciones',
-    'Transporte, Almacenamiento y Comunicaciones',
-    'Transporte, Almacenamiento y Comunicaciones',
-    'Establecimientos Financieros, Bienes Inmuebles y Servicios prestados a las Empresas',
-    'Establecimientos Financieros, Bienes Inmuebles y Servicios prestados a las Empresas',
-    'Establecimientos Financieros, Bienes Inmuebles y Servicios prestados a las Empresas',
-    'Establecimientos Financieros, Bienes Inmuebles y Servicios prestados a las Empresas',
-    'Servicios comunales sociales y personales, seguridad y limpieza',
-    'Servicios comunales sociales y personales, seguridad y limpieza',
-    'Servicios comunales sociales y personales, seguridad y limpieza',
-    'Servicios comunales sociales y personales, seguridad y limpieza',
-    'Actividades de investigación y seguridad, actividad de limpieza de edificios',
-    'Actividades de investigación y seguridad, actividad de limpieza de edificios',
-    'Actividades de investigación y seguridad, actividad de limpieza de edificios',
-    'Actividades de investigación y seguridad, actividad de limpieza de edificios',
-    'Actividades de hospitales',
-    'Actividades de hospitales',
-    'Actividades de hospitales',
-    'Actividades de hospitales',
-    'Empresas a cogidas a la Ley de Zonas Libres'
-  ];
+  economicActivityList: any[] = [];
 
   locations: any[] = [];
+
+  locationSelected: string;
 
   constructor(private lookupsService: LookupsService,
               private formBuilder : FormBuilder) {
@@ -92,7 +46,8 @@ export class DatosEmpleadorComponent implements OnInit {
 
   ngOnInit(): void {
     this.lookupsService.getLocations().subscribe((data) => {
-      this.locations = data;
+      this.locations = data[0].children;
+      console.log(this.locations);
     }, ((error?: any) => {
       const err = error.message | error;
       console.warn(err);
@@ -197,5 +152,7 @@ export class DatosEmpleadorComponent implements OnInit {
     return this.formEmployer.get('companyData.economicActivity')?.touched &&
     this.formEmployer.get('companyData.economicActivity')?.invalid;
   }
+
+  getLocation(){}
 
 }
