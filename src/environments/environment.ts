@@ -9,7 +9,7 @@ export const environment = {
   appVersion: 'v0.0.2',
 
   API: {
-    LOOKUPS: `${API_BASE}/lookups`,
+    LOOKUPS: `${API_BASE}/locations`,
     SALARY_HISTORY_CATALOG: `${API_BASE}/salary-history-catalog`,
     ECONOMIC_ACTIVITY:`${API_BASE}/ea-catalog/v1/all`
   },

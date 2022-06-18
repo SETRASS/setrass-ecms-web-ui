@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpErrorResponse, HttpHeaders} from "@angular/common/http";
 import {catchError, Observable, throwError} from "rxjs";
-import {ResponseMessage} from "../../models/response-message";
 
 @Injectable()
 export class BaseHttpService {
@@ -25,8 +24,8 @@ export class BaseHttpService {
     return throwError(issue);
   }
 
-  protected getRequest<T>(endpoint: string):  Observable<ResponseMessage<T>> {
-    return this.httpClient.get<ResponseMessage<T>>(
+  protected getRequest<T>(endpoint: string):  Observable<T> {
+    return this.httpClient.get<T>(
       endpoint,
       this.httpOptions
     ).pipe(
@@ -34,8 +33,8 @@ export class BaseHttpService {
     );
   }
 
-  protected postRequest<T>(endpoint: string, body:any):  Observable<ResponseMessage<T>> {
-    return this.httpClient.post<ResponseMessage<T>>(
+  protected postRequest<T>(endpoint: string, body:any):  Observable<T> {
+    return this.httpClient.post<T>(
       endpoint,
       body,
       this.httpOptions

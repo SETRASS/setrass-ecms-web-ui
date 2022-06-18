@@ -2,6 +2,7 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
 
 import { IStepperOptions, StepperComponent, ToggleComponent } from 'src/app/_metronic/kt/components';
+import {LookupsService} from "../../../services/lookups/lookups.service";
 
 
 @Component({
@@ -73,8 +74,11 @@ export class DatosEmpleadorComponent implements OnInit {
     'Actividades de hospitales',
     'Empresas a cogidas a la Ley de Zonas Libres'
   ];
-  
-  constructor(private formBuilder : FormBuilder) {
+
+  locations: any[] = [];
+
+  constructor(private lookupsService: LookupsService,
+              private formBuilder : FormBuilder) {
     this.formBuild();
   }
 
@@ -84,10 +88,15 @@ export class DatosEmpleadorComponent implements OnInit {
     stepper.on("kt.stepper.next", () => stepper.goNext());
     stepper.on("kt.stepper.previous", () => stepper.goPrev());
   }
-  
 
-  ngOnInit(): void { 
 
+  ngOnInit(): void {
+    this.lookupsService.getLocations().subscribe((data) => {
+      this.locations = data;
+    }, ((error?: any) => {
+      const err = error.message | error;
+      console.warn(err);
+    }));
   }
 
   private formBuild () {
@@ -126,7 +135,7 @@ export class DatosEmpleadorComponent implements OnInit {
         monthlySalaryAverage6: [0, []],
       }),
       speciesSalary: this.formBuilder.group({
-        
+
       })
     });
 
@@ -152,12 +161,12 @@ export class DatosEmpleadorComponent implements OnInit {
   }
 
   get isCompanyNameValid(){
-    return this.formEmployer.get('companyData.companyName')?.touched && 
-    this.formEmployer.get('companyData.companyName')?.valid; 
+    return this.formEmployer.get('companyData.companyName')?.touched &&
+    this.formEmployer.get('companyData.companyName')?.valid;
   }
 
   get isCompanyNameInvalid(){
-    return this.formEmployer.get('companyData.companyName')?.touched && 
+    return this.formEmployer.get('companyData.companyName')?.touched &&
     this.formEmployer.get('companyData.companyName')?.invalid;
   }
 
@@ -166,26 +175,26 @@ export class DatosEmpleadorComponent implements OnInit {
   }
 
   get isRtnNumberValid(){
-    return this.formEmployer.get('companyData.rtnNumber')?.touched && 
+    return this.formEmployer.get('companyData.rtnNumber')?.touched &&
     this.formEmployer.get('companyData.rtnNumber')?.valid;
   }
-  
+
   get isRtnNumberInvalid(){
-    return this.formEmployer.get('companyData.rtnNumber')?.touched && 
+    return this.formEmployer.get('companyData.rtnNumber')?.touched &&
     this.formEmployer.get('companyData.rtnNumber')?.invalid;
   }
-  
+
   get rtnNumber(){
     return this.formEmployer.get('companyData.rtnNumber');
   }
 
   get isEconomicActivityValid(){
-    return this.formEmployer.get('companyData.economicActivity')?.touched && 
+    return this.formEmployer.get('companyData.economicActivity')?.touched &&
     this.formEmployer.get('companyData.economicActivity')?.valid;
   }
-  
+
   get isEconomicActivityInvalid(){
-    return this.formEmployer.get('companyData.economicActivity')?.touched && 
+    return this.formEmployer.get('companyData.economicActivity')?.touched &&
     this.formEmployer.get('companyData.economicActivity')?.invalid;
   }
 
