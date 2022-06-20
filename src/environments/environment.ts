@@ -31,7 +31,6 @@ export const environment = {
       'published': true,
       'thumbnail': './assets/media/demos/stss-base-template-ui.png'
     },
-
   },
 };
 

@@ -201,10 +201,12 @@
                   <!--begin::Label-->
                   <label class="form-label">Tamaño de la empresa</label>
                   <!--end::Label-->
-
                   <!--begin::Input-->
-                  <select 
-                    type="text" 
+                  <select
+                    formControlName="companySize"
+                    [class.is-valid]="isCompanySizeValid"
+                    [class.is-invalid]="isCompanySizeInvalid"
+                    type="text"
                     class="form-select form-select-solid"  
                     placeholder="">
                     <option value="">0 a 10 Empleados</option>

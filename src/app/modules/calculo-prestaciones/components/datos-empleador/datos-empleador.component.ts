@@ -154,6 +154,15 @@ export class DatosEmpleadorComponent implements OnInit {
     this.formEmployer.get('companyData.economicActivity')?.invalid;
   }
 
+  get isCompanySizeValid(){
+    return this.formEmployer.get('companyData.companySize')?.touched &&
+    this.formEmployer.get('companyData.companySize')?.valid;
+  }
+  get isCompanySizeInvalid(){
+    return this.formEmployer.get('companyData.companySize')?.touched &&
+    this.formEmployer.get('companyData.companySize')?.invalid;
+  }
+
   getMunicipios(id:string){
     return this.locations.find(val => val.location.id === id).children;
   }
