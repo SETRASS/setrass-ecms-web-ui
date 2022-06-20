@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms'
 
 import { IStepperOptions, StepperComponent, ToggleComponent } from 'src/app/_metronic/kt/components';
 import {LookupsService} from "../../../services/lookups/lookups.service";
+import {SalaryHistoryCatalogService} from "../../../services/salary-history-catalog/salary-history-catalog.service";
 
 
 @Component({
@@ -26,13 +27,14 @@ export class DatosEmpleadorComponent implements OnInit {
   salaryOptions:String[] = ['SI', 'NO'];
   haveSalary: string = 'SI';
   economicActivityList: any[] = [];
-
   locations: any[] = [];
+  companySizeList: any[] = [];
 
   locationSelected: string;
   currentMunicipios: any[];
 
   constructor(private lookupsService: LookupsService,
+              private salaryHistoryCatalogService: SalaryHistoryCatalogService,
               private formBuilder : FormBuilder) {
     this.formBuild();
   }
@@ -53,6 +55,24 @@ export class DatosEmpleadorComponent implements OnInit {
       const err = error.message | error;
       console.warn(err);
     }));
+
+    // initialize economic activities
+    this.salaryHistoryCatalogService.getEconomicActivities().subscribe(
+      (data) => {
+        this.economicActivityList = data;
+      },
+      (error) => {
+        const err = error.message | error;
+        console.warn(err);
+      });
+
+    // company size
+    this.salaryHistoryCatalogService.getCompanySizes().subscribe((data) => {
+      this.companySizeList = data;
+    }, (error) => {
+      const err = error.message | error;
+      console.warn(err);
+    });
   }
 
   private formBuild () {

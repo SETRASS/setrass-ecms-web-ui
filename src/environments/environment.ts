@@ -11,8 +11,7 @@ export const environment = {
 
   API: {
     LOOKUPS: `${API_BASE}:8080/locations`,
-    SALARY_HISTORY_CATALOG: `${API_BASE}:8081/salary-history-catalog`,
-    ECONOMIC_ACTIVITY:`${API_BASE}:8081/ea-catalog/v1/all`
+    SALARY_HISTORY_CATALOG: `${API_BASE}:8081`,
   },
   USERDATA_KEY: 'authf649fc9a5f55',
   isMockEnabled: true,
