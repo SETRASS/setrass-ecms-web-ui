@@ -615,7 +615,27 @@
                       <label class="form-label">Salario Mes 2</label>
                       <!--end::Label-->
                       <!--begin::Input-->
-                      <input type="number" class="form-control form-control-solid" name="input1" placeholder="" value=""/>
+                      <input
+                        formControlName="monthlySalaryAverage2"
+                        [class.is-valid]="isValidField('salaryData.monthlySalaryAverage2')"
+                        [class.is-invalid]="isInvalidField('salaryData.monthlySalaryAverage2')"
+                        type="number" 
+                        class="form-control form-control-solid" 
+                      />
+                      <div *ngIf="isInvalidField('salaryData.monthlySalaryAverage1')">
+                        <span 
+                          *ngIf="getErrorField('salaryData.monthlySalaryAverage1', 'required')"
+                          class="text-danger"
+                          >  
+                          Este campo es requerido.
+                        </span>
+                        <span 
+                          *ngIf="getErrorField('salaryData.monthlySalaryAverage1', 'pattern')"
+                          class="text-danger"
+                        >
+                           Este campo es númerico.
+                        </span>
+                      </div>
 
                       <!--end::Input-->
                     </div>
@@ -672,15 +692,15 @@
                   </div>
                   <div class="row mb-10">
                     <div class="col-sm-12">
-                      <ul class="nav nav-tabs nav-line-tabs nav-line-tabs-2x mb-5 fs-6">
-                        <li class="nav-item" role="presentation">
-                          <button class="nav-link active" data-bs-toggle="tab" role="tab" data-bs-target="#kt_tab_pane_4">Comisiones</button>
+                      <ul class="nav nav-tabs nav-line-tabs nav-line-tabs-2x mb-5 fs-6 d-flex">
+                        <li class="nav-item" role="presentation" style="flex:1">
+                          <button class="nav-link p-5 w-100 active" data-bs-toggle="tab" role="tab" data-bs-target="#kt_tab_pane_4" ><h4 style="color: #979797">Comisiones</h4></button>
                         </li>
-                        <li class="nav-item">
-                          <button class="nav-link" data-bs-toggle="tab" role="tab" data-bs-target="#kt_tab_pane_5">Horas Extras</button>
+                        <li class="nav-item" style="flex:1">
+                          <button class="nav-link p-5 w-100" data-bs-toggle="tab" role="tab" data-bs-target="#kt_tab_pane_5" ><h4 style="color: #979797">Horas Extras</h4></button>
                         </li>
-                        <li class="nav-item">
-                          <button class="nav-link" data-bs-toggle="tab" role="tab" data-bs-target="#kt_tab_pane_6">Bonificaciones</button>
+                        <li class="nav-item" style="flex:1">
+                          <button class="nav-link p-5 w-100" data-bs-toggle="tab" role="tab" data-bs-target="#kt_tab_pane_6" ><h4 style="color: #979797">Bonificaciones</h4></button>
                         </li>
                       </ul>
                       <div class="tab-content" id="myTabContent">
@@ -728,10 +748,90 @@
                             </div>
                           </div>
                           <div class="tab-pane fade" id="kt_tab_pane_5" role="tabpanel">
-                              Nulla est ullamco ut irure incididunt nulla Lorem Lorem minim irure officia enim reprehenderit.
+                            <div class="row mb-10">
+                              <div class="col-12 mt-5">
+                                <b>Ingrese la cantidad de comisiones de los últimos seis meses.</b>
+                              </div>
+                            </div>
+                            <div class="row mb-10">
+                              <div class="col-sm-12 col-lg-3">
+                                <label class="form-label">Comision Mes 1</label>
+                                <input type="number" class="form-control form-control-solid" name="input1" placeholder="0" value="0"/>
+                              </div>
+                              <div class="col-sm-12 col-lg-3">
+                                <label class="form-label">Comision Mes 2</label>
+                                <input type="number" class="form-control form-control-solid" name="input1" placeholder="0" value="0"/>
+                              </div>
+                              <div class="col-sm-12 col-lg-3">
+                                <label class="form-label">Comision Mes 3</label>
+                                <input type="number" class="form-control form-control-solid" name="input1" placeholder="0" value="0"/>
+                              </div>
+                              <div class="col-sm-12 col-lg-3">
+                                <label class="form-label">Comision Mes 4</label>
+                                <input type="number" class="form-control form-control-solid" name="input1" placeholder="0" value="0"/>
+                              </div>
+                            </div>
+                            <div class="row mb-10">
+                              <div class="col-sm-12 col-lg-3">
+                                <label class="form-label">Comision Mes 5</label>
+                                <input type="number" class="form-control form-control-solid" name="input1" placeholder="0" value="0"/>
+                              </div>
+                              <div class="col-sm-12 col-lg-3">
+                                <label class="form-label">Comision Mes 6</label>
+                                <input type="number" class="form-control form-control-solid" name="input1" placeholder="0" value="0"/>
+                              </div>
+                            </div>
+                            <div class="row mb-10">
+                              <div class="col-sm-12 col-lg-3">
+                                <b>Comisiones Promedio</b>
+                              </div>
+                              <div class="col-sm-12 col-lg-9">
+                                ∑(M1 + M2 + M3 + M4 + M5 + M6) ÷ 6      =  <b>L. 18,000.00</b>
+                              </div>
+                            </div>
                           </div>
                           <div class="tab-pane fade" id="kt_tab_pane_6" role="tabpanel">
-                              Sint sit mollit irure quis est nostrud cillum consequat Lorem esse do quis dolor esse fugiat sunt do.
+                            <div class="row mb-10">
+                              <div class="col-12 mt-5">
+                                <b>Ingrese la cantidad de bonificaciones de los últimos seis meses.</b>
+                              </div>
+                            </div>
+                            <div class="row mb-10">
+                              <div class="col-sm-12 col-lg-3">
+                                <label class="form-label">Bonificación Mes 1</label>
+                                <input type="number" class="form-control form-control-solid" name="input1" placeholder="0" value="0"/>
+                              </div>
+                              <div class="col-sm-12 col-lg-3">
+                                <label class="form-label">Bonificación Mes 2</label>
+                                <input type="number" class="form-control form-control-solid" name="input1" placeholder="0" value="0"/>
+                              </div>
+                              <div class="col-sm-12 col-lg-3">
+                                <label class="form-label">Bonificación Mes 3</label>
+                                <input type="number" class="form-control form-control-solid" name="input1" placeholder="0" value="0"/>
+                              </div>
+                              <div class="col-sm-12 col-lg-3">
+                                <label class="form-label">Bonificación Mes 4</label>
+                                <input type="number" class="form-control form-control-solid" name="input1" placeholder="0" value="0"/>
+                              </div>
+                            </div>
+                            <div class="row mb-10">
+                              <div class="col-sm-12 col-lg-3">
+                                <label class="form-label">Bonificación Mes 5</label>
+                                <input type="number" class="form-control form-control-solid" name="input1" placeholder="0" value="0"/>
+                              </div>
+                              <div class="col-sm-12 col-lg-3">
+                                <label class="form-label">Bonificación Mes 6</label>
+                                <input type="number" class="form-control form-control-solid" name="input1" placeholder="0" value="0"/>
+                              </div>
+                            </div>
+                            <div class="row mb-10">
+                              <div class="col-sm-12 col-lg-3">
+                                <b>Bonificaciones Promedio</b>
+                              </div>
+                              <div class="col-sm-12 col-lg-9">
+                                ∑(B1 + B2 + B3 + B4 + B5 + B6) ÷ 6      =  <b>L. 18,000.00</b>
+                              </div>
+                            </div>
                           </div>
                       </div>
                     </div>
