@@ -573,7 +573,8 @@
                   </div>
                 </div>
               </div>
-              <div *ngIf="haveSalary === 'NO'" class="row mb-10">
+              <!-- <div *ngIf="haveSalary === 'NO'" class="row mb-10"> -->
+              <div  class="row mb-10">
                 <div class="col-12">
                   <div class="row mb-10">
                     <b>Ingrese los salarios recibidos en los últimos seis meses.</b>
@@ -584,7 +585,28 @@
                       <label class="form-label">Salario Mes 1</label>
                       <!--end::Label-->
                       <!--begin::Input-->
-                      <input type="number" class="form-control form-control-solid" placeholder=""/>
+                      <input
+                        formControlName="monthlySalaryAverage1"
+                        [class.is-valid]="isValidField('salaryData.monthlySalaryAverage1')" 
+                        [class.is-invalid]="isInvalidField('salaryData.monthlySalaryAverage1')" 
+                        type="number" 
+                        class="form-control form-control-solid" 
+                        placeholder=""
+                      />
+                      <div *ngIf="isInvalidField('salaryData.monthlySalaryAverage1')">
+                        <span 
+                          *ngIf="getErrorField('salaryData.monthlySalaryAverage1', 'required')"
+                          class="text-danger"
+                          >  
+                          Este campo es requerido.
+                        </span>
+                        <span 
+                          *ngIf="getErrorField('salaryData.monthlySalaryAverage1', 'pattern')"
+                          class="text-danger"
+                        >
+                           Este campo es númerico.
+                        </span>
+                      </div>
 
                       <!--end::Input-->
                     </div>

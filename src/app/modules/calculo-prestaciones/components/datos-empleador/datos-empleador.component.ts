@@ -118,16 +118,16 @@ export class DatosEmpleadorComponent implements OnInit {
       })
     });
 
-    this.formEmployer.get('salaryData.haveFixedSalary')?.valueChanges
+    this.formEmployer.get('salaryData.fixedSalary')?.valueChanges
     .subscribe(value => {
       console.log(value);
       if(value === 'NO'){
-        this.formEmployer.get('salaryData.monthlySalaryAverage1')?.setValidators([Validators.required]);
-        this.formEmployer.get('salaryData.monthlySalaryAverage2')?.setValidators([Validators.required]);
-        this.formEmployer.get('salaryData.monthlySalaryAverage3')?.setValidators([Validators.required]);
-        this.formEmployer.get('salaryData.monthlySalaryAverage4')?.setValidators([Validators.required]);
-        this.formEmployer.get('salaryData.monthlySalaryAverage5')?.setValidators([Validators.required]);
-        this.formEmployer.get('salaryData.monthlySalaryAverage6')?.setValidators([Validators.required]);
+        this.formEmployer.get('salaryData.monthlySalaryAverage1')?.setValidators([Validators.required, Validators.pattern(/^[0-9]+$/)]);
+        this.formEmployer.get('salaryData.monthlySalaryAverage2')?.setValidators([Validators.required, Validators.pattern(/^[0-9]+$/)]);
+        this.formEmployer.get('salaryData.monthlySalaryAverage3')?.setValidators([Validators.required, Validators.pattern(/^[0-9]+$/)]);
+        this.formEmployer.get('salaryData.monthlySalaryAverage4')?.setValidators([Validators.required, Validators.pattern(/^[0-9]+$/)]);
+        this.formEmployer.get('salaryData.monthlySalaryAverage5')?.setValidators([Validators.required, Validators.pattern(/^[0-9]+$/)]);
+        this.formEmployer.get('salaryData.monthlySalaryAverage6')?.setValidators([Validators.required, Validators.pattern(/^[0-9]+$/)]);
       }else{
         this.formEmployer.get('salaryData.monthlySalaryAverage1')?.setValidators(null);
         this.formEmployer.get('salaryData.monthlySalaryAverage2')?.setValidators(null);
@@ -136,6 +136,7 @@ export class DatosEmpleadorComponent implements OnInit {
         this.formEmployer.get('salaryData.monthlySalaryAverage5')?.setValidators(null);
         this.formEmployer.get('salaryData.monthlySalaryAverage6')?.setValidators(null);
       }
+      this.haveSalary = value;
     });
   }
 
