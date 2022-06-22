@@ -14,11 +14,12 @@ import {SalaryHistoryCatalogService} from "../../../services/salary-history-cata
 export class DatosEmpleadorComponent implements OnInit {
 
   // Variables
-  @ViewChild('kt_stepper_vertical') stepper: ElementRef;
+  @ViewChild('kt_stepper_vertical') stepperSteps: ElementRef;
+  stepper: any;
   formEmployer: FormGroup;
   public currentStep : Number = 1;
   private stepperOptions: IStepperOptions = {
-    startIndex: 1,
+    startIndex: 3,
     animation: false,
     animationSpeed: '',
     animationNextClass: '',
@@ -41,9 +42,14 @@ export class DatosEmpleadorComponent implements OnInit {
 
 
   ngAfterViewInit(): void{
-    const stepper = new StepperComponent(this.stepper.nativeElement, this.stepperOptions);
-    stepper.on("kt.stepper.next", () => stepper.goNext());
-    stepper.on("kt.stepper.previous", () => stepper.goPrev());
+    this.stepper = new StepperComponent(this.stepperSteps.nativeElement, this.stepperOptions);
+    this.stepper.on("kt.stepper.previous", () => this.stepper.goPrev());
+    this.stepper.on("kt.stepper.next", () => {
+      this.formEmployer.get('companyData')?.valid ? this.stepper.goNext() : this.formEmployer.get('companyData')?.markAllAsTouched();
+      this.formEmployer.get('employeeData')?.valid ? this.stepper.goNext() : this.formEmployer.get('employeeData')?.markAllAsTouched();
+      this.formEmployer.get('salaryData')?.valid ? 'this.stepper.goNext()' : this.formEmployer.get('salaryData')?.markAllAsTouched();
+      this.formEmployer.get('speciesSalary')?.valid ? 'this.stepper.goNext()' : this.formEmployer.get('speciesSalary')?.markAllAsTouched(); 
+    });
   }
 
 
@@ -78,31 +84,28 @@ export class DatosEmpleadorComponent implements OnInit {
   private formBuild () {
     this.formEmployer = this.formBuilder.group({
       companyData: this.formBuilder.group({
-        companyName: ['',[Validators.required]],
+        companyName: ['',[Validators.required, Validators.minLength(5)]],
         rtnNumber: ['', [Validators.required, Validators.minLength(14), Validators.maxLength(14)]],
         economicActivity: ['', [Validators.required,]],
         companySize:['', [Validators.required]]
       }),
       employeeData: this.formBuilder.group({
-        typeIdentity: [['DNI','CARNET RESIDENTE'], [Validators.required]],
-        identityNumber: ["", [
-          Validators.required,
-          Validators.minLength(14)
-        ]],
-        employeeName: ['', [Validators.required]],
-        employeeLastName: ['', [Validators.required]],
-        employeeAge: [0, [Validators.required]],
+        typeIdentity: ['DNI', [Validators.required]],
+        identityNumber: ["", [Validators.required, Validators.minLength(14)]],
+        employeeName: ['', [Validators.required, Validators.pattern(/^([Aa-zA-ZáéíóúÁÉÍÓÚÑñ]{2,}\s?){2,4}$/)]],
+        employeeLastname: ['', [Validators.required, Validators.pattern(/^([Aa-zA-ZáéíóúÁÉÍÓÚÑñ]{2,}\s?){2,4}$/)]],
+        employeeAge: [, [Validators.required, Validators.min(14), Validators.max(85), Validators.pattern(/^[0-9]+$/)]],
         employeeSex: ['Masculino', [Validators.required]],
-        employeeTelephone: ['', [Validators.required, Validators.minLength(8)]],
+        employeePhone: ['', [Validators.required, Validators.minLength(8),Validators.maxLength(8)]],
         employeeEmail: ['', [Validators.required, Validators.email]],
-        department: ['', [Validators.required]],
-        municipality: [0, [Validators.required]],
+        department: ['Francisco Morazan', [Validators.required]],
+        municipality: ['Tatumbla', [Validators.required]],
       }),
       salaryData: this.formBuilder.group({
-        startDate: [0, [Validators.required]],
-        endDate: [0, [Validators.required]],
-        haveFixedSalary: ['SI', [Validators.required]],
-        salary: [0, [Validators.required]],
+        startDate: ['', [Validators.required]],
+        endDate: ['', [Validators.required]],
+        fixedSalary: ['SI', [Validators.required]],
+        salary: ['', [Validators.required, Validators.pattern(/^[0-9]+$/)]],
         monthlySalaryAverage1: [0, []],
         monthlySalaryAverage2: [0, []],
         monthlySalaryAverage3: [0, []],
@@ -136,51 +139,22 @@ export class DatosEmpleadorComponent implements OnInit {
     });
   }
 
-  get isCompanyNameValid(){
-    return this.formEmployer.get('companyData.companyName')?.touched &&
-    this.formEmployer.get('companyData.companyName')?.valid;
+  get isFormGroupCompanyDataValid(){
+    return this.formEmployer.get('companyData')?.invalid;
   }
 
-  get isCompanyNameInvalid(){
-    return this.formEmployer.get('companyData.companyName')?.touched &&
-    this.formEmployer.get('companyData.companyName')?.invalid;
+  getErrorField(element: string, errorName: string){
+    return this.formEmployer.get(element)?.hasError(errorName);
   }
 
-  get companyName(){
-    return this.formEmployer.get('companyData.companyName');
+  isValidField(formControlName: string){
+    return this.formEmployer.get(formControlName)?.touched &&
+    this.formEmployer.get(formControlName)?.valid
   }
 
-  get isRtnNumberValid(){
-    return this.formEmployer.get('companyData.rtnNumber')?.touched &&
-    this.formEmployer.get('companyData.rtnNumber')?.valid;
-  }
-
-  get isRtnNumberInvalid(){
-    return this.formEmployer.get('companyData.rtnNumber')?.touched &&
-    this.formEmployer.get('companyData.rtnNumber')?.invalid;
-  }
-
-  get rtnNumber(){
-    return this.formEmployer.get('companyData.rtnNumber');
-  }
-
-  get isEconomicActivityValid(){
-    return this.formEmployer.get('companyData.economicActivity')?.touched &&
-    this.formEmployer.get('companyData.economicActivity')?.valid;
-  }
-
-  get isEconomicActivityInvalid(){
-    return this.formEmployer.get('companyData.economicActivity')?.touched &&
-    this.formEmployer.get('companyData.economicActivity')?.invalid;
-  }
-
-  get isCompanySizeValid(){
-    return this.formEmployer.get('companyData.companySize')?.touched &&
-    this.formEmployer.get('companyData.companySize')?.valid;
-  }
-  get isCompanySizeInvalid(){
-    return this.formEmployer.get('companyData.companySize')?.touched &&
-    this.formEmployer.get('companyData.companySize')?.invalid;
+  isInvalidField(formControlName: string){
+    return this.formEmployer.get(formControlName)?.touched &&
+    this.formEmployer.get(formControlName)?.invalid
   }
 
   getMunicipios(id:string){
@@ -189,6 +163,10 @@ export class DatosEmpleadorComponent implements OnInit {
 
   getLocation(event: any){
     this.currentMunicipios = this.getMunicipios(event);
+  }
+
+  formDataSend(){
+    this.formEmployer.valid ? console.log(this.formEmployer.value) : this.formEmployer.markAllAsTouched();
   }
 
 }

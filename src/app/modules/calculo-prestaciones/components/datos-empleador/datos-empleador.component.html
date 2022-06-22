@@ -128,7 +128,7 @@
       <!--begin::Content-->
       <div class="flex-row-fluid">
         <!--begin::Form-->
-        <form class="form" [formGroup]="formEmployer" novalidate="novalidate">
+        <form class="form" [formGroup]="formEmployer" (ngSubmit)="formDataSend()" novalidate="novalidate">
           <!--begin::Group-->
           <div class="">
             <!--begin:: Datos empresa-->
@@ -142,78 +142,94 @@
                   <!--begin::Input-->
                   <input
                     formControlName="companyName"
-                    [class.is-valid]="isCompanyNameValid"
-                    [class.is-invalid]="isCompanyNameInvalid"
+                    [class.is-valid]="isValidField('companyData.companyName')"
+                    [class.is-invalid]="isInvalidField('companyData.companyName')"
                     type="text"
                     class="form-control form-control-solid"
                     placeholder="Empresa XYZ"/>
-                    <span
-                      *ngIf="isCompanyNameInvalid"
+                    <p *ngIf="isInvalidField('companyData.companyName')">
+                      <span
+                      *ngIf="getErrorField('companyData.companyName', 'required')"
                       class="text-danger"
-                      >Este campo es requerido</span>
+                      >Este campo es requerido.</span>
+                      <span
+                      *ngIf="getErrorField('companyData.companyName', 'minlength')"
+                      class="text-danger"
+                      > Debe contener al menos 5 caracteres.</span>
+                    </p>
                   <!--end::Input-->
                 </div>
                 <div class="col-sm-12 col-lg-3">
                   <!--begin::Label-->
                   <label class="form-label">RTN</label>
                   <!--end::Label-->
-
                   <!--begin::Input-->
                   <input
                     formControlName="rtnNumber"
-                    [class.is-valid]="isRtnNumberValid"
-                    [class.is-invalid]="isRtnNumberInvalid"
+                    [class.is-valid]="isValidField('companyData.rtnNumber')"
+                    [class.is-invalid]="isInvalidField('companyData.rtnNumber')"
                     type="text" class="form-control form-control-solid"
                     placeholder="Número de RTN" value=""/>
                   <!--end::Input-->
-                  <div *ngIf="isRtnNumberInvalid">
+                  <div *ngIf="isInvalidField('companyData.rtnNumber')">
                     <span
-                      class="text-danger"
-                      >Este campo es requerido
-                    </span>
-                    <!--<span
-                        *ngIf="rtnNumber.hasError('minLength')"
-                        class="text-danger"
-                        >Debe de tener al menos 14 caracteres
-                    </span>-->
+                    *ngIf="getErrorField('companyData.rtnNumber', 'required')"
+                    class="text-danger"
+                    >Este campo es requerido.</span>
+                    <span
+                    *ngIf="getErrorField('companyData.rtnNumber', 'minlength')"
+                    class="text-danger"
+                    > Debe contener al menos 14 caracteres.</span>
+                    <span
+                    *ngIf="getErrorField('companyData.rtnNumber', 'maxlength')"
+                    class="text-danger"
+                    > Hay más de 14 caracteres.</span>
                   </div>
-
                 </div>
                 <div class="col-sm-12 col-lg-3">
                   <!--begin::Label-->
                   <label class="form-label">Actividad económica</label>
                   <!--end::Label-->
-
                   <!--begin::Input-->
                   <ng-select
                     formControlName="economicActivity"
-                    [class.is-valid]="isEconomicActivityValid"
-                    [class.is-invalid]="isEconomicActivityInvalid"
+                    [class.is-valid]="isValidField('companyData.economicActivity')"
+                    [class.is-invalid]="isInvalidField('companyData.economicActivity')"
                     class=""
                     placeholder="">
                     <ng-option *ngFor="let item of economicActivityList" [value]="item.id">{{item.name}}</ng-option>
                   </ng-select>
                   <!--end::Input-->
+                  <div *ngIf="isInvalidField('companyData.economicActivity')">
+                    <span
+                    *ngIf="getErrorField('companyData.economicActivity', 'required')"
+                    class="text-danger"
+                    >Este campo es requerido.</span>
+                  </div>
                 </div>
-
                 <div class="col-sm-12 col-lg-3">
                   <!--begin::Label-->
                   <label class="form-label">Tamaño de la empresa</label>
                   <!--end::Label-->
                   <!--begin::Input-->
-                  <select
+                  <ng-select
                     formControlName="companySize"
-                    [class.is-valid]="isCompanySizeValid"
-                    [class.is-invalid]="isCompanySizeInvalid"
+                    [class.is-valid]="isValidField('companyData.companySize')"
+                    [class.is-invalid]="isInvalidField('companyData.companySize')"
                     type="text"
-                    class="form-select form-select-solid"  
+                    class="form-select-solid"  
                     placeholder="">
                     <ng-option *ngFor="let item of companySizeList" [value]="item.id">{{item.minQty}} - {{item.maxQty}} Empleados</ng-option>
                   </ng-select>
                   <!--end::Input-->
+                  <div *ngIf="isInvalidField('companyData.companySize')">
+                    <span
+                    *ngIf="getErrorField('companyData.companySize', 'required')"
+                    class="text-danger"
+                    >Este campo es requerido.</span>
+                  </div>
                 </div>
               </div>
-              <!--end::Input group-->
             </div>
             <!--begin:: Datos trabajador-->
             <div formGroupName="employeeData" class="flex-column gap-5" data-kt-stepper-element="content">
@@ -223,12 +239,22 @@
                   <label class="form-label">Tipo identificación</label>
                   <!--end::Label-->
                   <!--begin::Input-->
-                  <select name="" id="" class="form-select form-select-solid">
-                    <option value="">DNI</option>
-                    <option value="">Carnet de residente</option>
-                    <option value="">Pasaporte</option>
+                  <select 
+                    formControlName="typeIdentity"
+                    [class.is-valid]="isValidField('employeeData.typeIdentity')"
+                    [class.is-invalid]="isInvalidField('employeeData.typeIdentity')"
+                    class="form-select form-select-solid">
+                    <option value="DNI">DNI</option>
+                    <option value="Carnet de residente">Carnet de residente</option>
+                    <option value="Pasaporte">Pasaporte</option>
                   </select>
                   <!--end::Input-->
+                  <div *ngIf="isInvalidField('employeeData.typeIdentity')">
+                    <span
+                    *ngIf="getErrorField('employeeData.typeIdentity', 'required')"
+                    class="text-danger"
+                    >Este campo es requerido.</span>
+                  </div>
                 </div>
                 <div class="col-sm-12 col-lg-3">
                   <!--begin::Label-->
@@ -238,10 +264,26 @@
                   <!--begin::Input-->
                   <input
                     formControlName="identityNumber"
+                    [class.is-valid]="isValidField('employeeData.identityNumber')"
+                    [class.is-invalid]="isInvalidField('employeeData.identityNumber')"
                     type="text"
                     class="form-control form-control-solid"
-                    placeholder=""
+                    placeholder="080119990876549"
                   />
+                  <div *ngIf="isInvalidField('employeeData.identityNumber')">
+                    <span
+                    *ngIf="getErrorField('employeeData.identityNumber', 'required')"
+                    class="text-danger"
+                    >Este campo es requerido.</span>
+                    <span
+                    *ngIf="getErrorField('employeeData.identityNumber', 'minlength')"
+                    class="text-danger"
+                    > Debe contener al menos 14 caracteres.</span>
+                    <span
+                    *ngIf="getErrorField('employeeData.identityNumber', 'maxlength')"
+                    class="text-danger"
+                    > Hay más de 14 caracteres.</span>
+                  </div>
                   <!--end::Input-->
                 </div>
                 <div class="col-sm-12 col-lg-3">
@@ -250,8 +292,20 @@
                   <!--end::Label-->
 
                   <!--begin::Input-->
-                  <input type="text" class="form-control form-control-solid" name="input3" placeholder="" value=""/>
+                  <input
+                    formControlName="employeeName"
+                    [class.is-valid]="isValidField('employeeData.employeeName')"
+                    [class.is-invalid]="isInvalidField('employeeData.employeeName')"
+                    type="text" 
+                    class="form-control form-control-solid" 
+                    placeholder="Jorge Adalberto"/>
                   <!--end::Input-->
+                  <div *ngIf="isInvalidField('employeeData.employeeName')">
+                    <span
+                    *ngIf="getErrorField('employeeData.employeeName', 'required')"
+                    class="text-danger"
+                    >Este campo es requerido.</span>
+                  </div>
                 </div>
                 <div class="col-sm-12 col-lg-3">
                   <!--begin::Label-->
@@ -259,8 +313,20 @@
                   <!--end::Label-->
 
                   <!--begin::Input-->
-                  <input type="text" class="form-control form-control-solid" name="input3" placeholder="" value=""/>
+                  <input 
+                    formControlName="employeeLastname"
+                    [class.is-valid]="isValidField('employeeData.employeeLastname')"
+                    [class.is-invalid]="isInvalidField('employeeData.employeeLastname')"
+                    type="text" 
+                    class="form-control form-control-solid" 
+                    placeholder="Aguilar"/>
                   <!--end::Input-->
+                  <div *ngIf="isInvalidField('employeeData.employeeLastname')">
+                    <span
+                    *ngIf="getErrorField('employeeData.employeeLastname', 'required')"
+                    class="text-danger"
+                    >Este campo es requerido.</span>
+                  </div>
                 </div>
               </div>
               <div class="row mb-10">
@@ -270,35 +336,105 @@
                   <!--end::Label-->
 
                   <!--begin::Input-->
-                  <input type="text" class="form-control form-control-solid" name="input3" placeholder="" value=""/>
+                  <input
+                    formControlName="employeeAge"
+                    [class.is-valid]="isValidField('employeeData.employeeAge')"
+                    [class.is-invalid]="isInvalidField('employeeData.employeeAge')"
+                    type="text" 
+                    class="form-control form-control-solid" 
+                    placeholder="30"/>
                   <!--end::Input-->
+                  <div *ngIf="isInvalidField('employeeData.employeeAge')">
+                    <span
+                    *ngIf="getErrorField('employeeData.employeeAge', 'required')"
+                    class="text-danger"
+                    >Este campo es requerido.</span>
+                    <span
+                    *ngIf="getErrorField('employeeData.employeeAge', 'min')"
+                    class="text-danger"
+                    > Debe tener al menos 14 años.</span>
+                    <span
+                    *ngIf="getErrorField('employeeData.employeeAge', 'max')"
+                    class="text-danger"
+                    > El límite de edad es de 85 años.</span>
+                    <span
+                    *ngIf="getErrorField('employeeData.employeeAge', 'pattern')"
+                    class="text-danger"
+                    > Este campo es númerico.</span>
+                  </div>
                 </div>
                 <div class="col-sm-12 col-lg-3">
                   <!--begin::Label-->
                   <label class="form-label">Sexo</label>
                   <!--end::Label-->
                   <!--begin::Input-->
-                  <select name="" id="" class="form-select form-select-solid">
-                    <option value="">Masculino</option>
-                    <option value="">Femenino</option>
+                  <select
+                    formControlName="employeeSex"
+                    [class.is-valid]="isValidField('employeeData.employeeSex')" 
+                    [class.is-invalid]="isInvalidField('employeeData.employeeSex')" 
+                    class="form-select form-select-solid">
+                    <option value="Masculino">Masculino</option>
+                    <option value="Femenino">Femenino</option>
                   </select>
                   <!--end::Input-->
+                  <span
+                    *ngIf="isInvalidField('employeeData.employeeSex') && getErrorField('employeeData.employeeSex', 'required')"
+                    class="text-danger"
+                    > Este campo es requerido.</span>
                 </div>
                 <div class="col-sm-12 col-lg-3">
                   <!--begin::Label-->
                   <label class="form-label">Número telefónico</label>
                   <!--end::Label-->
                   <!--begin::Input-->
-                  <input type="tel" class="form-control form-control-solid">
+                  <input
+                    formControlName="employeePhone"
+                    [class.is-valid]="isValidField('employeeData.employeePhone')"
+                    [class.is-invalid]="isInvalidField('employeeData.employeePhone')"
+                    type="tel" 
+                    class="form-control form-control-solid"
+                    placeholder="32866900"
+                    >
                   <!--end::Input-->
+                  <div *ngIf="isInvalidField('employeeData.employeePhone')">
+                    <span
+                    *ngIf="getErrorField('employeeData.employeePhone', 'required')"
+                    class="text-danger"
+                    >Este campo es requerido.</span>
+                    <span
+                    *ngIf="getErrorField('employeeData.employeePhone', 'minlength')"
+                    class="text-danger"
+                    > Debe tener al menos 8 digitos.</span>
+                    <span
+                    *ngIf="getErrorField('employeeData.employeePhone', 'maxlength')"
+                    class="text-danger"
+                    > El límite es de 8 digitos.</span>
+                  </div>
                 </div>
                 <div class="col-sm-12 col-lg-3">
                   <!--begin::Label-->
                   <label class="form-label">Correo electrónico</label>
                   <!--end::Label-->
                   <!--begin::Input-->
-                  <input type="email" class="form-control form-control-solid">
+                  <input 
+                    formControlName="employeeEmail"
+                    [class.is-valid]="isValidField('employeeData.employeeEmail')"
+                    [class.is-invalid]="isInvalidField('employeeData.employeeEmail')"
+                    type="email" 
+                    class="form-control form-control-solid"
+                    placeholder="correo@gmail.com"
+                  >
                   <!--end::Input-->
+                  <div *ngIf="isInvalidField('employeeData.employeeEmail')">
+                    <span
+                    *ngIf="getErrorField('employeeData.employeeEmail', 'required')"
+                    class="text-danger"
+                    >Este campo es requerido.</span>
+                    <span
+                    *ngIf="getErrorField('employeeData.employeeEmail', 'email')"
+                    class="text-danger"
+                    > Debe ser un correo valido.</span>
+                  </div>
                 </div>
               </div>
               <div class="row mb-10">
@@ -309,7 +445,8 @@
                   <!--begin::Input-->
                   <ng-select 
                     formControlName="department"
-                    class=""
+                    [class.is-valid]="isValidField('employeeData.department')"
+                    [class.is-invalid]="isInvalidField('employeeData.department')"
                     (change)="getLocation($event)"
                     app
                     >
@@ -320,36 +457,59 @@
                     </ng-option>
                   </ng-select>
                   <!--end::Input-->
+                  <div *ngIf="isInvalidField('employeeData.department')">
+                    <span
+                    *ngIf="getErrorField('employeeData.employeeAge', 'required')"
+                    class="text-danger"
+                    >Este campo es requerido.</span>  
+                  </div>
                 </div>
                 <div class="col-sm-12 col-lg-3">
                   <!--begin::Label-->
                   <label class="form-label">Municipio</label>
                   <!--end::Label-->
                   <!--begin::Input-->
-                  <ng-select class="">
+                  <ng-select 
+                    formControlName="municipality" 
+                    [class.is-valid]="isValidField('employeeData.municipality')"
+                    [class.is-invalid]="isInvalidField('employeeData.municipality')"
+                    class="">
                     <ng-option *ngFor="let value of currentMunicipios"  [value]="value.location.id">{{value.location.name}}</ng-option>
                   </ng-select>
                   <!--end::Input-->
+                  <div *ngIf="isInvalidField('employeeData.department')">
+                    <span
+                    *ngIf="getErrorField('employeeData.employeeAge', 'required')"
+                    class="text-danger"
+                    >Este campo es requerido.</span>  
+                  </div>
                 </div>
               </div>
-              <!-- <div class="fv-row mb-10">
-
-              </div> -->
-
             </div>
             <!--begin::Step 1-->
 
             <!--begin:: Datos Salariales-->
-            <div class="flex-column gap-5" data-kt-stepper-element="content">
+            <div formGroupName="salaryData" class="flex-column gap-5" data-kt-stepper-element="content">
               <div class="row mb-10">
                 <div class="col-sm-12 col-lg-3">
                   <!--begin::Label-->
                   <label class="form-label">Fecha de inicio</label>
                   <!--end::Label-->
                   <!--begin::Input-->
-                  <input type="date" class="form-control form-control-solid" name="input1" placeholder="" value=""/>
-
+                  <input 
+                    formControlName="startDate"
+                    [class.is-valid]="isValidField('salaryData.startDate')"
+                    [class.is-invalid]="isInvalidField('salaryData.startDate')"
+                    type="date" 
+                    class="form-control form-control-solid" 
+                  />
                   <!--end::Input-->
+                  <div *ngIf="isInvalidField('salaryData.startDate')">
+                    <span
+                    *ngIf="getErrorField('salaryData.startDate', 'required')"
+                    class="text-danger"
+                    >Este campo es requerido.</span>  
+                  </div>
                 </div>
                 <div class="col-sm-12 col-lg-3">
                   <!--begin::Label-->
@@ -357,8 +517,20 @@
                   <!--end::Label-->
 
                   <!--begin::Input-->
-                  <input type="date" class="form-control form-control-solid" name="input1" placeholder="" value=""/>
+                  <input
+                    formControlName="endDate"
+                    [class.is-valid]="isValidField('salaryData.endDate')"
+                    [class.is-invalid]="isInvalidField('salaryData.endDate')"
+                    type="date" 
+                    class="form-control form-control-solid" 
+                  />
                   <!--end::Input-->
+                  <div *ngIf="isInvalidField('salaryData.endDate')">
+                    <span
+                    *ngIf="getErrorField('salaryData.endDate', 'required')"
+                    class="text-danger"
+                    >Este campo es requerido.</span>  
+                  </div>
                 </div>
                 <div class="col-sm-12 col-lg-3">
                   <!--begin::Label-->
@@ -367,22 +539,38 @@
 
                   <!--begin::Input-->
                   <select
-                    [(ngModel)]="haveSalary"
-                    [ngModelOptions]="{standalone: true}"
+                    formControlName="fixedSalary"
+                    [class.is-valid]="isValidField('salaryData.fixedSalary')"
+                    [class.is-invalid]="isInvalidField('salaryData.fixedSalary')"
                     class="form-select form-select-solid">
                     <option *ngFor="let option of salaryOptions">{{option}}</option>
                   </select>
-
                   <!--end::Input-->
                 </div>
                 <div class="col-sm-12 col-lg-3">
                   <!--begin::Label-->
-                  <label class="form-label">Salario</label>
+                  <label class="form-label">Salario mensual</label>
                   <!--end::Label-->
 
                   <!--begin::Input-->
-                  <input type="number" class="form-control form-control-solid" name="input3" placeholder="L. 18,000.00" value=""/>
+                  <input
+                  formControlName="salary"
+                  [class.is-valid]="isValidField('salaryData.salary')"
+                  [class.is-invalid]="isInvalidField('salaryData.salary')"
+                  type="number" 
+                  class="form-control form-control-solid" 
+                  placeholder="L. 18,000.00" value=""/>
                   <!--end::Input-->
+                  <div *ngIf="isInvalidField('salaryData.salary')">
+                    <span
+                    *ngIf="getErrorField('salaryData.salary', 'required')"
+                    class="text-danger"
+                    >Este campo es requerido.</span>  
+                    <span
+                    *ngIf="getErrorField('salaryData.salary', 'pattern')"
+                    class="text-danger"
+                    >Este campo es númerico.</span>  
+                  </div>
                 </div>
               </div>
               <div *ngIf="haveSalary === 'NO'" class="row mb-10">
@@ -602,15 +790,18 @@
             <!--begin::Wrapper-->
             <div>
               <button type="button" class="btn btn-primary" data-kt-stepper-action="submit">
-                        <span class="indicator-label">
-                          Realizar cálculo
-                        </span>
+                <span class="indicator-label">
+                  Realizar cálculo
+                </span>
                 <span class="indicator-progress">
-                          Espere un momento, por favor... <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
-                        </span>
+                  Espere un momento, por favor... <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                </span>
               </button>
 
-              <button type="button" class="btn btn-primary" data-kt-stepper-action="next">
+              <button
+                type="button" 
+                class="btn btn-primary" 
+                data-kt-stepper-action="next">
                 Siguiente
               </button>
             </div>
