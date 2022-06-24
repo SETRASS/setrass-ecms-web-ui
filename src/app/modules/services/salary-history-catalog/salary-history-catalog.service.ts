@@ -13,11 +13,12 @@ export class SalaryHistoryCatalogService extends BaseHttpService {
   }
 
   getEconomicActivities(): Observable<any[]> {
-    return this.getRequest<any[]>(`${this.baseUrl}/ea-catalog/v1/all`);
+    return this.getRequest<any[]>(`${this.baseUrl}/salary-rate-per-year/v1/getTable`);
   }
 
   getCompanySizes(): Observable<any[]> {
     return this.getRequest<any[]>(`${this.baseUrl}/employee-qty-waves/v1/all`);
+    
   }
 
 }

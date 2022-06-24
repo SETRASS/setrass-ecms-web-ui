@@ -3,15 +3,16 @@
 // The list of file replacements can be found in `angular.json`.
 
 //const API_BASE = "http://10.152.1.202:8080";
-const API_BASE = "http://10.152.1.98"; // lookup
+const API_BASE = "http://a17bd4950f19a40b18ffd9647a722e2e-1174112288.us-east-1.elb.amazonaws.com"; // lookup
+const API_BASE_SALARY = "http://ab7c63455f57a43fabe15e7322039b62-695484959.us-east-1.elb.amazonaws.com";
 
 export const environment = {
   production: false,
   appVersion: 'v0.0.2',
 
   API: {
-    LOOKUPS: `${API_BASE}:8080/locations`,
-    SALARY_HISTORY_CATALOG: `${API_BASE}:8081`,
+    LOOKUPS: `${API_BASE}/locations`,
+    SALARY_HISTORY_CATALOG: `${API_BASE_SALARY}`,
   },
   USERDATA_KEY: 'authf649fc9a5f55',
   isMockEnabled: true,

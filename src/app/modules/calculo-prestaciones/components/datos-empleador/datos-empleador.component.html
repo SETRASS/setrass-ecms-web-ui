@@ -184,6 +184,10 @@
                     *ngIf="getErrorField('companyData.rtnNumber', 'maxlength')"
                     class="text-danger"
                     > Hay más de 14 caracteres.</span>
+                    <span
+                    *ngIf="getErrorField('companyData.rtnNumber', 'pattern')"
+                    class="text-danger"
+                    > Este campo es numérico.</span>
                   </div>
                 </div>
                 <div class="col-sm-12 col-lg-3">
@@ -195,9 +199,10 @@
                     formControlName="economicActivity"
                     [class.is-valid]="isValidField('companyData.economicActivity')"
                     [class.is-invalid]="isInvalidField('companyData.economicActivity')"
+                    (change)="getEconomicActivity($event)"
                     class=""
                     placeholder="">
-                    <ng-option *ngFor="let item of economicActivityList" [value]="item.id">{{item.name}}</ng-option>
+                    <ng-option *ngFor="let item of economicActivityList" [value]="item.economicActivity">{{item.economicActivity}}</ng-option>
                   </ng-select>
                   <!--end::Input-->
                   <div *ngIf="isInvalidField('companyData.economicActivity')">
@@ -219,7 +224,8 @@
                     type="text"
                     class="form-select-solid"  
                     placeholder="">
-                    <ng-option *ngFor="let item of companySizeList" [value]="item.id">{{item.minQty}} - {{item.maxQty}} Empleados</ng-option>
+                    <!-- <ng-option *ngFor="let item of companySizeList" [value]="item.id">{{item.minQty}} - {{item.maxQty}} Empleados</ng-option> -->
+                    <ng-option *ngFor="let item of currentEconomicActivity" [value]="item.companyEmployeeWeight">{{item.companyEmployeeWeight}}</ng-option>
                   </ng-select>
                   <!--end::Input-->
                   <div *ngIf="isInvalidField('companyData.companySize')">
@@ -260,7 +266,6 @@
                   <!--begin::Label-->
                   <label class="form-label">Número de identificación</label>
                   <!--end::Label-->
-
                   <!--begin::Input-->
                   <input
                     formControlName="identityNumber"
@@ -283,6 +288,10 @@
                     *ngIf="getErrorField('employeeData.identityNumber', 'maxlength')"
                     class="text-danger"
                     > Hay más de 14 caracteres.</span>
+                    <span
+                    *ngIf="getErrorField('employeeData.identityNumber', 'pattern')"
+                    class="text-danger"
+                    > Este campo es númerico.</span>
                   </div>
                   <!--end::Input-->
                 </div>
@@ -557,6 +566,7 @@
                   formControlName="salary"
                   [class.is-valid]="isValidField('salaryData.salary')"
                   [class.is-invalid]="isInvalidField('salaryData.salary')"
+                  [disabled]="isSalaryFieldDisabled"
                   type="number" 
                   class="form-control form-control-solid" 
                   placeholder="L. 18,000.00" value=""/>
@@ -573,8 +583,7 @@
                   </div>
                 </div>
               </div>
-              <!-- <div *ngIf="haveSalary === 'NO'" class="row mb-10"> -->
-              <div  class="row mb-10">
+              <div *ngIf="haveSalary === 'NO'" class="row mb-10">
                 <div class="col-12">
                   <div class="row mb-10">
                     <b>Ingrese los salarios recibidos en los últimos seis meses.</b>
@@ -589,6 +598,7 @@
                         formControlName="monthlySalaryAverage1"
                         [class.is-valid]="isValidField('salaryData.monthlySalaryAverage1')" 
                         [class.is-invalid]="isInvalidField('salaryData.monthlySalaryAverage1')" 
+                        (change)="getTotalSalaryAverage()"
                         type="number" 
                         class="form-control form-control-solid" 
                         placeholder=""
@@ -619,6 +629,7 @@
                         formControlName="monthlySalaryAverage2"
                         [class.is-valid]="isValidField('salaryData.monthlySalaryAverage2')"
                         [class.is-invalid]="isInvalidField('salaryData.monthlySalaryAverage2')"
+                        (change)="getTotalSalaryAverage()"
                         type="number" 
                         class="form-control form-control-solid" 
                       />
@@ -636,7 +647,6 @@
                            Este campo es númerico.
                         </span>
                       </div>
-
                       <!--end::Input-->
                     </div>
                     <div class="col-sm-12 col-lg-3">
@@ -644,43 +654,126 @@
                       <label class="form-label">Salario Mes 3</label>
                       <!--end::Label-->
                       <!--begin::Input-->
-                      <input type="number" class="form-control form-control-solid" name="input1" placeholder="" value=""/>
-
+                      <input 
+                        formControlName="monthlySalaryAverage3"
+                        [class.is-valid]="isValidField('salaryData.monthlySalaryAverage3')"
+                        [class.is-invalid]="isInvalidField('salaryData.monthlySalaryAverage3')"
+                        (change)="getTotalSalaryAverage()"
+                        type="number" 
+                        class="form-control form-control-solid" 
+                      />
                       <!--end::Input-->
+                      <div *ngIf="isInvalidField('salaryData.monthlySalaryAverage3')">
+                        <span 
+                          *ngIf="getErrorField('salaryData.monthlySalaryAverage3', 'required')"
+                          class="text-danger"
+                          >  
+                          Este campo es requerido.
+                        </span>
+                        <span 
+                          *ngIf="getErrorField('salaryData.monthlySalaryAverage3', 'pattern')"
+                          class="text-danger"
+                        >
+                           Este campo es númerico.
+                        </span>
+                      </div>
                     </div>
                     <div class="col-sm-12 col-lg-3">
                       <!--begin::Label-->
                       <label class="form-label">Salario Mes 4</label>
                       <!--end::Label-->
                       <!--begin::Input-->
-                      <input type="number" class="form-control form-control-solid" name="input1" placeholder="" value=""/>
-
+                      <input
+                        formControlName="monthlySalaryAverage4"
+                        [class.is-valid]="isValidField('salaryData.monthlySalaryAverage4')"
+                        [class.is-invalid]="isInvalidField('salaryData.monthlySalaryAverage4')"
+                        (change)="getTotalSalaryAverage()"
+                        type="number" 
+                        class="form-control form-control-solid"
+                      />
                       <!--end::Input-->
+                      <div *ngIf="isInvalidField('salaryData.monthlySalaryAverage4')">
+                        <span 
+                          *ngIf="getErrorField('salaryData.monthlySalaryAverage4', 'required')"
+                          class="text-danger"
+                          >  
+                          Este campo es requerido.
+                        </span>
+                        <span 
+                          *ngIf="getErrorField('salaryData.monthlySalaryAverage4', 'pattern')"
+                          class="text-danger"
+                        >
+                           Este campo es númerico.
+                        </span>
+                      </div>
                     </div>
                   </div>
-                  <div class="row">
+                  <div class="row mb-10">
                     <div class="col-sm-12 col-lg-3">
                       <!--begin::Label-->
                       <label class="form-label">Salario Mes 5</label>
                       <!--end::Label-->
                       <!--begin::Input-->
-                      <input type="number" class="form-control form-control-solid" name="input1" placeholder="" value=""/>
-
+                      <input
+                        formControlName="monthlySalaryAverage5"
+                        [class.is-valid]="isValidField('salaryData.monthlySalaryAverage5')"
+                        [class.is-invalid]="isInvalidField('salaryData.monthlySalaryAverage5')"
+                        (change)="getTotalSalaryAverage()"
+                        type="number" 
+                        class="form-control form-control-solid" 
+                      />
                       <!--end::Input-->
+                      <div *ngIf="isInvalidField('salaryData.monthlySalaryAverage5')">
+                        <span 
+                          *ngIf="getErrorField('salaryData.monthlySalaryAverage5', 'required')"
+                          class="text-danger"
+                          >  
+                          Este campo es requerido.
+                        </span>
+                        <span 
+                          *ngIf="getErrorField('salaryData.monthlySalaryAverage5', 'pattern')"
+                          class="text-danger"
+                        >
+                           Este campo es númerico.
+                        </span>
+                      </div>
                     </div>
                     <div class="col-sm-12 col-lg-3">
                       <!--begin::Label-->
                       <label class="form-label">Salario Mes 6</label>
                       <!--end::Label-->
                       <!--begin::Input-->
-                      <input type="number" class="form-control form-control-solid" name="input1" placeholder="" value=""/>
-
+                      <input 
+                        formControlName="monthlySalaryAverage6"
+                        [class.is-valid]="isValidField('salaryData.monthlySalaryAverage6')"
+                        [class.is-invalid]="isInvalidField('salaryData.monthlySalaryAverage6')"
+                        (change)="getTotalSalaryAverage()"
+                        type="number"
+                        class="form-control form-control-solid"
+                      />
                       <!--end::Input-->
+                      <div *ngIf="isInvalidField('salaryData.monthlySalaryAverage6')">
+                        <span 
+                          *ngIf="getErrorField('salaryData.monthlySalaryAverage6', 'required')"
+                          class="text-danger"
+                          >  
+                          Este campo es requerido.
+                        </span>
+                        <span 
+                          *ngIf="getErrorField('salaryData.monthlySalaryAverage6', 'pattern')"
+                          class="text-danger"
+                        >
+                           Este campo es númerico.
+                        </span>
+                      </div>
                     </div>
                   </div>
-                  <div class="row mt-10 d-flex justify-content-end">
-                    <div class="col-6 d-flex justify-content-end">
-                      <a href="#" class="btn btn-primary">Cálcular salario promedio</a>
+                  <div class="row mb-10">
+                    <div class="col-sm-12 col-lg-3">
+                      <b>Salario Promedio</b>
+                    </div>
+                    <div class="col-sm-12 col-lg-9">
+                      ∑(S1 + S2 + S3 + S4 + S5 + S6) ÷ 6      =  L. <b>{{totalSalaryAverage.toFixed(2)}}</b>
                     </div>
                   </div>
                 </div>

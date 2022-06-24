@@ -19,7 +19,7 @@ export class DatosEmpleadorComponent implements OnInit {
   formEmployer: FormGroup;
   public currentStep : Number = 1;
   private stepperOptions: IStepperOptions = {
-    startIndex: 3,
+    startIndex: 1,
     animation: false,
     animationSpeed: '',
     animationNextClass: '',
@@ -28,11 +28,15 @@ export class DatosEmpleadorComponent implements OnInit {
   salaryOptions:String[] = ['SI', 'NO'];
   haveSalary: string = 'SI';
   economicActivityList: any[] = [];
+  salaryRatesList: any[] = [];
   locations: any[] = [];
   companySizeList: any[] = [];
 
   locationSelected: string;
   currentMunicipios: any[];
+  currentEconomicActivity: any[];
+  totalSalaryAverage = 0.00;
+  isSalaryFieldDisabled: boolean = true;
 
   constructor(private lookupsService: LookupsService,
               private salaryHistoryCatalogService: SalaryHistoryCatalogService,
@@ -65,7 +69,7 @@ export class DatosEmpleadorComponent implements OnInit {
     // initialize economic activities
     this.salaryHistoryCatalogService.getEconomicActivities().subscribe(
       (data) => {
-        this.economicActivityList = data;
+        this.economicActivityList = data.find(val => val.year === 2022).salaryRates;
       },
       (error) => {
         const err = error.message | error;
@@ -85,21 +89,21 @@ export class DatosEmpleadorComponent implements OnInit {
     this.formEmployer = this.formBuilder.group({
       companyData: this.formBuilder.group({
         companyName: ['',[Validators.required, Validators.minLength(5)]],
-        rtnNumber: ['', [Validators.required, Validators.minLength(14), Validators.maxLength(14)]],
+        rtnNumber: ['', [Validators.required, Validators.minLength(14), Validators.maxLength(14), Validators.pattern(/^[0-9]+$/)]],
         economicActivity: ['', [Validators.required,]],
         companySize:['', [Validators.required]]
       }),
       employeeData: this.formBuilder.group({
         typeIdentity: ['DNI', [Validators.required]],
-        identityNumber: ["", [Validators.required, Validators.minLength(14)]],
+        identityNumber: ["", [Validators.required, Validators.minLength(13), Validators.maxLength(13), Validators.pattern(/^[0-9]+$/)]],
         employeeName: ['', [Validators.required, Validators.pattern(/^([Aa-zA-ZáéíóúÁÉÍÓÚÑñ]{2,}\s?){2,4}$/)]],
         employeeLastname: ['', [Validators.required, Validators.pattern(/^([Aa-zA-ZáéíóúÁÉÍÓÚÑñ]{2,}\s?){2,4}$/)]],
         employeeAge: [, [Validators.required, Validators.min(14), Validators.max(85), Validators.pattern(/^[0-9]+$/)]],
         employeeSex: ['Masculino', [Validators.required]],
         employeePhone: ['', [Validators.required, Validators.minLength(8),Validators.maxLength(8)]],
         employeeEmail: ['', [Validators.required, Validators.email]],
-        department: ['Francisco Morazan', [Validators.required]],
-        municipality: ['Tatumbla', [Validators.required]],
+        department: ['', [Validators.required]],
+        municipality: ['', [Validators.required]],
       }),
       salaryData: this.formBuilder.group({
         startDate: ['', [Validators.required]],
@@ -128,6 +132,8 @@ export class DatosEmpleadorComponent implements OnInit {
         this.formEmployer.get('salaryData.monthlySalaryAverage4')?.setValidators([Validators.required, Validators.pattern(/^[0-9]+$/)]);
         this.formEmployer.get('salaryData.monthlySalaryAverage5')?.setValidators([Validators.required, Validators.pattern(/^[0-9]+$/)]);
         this.formEmployer.get('salaryData.monthlySalaryAverage6')?.setValidators([Validators.required, Validators.pattern(/^[0-9]+$/)]);
+        this.formEmployer.get('salaryData.salary')?.setValue(this.totalSalaryAverage.toFixed(2));
+        this.isSalaryFieldDisabled = true;
       }else{
         this.formEmployer.get('salaryData.monthlySalaryAverage1')?.setValidators(null);
         this.formEmployer.get('salaryData.monthlySalaryAverage2')?.setValidators(null);
@@ -135,6 +141,8 @@ export class DatosEmpleadorComponent implements OnInit {
         this.formEmployer.get('salaryData.monthlySalaryAverage4')?.setValidators(null);
         this.formEmployer.get('salaryData.monthlySalaryAverage5')?.setValidators(null);
         this.formEmployer.get('salaryData.monthlySalaryAverage6')?.setValidators(null);
+        this.formEmployer.get('salaryData.salary')?.setValue(0);
+        this.isSalaryFieldDisabled = false;
       }
       this.haveSalary = value;
     });
@@ -162,8 +170,29 @@ export class DatosEmpleadorComponent implements OnInit {
     return this.locations.find(val => val.location.id === id).children;
   }
 
+  getCompanyEmployeeWeight(economicActivity: string){
+    return this.economicActivityList.filter(val => val.economicActivity === economicActivity);
+  }
+
   getLocation(event: any){
     this.currentMunicipios = this.getMunicipios(event);
+  }
+
+  getEconomicActivity(event: string){
+    console.log(event);
+    console.log(this.getCompanyEmployeeWeight(event));
+    this.currentEconomicActivity = this.getCompanyEmployeeWeight(event);
+  }
+
+  getTotalSalaryAverage(){
+    let month1 = Number(this.formEmployer.get('salaryData.monthlySalaryAverage1')?.value);
+    let month2 = Number(this.formEmployer.get('salaryData.monthlySalaryAverage2')?.value);
+    let month3 = Number(this.formEmployer.get('salaryData.monthlySalaryAverage3')?.value);
+    let month4 = Number(this.formEmployer.get('salaryData.monthlySalaryAverage4')?.value);
+    let month5 = Number(this.formEmployer.get('salaryData.monthlySalaryAverage5')?.value);
+    let month6 = Number(this.formEmployer.get('salaryData.monthlySalaryAverage6')?.value);
+    this.totalSalaryAverage += (month1 + month2 + month3 + month4 + month5 + month6) / 6;
+    this.formEmployer.get('salaryData.salary')?.setValue(this.totalSalaryAverage.toFixed(2));
   }
 
   formDataSend(){
