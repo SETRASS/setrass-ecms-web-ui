@@ -121,12 +121,12 @@ export class DatosEmpleadorComponent implements OnInit {
         monthlySalaryAverage5: [0, []],
         monthlySalaryAverage6: [0, []],
         commissions: this.formBuilder.group({
-          monthlyCommissions1: [0, []],
-          monthlyCommissions2: [0, []],
-          monthlyCommissions3: [0, []],
-          monthlyCommissions4: [0, []],
-          monthlyCommissions5: [0, []],
-          monthlyCommissions6: [0, []]
+          monthlyCommissions1: [0, [Validators.pattern(/^[0-9]+$/)]],
+          monthlyCommissions2: [0, [Validators.pattern(/^[0-9]+$/)]],
+          monthlyCommissions3: [0, [Validators.pattern(/^[0-9]+$/)]],
+          monthlyCommissions4: [0, [Validators.pattern(/^[0-9]+$/)]],
+          monthlyCommissions5: [0, [Validators.pattern(/^[0-9]+$/)]],
+          monthlyCommissions6: [0, [Validators.pattern(/^[0-9]+$/)]]
         }),
         extraHours: this.formBuilder.group({
           monthlyExtraHours1: [0, []],

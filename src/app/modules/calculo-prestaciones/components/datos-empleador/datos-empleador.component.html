@@ -759,7 +759,7 @@
                           *ngIf="getErrorField('salaryData.monthlySalaryAverage6', 'pattern')"
                           class="text-danger"
                         >
-                           Este campo es númerico.
+                          Este campo es númerico.
                         </span>
                       </div>
                     </div>
@@ -793,7 +793,7 @@
                         </li>
                       </ul>
                       <div class="tab-content" id="myTabContent">
-                          <div class="tab-pane fade show active" id="kt_tab_pane_4" role="tabpanel">
+                          <div formGroupName="commissions" class="tab-pane fade show active" id="kt_tab_pane_4" role="tabpanel">
                             <div class="row mb-10">
                               <div class="col-12 mt-5">
                                 <b>Ingrese la cantidad de comisiones de los últimos seis meses.</b>
@@ -802,7 +802,21 @@
                             <div class="row mb-10">
                               <div class="col-sm-12 col-lg-3">
                                 <label class="form-label">Comision Mes 1</label>
-                                <input type="number" class="form-control form-control-solid" name="input1" placeholder="0" value="0"/>
+                                <input
+                                  formControlName="monthlyCommissions1"
+                                  [class.is-valid]="isValidField('salaryData.commissions.monthlyCommissions1')"
+                                  [class.is-invalid]="isInvalidField('salaryData.commissions.monthlyCommissions1')"
+                                  type="number" 
+                                  class="form-control form-control-solid" 
+                                  (change)="getTotalAverageField('salaryData.commissions.monthlyCommissions1')"
+                                  />
+                                  <div *ngIf="isInvalidField('salaryData.commissions.monthlyCommissions1')">
+                                    <span 
+                                      *ngIf="getErrorField('salaryData.commissions.monthlyCommissions1', 'pattern')"
+                                      class="text-danger">
+                                      Este campo es númerico.
+                                    </span>
+                                  </div>
                               </div>
                               <div class="col-sm-12 col-lg-3">
                                 <label class="form-label">Comision Mes 2</label>
@@ -836,37 +850,41 @@
                               </div>
                             </div>
                           </div>
-                          <div class="tab-pane fade" id="kt_tab_pane_5" role="tabpanel">
+                          <div formGroupName="extraHours" class="tab-pane fade" id="kt_tab_pane_5" role="tabpanel">
                             <div class="row mb-10">
                               <div class="col-12 mt-5">
-                                <b>Ingrese la cantidad de comisiones de los últimos seis meses.</b>
+                                <b>Ingrese la cantidad de horas extras de los últimos seis meses.</b>
                               </div>
                             </div>
                             <div class="row mb-10">
                               <div class="col-sm-12 col-lg-3">
-                                <label class="form-label">Comision Mes 1</label>
+                                <label class="form-label">Horas extras Mes 1</label>
+                                <input
+                                  formControlName="monthlyExtraHours1"
+                                  type="number" 
+                                  class="form-control form-control-solid" 
+                                  name="input1"/>
+                              </div>
+                              <div class="col-sm-12 col-lg-3">
+                                <label class="form-label">Horas extras Mes 2</label>
                                 <input type="number" class="form-control form-control-solid" name="input1" placeholder="0" value="0"/>
                               </div>
                               <div class="col-sm-12 col-lg-3">
-                                <label class="form-label">Comision Mes 2</label>
+                                <label class="form-label">Horas extras Mes 3</label>
                                 <input type="number" class="form-control form-control-solid" name="input1" placeholder="0" value="0"/>
                               </div>
                               <div class="col-sm-12 col-lg-3">
-                                <label class="form-label">Comision Mes 3</label>
-                                <input type="number" class="form-control form-control-solid" name="input1" placeholder="0" value="0"/>
-                              </div>
-                              <div class="col-sm-12 col-lg-3">
-                                <label class="form-label">Comision Mes 4</label>
+                                <label class="form-label">Horas extras Mes 4</label>
                                 <input type="number" class="form-control form-control-solid" name="input1" placeholder="0" value="0"/>
                               </div>
                             </div>
                             <div class="row mb-10">
                               <div class="col-sm-12 col-lg-3">
-                                <label class="form-label">Comision Mes 5</label>
+                                <label class="form-label">Horas extras Mes 5</label>
                                 <input type="number" class="form-control form-control-solid" name="input1" placeholder="0" value="0"/>
                               </div>
                               <div class="col-sm-12 col-lg-3">
-                                <label class="form-label">Comision Mes 6</label>
+                                <label class="form-label">Horas extras Mes 6</label>
                                 <input type="number" class="form-control form-control-solid" name="input1" placeholder="0" value="0"/>
                               </div>
                             </div>
@@ -879,7 +897,7 @@
                               </div>
                             </div>
                           </div>
-                          <div class="tab-pane fade" id="kt_tab_pane_6" role="tabpanel">
+                          <div formGroupName="bonuses" class="tab-pane fade" id="kt_tab_pane_6" role="tabpanel">
                             <div class="row mb-10">
                               <div class="col-12 mt-5">
                                 <b>Ingrese la cantidad de bonificaciones de los últimos seis meses.</b>
