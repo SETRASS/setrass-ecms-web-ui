@@ -202,7 +202,7 @@
                     (change)="getEconomicActivity($event)"
                     class=""
                     placeholder="">
-                    <ng-option *ngFor="let item of economicActivityList" [value]="item.economicActivity">{{item.economicActivity}}</ng-option>
+                    <ng-option *ngFor="let item of economicActivityList" [value]="item.id">{{item.name}}</ng-option>
                   </ng-select>
                   <!--end::Input-->
                   <div *ngIf="isInvalidField('companyData.economicActivity')">
@@ -563,10 +563,10 @@
 
                   <!--begin::Input-->
                   <input
+                  #salary
                   formControlName="salary"
                   [class.is-valid]="isValidField('salaryData.salary')"
                   [class.is-invalid]="isInvalidField('salaryData.salary')"
-                  [disabled]="isSalaryFieldDisabled"
                   type="number" 
                   class="form-control form-control-solid" 
                   placeholder="L. 18,000.00" value=""/>
@@ -576,10 +576,6 @@
                     *ngIf="getErrorField('salaryData.salary', 'required')"
                     class="text-danger"
                     >Este campo es requerido.</span>  
-                    <span
-                    *ngIf="getErrorField('salaryData.salary', 'pattern')"
-                    class="text-danger"
-                    >Este campo es númerico.</span>  
                   </div>
                 </div>
               </div>
@@ -598,7 +594,7 @@
                         formControlName="monthlySalaryAverage1"
                         [class.is-valid]="isValidField('salaryData.monthlySalaryAverage1')" 
                         [class.is-invalid]="isInvalidField('salaryData.monthlySalaryAverage1')" 
-                        (change)="getTotalSalaryAverage()"
+                        (change)="getTotalAverageField('salaryData.monthlySalaryAverage')"
                         type="number" 
                         class="form-control form-control-solid" 
                         placeholder=""
@@ -629,7 +625,7 @@
                         formControlName="monthlySalaryAverage2"
                         [class.is-valid]="isValidField('salaryData.monthlySalaryAverage2')"
                         [class.is-invalid]="isInvalidField('salaryData.monthlySalaryAverage2')"
-                        (change)="getTotalSalaryAverage()"
+                        (change)="getTotalAverageField('salaryData.monthlySalaryAverage')"
                         type="number" 
                         class="form-control form-control-solid" 
                       />
@@ -658,7 +654,7 @@
                         formControlName="monthlySalaryAverage3"
                         [class.is-valid]="isValidField('salaryData.monthlySalaryAverage3')"
                         [class.is-invalid]="isInvalidField('salaryData.monthlySalaryAverage3')"
-                        (change)="getTotalSalaryAverage()"
+                        (change)="getTotalAverageField('salaryData.monthlySalaryAverage')"
                         type="number" 
                         class="form-control form-control-solid" 
                       />
@@ -687,7 +683,7 @@
                         formControlName="monthlySalaryAverage4"
                         [class.is-valid]="isValidField('salaryData.monthlySalaryAverage4')"
                         [class.is-invalid]="isInvalidField('salaryData.monthlySalaryAverage4')"
-                        (change)="getTotalSalaryAverage()"
+                        (change)="getTotalAverageField('salaryData.monthlySalaryAverage')"
                         type="number" 
                         class="form-control form-control-solid"
                       />
@@ -718,7 +714,7 @@
                         formControlName="monthlySalaryAverage5"
                         [class.is-valid]="isValidField('salaryData.monthlySalaryAverage5')"
                         [class.is-invalid]="isInvalidField('salaryData.monthlySalaryAverage5')"
-                        (change)="getTotalSalaryAverage()"
+                        (change)="getTotalAverageField('salaryData.monthlySalaryAverage')"
                         type="number" 
                         class="form-control form-control-solid" 
                       />
@@ -747,7 +743,7 @@
                         formControlName="monthlySalaryAverage6"
                         [class.is-valid]="isValidField('salaryData.monthlySalaryAverage6')"
                         [class.is-invalid]="isInvalidField('salaryData.monthlySalaryAverage6')"
-                        (change)="getTotalSalaryAverage()"
+                        (change)="getTotalAverageField('salaryData.monthlySalaryAverage')"
                         type="number"
                         class="form-control form-control-solid"
                       />

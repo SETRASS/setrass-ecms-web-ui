@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
 
 import { IStepperOptions, StepperComponent, ToggleComponent } from 'src/app/_metronic/kt/components';
@@ -15,11 +15,12 @@ export class DatosEmpleadorComponent implements OnInit {
 
   // Variables
   @ViewChild('kt_stepper_vertical') stepperSteps: ElementRef;
+  @ViewChild('salary') salaryField: ElementRef;
   stepper: any;
   formEmployer: FormGroup;
   public currentStep : Number = 1;
   private stepperOptions: IStepperOptions = {
-    startIndex: 1,
+    startIndex: 3,
     animation: false,
     animationSpeed: '',
     animationNextClass: '',
@@ -35,12 +36,16 @@ export class DatosEmpleadorComponent implements OnInit {
   locationSelected: string;
   currentMunicipios: any[];
   currentEconomicActivity: any[];
-  totalSalaryAverage = 0.00;
+  totalSalaryAverage = 0;
+  totalCommissionsAverage = 0;
+  totalExtraHoursAverage = 0;
+  totalBonusesAverage = 0;
   isSalaryFieldDisabled: boolean = true;
 
   constructor(private lookupsService: LookupsService,
               private salaryHistoryCatalogService: SalaryHistoryCatalogService,
-              private formBuilder : FormBuilder) {
+              private formBuilder : FormBuilder,
+              private render2: Renderer2) {
     this.formBuild();
   }
 
@@ -51,7 +56,7 @@ export class DatosEmpleadorComponent implements OnInit {
     this.stepper.on("kt.stepper.next", () => {
       this.formEmployer.get('companyData')?.valid ? this.stepper.goNext() : this.formEmployer.get('companyData')?.markAllAsTouched();
       this.formEmployer.get('employeeData')?.valid ? this.stepper.goNext() : this.formEmployer.get('employeeData')?.markAllAsTouched();
-      this.formEmployer.get('salaryData')?.valid ? 'this.stepper.goNext()' : this.formEmployer.get('salaryData')?.markAllAsTouched();
+      this.formEmployer.get('salaryData')?.valid ? this.stepper.goNext() : this.formEmployer.get('salaryData')?.markAllAsTouched();
       this.formEmployer.get('speciesSalary')?.valid ? 'this.stepper.goNext()' : this.formEmployer.get('speciesSalary')?.markAllAsTouched(); 
     });
   }
@@ -60,7 +65,6 @@ export class DatosEmpleadorComponent implements OnInit {
   ngOnInit(): void {
     this.lookupsService.getLocations().subscribe((data) => {
       this.locations = data[0].children;
-      console.log(this.locations);
     }, ((error?: any) => {
       const err = error.message | error;
       console.warn(err);
@@ -69,7 +73,7 @@ export class DatosEmpleadorComponent implements OnInit {
     // initialize economic activities
     this.salaryHistoryCatalogService.getEconomicActivities().subscribe(
       (data) => {
-        this.economicActivityList = data.find(val => val.year === 2022).salaryRates;
+        this.economicActivityList = data;
       },
       (error) => {
         const err = error.message | error;
@@ -109,13 +113,37 @@ export class DatosEmpleadorComponent implements OnInit {
         startDate: ['', [Validators.required]],
         endDate: ['', [Validators.required]],
         fixedSalary: ['SI', [Validators.required]],
-        salary: ['', [Validators.required, Validators.pattern(/^[0-9]+$/)]],
+        salary: ['', [Validators.required]],
         monthlySalaryAverage1: [0, []],
         monthlySalaryAverage2: [0, []],
         monthlySalaryAverage3: [0, []],
         monthlySalaryAverage4: [0, []],
         monthlySalaryAverage5: [0, []],
         monthlySalaryAverage6: [0, []],
+        commissions: this.formBuilder.group({
+          monthlyCommissions1: [0, []],
+          monthlyCommissions2: [0, []],
+          monthlyCommissions3: [0, []],
+          monthlyCommissions4: [0, []],
+          monthlyCommissions5: [0, []],
+          monthlyCommissions6: [0, []]
+        }),
+        extraHours: this.formBuilder.group({
+          monthlyExtraHours1: [0, []],
+          monthlyExtraHours2: [0, []],
+          monthlyExtraHours3: [0, []],
+          monthlyExtraHours4: [0, []],
+          monthlyExtraHours5: [0, []],
+          monthlyExtraHours6: [0, []]
+        }),
+        bonuses: this.formBuilder.group({
+          monthlyBonus1: [0, []],
+          monthlyBonus2: [0, []],
+          monthlyBonus3: [0, []],
+          monthlyBonus4: [0, []],
+          monthlyBonus5: [0, []],
+          monthlyBonus6: [0, []]
+        }),
       }),
       speciesSalary: this.formBuilder.group({
 
@@ -126,30 +154,22 @@ export class DatosEmpleadorComponent implements OnInit {
     .subscribe(value => {
       console.log(value);
       if(value === 'NO'){
-        this.formEmployer.get('salaryData.monthlySalaryAverage1')?.setValidators([Validators.required, Validators.pattern(/^[0-9]+$/)]);
-        this.formEmployer.get('salaryData.monthlySalaryAverage2')?.setValidators([Validators.required, Validators.pattern(/^[0-9]+$/)]);
-        this.formEmployer.get('salaryData.monthlySalaryAverage3')?.setValidators([Validators.required, Validators.pattern(/^[0-9]+$/)]);
-        this.formEmployer.get('salaryData.monthlySalaryAverage4')?.setValidators([Validators.required, Validators.pattern(/^[0-9]+$/)]);
-        this.formEmployer.get('salaryData.monthlySalaryAverage5')?.setValidators([Validators.required, Validators.pattern(/^[0-9]+$/)]);
-        this.formEmployer.get('salaryData.monthlySalaryAverage6')?.setValidators([Validators.required, Validators.pattern(/^[0-9]+$/)]);
-        this.formEmployer.get('salaryData.salary')?.setValue(this.totalSalaryAverage.toFixed(2));
+        for(let item = 1; item <= 6; item++){
+          this.formEmployer.get(`salaryData.monthlySalaryAverage${item}`)?.setValidators([Validators.required, Validators.pattern(/^[0-9]+$/)]);
+        }
+        this.formEmployer.get('salaryData.salary')?.setValue(this.totalSalaryAverage);
+        this.render2.setAttribute(this.salaryField.nativeElement, 'disabled', 'true');
         this.isSalaryFieldDisabled = true;
       }else{
-        this.formEmployer.get('salaryData.monthlySalaryAverage1')?.setValidators(null);
-        this.formEmployer.get('salaryData.monthlySalaryAverage2')?.setValidators(null);
-        this.formEmployer.get('salaryData.monthlySalaryAverage3')?.setValidators(null);
-        this.formEmployer.get('salaryData.monthlySalaryAverage4')?.setValidators(null);
-        this.formEmployer.get('salaryData.monthlySalaryAverage5')?.setValidators(null);
-        this.formEmployer.get('salaryData.monthlySalaryAverage6')?.setValidators(null);
-        this.formEmployer.get('salaryData.salary')?.setValue(0);
+        for(let item = 1; item <= 6; item++){
+          this.formEmployer.get(`salaryData.monthlySalaryAverage${item}`)?.setValidators(null);
+        }
+        this.formEmployer.get('salaryData.salary')?.setValue(0);  
+        this.render2.setAttribute(this.salaryField.nativeElement, 'disabled', 'false');
         this.isSalaryFieldDisabled = false;
       }
       this.haveSalary = value;
     });
-  }
-
-  get isFormGroupCompanyDataValid(){
-    return this.formEmployer.get('companyData')?.invalid;
   }
 
   getErrorField(element: string, errorName: string){
@@ -184,15 +204,31 @@ export class DatosEmpleadorComponent implements OnInit {
     this.currentEconomicActivity = this.getCompanyEmployeeWeight(event);
   }
 
-  getTotalSalaryAverage(){
-    let month1 = Number(this.formEmployer.get('salaryData.monthlySalaryAverage1')?.value);
-    let month2 = Number(this.formEmployer.get('salaryData.monthlySalaryAverage2')?.value);
-    let month3 = Number(this.formEmployer.get('salaryData.monthlySalaryAverage3')?.value);
-    let month4 = Number(this.formEmployer.get('salaryData.monthlySalaryAverage4')?.value);
-    let month5 = Number(this.formEmployer.get('salaryData.monthlySalaryAverage5')?.value);
-    let month6 = Number(this.formEmployer.get('salaryData.monthlySalaryAverage6')?.value);
-    this.totalSalaryAverage += (month1 + month2 + month3 + month4 + month5 + month6) / 6;
-    this.formEmployer.get('salaryData.salary')?.setValue(this.totalSalaryAverage.toFixed(2));
+  getTotalAverageField(element: string){
+    let month1 = Number(this.formEmployer.get(`${element}1`)?.value);
+    let month2 = Number(this.formEmployer.get(`${element}2`)?.value);
+    let month3 = Number(this.formEmployer.get(`${element}3`)?.value);
+    let month4 = Number(this.formEmployer.get(`${element}4`)?.value);
+    let month5 = Number(this.formEmployer.get(`${element}5`)?.value);
+    let month6 = Number(this.formEmployer.get(`${element}6`)?.value);
+    switch(element){
+      case 'salaryData.monthlySalaryAverage':
+        this.totalSalaryAverage += (month1 + month2 + month3 + month4 + month5 + month6) / 6;
+        this.formEmployer.get('salaryData.salary')?.setValue(this.totalSalaryAverage.toFixed(2));
+        break;
+      case 'salaryData.commissions.monthlyCommissions':
+        this.totalCommissionsAverage = (month1 + month2 + month3 + month4 + month5 + month6) / 6;
+        this.totalCommissionsAverage.toFixed(2);
+        break;
+      case 'salaryData.extraHours.monthlyExtraHours':
+        this.totalExtraHoursAverage = (month1 + month2 + month3 + month4 + month5 + month6) / 6;
+        this.totalExtraHoursAverage.toFixed(2);
+        break;
+      case 'salaryData.bonuses.monthlyBonus':
+        this.totalBonusesAverage = (month1 + month2 + month3 + month4 + month5 + month6) / 6;
+        this.totalBonusesAverage.toFixed(2);
+        break;
+    }
   }
 
   formDataSend(){

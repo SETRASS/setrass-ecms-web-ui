@@ -6,14 +6,14 @@ import {Observable} from "rxjs";
 
 @Injectable()
 export class SalaryHistoryCatalogService extends BaseHttpService {
-  readonly baseUrl = environment.API.SALARY_HISTORY_CATALOG;
+  readonly baseUrl = environment.API.ECONOMIC_ACTIVITY;
 
   constructor(http: HttpClient) {
     super(http);
   }
 
   getEconomicActivities(): Observable<any[]> {
-    return this.getRequest<any[]>(`${this.baseUrl}/salary-rate-per-year/v1/getTable`);
+    return this.getRequest<any[]>(`${this.baseUrl}/ea-catalog/v1/all`);
   }
 
   getCompanySizes(): Observable<any[]> {
