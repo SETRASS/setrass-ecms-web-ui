@@ -215,18 +215,16 @@ export class DatosEmpleadorComponent implements OnInit {
       case 'salaryData.monthlySalaryAverage':
         this.totalSalaryAverage += (month1 + month2 + month3 + month4 + month5 + month6) / 6;
         this.formEmployer.get('salaryData.salary')?.setValue(this.totalSalaryAverage.toFixed(2));
+        console.log(this.totalSalaryAverage);
         break;
       case 'salaryData.commissions.monthlyCommissions':
         this.totalCommissionsAverage = (month1 + month2 + month3 + month4 + month5 + month6) / 6;
-        this.totalCommissionsAverage.toFixed(2);
         break;
       case 'salaryData.extraHours.monthlyExtraHours':
         this.totalExtraHoursAverage = (month1 + month2 + month3 + month4 + month5 + month6) / 6;
-        this.totalExtraHoursAverage.toFixed(2);
         break;
       case 'salaryData.bonuses.monthlyBonus':
         this.totalBonusesAverage = (month1 + month2 + month3 + month4 + month5 + month6) / 6;
-        this.totalBonusesAverage.toFixed(2);
         break;
     }
   }

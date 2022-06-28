@@ -629,18 +629,18 @@
                         type="number" 
                         class="form-control form-control-solid" 
                       />
-                      <div *ngIf="isInvalidField('salaryData.monthlySalaryAverage1')">
+                      <div *ngIf="isInvalidField('salaryData.monthlySalaryAverage2')">
                         <span 
-                          *ngIf="getErrorField('salaryData.monthlySalaryAverage1', 'required')"
+                          *ngIf="getErrorField('salaryData.monthlySalaryAverage2', 'required')"
                           class="text-danger"
                           >  
                           Este campo es requerido.
                         </span>
                         <span 
-                          *ngIf="getErrorField('salaryData.monthlySalaryAverage1', 'pattern')"
+                          *ngIf="getErrorField('salaryData.monthlySalaryAverage2', 'pattern')"
                           class="text-danger"
                         >
-                           Este campo es númerico.
+                          Este campo es númerico.
                         </span>
                       </div>
                       <!--end::Input-->
@@ -808,7 +808,7 @@
                                   [class.is-invalid]="isInvalidField('salaryData.commissions.monthlyCommissions1')"
                                   type="number" 
                                   class="form-control form-control-solid" 
-                                  (change)="getTotalAverageField('salaryData.commissions.monthlyCommissions1')"
+                                  (change)="getTotalAverageField('salaryData.commissions.monthlyCommissions')"
                                   />
                                   <div *ngIf="isInvalidField('salaryData.commissions.monthlyCommissions1')">
                                     <span 
@@ -820,25 +820,95 @@
                               </div>
                               <div class="col-sm-12 col-lg-3">
                                 <label class="form-label">Comision Mes 2</label>
-                                <input type="number" class="form-control form-control-solid" name="input1" placeholder="0" value="0"/>
+                                <input
+                                  formControlName="monthlyCommissions2"
+                                  [class.is-valid]="isValidField('salaryData.commissions.monthlyCommissions2')"
+                                  [class.is-invalid]="isInvalidField('salaryData.commissions.monthlyCommissions2')"
+                                  type="number" 
+                                  class="form-control form-control-solid" 
+                                  (change)="getTotalAverageField('salaryData.commissions.monthlyCommissions')"
+                                  />
+                                  <div *ngIf="isInvalidField('salaryData.commissions.monthlyCommissions2')">
+                                    <span 
+                                      *ngIf="getErrorField('salaryData.commissions.monthlyCommissions2', 'pattern')"
+                                      class="text-danger">
+                                      Este campo es númerico.
+                                    </span>
+                                  </div>
                               </div>
                               <div class="col-sm-12 col-lg-3">
                                 <label class="form-label">Comision Mes 3</label>
-                                <input type="number" class="form-control form-control-solid" name="input1" placeholder="0" value="0"/>
+                                <input
+                                  formControlName="monthlyCommissions3"
+                                  [class.is-valid]="isValidField('salaryData.commissions.monthlyCommissions3')"
+                                  [class.is-invalid]="isInvalidField('salaryData.commissions.monthlyCommissions3')"
+                                  type="number" 
+                                  class="form-control form-control-solid" 
+                                  (change)="getTotalAverageField('salaryData.commissions.monthlyCommissions')"
+                                  />
+                                  <div *ngIf="isInvalidField('salaryData.commissions.monthlyCommissions3')">
+                                    <span 
+                                      *ngIf="getErrorField('salaryData.commissions.monthlyCommissions3', 'pattern')"
+                                      class="text-danger">
+                                      Este campo es númerico.
+                                    </span>
+                                  </div>
                               </div>
                               <div class="col-sm-12 col-lg-3">
                                 <label class="form-label">Comision Mes 4</label>
-                                <input type="number" class="form-control form-control-solid" name="input1" placeholder="0" value="0"/>
+                                <input
+                                  formControlName="monthlyCommissions4"
+                                  [class.is-valid]="isValidField('salaryData.commissions.monthlyCommissions4')"
+                                  [class.is-invalid]="isInvalidField('salaryData.commissions.monthlyCommissions4')"
+                                  type="number" 
+                                  class="form-control form-control-solid" 
+                                  (change)="getTotalAverageField('salaryData.commissions.monthlyCommissions')"
+                                  />
+                                  <div *ngIf="isInvalidField('salaryData.commissions.monthlyCommissions4')">
+                                    <span 
+                                      *ngIf="getErrorField('salaryData.commissions.monthlyCommissions4', 'pattern')"
+                                      class="text-danger">
+                                      Este campo es númerico.
+                                    </span>
+                                  </div>
                               </div>
                             </div>
                             <div class="row mb-10">
                               <div class="col-sm-12 col-lg-3">
                                 <label class="form-label">Comision Mes 5</label>
-                                <input type="number" class="form-control form-control-solid" name="input1" placeholder="0" value="0"/>
+                                <input
+                                  formControlName="monthlyCommissions5"
+                                  [class.is-valid]="isValidField('salaryData.commissions.monthlyCommissions5')"
+                                  [class.is-invalid]="isInvalidField('salaryData.commissions.monthlyCommissions5')"
+                                  type="number" 
+                                  class="form-control form-control-solid" 
+                                  (change)="getTotalAverageField('salaryData.commissions.monthlyCommissions')"
+                                  />
+                                  <div *ngIf="isInvalidField('salaryData.commissions.monthlyCommissions5')">
+                                    <span 
+                                      *ngIf="getErrorField('salaryData.commissions.monthlyCommissions5', 'pattern')"
+                                      class="text-danger">
+                                      Este campo es númerico.
+                                    </span>
+                                  </div>
                               </div>
                               <div class="col-sm-12 col-lg-3">
                                 <label class="form-label">Comision Mes 6</label>
-                                <input type="number" class="form-control form-control-solid" name="input1" placeholder="0" value="0"/>
+                                <input
+                                  formControlName="monthlyCommissions6"
+                                  [class.is-valid]="isValidField('salaryData.commissions.monthlyCommissions6')"
+                                  [class.is-invalid]="isInvalidField('salaryData.commissions.monthlyCommissions6')"
+                                  type="number" 
+                                  class="form-control form-control-solid" 
+                                  (change)="getTotalAverageField('salaryData.commissions.monthlyCommissions')"
+                                  />
+                                  <div *ngIf="isInvalidField('salaryData.commissions.monthlyCommissions6')">
+                                    <span 
+                                      *ngIf="getErrorField('salaryData.commissions.monthlyCommissions6', 'pattern')"
+                                      class="text-danger">
+                                      Este campo es númerico.
+                                    </span>
+                                  </div>
                               </div>
                             </div>
                             <div class="row mb-10">
@@ -846,7 +916,7 @@
                                 <b>Comisiones Promedio</b>
                               </div>
                               <div class="col-sm-12 col-lg-9">
-                                ∑(M1 + M2 + M3 + M4 + M5 + M6) ÷ 6      =  <b>L. {{totalCommissionsAverage}}</b>
+                                ∑(M1 + M2 + M3 + M4 + M5 + M6) ÷ 6      =  <b>L. {{totalCommissionsAverage.toFixed(2)}}</b>
                               </div>
                             </div>
                           </div>
@@ -861,39 +931,119 @@
                                 <label class="form-label">Horas extras Mes 1</label>
                                 <input
                                   formControlName="monthlyExtraHours1"
+                                  [class.is-valid]="isValidField('salaryData.extraHours.monthlyExtraHours1')"
+                                  [class.is-invalid]="isInvalidField('salaryData.extraHours.monthlyExtraHours1')"
                                   type="number" 
                                   class="form-control form-control-solid" 
-                                  name="input1"/>
+                                  (change)="getTotalAverageField('salaryData.extraHours.monthlyExtraHours')"
+                                />
+                                <div *ngIf="isInvalidField('salaryData.extraHours.monthlyExtraHours1')">
+                                  <span 
+                                    *ngIf="getErrorField('salaryData.extraHours.monthlyExtraHours1', 'pattern')"
+                                    class="text-danger">
+                                    Este campo es númerico.
+                                  </span>
+                                </div>
                               </div>
                               <div class="col-sm-12 col-lg-3">
                                 <label class="form-label">Horas extras Mes 2</label>
-                                <input type="number" class="form-control form-control-solid" name="input1" placeholder="0" value="0"/>
+                                <input
+                                  formControlName="monthlyExtraHours2"
+                                  [class.is-valid]="isValidField('salaryData.extraHours.monthlyExtraHours2')"
+                                  [class.is-invalid]="isInvalidField('salaryData.extraHours.monthlyExtraHours2')"
+                                  type="number" 
+                                  class="form-control form-control-solid" 
+                                  (change)="getTotalAverageField('salaryData.extraHours.monthlyExtraHours')"
+                                />
+                                <div *ngIf="isInvalidField('salaryData.extraHours.monthlyExtraHours2')">
+                                  <span 
+                                    *ngIf="getErrorField('salaryData.extraHours.monthlyExtraHours2', 'pattern')"
+                                    class="text-danger">
+                                    Este campo es númerico.
+                                  </span>
+                                </div>
                               </div>
                               <div class="col-sm-12 col-lg-3">
                                 <label class="form-label">Horas extras Mes 3</label>
-                                <input type="number" class="form-control form-control-solid" name="input1" placeholder="0" value="0"/>
+                                <input
+                                  formControlName="monthlyExtraHours3"
+                                  [class.is-valid]="isValidField('salaryData.extraHours.monthlyExtraHours3')"
+                                  [class.is-invalid]="isInvalidField('salaryData.extraHours.monthlyExtraHours3')"
+                                  type="number" 
+                                  class="form-control form-control-solid" 
+                                  (change)="getTotalAverageField('salaryData.extraHours.monthlyExtraHours')"
+                                />
+                                <div *ngIf="isInvalidField('salaryData.extraHours.monthlyExtraHours3')">
+                                  <span 
+                                    *ngIf="getErrorField('salaryData.extraHours.monthlyExtraHours3', 'pattern')"
+                                    class="text-danger">
+                                    Este campo es númerico.
+                                  </span>
+                                </div>
                               </div>
                               <div class="col-sm-12 col-lg-3">
                                 <label class="form-label">Horas extras Mes 4</label>
-                                <input type="number" class="form-control form-control-solid" name="input1" placeholder="0" value="0"/>
+                                <input
+                                  formControlName="monthlyExtraHours4"
+                                  [class.is-valid]="isValidField('salaryData.extraHours.monthlyExtraHours4')"
+                                  [class.is-invalid]="isInvalidField('salaryData.extraHours.monthlyExtraHours4')"
+                                  type="number" 
+                                  class="form-control form-control-solid" 
+                                  (change)="getTotalAverageField('salaryData.extraHours.monthlyExtraHours')"
+                                />
+                                <div *ngIf="isInvalidField('salaryData.extraHours.monthlyExtraHours4')">
+                                  <span 
+                                    *ngIf="getErrorField('salaryData.extraHours.monthlyExtraHours4', 'pattern')"
+                                    class="text-danger">
+                                    Este campo es númerico.
+                                  </span>
+                                </div>
                               </div>
                             </div>
                             <div class="row mb-10">
                               <div class="col-sm-12 col-lg-3">
                                 <label class="form-label">Horas extras Mes 5</label>
-                                <input type="number" class="form-control form-control-solid" name="input1" placeholder="0" value="0"/>
+                                <input
+                                  formControlName="monthlyExtraHours5"
+                                  [class.is-valid]="isValidField('salaryData.extraHours.monthlyExtraHours5')"
+                                  [class.is-invalid]="isInvalidField('salaryData.extraHours.monthlyExtraHours5')"
+                                  type="number" 
+                                  class="form-control form-control-solid" 
+                                  (change)="getTotalAverageField('salaryData.extraHours.monthlyExtraHours')"
+                                />
+                                <div *ngIf="isInvalidField('salaryData.extraHours.monthlyExtraHours5')">
+                                  <span 
+                                    *ngIf="getErrorField('salaryData.extraHours.monthlyExtraHours5', 'pattern')"
+                                    class="text-danger">
+                                    Este campo es númerico.
+                                  </span>
+                                </div>
                               </div>
                               <div class="col-sm-12 col-lg-3">
                                 <label class="form-label">Horas extras Mes 6</label>
-                                <input type="number" class="form-control form-control-solid" name="input1" placeholder="0" value="0"/>
+                                <input
+                                  formControlName="monthlyExtraHours6"
+                                  [class.is-valid]="isValidField('salaryData.extraHours.monthlyExtraHours6')"
+                                  [class.is-invalid]="isInvalidField('salaryData.extraHours.monthlyExtraHours6')"
+                                  type="number" 
+                                  class="form-control form-control-solid" 
+                                  (input)="getTotalAverageField('salaryData.extraHours.monthlyExtraHours')"
+                                />
+                                <div *ngIf="isInvalidField('salaryData.extraHours.monthlyExtraHours6')">
+                                  <span 
+                                    *ngIf="getErrorField('salaryData.extraHours.monthlyExtraHours6', 'pattern')"
+                                    class="text-danger">
+                                    Este campo es númerico.
+                                  </span>
+                                </div>
                               </div>
                             </div>
                             <div class="row mb-10">
                               <div class="col-sm-12 col-lg-3">
-                                <b>Comisiones Promedio</b>
+                                <b>Horas Extras Promedio</b>
                               </div>
                               <div class="col-sm-12 col-lg-9">
-                                ∑(M1 + M2 + M3 + M4 + M5 + M6) ÷ 6      =  <b>L. 18,000.00</b>
+                                ∑(M1 + M2 + M3 + M4 + M5 + M6) ÷ 6      =  <b>L. {{totalExtraHoursAverage.toFixed(2)}}</b>
                               </div>
                             </div>
                           </div>
@@ -906,29 +1056,113 @@
                             <div class="row mb-10">
                               <div class="col-sm-12 col-lg-3">
                                 <label class="form-label">Bonificación Mes 1</label>
-                                <input type="number" class="form-control form-control-solid" name="input1" placeholder="0" value="0"/>
+                                <input
+                                  formControlName="monthlyBonus1"
+                                  [class.is-valid]="isValidField('salaryData.bonuses.monthlyBonus1')"
+                                  [class.is-invalid]="isInvalidField('salaryData.bonuses.monthlyBonus1')"
+                                  type="number" 
+                                  class="form-control form-control-solid" 
+                                  (change)="getTotalAverageField('salaryData.bonuses.monthlyBonus')"
+                                />
+                                <div *ngIf="isInvalidField('salaryData.bonuses.monthlyBonus1')">
+                                  <span 
+                                    *ngIf="getErrorField('salaryData.bonuses.monthlyBonus1', 'pattern')"
+                                    class="text-danger">
+                                    Este campo es númerico.
+                                  </span>
+                                </div>
                               </div>
                               <div class="col-sm-12 col-lg-3">
                                 <label class="form-label">Bonificación Mes 2</label>
-                                <input type="number" class="form-control form-control-solid" name="input1" placeholder="0" value="0"/>
+                                <input
+                                  formControlName="monthlyBonus2"
+                                  [class.is-valid]="isValidField('salaryData.bonuses.monthlyBonus2')"
+                                  [class.is-invalid]="isInvalidField('salaryData.bonuses.monthlyBonus2')"
+                                  type="number" 
+                                  class="form-control form-control-solid" 
+                                  (change)="getTotalAverageField('salaryData.bonuses.monthlyBonus')"
+                                />
+                                <div *ngIf="isInvalidField('salaryData.bonuses.monthlyBonus2')">
+                                  <span 
+                                    *ngIf="getErrorField('salaryData.bonuses.monthlyBonus2', 'pattern')"
+                                    class="text-danger">
+                                    Este campo es númerico.
+                                  </span>
+                                </div>
                               </div>
                               <div class="col-sm-12 col-lg-3">
                                 <label class="form-label">Bonificación Mes 3</label>
-                                <input type="number" class="form-control form-control-solid" name="input1" placeholder="0" value="0"/>
+                                <input
+                                  formControlName="monthlyBonus3"
+                                  [class.is-valid]="isValidField('salaryData.bonuses.monthlyBonus3')"
+                                  [class.is-invalid]="isInvalidField('salaryData.bonuses.monthlyBonus3')"
+                                  type="number" 
+                                  class="form-control form-control-solid" 
+                                  (change)="getTotalAverageField('salaryData.bonuses.monthlyBonus')"
+                                />
+                                <div *ngIf="isInvalidField('salaryData.bonuses.monthlyBonus3')">
+                                  <span 
+                                    *ngIf="getErrorField('salaryData.bonuses.monthlyBonus3', 'pattern')"
+                                    class="text-danger">
+                                    Este campo es númerico.
+                                  </span>
+                                </div>
                               </div>
                               <div class="col-sm-12 col-lg-3">
                                 <label class="form-label">Bonificación Mes 4</label>
-                                <input type="number" class="form-control form-control-solid" name="input1" placeholder="0" value="0"/>
+                                <input
+                                  formControlName="monthlyBonus4"
+                                  [class.is-valid]="isValidField('salaryData.bonuses.monthlyBonus4')"
+                                  [class.is-invalid]="isInvalidField('salaryData.bonuses.monthlyBonus4')"
+                                  type="number" 
+                                  class="form-control form-control-solid" 
+                                  (change)="getTotalAverageField('salaryData.bonuses.monthlyBonus')"
+                                />
+                                <div *ngIf="isInvalidField('salaryData.bonuses.monthlyBonus4')">
+                                  <span 
+                                    *ngIf="getErrorField('salaryData.bonuses.monthlyBonus4', 'pattern')"
+                                    class="text-danger">
+                                    Este campo es númerico.
+                                  </span>
+                                </div>
                               </div>
                             </div>
                             <div class="row mb-10">
                               <div class="col-sm-12 col-lg-3">
                                 <label class="form-label">Bonificación Mes 5</label>
-                                <input type="number" class="form-control form-control-solid" name="input1" placeholder="0" value="0"/>
+                                <input
+                                  formControlName="monthlyBonus5"
+                                  [class.is-valid]="isValidField('salaryData.bonuses.monthlyBonus5')"
+                                  [class.is-invalid]="isInvalidField('salaryData.bonuses.monthlyBonus5')"
+                                  type="number" 
+                                  class="form-control form-control-solid" 
+                                  (change)="getTotalAverageField('salaryData.bonuses.monthlyBonus')"
+                                />
+                                <div *ngIf="isInvalidField('salaryData.bonuses.monthlyBonus5')">
+                                  <span 
+                                    *ngIf="getErrorField('salaryData.bonuses.monthlyBonus5', 'pattern')"
+                                    class="text-danger">
+                                    Este campo es númerico.
+                                  </span>
+                                </div>
                               </div>
                               <div class="col-sm-12 col-lg-3">
                                 <label class="form-label">Bonificación Mes 6</label>
-                                <input type="number" class="form-control form-control-solid" name="input1" placeholder="0" value="0"/>
+                                <input
+                                  formControlName="monthlyBonus6"
+                                  [class.is-valid]="isValidField('salaryData.bonuses.monthlyBonus6')"
+                                  [class.is-invalid]="isInvalidField('salaryData.bonuses.monthlyBonus6')"
+                                  type="number" 
+                                  class="form-control form-control-solid" 
+                                  (change)="getTotalAverageField('salaryData.bonuses.monthlyBonus')"
+                                />
+                                <div *ngIf="isInvalidField('salaryData.bonuses.monthlyBonus6')">
+                                  <span 
+                                    *ngIf="getErrorField('salaryData.bonuses.monthlyBonus6', 'pattern')"
+                                    class="text-danger">
+                                    Este campo es númerico.
+                                  </span>
+                                </div>
                               </div>
                             </div>
                             <div class="row mb-10">
@@ -936,7 +1170,7 @@
                                 <b>Bonificaciones Promedio</b>
                               </div>
                               <div class="col-sm-12 col-lg-9">
-                                ∑(B1 + B2 + B3 + B4 + B5 + B6) ÷ 6      =  <b>L. {{totalBonusesAverage}}</b>
+                                ∑(B1 + B2 + B3 + B4 + B5 + B6) ÷ 6      =  <b>L. {{totalBonusesAverage.toFixed(2)}}</b>
                               </div>
                             </div>
                           </div>
