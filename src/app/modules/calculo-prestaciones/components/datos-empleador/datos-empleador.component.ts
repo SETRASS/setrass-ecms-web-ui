@@ -2,8 +2,11 @@ import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/co
 import { FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
 
 import { IStepperOptions, StepperComponent, ToggleComponent } from 'src/app/_metronic/kt/components';
+import { PersonType } from 'src/app/models/enums/person-type.enum';
+
 import {LookupsService} from "../../../services/lookups/lookups.service";
 import {SalaryHistoryCatalogService} from "../../../services/salary-history-catalog/salary-history-catalog.service";
+
 
 
 @Component({
@@ -20,12 +23,13 @@ export class DatosEmpleadorComponent implements OnInit {
   formEmployer: FormGroup;
   public currentStep : Number = 1;
   private stepperOptions: IStepperOptions = {
-    startIndex: 3,
+    startIndex: 1,
     animation: false,
     animationSpeed: '',
     animationNextClass: '',
     animationPreviousClass: ''
   };
+  personTypeList = Object.values(PersonType).splice(0,2);
   salaryOptions:String[] = ['SI', 'NO'];
   haveSalary: string = 'SI';
   economicActivityList: any[] = [];
@@ -63,6 +67,7 @@ export class DatosEmpleadorComponent implements OnInit {
 
 
   ngOnInit(): void {
+    console.log(this.personTypeList);
     this.lookupsService.getLocations().subscribe((data) => {
       this.locations = data[0].children;
     }, ((error?: any) => {
@@ -82,6 +87,7 @@ export class DatosEmpleadorComponent implements OnInit {
 
     // company size
     this.salaryHistoryCatalogService.getCompanySizes().subscribe((data) => {
+      console.log(data);
       this.companySizeList = data;
     }, (error) => {
       const err = error.message | error;
@@ -94,6 +100,8 @@ export class DatosEmpleadorComponent implements OnInit {
       companyData: this.formBuilder.group({
         companyName: ['',[Validators.required, Validators.minLength(5)]],
         rtnNumber: ['', [Validators.required, Validators.minLength(14), Validators.maxLength(14), Validators.pattern(/^[0-9]+$/)]],
+        dniNumber: ['', []],
+        personType: [PersonType.JURIDICA, [Validators.required]],
         economicActivity: ['', [Validators.required,]],
         companySize:['', [Validators.required]]
       }),
@@ -170,6 +178,28 @@ export class DatosEmpleadorComponent implements OnInit {
       }
       this.haveSalary = value;
     });
+
+    this.formEmployer.get('companyData.personType')?.valueChanges
+    .subscribe(value => {
+      switch(value){
+        case '0':
+          this.formEmployer.get('companyData.dniNumber')?.setValidators([
+            Validators.required, Validators.minLength(13), 
+            Validators.maxLength(13), Validators.pattern(/^[0-9]+$/)]);
+          this.formEmployer.get('companyData.rtnNumber')?.setValidators(null);
+          break;
+        case '1':
+          this.formEmployer.get('companyData.rtnNumber')?.setValidators([
+            Validators.required, Validators.minLength(14), 
+            Validators.maxLength(14), Validators.pattern(/^[0-9]+$/)]);
+          this.formEmployer.get('companyData.dniNumber')?.setValidators(null);
+          break;
+      }
+    });
+  }
+
+  get typePersonValue() {
+    return Number(this.formEmployer.get('companyData.personType')?.value);
   }
 
   getErrorField(element: string, errorName: string){

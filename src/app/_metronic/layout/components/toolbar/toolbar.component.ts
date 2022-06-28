@@ -5,7 +5,7 @@ import {
   OnInit,
   ViewChild,
 } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { NgForm, NgModel } from '@angular/forms';
 
 import { format } from 'date-fns';
 
@@ -24,7 +24,8 @@ export class ToolbarComponent implements OnInit, AfterViewInit {
   };
   toolbarContainerCssClasses: string = '';
   pageTitleCssClasses: string = '';
-  userType: string = '';
+  userType: string;
+  contractType: any;
 
   constructor(private layout: LayoutService, private toolbarService: ToolbarService) {}
 
@@ -33,6 +34,8 @@ export class ToolbarComponent implements OnInit, AfterViewInit {
     this.pageTitleCssClasses = this.layout.getStringCSSClasses('pageTitle');
     this.pageTitleAttributes = this.layout.getHTMLAttributes('pageTitle');
     this.userType = this.toolbarService.userTypeOf;
+    this.contractType = this.toolbarService.terminationContractType;
+    console.log(this.contractType);
   }
 
   ngAfterViewInit() {

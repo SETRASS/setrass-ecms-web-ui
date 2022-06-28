@@ -132,10 +132,10 @@
           <!--begin::Group-->
           <div class="">
             <!--begin:: Datos empresa-->
-            <div class="flex-column gap-5 current" data-kt-stepper-element="content">
+            <div formGroupName="companyData" class="flex-column gap-5 current" data-kt-stepper-element="content">
               <!--begin::Input group-->
-              <div formGroupName="companyData" class="row mb-10">
-                <div class="col-sm-12 col-lg-3">
+              <div  class="row mb-10">
+                <div class="col-sm-12 col-lg-4">
                   <!--begin::Label-->
                   <label class="form-label">Nombre de la empresa</label>
                   <!--end::Label-->
@@ -159,7 +159,28 @@
                     </p>
                   <!--end::Input-->
                 </div>
-                <div class="col-sm-12 col-lg-3">
+                <div class="col-sm-12 col-lg-4">
+                  <!--begin::Label-->
+                  <label class="form-label">Tipo de persona</label>
+                  <!--end::Label-->
+                  <!--begin::Input-->
+                  <select
+                    formControlName="personType"
+                    [class.is-valid]="isValidField('companyData.personType')"
+                    [class.is-invalid]="isInvalidField('companyData.personType')"
+                    type="text" class="form-select form-select-solid"
+                    placeholder="Número de RTN" value="">
+                    <option *ngFor="let key of personTypeList; index as i" [value]="i">{{key}}</option>
+                  </select>
+                  <!--end::Input-->
+                  <div *ngIf="isInvalidField('companyData.personType')">
+                    <span
+                    *ngIf="getErrorField('companyData.personType', 'required')"
+                    class="text-danger"
+                    >Este campo es requerido.</span>
+                  </div>
+                </div>
+                <div *ngIf="typePersonValue === 1" class="col-sm-12 col-lg-4">
                   <!--begin::Label-->
                   <label class="form-label">RTN</label>
                   <!--end::Label-->
@@ -179,18 +200,51 @@
                     <span
                     *ngIf="getErrorField('companyData.rtnNumber', 'minlength')"
                     class="text-danger"
-                    > Debe contener al menos 14 caracteres.</span>
+                    > Debe contener 14 dígitos.</span>
                     <span
                     *ngIf="getErrorField('companyData.rtnNumber', 'maxlength')"
                     class="text-danger"
-                    > Hay más de 14 caracteres.</span>
+                    > Hay más de 14 dígitos.</span>
                     <span
                     *ngIf="getErrorField('companyData.rtnNumber', 'pattern')"
                     class="text-danger"
                     > Este campo es numérico.</span>
                   </div>
                 </div>
-                <div class="col-sm-12 col-lg-3">
+                <div *ngIf="typePersonValue === 0" class="col-sm-12 col-lg-4">
+                  <!--begin::Label-->
+                  <label class="form-label">DNI</label>
+                  <!--end::Label-->
+                  <!--begin::Input-->
+                  <input
+                    formControlName="dniNumber"
+                    [class.is-valid]="isValidField('companyData.dniNumber')"
+                    [class.is-invalid]="isInvalidField('companyData.dniNumber')"
+                    type="text" class="form-control form-control-solid"
+                    placeholder="Número DNI" value=""/>
+                  <!--end::Input-->
+                  <div *ngIf="isInvalidField('companyData.dniNumber')">
+                    <span
+                    *ngIf="getErrorField('companyData.dniNumber', 'required')"
+                    class="text-danger"
+                    >Este campo es requerido.</span>
+                    <span
+                    *ngIf="getErrorField('companyData.dniNumber', 'minlength')"
+                    class="text-danger"
+                    > Debe contener 13 dígitos.</span>
+                    <span
+                    *ngIf="getErrorField('companyData.dniNumber', 'maxlength')"
+                    class="text-danger"
+                    > Hay más de 13 dígitos.</span>
+                    <span
+                    *ngIf="getErrorField('companyData.dniNumber', 'pattern')"
+                    class="text-danger"
+                    > Este campo es numérico.</span>
+                  </div>
+                </div>
+              </div>
+              <div class="row mb-10">
+                <div class="col-sm-12 col-lg-6">
                   <!--begin::Label-->
                   <label class="form-label">Actividad económica</label>
                   <!--end::Label-->
@@ -212,7 +266,7 @@
                     >Este campo es requerido.</span>
                   </div>
                 </div>
-                <div class="col-sm-12 col-lg-3">
+                <div class="col-sm-12 col-lg-6">
                   <!--begin::Label-->
                   <label class="form-label">Tamaño de la empresa</label>
                   <!--end::Label-->

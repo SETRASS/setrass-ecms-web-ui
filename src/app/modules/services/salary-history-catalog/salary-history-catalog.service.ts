@@ -18,7 +18,6 @@ export class SalaryHistoryCatalogService extends BaseHttpService {
 
   getCompanySizes(): Observable<any[]> {
     return this.getRequest<any[]>(`${this.baseUrl}/employee-qty-waves/v1/all`);
-    
   }
 
 }

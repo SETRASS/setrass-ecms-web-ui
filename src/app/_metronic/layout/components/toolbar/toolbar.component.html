@@ -12,11 +12,11 @@
   <div class="d-flex flex-column align-items-end justify-content-between py-3 py-md-1">
     <h6 class="text-white" style="font-weight: 700; text-transform:uppercase;" >{{getCurrentDateTime}}</h6>
     <div class="d-flex align-items-center justify-content-between">
-      <select class="form-select m-3 btn-bg-white" name="" id="">
-        <option value="">Despido</option>
-        <option value="">Renuncia</option>
+      <select [(ngModel)]="contractType" class="form-select m-3 w-150px btn-bg-white">
+        <option value="1">Despido</option>
+        <option value="0">Renuncia</option>
       </select>
-      <select class="form-select btn-bg-white" (change)="getUserType($event)">
+      <select class="form-select btn-bg-white" [(ngModel)]="userType" (change)="getUserType($event)">
         <option value="trabajador">Trabajador</option>
         <option value="empleador">Empleador</option>
       </select>
