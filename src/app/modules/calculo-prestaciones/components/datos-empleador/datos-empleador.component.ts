@@ -61,7 +61,7 @@ export class DatosEmpleadorComponent implements OnInit {
       this.formEmployer.get('companyData')?.valid ? this.stepper.goNext() : this.formEmployer.get('companyData')?.markAllAsTouched();
       this.formEmployer.get('employeeData')?.valid ? this.stepper.goNext() : this.formEmployer.get('employeeData')?.markAllAsTouched();
       this.formEmployer.get('salaryData')?.valid ? this.stepper.goNext() : this.formEmployer.get('salaryData')?.markAllAsTouched();
-      this.formEmployer.get('speciesSalary')?.valid ? 'this.stepper.goNext()' : this.formEmployer.get('speciesSalary')?.markAllAsTouched(); 
+      this.formEmployer.get('speciesSalary')?.valid ? 'this.stepper.goNext()' : this.formEmployer.get('speciesSalary')?.markAllAsTouched();
     });
   }
 
@@ -172,7 +172,7 @@ export class DatosEmpleadorComponent implements OnInit {
         for(let item = 1; item <= 6; item++){
           this.formEmployer.get(`salaryData.monthlySalaryAverage${item}`)?.setValidators(null);
         }
-        this.formEmployer.get('salaryData.salary')?.setValue(0);  
+        this.formEmployer.get('salaryData.salary')?.setValue(0);
         this.render2.setAttribute(this.salaryField.nativeElement, 'disabled', 'false');
         this.isSalaryFieldDisabled = false;
       }
@@ -184,13 +184,13 @@ export class DatosEmpleadorComponent implements OnInit {
       switch(value){
         case '0':
           this.formEmployer.get('companyData.dniNumber')?.setValidators([
-            Validators.required, Validators.minLength(13), 
+            Validators.required, Validators.minLength(13),
             Validators.maxLength(13), Validators.pattern(/^[0-9]+$/)]);
           this.formEmployer.get('companyData.rtnNumber')?.setValidators(null);
           break;
         case '1':
           this.formEmployer.get('companyData.rtnNumber')?.setValidators([
-            Validators.required, Validators.minLength(14), 
+            Validators.required, Validators.minLength(14),
             Validators.maxLength(14), Validators.pattern(/^[0-9]+$/)]);
           this.formEmployer.get('companyData.dniNumber')?.setValidators(null);
           break;
