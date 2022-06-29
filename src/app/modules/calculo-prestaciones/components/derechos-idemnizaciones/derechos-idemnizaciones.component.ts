@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ToolbarService } from 'src/app/_metronic/layout/components/toolbar/toolbar.service';
+
 
 @Component({
   selector: 'app-derechos-idemnizaciones',
@@ -7,9 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DerechosIdemnizacionesComponent implements OnInit {
 
-  constructor() { }
+  currentContractType: any;
+
+  constructor(public contractType: ToolbarService) {
+
+   }
 
   ngOnInit(): void {
+    this.currentContractType = this.contractType.terminationContractType;
+    console.log(this.currentContractType);
   }
 
 }
