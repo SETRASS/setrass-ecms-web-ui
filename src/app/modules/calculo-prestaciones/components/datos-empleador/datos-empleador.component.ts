@@ -23,7 +23,7 @@ export class DatosEmpleadorComponent implements OnInit {
   formEmployer: FormGroup;
   public currentStep : Number = 1;
   private stepperOptions: IStepperOptions = {
-    startIndex: 1,
+    startIndex: 4,
     animation: false,
     animationSpeed: '',
     animationNextClass: '',
@@ -61,13 +61,12 @@ export class DatosEmpleadorComponent implements OnInit {
       this.formEmployer.get('companyData')?.valid ? this.stepper.goNext() : this.formEmployer.get('companyData')?.markAllAsTouched();
       this.formEmployer.get('employeeData')?.valid ? this.stepper.goNext() : this.formEmployer.get('employeeData')?.markAllAsTouched();
       this.formEmployer.get('salaryData')?.valid ? this.stepper.goNext() : this.formEmployer.get('salaryData')?.markAllAsTouched();
-      this.formEmployer.get('speciesSalary')?.valid ? 'this.stepper.goNext()' : this.formEmployer.get('speciesSalary')?.markAllAsTouched();
+      this.formEmployer.get('speciesSalary')?.valid ? 'this.stepper.goNext()' : this.formEmployer.get('speciesSalary')?.markAllAsTouched(); 
     });
   }
 
 
   ngOnInit(): void {
-    console.log(this.personTypeList);
     this.lookupsService.getLocations().subscribe((data) => {
       this.locations = data[0].children;
     }, ((error?: any) => {
@@ -87,8 +86,7 @@ export class DatosEmpleadorComponent implements OnInit {
 
     // company size
     this.salaryHistoryCatalogService.getCompanySizes().subscribe((data) => {
-      console.log(data);
-      this.companySizeList = data;
+      this.companySizeList = data.map(val => ({id: val.id, name: `${val.minQty} a ${val.maxQty} Empleados`}));
     }, (error) => {
       const err = error.message | error;
       console.warn(err);
@@ -99,9 +97,9 @@ export class DatosEmpleadorComponent implements OnInit {
     this.formEmployer = this.formBuilder.group({
       companyData: this.formBuilder.group({
         companyName: ['',[Validators.required, Validators.minLength(5)]],
+        personType: [PersonType.JURIDICA, [Validators.required]],
         rtnNumber: ['', [Validators.required, Validators.minLength(14), Validators.maxLength(14), Validators.pattern(/^[0-9]+$/)]],
         dniNumber: ['', []],
-        personType: [PersonType.JURIDICA, [Validators.required]],
         economicActivity: ['', [Validators.required,]],
         companySize:['', [Validators.required]]
       }),
@@ -154,7 +152,8 @@ export class DatosEmpleadorComponent implements OnInit {
         }),
       }),
       speciesSalary: this.formBuilder.group({
-
+        optionSpeciesSalary: ['', [Validators.required]],
+        foodTime: ['', []]
       })
     });
 
@@ -172,7 +171,7 @@ export class DatosEmpleadorComponent implements OnInit {
         for(let item = 1; item <= 6; item++){
           this.formEmployer.get(`salaryData.monthlySalaryAverage${item}`)?.setValidators(null);
         }
-        this.formEmployer.get('salaryData.salary')?.setValue(0);
+        this.formEmployer.get('salaryData.salary')?.setValue(0);  
         this.render2.setAttribute(this.salaryField.nativeElement, 'disabled', 'false');
         this.isSalaryFieldDisabled = false;
       }
@@ -181,20 +180,28 @@ export class DatosEmpleadorComponent implements OnInit {
 
     this.formEmployer.get('companyData.personType')?.valueChanges
     .subscribe(value => {
-      switch(value){
+      if(value === '0'){
+        this.formEmployer.get('companyData.rtnNumber')?.setValidators(null);
+        this.formEmployer.get('companyData.dniNumber')?.setValidators([Validators.required, Validators.minLength(13), Validators.maxLength(13), Validators.pattern(/^[0-9]+$/)]);
+      }
+      if(value === '1'){
+        this.formEmployer.get('companyData.rtnNumber')?.setValidators([Validators.required, Validators.minLength(14), Validators.maxLength(14), Validators.pattern(/^[0-9]+$/)]);
+        this.formEmployer.get('companyData.dniNumber')?.setValidators(null);
+      }
+      /* switch(value){
         case '0':
-          this.formEmployer.get('companyData.dniNumber')?.setValidators([
-            Validators.required, Validators.minLength(13),
-            Validators.maxLength(13), Validators.pattern(/^[0-9]+$/)]);
-          this.formEmployer.get('companyData.rtnNumber')?.setValidators(null);
           break;
         case '1':
-          this.formEmployer.get('companyData.rtnNumber')?.setValidators([
-            Validators.required, Validators.minLength(14),
-            Validators.maxLength(14), Validators.pattern(/^[0-9]+$/)]);
-          this.formEmployer.get('companyData.dniNumber')?.setValidators(null);
           break;
-      }
+      } */
+    });
+
+    this.formEmployer.get('speciesSalary.optionSpeciesSalary')?.valueChanges
+    .subscribe(value => {
+
+
+
+
     });
   }
 

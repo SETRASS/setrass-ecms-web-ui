@@ -22,7 +22,7 @@
 
             <!--begin::Icon-->
             <div class="stepper-icon w-40px h-40px" >
-              <i class="stepper-check fas fa-check">checked</i>
+              <i class="stepper-check fa-solid fa-check fs-2x"></i>
               <span class="stepper-number">1</span>
             </div>
             <!--end::Icon-->
@@ -49,7 +49,7 @@
 
             <!--begin::Icon-->
             <div class="stepper-icon w-40px h-40px">
-              <i class="stepper-check fas fa-check">checked</i>
+              <i class="stepper-check fa-solid fa-check fs-2x"></i>
               <span class="stepper-number">2</span>
             </div>
             <!--begin::Icon-->
@@ -76,7 +76,7 @@
 
             <!--begin::Icon-->
             <div class="stepper-icon w-40px h-40px">
-              <i class="stepper-check fas fa-check">checked</i>
+              <i class="stepper-check fa-solid fa-check fs-2x"></i>
               <span class="stepper-number">3</span>
             </div>
             <!--begin::Icon-->
@@ -103,7 +103,7 @@
 
             <!--begin::Icon-->
             <div class="stepper-icon w-40px h-40px">
-              <i class="stepper-check fas fa-check">checked</i>
+              <i class="stepper-check fa-solid fa-check fs-2x"></i>
               <span class="stepper-number">4</span>
             </div>
             <!--begin::Icon-->
@@ -278,8 +278,8 @@
                     type="text"
                     class="form-select-solid"  
                     placeholder="">
-                    <!-- <ng-option *ngFor="let item of companySizeList" [value]="item.id">{{item.minQty}} - {{item.maxQty}} Empleados</ng-option> -->
-                    <ng-option *ngFor="let item of currentEconomicActivity" [value]="item.companyEmployeeWeight">{{item.companyEmployeeWeight}}</ng-option>
+                    <ng-option *ngFor="let item of companySizeList" [value]="item.id">{{item.name}}</ng-option>
+                    <!-- <ng-option *ngFor="let item of currentEconomicActivity" [value]="item.companyEmployeeWeight">{{item.companyEmployeeWeight}}</ng-option> -->
                   </ng-select>
                   <!--end::Input-->
                   <div *ngIf="isInvalidField('companyData.companySize')">
@@ -1237,7 +1237,7 @@
             <!--begin::Datos Salariales-->
 
             <!--begin:: Salario en especie-->
-            <div class="flex-column gap-5" data-kt-stepper-element="content">
+            <div formGroupName="speciesSalary" class="flex-column gap-5" data-kt-stepper-element="content">
               <!--begin::subtitle group-->
               <div class="row mb-10">
                 <div class="col-12">
@@ -1246,21 +1246,41 @@
               </div>
               <!--end::Subtitle group-->
               <!--begin::Input group-->
-              <div class="row mb-10">
+              <div class="row mb-2">
                 <div class="col-sm-12 col-lg-4">
-                  <button type="button" class="btn btn-light-primary w-100" data-kt-docs-advanced-forms="interactive">Alimentación</button>
-
+                  <div class="radio-container">
+                    <input formControlName="optionSpeciesSalary" type="radio" name="optionSpeciesSalary" value="alimentacion" id="Alimentacion">
+                    <div class="radio-tile">
+                      <label for="Alimentacion">Alimentación</label>
+                    </div>
+                  </div>
                 </div>
                 <div class="col-sm-12 col-lg-4">
-                  <button type="button" class="btn btn-light-primary w-100" data-kt-docs-advanced-forms="interactive">Vivienda</button>
+                  <div class="radio-container">
+                    <input formControlName="optionSpeciesSalary" type="radio" name="optionSpeciesSalary" value="vivienda" id="Vivienda">
+                    <div class="radio-tile">
+                      <label for="Vivienda">Vivienda</label>
+                    </div>
+                  </div>
                 </div>
                 <div class="col-sm-12 col-lg-4">
-                  <button type="button" class="btn btn-light-primary w-100" data-kt-docs-advanced-forms="interactive">Vivienda + Alimentación</button>
+                  <div class="radio-container">
+                    <input formControlName="optionSpeciesSalary" type="radio" name="optionSpeciesSalary" value="vivienda-alimentacion" id="Vivienda+Alimentacion">
+                    <div class="radio-tile">
+                      <label for="Vivienda+Alimentacion">Vivienda y Alimentación</label>
+                    </div>
+                  </div>
                 </div>
               </div>
               <div class="row mb-10">
                 <div class="col-sm-12 col-lg-4">
-                  <button type="button" class="btn btn-light-primary w-100" data-kt-docs-advanced-forms="interactive">No aplica</button>
+                  <div class="radio-container">
+                    <input formControlName="optionSpeciesSalary" type="radio" value="no-aplica" name="optionSpeciesSalary" id="noAplica">
+                    <div class="radio-tile">
+                      <label for="noAplica">No aplica</label>
+                    </div>
+                  </div>
+                  <!-- <button type="button" class="btn btn-light-primary w-100" data-kt-docs-advanced-forms="interactive">No aplica</button> -->
                 </div>
               </div>
               <div class="row mb-10">
@@ -1269,18 +1289,18 @@
                     <b>¿Cuántos tiempos de comida recibe?</b>
                   </div>
                   <div class="row mb-10">
-                    <div class="col-sm-12 col-lg-4">
+                    <div class="col-sm-6">
                       <!--begin::Option-->
-                      <input type="radio" class="btn-check" name="tiempo"   id="kt_radio_buttons_2_option_1"/>
-                      <label class="btn btn-outline btn-outline-dashed btn-outline-default" for="kt_radio_buttons_2_option_1">
+                      <input type="radio" class="btn-check" value="1" name="tiempo"   id="kt_radio_buttons_2_option_1"/>
+                      <label class="btn btn-outline btn-outline-dashed btn-outline-default w-100" for="kt_radio_buttons_2_option_1">
                         <span>1 tiempo de comida</span>
                       </label>
                       <!--end::Option-->
                     </div>
-                    <div class="col-sm-12 col-lg-4">
+                    <div class="col-sm-6">
                       <!--begin::Option-->
-                      <input type="radio" class="btn-check" name="tiempo"   id="kt_radio_buttons_2_option_2"/>
-                      <label class="btn btn-outline btn-outline-dashed btn-outline-default" for="kt_radio_buttons_2_option_2">
+                      <input type="radio" class="btn-check" value="2" name="tiempo"   id="kt_radio_buttons_2_option_2"/>
+                      <label class="btn btn-outline btn-outline-dashed btn-outline-default w-100" for="kt_radio_buttons_2_option_2">
                         <span>2 o más tiempos de comida</span>
                       </label>
                       <!--end::Option-->
