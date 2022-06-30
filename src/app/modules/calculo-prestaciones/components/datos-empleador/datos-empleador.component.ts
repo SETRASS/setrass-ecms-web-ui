@@ -46,6 +46,8 @@ export class DatosEmpleadorComponent implements OnInit {
   totalExtraHoursAverage = 0;
   totalBonusesAverage = 0;
   isSalaryFieldDisabled: boolean = true;
+  REQUEST_ID: string;
+  EMPLOYER_ID: string;
 
   constructor(private lookupsService: LookupsService,
               private salaryHistoryCatalogService: SalaryHistoryCatalogService,
@@ -210,7 +212,7 @@ export class DatosEmpleadorComponent implements OnInit {
         for(let item = 1; item <= 6; item++){
           this.formEmployer.get(`salaryData.monthlySalaryAverage${item}`)?.setValidators(null);
         }
-        this.formEmployer.get('salaryData.salary')?.setValue(0);
+        this.formEmployer.get('salaryData.salary')?.setValue(0);  
         this.render2.setAttribute(this.salaryField.nativeElement, 'disabled', 'false');
         this.isSalaryFieldDisabled = false;
       }
@@ -324,7 +326,7 @@ export class DatosEmpleadorComponent implements OnInit {
 
   postEmployeeAndEmployer() {
     const { companyData, employeeData } = this.formEmployer.value;
-
+    
     let data = {
       age: employeeData.employeeAge,
       email: employeeData.employeeEmail,
@@ -354,7 +356,52 @@ export class DatosEmpleadorComponent implements OnInit {
   }
 
   postSalaryInfoRequest() {
-    const { salaryData } = this.formEmployer.value;
+    const {  } = this.formEmployer.value.salaryData;
+    let data = {
+      "breastfeedingPaidHours": 0,
+      "daysOffPreAndPostNatalWasPaid": 0,
+      "daysPaidWasFiredWhilePregnant": 0,
+      "dismissalDate": "string",
+      "employerId": "string",
+      "fixedSalary": true,
+      "hasForewarningNotice": true,
+      "hasTakeVacationTimeLastYear": true,
+      "howMuchOwedHolyDays": 0,
+      "howMuchOwedSeventhDay": 0,
+      "lastSixMonthsBonusPayment": [0],
+      "lastSixMonthsSalary": [
+        0
+      ],
+      "lastSixMonthsSalaryCommissions": [
+        0
+      ],
+      "lastSixMonthsSalaryOverTime": [
+        0
+      ],
+      "owedBonusVacations": true,
+      "owedBonusVacationsAmount": 0,
+      "owedBreastfeedingHours": true,
+      "owedDaysOffPreAndPostNatal": true,
+      "owedHolyDays": true,
+      "owedOtherPayments": true,
+      "owedOtherPaymentsAmount": 0,
+      "owedOvertime": true,
+      "owedOvertimeType": "DIURNA",
+      "owedOvertimeWork": 0,
+      "owedPaidPendingVacations": true,
+      "owedPendingVacationsYears": 0,
+      "owedSalary": true,
+      "owedSalaryAmount": 0,
+      "owedSeventhDay": true,
+      "requestId": 0,
+      "salary": 0,
+      "salaryInKindOptionsType": "NONE",
+      "salaryInKindType": "FEED",
+      "startDate": "string",
+      "terminationContractType": "DESPIDO",
+      "wasFiredWhilePregnant": true,
+      "workerPersonId": "string"
+    }
   }
 
   formDataSend(){
