@@ -15,4 +15,6 @@ export interface WorkerPersonEmployerRequestDto {
   email: string;
   requestType: CalculoPrestacionesRequestType;
   employer: EmployerDto;
+  localizationId: string;
+  
 }
