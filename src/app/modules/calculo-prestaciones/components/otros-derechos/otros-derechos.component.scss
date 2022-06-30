@@ -1,0 +1,41 @@
+.text-15{
+    font-size: 15px;
+}
+.table.gy-7 th{
+    padding-top: 1.3rem;
+    padding-bottom: .5rem;
+}
+.table.gy-7 td{
+    padding: 1rem 0;
+}
+thead tr th h5{
+    color: #949699;
+    font-size: 15px;
+}
+thead tr th:nth-child(1){
+    border-top-left-radius: 7px;
+    border-bottom-left-radius: 7px;
+}
+thead tr th:nth-child(6){
+    text-align: right;
+    border-top-right-radius: 7px;
+    border-bottom-right-radius: 7px;
+}
+tbody tr td{
+    padding-bottom: -3rem !important;
+}
+tbody tr td b{
+    color: #5F6368;
+    font-size: 15px;
+}
+tbody tr td:nth-child(2){
+    font-family: 'Time New Roman',serif;
+    font-size: 17.2px;
+    color: #5F6368;
+}
+tbody tr td:nth-child(3){
+    text-align: right;
+    font-size: 15px;
+    font-weight: 700;
+    color: #5F6368;
+}

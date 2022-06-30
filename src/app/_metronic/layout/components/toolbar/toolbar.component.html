@@ -8,4 +8,18 @@
     class="page-title d-flex"
     [ngClass]="pageTitleCssClasses"
   ></app-page-title>
+
+  <div class="d-flex flex-column align-items-end justify-content-between py-3 py-md-1">
+    <h6 class="text-white" style="font-weight: 700; text-transform:uppercase;" >{{getCurrentDateTime}}</h6>
+    <div class="d-flex align-items-center justify-content-between">
+      <select [(ngModel)]="contractType" class="form-select m-3 w-150px btn-bg-white">
+        <option value="DESPIDO">Despido</option>
+        <option value="RENUNCIA">Renuncia</option>
+      </select>
+      <select class="form-select btn-bg-white" [(ngModel)]="userType" (change)="getUserType($event)">
+        <option value="WORKER_PERSON">Trabajador</option>
+        <option value="COMPANY">Empleador</option>
+      </select>
+    </div>
+  </div>
 </div>

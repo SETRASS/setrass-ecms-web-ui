@@ -13,7 +13,7 @@ $gray-400: 										    if(isDarkMode(), #474761, #B5B5C3) !default;
 $gray-500: 										    if(isDarkMode(), #565674, #A1A5B7) !default;
 $gray-600: 										    if(isDarkMode(), #6D6D80, #7E8299) !default;
 $gray-700: 										    if(isDarkMode(), #92929F, #5E6278) !default;
-$gray-800: 										    if(isDarkMode(), #CDCDDE, #3F4254) !default;
+$gray-800: 										    if(isDarkMode(), #CDCDDE, #4F4F4F) !default;
 $gray-900: 										    if(isDarkMode(), #FFFFFF, #181C32) !default;
 $text-muted:                                        $gray-500 !default;
 

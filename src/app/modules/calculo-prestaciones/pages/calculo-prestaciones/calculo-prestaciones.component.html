@@ -1,0 +1,11 @@
+<app-datos-empleador *ngIf="toolbarService.userTypeOf === 'COMPANY'"></app-datos-empleador>
+<app-datos-trabajador *ngIf="toolbarService.userTypeOf === 'WORKER_PERSON'" ></app-datos-trabajador>
+<br>
+<app-calculo-salarial *ngIf="calculoPrestacionesService.isShowCalculoSalarial"></app-calculo-salarial>
+<br>
+<app-derechos-idemnizaciones *ngIf="calculoPrestacionesService.isShowIndemnizaciones"></app-derechos-idemnizaciones>
+<br>
+<app-otros-derechos *ngIf="calculoPrestacionesService.isShowOtrosDerechos"></app-otros-derechos>
+<br>
+<app-calculo-generado *ngIf="calculoPrestacionesService.isShowExportPdf"></app-calculo-generado>
+<br>
