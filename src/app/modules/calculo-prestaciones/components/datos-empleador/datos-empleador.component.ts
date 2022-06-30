@@ -74,6 +74,7 @@ export class DatosEmpleadorComponent implements OnInit {
       if(this.formEmployer.get('employeeData')?.valid){
         this.stepperOptions.startIndex = 3;
         console.log('Employee Data validado', this.stepperOptions.startIndex);
+        this.postEmployeeAndEmployer();
         this.stepper.goNext();
       }else{
         this.formEmployer.get('employeeData')?.markAllAsTouched();
@@ -211,7 +212,7 @@ export class DatosEmpleadorComponent implements OnInit {
         for(let item = 1; item <= 6; item++){
           this.formEmployer.get(`salaryData.monthlySalaryAverage${item}`)?.setValidators(null);
         }
-        this.formEmployer.get('salaryData.salary')?.setValue(0);  
+        this.formEmployer.get('salaryData.salary')?.setValue(0);
         this.render2.setAttribute(this.salaryField.nativeElement, 'disabled', 'false');
         this.isSalaryFieldDisabled = false;
       }
@@ -325,7 +326,7 @@ export class DatosEmpleadorComponent implements OnInit {
 
   postEmployeeAndEmployer() {
     const { companyData, employeeData } = this.formEmployer.value;
-    
+
     let data = {
       age: employeeData.employeeAge,
       email: employeeData.employeeEmail,
@@ -349,7 +350,9 @@ export class DatosEmpleadorComponent implements OnInit {
       requestType: this.toolbar.userTypeOf,
       terminationContractType: this.toolbar.terminationContractType
     }
-    this.calculoPrestacionesService.sendEmployeeEmployerReq(data)
+    this.calculoPrestacionesService.sendEmployeeEmployerReq(data).subscribe((response) => {
+      console.log(response);
+    })
   }
 
   formDataSend(){
