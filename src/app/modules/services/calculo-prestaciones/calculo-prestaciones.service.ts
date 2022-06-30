@@ -15,7 +15,13 @@ export class CalculoPrestacionesService extends BaseHttpService {
   objectGlobal = {
     userTypeOf: 'empleador',
     terminationContractType: TerminationContractType.DESPIDO,
-    gender: Gender.Masculino ? 'M' : 'F'
+    gender: Gender.Masculino ? 'M' : 'F',
+    requestId: '',
+    employerId: '',
+    workerPersonId: '',
+    fixedSalary: true,
+    startDate: '',
+    dismissalDate: ''
   }
 
   constructor(http: HttpClient) {

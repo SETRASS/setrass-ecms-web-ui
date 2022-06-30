@@ -1249,7 +1249,7 @@
               <div class="row mb-2">
                 <div class="col-sm-12 col-lg-4">
                   <div class="radio-container">
-                    <input formControlName="optionSpeciesSalary" type="radio" name="optionSpeciesSalary" value="alimentacion" id="Alimentacion">
+                    <input formControlName="optionSpeciesSalary" type="radio" name="optionSpeciesSalary" value="FEED" id="Alimentacion">
                     <div class="radio-tile">
                       <label for="Alimentacion">Alimentación</label>
                     </div>
@@ -1257,7 +1257,7 @@
                 </div>
                 <div class="col-sm-12 col-lg-4">
                   <div class="radio-container">
-                    <input formControlName="optionSpeciesSalary" type="radio" name="optionSpeciesSalary" value="vivienda" id="Vivienda">
+                    <input formControlName="optionSpeciesSalary" type="radio" name="optionSpeciesSalary" value="HOME" id="Vivienda">
                     <div class="radio-tile">
                       <label for="Vivienda">Vivienda</label>
                     </div>
@@ -1265,7 +1265,7 @@
                 </div>
                 <div class="col-sm-12 col-lg-4">
                   <div class="radio-container">
-                    <input formControlName="optionSpeciesSalary" type="radio" name="optionSpeciesSalary" value="vivienda-alimentacion" id="Vivienda+Alimentacion">
+                    <input formControlName="optionSpeciesSalary" type="radio" name="optionSpeciesSalary" value="FEED_HOME" id="Vivienda+Alimentacion">
                     <div class="radio-tile">
                       <label for="Vivienda+Alimentacion">Vivienda y Alimentación</label>
                     </div>
@@ -1275,7 +1275,7 @@
               <div class="row mb-10">
                 <div class="col-sm-12 col-lg-4">
                   <div class="radio-container">
-                    <input formControlName="optionSpeciesSalary" type="radio" value="no-aplica" name="optionSpeciesSalary" id="noAplica">
+                    <input formControlName="optionSpeciesSalary" type="radio" value="NONE" name="optionSpeciesSalary" id="noAplica">
                     <div class="radio-tile">
                       <label for="noAplica">No aplica</label>
                     </div>
@@ -1283,7 +1283,7 @@
                   <!-- <button type="button" class="btn btn-light-primary w-100" data-kt-docs-advanced-forms="interactive">No aplica</button> -->
                 </div>
               </div>
-              <div *ngIf="speciesSalaryValue == 'alimentacion'" class="row mb-10">
+              <div *ngIf="speciesSalaryValue == 'FEED'" class="row mb-10">
                 <div class="col-12">
                   <div class="row mb-10">
                     <p data-bs-toggle="tooltip" data-bs-placement="top"><b>¿Cuántos tiempos de comida recibe?</b></p>
@@ -1291,7 +1291,7 @@
                   <div class="row mb-10">
                     <div class="col-sm-6">
                       <!--begin::Option-->
-                      <input formControlName="foodTime" type="radio" class="btn-check" value="1" name="foodTime"   id="kt_radio_buttons_2_option_1"/>
+                      <input formControlName="foodTime" type="radio" class="btn-check" value="ONE_MEAL" name="foodTime"   id="kt_radio_buttons_2_option_1"/>
                       <label class="btn btn-outline btn-outline-dashed btn-outline-default w-100" for="kt_radio_buttons_2_option_1">
                         <span>1 tiempo de comida</span>
                       </label>
@@ -1299,7 +1299,7 @@
                     </div>
                     <div class="col-sm-6">
                       <!--begin::Option-->
-                      <input formControlName="foodTime" type="radio" class="btn-check" value="2" name="foodTime"   id="kt_radio_buttons_2_option_2"/>
+                      <input formControlName="foodTime" type="radio" class="btn-check" value="TWO_OR_MORE_MEALS" name="foodTime"   id="kt_radio_buttons_2_option_2"/>
                       <label class="btn btn-outline btn-outline-dashed btn-outline-default w-100" for="kt_radio_buttons_2_option_2">
                         <span>2 o más tiempos de comida</span>
                       </label>
@@ -1332,9 +1332,18 @@
             <!--end::Wrapper-->
 
             <!--begin::Wrapper-->
+
             <div>
+              <button
+                type="button"
+                (click)="postSalaryInfoRequest()"
+                class="btn btn-primary"
+                *ngIf="!isResponseOk">
+                Guardar
+              </button>
               <button 
                 #submit
+                *ngIf="!isResponseOk"
                 type="button"
                 class="btn btn-primary"
                 data-kt-stepper-action="submit"
