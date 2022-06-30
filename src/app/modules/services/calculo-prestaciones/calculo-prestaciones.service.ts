@@ -13,10 +13,10 @@ import { Gender } from 'src/app/models/enums/gender.enum';
 export class CalculoPrestacionesService extends BaseHttpService {
   readonly baseUrl = environment.API.SALARY_INFO_REQ;
   isShowEmployerData = true;
-  isShowCalculoSalarial = false;
-  isShowIndemnizaciones = false;
-  isShowOtrosDerechos = false;
-  isShowExportPdf = false;
+  isShowCalculoSalarial = true;
+  isShowIndemnizaciones = true;
+  isShowOtrosDerechos = true;
+  isShowExportPdf = true;
   objectGlobal = {
     userTypeOf: 'empleador',
     terminationContractType: TerminationContractType.DESPIDO,

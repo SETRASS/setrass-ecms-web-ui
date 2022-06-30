@@ -454,10 +454,22 @@ export class DatosEmpleadorComponent implements OnInit {
           console.log('Global',this.calculoPrestacionesService.objectGlobal);
           this.calculoPrestacionesService.isShowCalculoSalarial = true;
           this.calculoPrestacionesService.isShowIndemnizaciones = true;
+          this.scrollAnimation();
         }, (catchError) => {
           console.warn(catchError);
         });
     }
+  }
+
+  scrollAnimation() {
+    window.addEventListener("scroll", () => {
+      const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+      const scrolled = window.scrollY;
+
+      if(Math.ceil(scrolled) === scrollable){
+        alert('Llegaste al Final');
+      }   
+    });
   }
 
   formDataSend() {
