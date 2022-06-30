@@ -12,6 +12,11 @@ import { Gender } from 'src/app/models/enums/gender.enum';
 })
 export class CalculoPrestacionesService extends BaseHttpService {
   readonly baseUrl = environment.API.SALARY_INFO_REQ;
+  isShowEmployerData = true;
+  isShowCalculoSalarial = false;
+  isShowIndemnizaciones = false;
+  isShowOtrosDerechos = false;
+  isShowExportPdf = false;
   objectGlobal = {
     userTypeOf: 'empleador',
     terminationContractType: TerminationContractType.DESPIDO,
@@ -21,7 +26,8 @@ export class CalculoPrestacionesService extends BaseHttpService {
     workerPersonId: '',
     fixedSalary: true,
     startDate: '',
-    dismissalDate: ''
+    dismissalDate: '',
+    employer: {}
   }
 
   constructor(http: HttpClient) {

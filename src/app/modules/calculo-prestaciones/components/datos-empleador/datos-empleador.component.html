@@ -1336,13 +1336,14 @@
             <div>
               <button
                 #submit
-                type="button"
+                type="submit"
                 class="btn btn-primary"
                 data-kt-stepper-action="submit"
               >
                 <span class="indicator-label">
                   {{saveButtonText}}
                 </span>
+                <p *ngIf="saveButtonIsOk && (saveButtonText !== 'Realizar Calculo')" class="loader-btn" style="margin:0;padding: 0;"></p>
                 <span class="indicator-progress">
                   Espere un momento, por favor... <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
                 </span>

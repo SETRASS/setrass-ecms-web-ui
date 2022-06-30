@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CalculoPrestacionesService } from 'src/app/modules/services/calculo-prestaciones/calculo-prestaciones.service';
 
 @Component({
   selector: 'app-calculo-salarial',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CalculoSalarialComponent implements OnInit {
 
-  constructor() { }
+  data: any;
+
+  constructor(private calculoPrestacionesService: CalculoPrestacionesService) {
+
+   }
 
   ngOnInit(): void {
+    this.data = this.calculoPrestacionesService.objectGlobal;
   }
 
 }

@@ -50,13 +50,14 @@ export class DatosEmpleadorComponent implements OnInit {
 
   //SAVE BUTTON / COMPUTE
   saveButtonIsOk = false;
-  saveButtonText = this.saveButtonIsOk ? "Realizar Calculo" : "Guardar";
+  saveButtonText = '';
 
   // CONST
   REQUEST_ID: string;
   EMPLOYER_ID: string;
   WORKER_PERSON_ID: string;
   isResponseOk: boolean = false;
+  spinnerShow = false;
 
   constructor(private lookupsService: LookupsService,
               private salaryHistoryCatalogService: SalaryHistoryCatalogService,
@@ -69,7 +70,7 @@ export class DatosEmpleadorComponent implements OnInit {
 
 
   ngAfterViewInit(): void {
-
+    this.saveButtonText = this.saveButtonIsOk ? "Realizar Calculo" : "Guardar";
   }
 
 
@@ -124,7 +125,6 @@ export class DatosEmpleadorComponent implements OnInit {
       }
 
       if (this.formEmployer.get('speciesSalary')?.valid && this.stepper.getCurrentStepIndex() === 4) {
-        this.postSalaryInfoRequest();
         return this.stepper.goNext();
       }
     });
@@ -133,30 +133,30 @@ export class DatosEmpleadorComponent implements OnInit {
   private formBuild() {
     this.formEmployer = this.formBuilder.group({
       companyData: this.formBuilder.group({
-        companyName: ['', [Validators.required, Validators.minLength(5)]],
+        companyName: ['La empresa SA', [Validators.required, Validators.minLength(5)]],
         personType: ['JURIDICA', [Validators.required]],
-        rtnNumber: ['', [Validators.required, Validators.minLength(14), Validators.maxLength(14), Validators.pattern(/^[0-9]+$/)]],
+        rtnNumber: ['08011994058778', [Validators.required, Validators.minLength(14), Validators.maxLength(14), Validators.pattern(/^[0-9]+$/)]],
         dniNumber: ['', []],
         economicActivity: ['', [Validators.required,]],
         companySize: ['', [Validators.required]]
       }),
       employeeData: this.formBuilder.group({
         typeIdentity: ['DNI', [Validators.required]],
-        identityNumber: ["", [Validators.required, Validators.minLength(13), Validators.maxLength(13), Validators.pattern(/^[0-9]+$/)]],
-        employeeName: ['', [Validators.required, Validators.pattern(/^([Aa-zA-ZáéíóúÁÉÍÓÚÑñ]{2,}\s?){2,4}$/)]],
-        employeeLastname: ['', [Validators.required, Validators.pattern(/^([Aa-zA-ZáéíóúÁÉÍÓÚÑñ]{2,}\s?){2,4}$/)]],
-        employeeAge: [, [Validators.required, Validators.min(14), Validators.max(85), Validators.pattern(/^[0-9]+$/)]],
-        employeeSex: ['Masculino', [Validators.required]],
-        employeePhone: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(8)]],
-        employeeEmail: ['', [Validators.required, Validators.email]],
+        identityNumber: ["0801199405879", [Validators.required, Validators.minLength(13), Validators.maxLength(13), Validators.pattern(/^[0-9]+$/)]],
+        employeeName: ['Andrea Nicolle', [Validators.required, Validators.pattern(/^([Aa-zA-ZáéíóúÁÉÍÓÚÑñ]{2,}\s?){2,4}$/)]],
+        employeeLastname: ['Salazar', [Validators.required, Validators.pattern(/^([Aa-zA-ZáéíóúÁÉÍÓÚÑñ]{2,}\s?){2,4}$/)]],
+        employeeAge: [21, [Validators.required, Validators.min(14), Validators.max(85), Validators.pattern(/^[0-9]+$/)]],
+        employeeSex: ['F', [Validators.required]],
+        employeePhone: ['32876905', [Validators.required, Validators.minLength(8), Validators.maxLength(8)]],
+        employeeEmail: ['andrea.nicolle@mail.com', [Validators.required, Validators.email]],
         department: ['', [Validators.required]],
         municipality: ['', [Validators.required]],
       }),
       salaryData: this.formBuilder.group({
-        startDate: ['', [Validators.required]],
-        endDate: ['', [Validators.required]],
+        startDate: ['2015-06-15', [Validators.required]],
+        endDate: ['2022-09-10', [Validators.required]],
         fixedSalary: ['SI', [Validators.required]],
-        salary: ['', [Validators.required]],
+        salary: ['20000', [Validators.required]],
         monthlySalaryAverage1: [0, []],
         monthlySalaryAverage2: [0, []],
         monthlySalaryAverage3: [0, []],
@@ -351,14 +351,16 @@ export class DatosEmpleadorComponent implements OnInit {
     }
     this.calculoPrestacionesService.sendEmployeeEmployerReq(data).subscribe((response: any) => {
       console.log(response);
-      const {employerId, requestId, workerPersonId} = response;
+      const {employerId, requestId, workerPersonId, employer} = response;
       this.EMPLOYER_ID = employerId;
       this.REQUEST_ID = requestId;
       this.WORKER_PERSON_ID = workerPersonId;
       this.calculoPrestacionesService.objectGlobal.employerId = employerId;
       this.calculoPrestacionesService.objectGlobal.requestId = requestId;
       this.calculoPrestacionesService.objectGlobal.workerPersonId = workerPersonId;
+      this.calculoPrestacionesService.objectGlobal.employer = employer;
       console.log(this.REQUEST_ID);
+      console.log(response);
     })
   }
 
@@ -410,8 +412,8 @@ export class DatosEmpleadorComponent implements OnInit {
       ],
       "owedBonusVacations": true,
       "owedBonusVacationsAmount": 0,
-      "owedBreastfeedingHours": true,
-      "owedDaysOffPreAndPostNatal": true,
+      "owedBreastfeedingHours": false,
+      "owedDaysOffPreAndPostNatal": false,
       "owedHolyDays": true,
       "owedOtherPayments": true,
       "owedOtherPaymentsAmount": 0,
@@ -420,29 +422,38 @@ export class DatosEmpleadorComponent implements OnInit {
       "owedOvertimeWork": 0,
       "owedPaidPendingVacations": true,
       "owedPendingVacationsYears": 0,
-      "owedSalary": true,
+      "owedSalary": false,
       "owedSalaryAmount": 0,
-      "owedSeventhDay": true,
+      "owedSeventhDay": false,
       "requestId": this.REQUEST_ID,
       "salary": Number(salaryData.salary),
       "salaryInKindOptionsType": speciesSalary.foodTime,
       "salaryInKindType": speciesSalary.optionSpeciesSalary,
       "startDate": salaryData.startDate,
       "terminationContractType": this.toolbar.terminationContractType,
-      "wasFiredWhilePregnant": true,
+      "wasFiredWhilePregnant": false,
       "workerPersonId": this.WORKER_PERSON_ID
     }
+
+    this.saveButtonText = "";
+
     if (!this.saveButtonIsOk) {
+      this.saveButtonIsOk = true;
+      this.spinnerShow = true;
       this.calculoPrestacionesService.sendSalaryEmployeeInfo(data).subscribe(value => {
-        console.log(value);
-        this.saveButtonIsOk = true;
+        this.saveButtonText = "Realizar Calculo";
+        this.spinnerShow = false;
       });
     }
 
     if (this.saveButtonIsOk) {
+      this.spinnerShow = false;
       this.calculoPrestacionesService.sendSalaryEmployeeCompute(data)
         .subscribe((response: any) => {
-          console.log(response);
+          this.calculoPrestacionesService.objectGlobal = Object.assign(this.calculoPrestacionesService.objectGlobal, response);
+          console.log('Global',this.calculoPrestacionesService.objectGlobal);
+          this.calculoPrestacionesService.isShowCalculoSalarial = true;
+          this.calculoPrestacionesService.isShowIndemnizaciones = true;
         }, (catchError) => {
           console.warn(catchError);
         });
@@ -450,7 +461,8 @@ export class DatosEmpleadorComponent implements OnInit {
   }
 
   formDataSend() {
-    this.formEmployer.valid ? console.log(this.formEmployer.value) : this.formEmployer.markAllAsTouched();
+    this.postSalaryInfoRequest();
+    //this.formEmployer.valid ? console.log(this.formEmployer.value) : this.formEmployer.markAllAsTouched();
   }
 
 }
