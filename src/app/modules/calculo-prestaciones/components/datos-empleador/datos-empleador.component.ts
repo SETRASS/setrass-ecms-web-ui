@@ -51,6 +51,7 @@ export class DatosEmpleadorComponent implements OnInit {
   REQUEST_ID: string;
   EMPLOYER_ID: string;
   WORKER_PERSON_ID: string;
+  isResponseOk: boolean=false;
 
   constructor(private lookupsService: LookupsService,
               private salaryHistoryCatalogService: SalaryHistoryCatalogService,
@@ -63,53 +64,14 @@ export class DatosEmpleadorComponent implements OnInit {
 
 
   ngAfterViewInit(): void{
-    this.render2.setAttribute(this.btnSubmit.nativeElement, 'disabled', 'true');
-    this.stepper = new StepperComponent(this.stepperSteps.nativeElement, this.stepperOptions);
-    this.stepper.on("kt.stepper.previous", () => this.stepper.goPrev());
-    this.stepper.on("kt.stepper.next", () => {
-      if(this.formEmployer.get('companyData')?.valid){
-        console.log('Company Data validado', this.stepperOptions.startIndex);
-        this.stepperOptions.startIndex = 2;
-        this.stepper.goNext();
-      }else{
-        this.formEmployer.get('companyData')?.markAllAsTouched();
-        console.log('Company Data Error', this.stepperOptions.startIndex);
-      }
-
-      if(this.formEmployer.get('employeeData')?.valid){
-        this.stepperOptions.startIndex = 3;
-        console.log('Employee Data validado', this.stepperOptions.startIndex);
-        this.postEmployeeAndEmployer();
-        this.stepper.goNext();
-      }else{
-        this.formEmployer.get('employeeData')?.markAllAsTouched();
-        console.log('Employee Data ERROR', this.stepperOptions.startIndex);
-      }
-
-      if(this.formEmployer.get('salaryData')?.valid){
-        this.stepperOptions.startIndex = 4;
-        console.log('Salary Data validado', this.stepperOptions.startIndex);
-        this.stepper.goNext();
-      }else{
-        this.formEmployer.get('salaryData')?.markAllAsTouched();
-        console.log('Salary Data ERROR', this.stepperOptions.startIndex);
-      }
-
-      if(this.formEmployer.get('speciesSalary')?.valid){
-        console.log('Specie Salary validado', this.stepperOptions.startIndex);
-        this.stepper.goNext();
-      }else{
-        this.formEmployer.get('speciesSalary')?.markAllAsTouched();
-        console.log('Specie Salary ERROR', this.stepperOptions.startIndex);
-      }
-    });
+    
   }
 
 
   ngOnInit(): void {
-    this.formEmployer.valueChanges.subscribe(value => {
-      console.log(value);
-    });
+    
+    setTimeout(() => this.stepperConfig(),3000);
+
     // locations
     this.lookupsService.getLocations().subscribe((data) => {
       this.locations = data[0].children;
@@ -134,6 +96,35 @@ export class DatosEmpleadorComponent implements OnInit {
     }, (error) => {
       const err = error.message | error;
       console.warn(err);
+    });
+  }
+
+  async stepperConfig () {
+    //this.render2.setAttribute(this.btnSubmit.nativeElement, 'disabled', 'true');
+    this.stepper = new StepperComponent(this.stepperSteps.nativeElement, this.stepperOptions);
+    this.stepper.on("kt.stepper.previous", () => this.stepper.goPrev());
+    this.stepper.on("kt.stepper.next", () => { 
+
+    if(this.formEmployer.get('companyData')?.valid && this.stepper.getCurrentStepIndex() === 1){
+      return this.stepper.goNext();
+    }
+
+    if(this.formEmployer.get('employeeData')?.valid && this.stepper.getCurrentStepIndex() === 2){
+      console.log('Employee data validado');
+      this.postEmployeeAndEmployer();
+      return this.stepper.goNext();
+    }
+
+    if(this.formEmployer.get('salaryData')?.valid && this.stepper.getCurrentStepIndex() === 3){
+      console.log('Salary data validado');
+      return this.stepper.goNext();
+    }
+
+    if(this.formEmployer.get('speciesSalary')?.valid && this.stepper.getCurrentStepIndex() === 4){
+      return this.stepper.goNext();
+    }
+      
+      
     });
   }
 
@@ -196,8 +187,8 @@ export class DatosEmpleadorComponent implements OnInit {
         }),
       }),
       speciesSalary: this.formBuilder.group({
-        optionSpeciesSalary: ['', [Validators.required]],
-        foodTime: ['', []]
+        optionSpeciesSalary: ['NONE', [Validators.required]],
+        foodTime: ['NONE', []]
       })
     });
 
@@ -328,6 +319,7 @@ export class DatosEmpleadorComponent implements OnInit {
   }
 
   postEmployeeAndEmployer() {
+    console.log("Ok");
     const { companyData, employeeData, salaryData } = this.formEmployer.value;
     this.calculoPrestacionesService.objectGlobal.startDate = employeeData.startDate;
     this.calculoPrestacionesService.objectGlobal.dismissalDate = employeeData.endDate;
@@ -364,11 +356,13 @@ export class DatosEmpleadorComponent implements OnInit {
       this.calculoPrestacionesService.objectGlobal.employerId = employerId;
       this.calculoPrestacionesService.objectGlobal.requestId = requestId;
       this.calculoPrestacionesService.objectGlobal.workerPersonId = workerPersonId;
+      console.log(this.REQUEST_ID);
     })
   }
 
   postSalaryInfoRequest() {
-    const salaryData = this.formEmployer.value;
+    console.log("Ok");
+    const {salaryData, speciesSalary} = this.formEmployer.value;
     let data = {
       "breastfeedingPaidHours": 0,
       "daysOffPreAndPostNatalWasPaid": 0,
@@ -397,12 +391,12 @@ export class DatosEmpleadorComponent implements OnInit {
         salaryData.monthlySalaryAverage6,
       ],
       "lastSixMonthsSalaryCommissions": [
-        salaryData.comissions.monthlyCommissions1,
-        salaryData.comissions.monthlyCommissions2,
-        salaryData.comissions.monthlyCommissions3,
-        salaryData.comissions.monthlyCommissions4,
-        salaryData.comissions.monthlyCommissions5,
-        salaryData.comissions.monthlyCommissions6
+        salaryData.commissions.monthlyCommissions1,
+        salaryData.commissions.monthlyCommissions2,
+        salaryData.commissions.monthlyCommissions3,
+        salaryData.commissions.monthlyCommissions4,
+        salaryData.commissions.monthlyCommissions5,
+        salaryData.commissions.monthlyCommissions6
       ],
       "lastSixMonthsSalaryOverTime": [
         salaryData.extraHours.monthlyExtraHours1,
@@ -427,15 +421,20 @@ export class DatosEmpleadorComponent implements OnInit {
       "owedSalary": true,
       "owedSalaryAmount": 0,
       "owedSeventhDay": true,
-      "requestId": this.REQUEST_ID,
+      "requestId":this.REQUEST_ID,
       "salary": Number(salaryData.salary),
-      "salaryInKindOptionsType": "NONE",
-      "salaryInKindType": "FEED",
+      "salaryInKindOptionsType": speciesSalary.foodTime,
+      "salaryInKindType": speciesSalary.optionSpeciesSalary,
       "startDate": salaryData.startDate,
       "terminationContractType": this.toolbar.terminationContractType,
       "wasFiredWhilePregnant": true,
       "workerPersonId": this.WORKER_PERSON_ID
     }
+    console.log(data)
+     this.calculoPrestacionesService.sendSalaryEmployeeInfo(data).subscribe(value => {
+       console.log(value);
+       this.isResponseOk=true;
+    });
   }
 
   formDataSend(){
