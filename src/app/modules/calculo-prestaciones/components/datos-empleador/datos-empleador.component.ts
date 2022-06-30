@@ -6,10 +6,12 @@ import {PersonType} from 'src/app/models/enums/person-type.enum';
 
 import {LookupsService} from "../../../services/lookups/lookups.service";
 import {SalaryHistoryCatalogService} from "../../../services/salary-history-catalog/salary-history-catalog.service";
+import {DomSanitizer, SafeHtml} from '@angular/platform-browser';
 import {CalculoPrestacionesService} from 'src/app/modules/services/calculo-prestaciones/calculo-prestaciones.service';
 
 import {ToolbarService} from 'src/app/_metronic/layout/components/toolbar/toolbar.service';
 import {catchError} from "rxjs";
+import {HttpClient} from "@angular/common/http";
 
 @Component({
   selector: 'app-datos-empleador',
@@ -64,7 +66,9 @@ export class DatosEmpleadorComponent implements OnInit {
               private calculoPrestacionesService: CalculoPrestacionesService,
               private toolbar: ToolbarService,
               private formBuilder: FormBuilder,
-              private render2: Renderer2) {
+              private render2: Renderer2,
+              private httpClient: HttpClient,
+              private sanitize: DomSanitizer) {
     this.formBuild();
   }
 
@@ -75,6 +79,7 @@ export class DatosEmpleadorComponent implements OnInit {
 
 
   ngOnInit(): void {
+
 
     setTimeout(() => this.stepperConfig(), 3000);
 
@@ -468,7 +473,7 @@ export class DatosEmpleadorComponent implements OnInit {
 
       if(Math.ceil(scrolled) === scrollable){
         alert('Llegaste al Final');
-      }   
+      }
     });
   }
 
