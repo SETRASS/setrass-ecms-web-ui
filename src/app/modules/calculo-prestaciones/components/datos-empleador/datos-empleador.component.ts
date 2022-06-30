@@ -454,7 +454,6 @@ export class DatosEmpleadorComponent implements OnInit {
           console.log('Global',this.calculoPrestacionesService.objectGlobal);
           this.calculoPrestacionesService.isShowCalculoSalarial = true;
           this.calculoPrestacionesService.isShowIndemnizaciones = true;
-          this.scrollAnimation();
         }, (catchError) => {
           console.warn(catchError);
         });
