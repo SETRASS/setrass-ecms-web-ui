@@ -46,8 +46,11 @@ export class DatosEmpleadorComponent implements OnInit {
   totalExtraHoursAverage = 0;
   totalBonusesAverage = 0;
   isSalaryFieldDisabled: boolean = true;
+  
+  // CONST
   REQUEST_ID: string;
   EMPLOYER_ID: string;
+  WORKER_PERSON_ID: string;
 
   constructor(private lookupsService: LookupsService,
               private salaryHistoryCatalogService: SalaryHistoryCatalogService,
@@ -350,33 +353,62 @@ export class DatosEmpleadorComponent implements OnInit {
       requestType: this.toolbar.userTypeOf,
       terminationContractType: this.toolbar.terminationContractType
     }
-    this.calculoPrestacionesService.sendEmployeeEmployerReq(data).subscribe((response) => {
+    this.calculoPrestacionesService.sendEmployeeEmployerReq(data).subscribe((response: any) => {
       console.log(response);
+      const {employerId, requestId, workerPersonId} = response;
+      this.EMPLOYER_ID = employerId;
+      this.REQUEST_ID = requestId;
+      this.WORKER_PERSON_ID = workerPersonId;
+      this.calculoPrestacionesService.objectGlobal.employerId = employerId;
+      this.calculoPrestacionesService.objectGlobal.requestId = requestId;
+      this.calculoPrestacionesService.objectGlobal.workerPersonId = workerPersonId;
     })
   }
 
   postSalaryInfoRequest() {
-    const {  } = this.formEmployer.value.salaryData;
+    const salaryData = this.formEmployer.value;
     let data = {
       "breastfeedingPaidHours": 0,
       "daysOffPreAndPostNatalWasPaid": 0,
       "daysPaidWasFiredWhilePregnant": 0,
-      "dismissalDate": "string",
-      "employerId": "string",
-      "fixedSalary": true,
+      "dismissalDate": salaryData.endDate,
+      "employerId": this.EMPLOYER_ID,
+      "fixedSalary": salaryData.fixedSalary === 'SI' ? true : false,
       "hasForewarningNotice": true,
       "hasTakeVacationTimeLastYear": true,
       "howMuchOwedHolyDays": 0,
       "howMuchOwedSeventhDay": 0,
-      "lastSixMonthsBonusPayment": [0],
+      "lastSixMonthsBonusPayment": [
+        salaryData.bonuses.monthlyBonus1,
+        salaryData.bonuses.monthlyBonus2,
+        salaryData.bonuses.monthlyBonus3,
+        salaryData.bonuses.monthlyBonus4,
+        salaryData.bonuses.monthlyBonus5,
+        salaryData.bonuses.monthlyBonus6,
+      ],
       "lastSixMonthsSalary": [
-        0
+        salaryData.monthlySalaryAverage1,
+        salaryData.monthlySalaryAverage2,
+        salaryData.monthlySalaryAverage3,
+        salaryData.monthlySalaryAverage4,
+        salaryData.monthlySalaryAverage5,
+        salaryData.monthlySalaryAverage6,
       ],
       "lastSixMonthsSalaryCommissions": [
-        0
+        salaryData.comissions.monthlyCommissions1,
+        salaryData.comissions.monthlyCommissions2,
+        salaryData.comissions.monthlyCommissions3,
+        salaryData.comissions.monthlyCommissions4,
+        salaryData.comissions.monthlyCommissions5,
+        salaryData.comissions.monthlyCommissions6
       ],
       "lastSixMonthsSalaryOverTime": [
-        0
+        salaryData.extraHours.monthlyExtraHours1,
+        salaryData.extraHours.monthlyExtraHours2,
+        salaryData.extraHours.monthlyExtraHours3,
+        salaryData.extraHours.monthlyExtraHours4,
+        salaryData.extraHours.monthlyExtraHours5,
+        salaryData.extraHours.monthlyExtraHours6
       ],
       "owedBonusVacations": true,
       "owedBonusVacationsAmount": 0,
@@ -393,14 +425,14 @@ export class DatosEmpleadorComponent implements OnInit {
       "owedSalary": true,
       "owedSalaryAmount": 0,
       "owedSeventhDay": true,
-      "requestId": 0,
-      "salary": 0,
+      "requestId": this.REQUEST_ID,
+      "salary": Number(salaryData.salary),
       "salaryInKindOptionsType": "NONE",
       "salaryInKindType": "FEED",
-      "startDate": "string",
-      "terminationContractType": "DESPIDO",
+      "startDate": salaryData.startDate,
+      "terminationContractType": this.toolbar.terminationContractType,
       "wasFiredWhilePregnant": true,
-      "workerPersonId": "string"
+      "workerPersonId": this.WORKER_PERSON_ID
     }
   }
 
