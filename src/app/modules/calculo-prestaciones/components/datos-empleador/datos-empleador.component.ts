@@ -140,9 +140,7 @@ export class DatosEmpleadorComponent implements OnInit {
         rtnNumber: ['', [Validators.required, Validators.minLength(14), Validators.maxLength(14), Validators.pattern(/^[0-9]+$/)]],
         dniNumber: ['', []],
         economicActivity: ['', [Validators.required,]],
-        companySize:['', [Validators.required]],
-        requestType: [this.toolbar.userTypeOf, []],
-        terminationContractType: [this.toolbar.terminationContractType, []]
+        companySize:['', [Validators.required]]
       }),
       employeeData: this.formBuilder.group({
         typeIdentity: ['DNI', [Validators.required]],
@@ -353,6 +351,10 @@ export class DatosEmpleadorComponent implements OnInit {
     this.calculoPrestacionesService.sendEmployeeEmployerReq(data).subscribe((response) => {
       console.log(response);
     })
+  }
+
+  postSalaryInfoRequest() {
+    const { salaryData } = this.formEmployer.value;
   }
 
   formDataSend(){
