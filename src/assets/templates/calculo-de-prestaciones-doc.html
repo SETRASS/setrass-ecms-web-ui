@@ -73,19 +73,19 @@
   <!-- left side (#request, requestType) -->
   <div>
     <div>
-      <span class="fw-bold">No. cálculo:</span> 2
+      <span class="fw-bold">No. cálculo:</span> @requestId
     </div>
     <div>
-      <span class="fw-bold">Cálculo por:</span> Despido
+      <span class="fw-bold">Cálculo por:</span> @terminationContractType
     </div>
   </div>
   <!-- right side (dateOfCreation, CalculoPrestacionesRequestType) -->
   <div class="d-flex flex-column align-items-end">
     <div>
-      <span class="fw-bold">Fecha de emisión:</span> 13/05/2022
+      <span class="fw-bold">Fecha de emisión:</span> @todayDate
     </div>
     <div>
-      <span class="fw-bold">Solicitante:</span> Trabajador
+      <span class="fw-bold">Solicitante:</span> @requestType
     </div>
   </div>
 </div>
@@ -96,22 +96,22 @@
   <!-- left side (person name, employer, date start) -->
   <div>
     <div>
-      <span class="fw-bold">Nombre Trabajador(a):</span> Javier Adiel Díaz Alcerro
+      <span class="fw-bold">Nombre Trabajador(a):</span> @firstName @lastName
     </div>
     <div>
-      <span class="fw-bold">Nombre Empresa o Razón Social:</span> La Empresa
+      <span class="fw-bold">Nombre Empresa o Razón Social:</span> @employerName
     </div>
     <div>
-      <span class="fw-bold">Fecha de Inicio:</span> 10/08/2010
+      <span class="fw-bold">Fecha de Inicio:</span> @startDate
     </div>
   </div>
   <!-- right side (identification number, end date) -->
   <div class="d-flex flex-column align-items-end">
     <div>
-      <span class="fw-bold">N° identificación:</span> 0801-1999-20001
+      <span class="fw-bold">N° identificación:</span> @identificationType
     </div>
     <div>
-      <span class="fw-bold">Fecha de Despido:</span> 25/10/2019
+      <span class="fw-bold">Fecha de Despido:</span> @dismissalDate
     </div>
   </div>
 </div>
@@ -121,31 +121,31 @@
 <div class="d-flex flex-row justify-content-between mt-2 border-box">
   <!-- column 1 -->
   <div class="d-flex flex-column align-self-start">
-    <p class="mb-0"><span class="fw-bold">Antiguedad:</span><span class="fw-bold"> Años:</span> 9</p>
+    <p class="mb-0"><span class="fw-bold">Antiguedad:</span><span class="fw-bold"> Años:</span> @years</p>
     <p class="mb-0"><span class="fw-bold">Salario Base Mensual:</span></p>
     <p class="mb-0"><span class="fw-bold">Salario Base Promedio Mensual:</span></p>
     <p class="mb-0"><span class="fw-bold">Salario Promedio Mensual:</span></p>
   </div>
   <!-- column 2 -->
   <div>
-    <p class="mb-0"><span class="fw-bold">Meses:</span> 2</p>
-    <p class="mb-0">L.15,000.00</p>
-    <p class="mb-0">L.17,500.00</p>
-    <p class="mb-0">L.17,500.00</p>
+    <p class="mb-0"><span class="fw-bold">Meses:</span> @months</p>
+    <p class="mb-0">L.@baseMonthSalary</p>
+    <p class="mb-0">L.@ordinaryAverageMonthlySalary</p>
+    <p class="mb-0">L.@averageMonthlySalary</p>
   </div>
   <!-- column 3 -->
   <div class="d-flex flex-column align-items-end">
-    <p class="mb-0"><span class="fw-bold">Días:</span> 15</p>
+    <p class="mb-0"><span class="fw-bold">Días:</span> @days</p>
     <p class="mb-0"><span class="fw-bold">Salario Base Diario:</span></p>
     <p class="mb-0"><span class="fw-bold">Salario Base Promedio Diario:</span></p>
     <p class="mb-0"><span class="fw-bold">Salario Promedio:</span></p>
   </div>
   <!-- column 4 -->
   <div class="d-flex flex-column align-items-end">
-    <p class="mb-0"><span class="fw-bold">Total días laborados:</span> 3,315</p>
-    <p class="mb-0">L.15,000.00</p>
-    <p class="mb-0">L.17,500.00</p>
-    <p class="mb-0">L.17,500.00</p>
+    <p class="mb-0"><span class="fw-bold">Total días laborados:</span> @totalWorkedDays</p>
+    <p class="mb-0">L.@ordinaryDailySalary</p>
+    <p class="mb-0">L.@ordinaryAverageDailySalary</p>
+    <p class="mb-0">L.@averageDailySalary</p>
   </div>
 </div>
 <!-- end Old time employee and computed salaries -->
@@ -165,9 +165,9 @@
     <tbody class="table-item-titles">
     <tr>
       <th scope="row">Preaviso:</th>
-      <td>60 días</td>
+      <td>@forewarningNoticeDays</td>
       <td></td>
-      <td>60 x 583.33</td>
+      <td>@forewarningNoticeDays x L.@</td>
       <td>L.34,999.80</td>
     </tr>
     <tr>
