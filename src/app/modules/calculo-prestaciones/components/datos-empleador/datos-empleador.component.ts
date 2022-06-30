@@ -6,8 +6,9 @@ import { PersonType } from 'src/app/models/enums/person-type.enum';
 
 import {LookupsService} from "../../../services/lookups/lookups.service";
 import {SalaryHistoryCatalogService} from "../../../services/salary-history-catalog/salary-history-catalog.service";
+import { CalculoPrestacionesService } from 'src/app/modules/services/calculo-prestaciones/calculo-prestaciones.service';
 
-
+import { ToolbarService } from 'src/app/_metronic/layout/components/toolbar/toolbar.service';
 
 @Component({
   selector: 'app-datos-empleador',
@@ -19,11 +20,11 @@ export class DatosEmpleadorComponent implements OnInit {
   // Variables
   @ViewChild('kt_stepper_vertical') stepperSteps: ElementRef;
   @ViewChild('salary') salaryField: ElementRef;
+  @ViewChild('submit') btnSubmit: ElementRef;
   stepper: any;
   formEmployer: FormGroup;
-  public currentStep : Number = 1;
-  private stepperOptions: IStepperOptions = {
-    startIndex: 4,
+  stepperOptions: IStepperOptions = {
+    startIndex: 1,
     animation: false,
     animationSpeed: '',
     animationNextClass: '',
@@ -48,6 +49,8 @@ export class DatosEmpleadorComponent implements OnInit {
 
   constructor(private lookupsService: LookupsService,
               private salaryHistoryCatalogService: SalaryHistoryCatalogService,
+              private calculoPrestacionesService: CalculoPrestacionesService,
+              private toolbar : ToolbarService,
               private formBuilder : FormBuilder,
               private render2: Renderer2) {
     this.formBuild();
@@ -55,18 +58,53 @@ export class DatosEmpleadorComponent implements OnInit {
 
 
   ngAfterViewInit(): void{
+    this.render2.setAttribute(this.btnSubmit.nativeElement, 'disabled', 'true');
     this.stepper = new StepperComponent(this.stepperSteps.nativeElement, this.stepperOptions);
     this.stepper.on("kt.stepper.previous", () => this.stepper.goPrev());
     this.stepper.on("kt.stepper.next", () => {
-      this.formEmployer.get('companyData')?.valid ? this.stepper.goNext() : this.formEmployer.get('companyData')?.markAllAsTouched();
-      this.formEmployer.get('employeeData')?.valid ? this.stepper.goNext() : this.formEmployer.get('employeeData')?.markAllAsTouched();
-      this.formEmployer.get('salaryData')?.valid ? this.stepper.goNext() : this.formEmployer.get('salaryData')?.markAllAsTouched();
-      this.formEmployer.get('speciesSalary')?.valid ? 'this.stepper.goNext()' : this.formEmployer.get('speciesSalary')?.markAllAsTouched(); 
+      if(this.formEmployer.get('companyData')?.valid){
+        console.log('Company Data validado', this.stepperOptions.startIndex);
+        this.stepperOptions.startIndex = 2;
+        this.stepper.goNext();
+      }else{
+        this.formEmployer.get('companyData')?.markAllAsTouched();
+        console.log('Company Data Error', this.stepperOptions.startIndex);
+      }
+
+      if(this.formEmployer.get('employeeData')?.valid){
+        this.stepperOptions.startIndex = 3;
+        console.log('Employee Data validado', this.stepperOptions.startIndex);
+        this.stepper.goNext();
+      }else{
+        this.formEmployer.get('employeeData')?.markAllAsTouched();
+        console.log('Employee Data ERROR', this.stepperOptions.startIndex);
+      }
+
+      if(this.formEmployer.get('salaryData')?.valid){
+        this.stepperOptions.startIndex = 4;
+        console.log('Salary Data validado', this.stepperOptions.startIndex);
+        this.stepper.goNext();
+      }else{
+        this.formEmployer.get('salaryData')?.markAllAsTouched();
+        console.log('Salary Data ERROR', this.stepperOptions.startIndex);
+      }
+
+      if(this.formEmployer.get('speciesSalary')?.valid){
+        console.log('Specie Salary validado', this.stepperOptions.startIndex);
+        this.stepper.goNext();
+      }else{
+        this.formEmployer.get('speciesSalary')?.markAllAsTouched();
+        console.log('Specie Salary ERROR', this.stepperOptions.startIndex);
+      }
     });
   }
 
 
   ngOnInit(): void {
+    this.formEmployer.valueChanges.subscribe(value => {
+      console.log(value);
+    });
+    // locations
     this.lookupsService.getLocations().subscribe((data) => {
       this.locations = data[0].children;
     }, ((error?: any) => {
@@ -97,11 +135,13 @@ export class DatosEmpleadorComponent implements OnInit {
     this.formEmployer = this.formBuilder.group({
       companyData: this.formBuilder.group({
         companyName: ['',[Validators.required, Validators.minLength(5)]],
-        personType: [PersonType.JURIDICA, [Validators.required]],
+        personType: ['JURIDICA', [Validators.required]],
         rtnNumber: ['', [Validators.required, Validators.minLength(14), Validators.maxLength(14), Validators.pattern(/^[0-9]+$/)]],
         dniNumber: ['', []],
         economicActivity: ['', [Validators.required,]],
-        companySize:['', [Validators.required]]
+        companySize:['', [Validators.required]],
+        requestType: [this.toolbar.userTypeOf, []],
+        terminationContractType: [this.toolbar.terminationContractType, []]
       }),
       employeeData: this.formBuilder.group({
         typeIdentity: ['DNI', [Validators.required]],
@@ -198,15 +238,32 @@ export class DatosEmpleadorComponent implements OnInit {
 
     this.formEmployer.get('speciesSalary.optionSpeciesSalary')?.valueChanges
     .subscribe(value => {
-
-
-
-
+      if(value === 'alimentacion'){
+        return this.formEmployer.get('speciesSalary.foodTime')?.setValidators([Validators.required]);
+      }
+      this.formEmployer.get('speciesSalary.foodTime')?.setValidators([]);
     });
   }
 
   get typePersonValue() {
-    return Number(this.formEmployer.get('companyData.personType')?.value);
+    return this.formEmployer.get('companyData.personType')?.value;
+  }
+
+  get salaryValue(){
+    return this.formEmployer.get('salaryData.salary')?.value;
+  }
+
+  get speciesSalaryValue(){
+    return this.formEmployer.get('speciesSalary.optionSpeciesSalary')?.value;
+  }
+
+  get isSpeciesSalaryValid(){
+    return this.formEmployer.get('speciesSalary')?.valid;
+  }
+
+  totalSpeciesSalary(percentage: string){
+    if(percentage === '20%') return (Number(this.salaryValue) * 0.20).toFixed(2);
+    if(percentage === '30%') return (Number(this.salaryValue) * 0.30).toFixed(2);
   }
 
   getErrorField(element: string, errorName: string){
@@ -264,6 +321,35 @@ export class DatosEmpleadorComponent implements OnInit {
         this.totalBonusesAverage = (month1 + month2 + month3 + month4 + month5 + month6) / 6;
         break;
     }
+  }
+
+  postEmployeeAndEmployer() {
+    const { companyData, employeeData } = this.formEmployer.value;
+    
+    let data = {
+      age: employeeData.employeeAge,
+      email: employeeData.employeeEmail,
+      employer: {
+        companySize: 0,
+        economicActivity: companyData.economicActivity,
+        employerId: "",
+        employerName: companyData.companyName,
+        identificationNumber: companyData.rtnNumber,
+        identificationType: "CARNET_RESIDENTE",
+        personType: companyData.personType
+      },
+      firstName: employeeData.employeeName,
+      gender: employeeData.employeeSex,
+      identificationNumber: employeeData.identityNumber,
+      identificationType: employeeData.typeIdentity,
+      lastName: employeeData.employeeLastname,
+      localizationId: employeeData.municipality,
+      phoneNumber: employeeData.employeePhone,
+      requestId: 0,
+      requestType: this.toolbar.userTypeOf,
+      terminationContractType: this.toolbar.terminationContractType
+    }
+    this.calculoPrestacionesService.sendEmployeeEmployerReq(data)
   }
 
   formDataSend(){

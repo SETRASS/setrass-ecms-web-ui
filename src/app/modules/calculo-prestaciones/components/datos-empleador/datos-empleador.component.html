@@ -1,6 +1,6 @@
 <div class="card shadow-sm">
   <div class="card-header">
-    <h3 class="card-title">Datos de la empresa</h3>
+    <h3 class="card-title fs-3">Datos de la empresa</h3>
     <!--<div class="card-toolbar">
       <button type="button" class="btn btn-sm btn-light">
         Action
@@ -170,7 +170,7 @@
                     [class.is-invalid]="isInvalidField('companyData.personType')"
                     type="text" class="form-select form-select-solid"
                     placeholder="Número de RTN" value="">
-                    <option *ngFor="let key of personTypeList; index as i" [value]="i">{{key}}</option>
+                    <option *ngFor="let key of personTypeList; index as i" [value]="key">{{key}}</option>
                   </select>
                   <!--end::Input-->
                   <div *ngIf="isInvalidField('companyData.personType')">
@@ -180,7 +180,7 @@
                     >Este campo es requerido.</span>
                   </div>
                 </div>
-                <div *ngIf="typePersonValue === 1" class="col-sm-12 col-lg-4">
+                <div *ngIf="typePersonValue === 'JURIDICA'" class="col-sm-12 col-lg-4">
                   <!--begin::Label-->
                   <label class="form-label">RTN</label>
                   <!--end::Label-->
@@ -211,7 +211,7 @@
                     > Este campo es numérico.</span>
                   </div>
                 </div>
-                <div *ngIf="typePersonValue === 0" class="col-sm-12 col-lg-4">
+                <div *ngIf="typePersonValue === 'NATURAL'" class="col-sm-12 col-lg-4">
                   <!--begin::Label-->
                   <label class="form-label">DNI</label>
                   <!--end::Label-->
@@ -305,8 +305,8 @@
                     [class.is-invalid]="isInvalidField('employeeData.typeIdentity')"
                     class="form-select form-select-solid">
                     <option value="DNI">DNI</option>
-                    <option value="Carnet de residente">Carnet de residente</option>
-                    <option value="Pasaporte">Pasaporte</option>
+                    <option value="CARNET_RESIDENTE">CARNET RESIDENTE</option>
+                    <option value="PASAPORTE">PASAPORTE</option>
                   </select>
                   <!--end::Input-->
                   <div *ngIf="isInvalidField('employeeData.typeIdentity')">
@@ -436,8 +436,8 @@
                     [class.is-valid]="isValidField('employeeData.employeeSex')" 
                     [class.is-invalid]="isInvalidField('employeeData.employeeSex')" 
                     class="form-select form-select-solid">
-                    <option value="Masculino">Masculino</option>
-                    <option value="Femenino">Femenino</option>
+                    <option value="M">Masculino</option>
+                    <option value="F">Femenino</option>
                   </select>
                   <!--end::Input-->
                   <span
@@ -1241,7 +1241,7 @@
               <!--begin::subtitle group-->
               <div class="row mb-10">
                 <div class="col-12">
-                  <b>Seleccione la opción a la que usted aplica</b>
+                  <p><b>Seleccione la opción a la que usted aplica</b></p>
                 </div>
               </div>
               <!--end::Subtitle group-->
@@ -1283,15 +1283,15 @@
                   <!-- <button type="button" class="btn btn-light-primary w-100" data-kt-docs-advanced-forms="interactive">No aplica</button> -->
                 </div>
               </div>
-              <div class="row mb-10">
+              <div *ngIf="speciesSalaryValue == 'alimentacion'" class="row mb-10">
                 <div class="col-12">
                   <div class="row mb-10">
-                    <b>¿Cuántos tiempos de comida recibe?</b>
+                    <p data-bs-toggle="tooltip" data-bs-placement="top"><b>¿Cuántos tiempos de comida recibe?</b></p>
                   </div>
                   <div class="row mb-10">
                     <div class="col-sm-6">
                       <!--begin::Option-->
-                      <input type="radio" class="btn-check" value="1" name="tiempo"   id="kt_radio_buttons_2_option_1"/>
+                      <input formControlName="foodTime" type="radio" class="btn-check" value="1" name="foodTime"   id="kt_radio_buttons_2_option_1"/>
                       <label class="btn btn-outline btn-outline-dashed btn-outline-default w-100" for="kt_radio_buttons_2_option_1">
                         <span>1 tiempo de comida</span>
                       </label>
@@ -1299,7 +1299,7 @@
                     </div>
                     <div class="col-sm-6">
                       <!--begin::Option-->
-                      <input type="radio" class="btn-check" value="2" name="tiempo"   id="kt_radio_buttons_2_option_2"/>
+                      <input formControlName="foodTime" type="radio" class="btn-check" value="2" name="foodTime"   id="kt_radio_buttons_2_option_2"/>
                       <label class="btn btn-outline btn-outline-dashed btn-outline-default w-100" for="kt_radio_buttons_2_option_2">
                         <span>2 o más tiempos de comida</span>
                       </label>
@@ -1308,6 +1308,13 @@
                   </div>
                 </div>
               </div>
+              <!-- <div *ngIf="speciesSalaryValue == 'vivienda'" class="row mb-10">
+                <div class="col-sm-12">
+                  <p> <b>Vivienda = SBM X 20%</b>  </p>
+                  <p> <b>Vivienda = {{salaryValue}} X 20%</b>  </p>
+                  <p> <b>Vivienda = {{totalSpeciesSalary('20%')}}</b>  </p>
+                </div>
+              </div> -->
               <!--end::Input group-->
             </div>
             <!--begin:: Salario en especie-->
@@ -1326,7 +1333,12 @@
 
             <!--begin::Wrapper-->
             <div>
-              <button type="button" class="btn btn-primary" data-kt-stepper-action="submit">
+              <button 
+                #submit
+                type="button"
+                class="btn btn-primary"
+                data-kt-stepper-action="submit"
+              >
                 <span class="indicator-label">
                   Realizar cálculo
                 </span>

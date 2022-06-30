@@ -5,10 +5,10 @@ import { TerminationContractType } from 'src/app/models/enums/termination-contra
   providedIn: 'root'
 })
 export class ToolbarService {
-  userTypeOf: string = 'empleador';
-  terminationContractType: TerminationContractType;
+  userTypeOf: string = 'COMPANY';
+  terminationContractType: string;
 
   constructor() {
-    this.terminationContractType = TerminationContractType.DESPIDO;
+    this.terminationContractType = 'DESPIDO';
    }
 }
