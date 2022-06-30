@@ -328,8 +328,10 @@ export class DatosEmpleadorComponent implements OnInit {
   }
 
   postEmployeeAndEmployer() {
-    const { companyData, employeeData } = this.formEmployer.value;
-    
+    const { companyData, employeeData, salaryData } = this.formEmployer.value;
+    this.calculoPrestacionesService.objectGlobal.startDate = employeeData.startDate;
+    this.calculoPrestacionesService.objectGlobal.dismissalDate = employeeData.endDate;
+    this.calculoPrestacionesService.objectGlobal.fixedSalary = salaryData.fixedSalary === 'SI' ? true : false;
     let data = {
       age: employeeData.employeeAge,
       email: employeeData.employeeEmail,

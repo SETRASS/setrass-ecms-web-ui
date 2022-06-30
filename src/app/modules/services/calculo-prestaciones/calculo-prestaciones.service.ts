@@ -18,7 +18,10 @@ export class CalculoPrestacionesService extends BaseHttpService {
     gender: Gender.Masculino ? 'M' : 'F',
     requestId: '',
     employerId: '',
-    workerPersonId: ''
+    workerPersonId: '',
+    fixedSalary: true,
+    startDate: '',
+    dismissalDate: ''
   }
 
   constructor(http: HttpClient) {
