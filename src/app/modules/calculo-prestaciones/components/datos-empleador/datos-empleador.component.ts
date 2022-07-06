@@ -70,13 +70,12 @@ export class DatosEmpleadorComponent implements OnInit {
 
 
   ngAfterViewInit(): void {
+    this.stepperConfig();
     this.saveButtonText = this.saveButtonIsOk ? "Realizar Calculo" : "Guardar";
   }
 
 
   ngOnInit(): void {
-
-    setTimeout(() => this.stepperConfig(), 3000);
 
     // locations
     this.lookupsService.getLocations().subscribe((data) => {
@@ -105,7 +104,7 @@ export class DatosEmpleadorComponent implements OnInit {
     });
   }
 
-  async stepperConfig() {
+  stepperConfig() {
     //this.render2.setAttribute(this.btnSubmit.nativeElement, 'disabled', 'true');
     this.stepper = new StepperComponent(this.stepperSteps.nativeElement, this.stepperOptions);
     this.stepper.on("kt.stepper.previous", () => this.stepper.goPrev());
@@ -320,7 +319,7 @@ export class DatosEmpleadorComponent implements OnInit {
     }
   }
 
-  postEmployeeAndEmployer() {
+  postEmployeeAndEmployer(): void {
     console.log("Ok");
     const {companyData, employeeData, salaryData} = this.formEmployer.value;
     this.calculoPrestacionesService.objectGlobal.startDate = employeeData.startDate;
