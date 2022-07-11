@@ -1,14 +1,8 @@
-import { Store, StoreConfig } from "@datorama/akita";
+import { Injectable } from '@angular/core';
+import { Store, StoreConfig,  ID, EntityStore, EntityState } from '@datorama/akita';
+import { CalculoPrestacionesState } from 'src/app/models/calculo-prestaciones.model';
 
-export interface CalculoPrestacionesState {
-    userType: '',
-    datosEmpleador: {},
-    calculoSalarial: {},
-    derechosIndemnizaciones: {},
-    otrosDerechos: {}
-}
-
-export const getInitialState = () => {
+export function createInitialState(): CalculoPrestacionesState {
     return {
         userType: '',
         datosEmpleador: {},
@@ -18,6 +12,9 @@ export const getInitialState = () => {
     }
 }
 
+@StoreConfig({ name: 'calculo-salarial' })
 export class CalculoPrestacionesStore extends Store<CalculoPrestacionesState> {
-    
+  constructor() {
+    super(createInitialState());
+  } 
 }
