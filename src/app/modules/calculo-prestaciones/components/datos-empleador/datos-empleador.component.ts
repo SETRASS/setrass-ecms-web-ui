@@ -9,7 +9,12 @@ import {SalaryHistoryCatalogService} from "../../../services/salary-history-cata
 import {CalculoPrestacionesService} from 'src/app/modules/services/calculo-prestaciones/calculo-prestaciones.service';
 
 import {ToolbarService} from 'src/app/_metronic/layout/components/toolbar/toolbar.service';
-import {catchError} from "rxjs";
+import {catchError, Observable} from "rxjs";
+import { EmployerStore } from '../../state/employer/employers.store';
+import { EmployerDto } from 'src/app/models/employer-dto.model';
+import { IdentificationType } from 'src/app/models/enums/identification-type.enum';
+import { LocationsQuery } from '../../state/locations/locations.query';
+import { Locations } from 'src/app/models/locations.model';
 
 @Component({
   selector: 'app-datos-empleador',
@@ -59,12 +64,18 @@ export class DatosEmpleadorComponent implements OnInit {
   isResponseOk: boolean = false;
   spinnerShow = false;
 
+  // states
+  locations$: Observable<Locations[]> = this.locationsQuery.selectAll();
+  isLocationsLoaded$: Observable<boolean> = this.locationsQuery.selectLoaded$;
+
   constructor(private lookupsService: LookupsService,
               private salaryHistoryCatalogService: SalaryHistoryCatalogService,
               private calculoPrestacionesService: CalculoPrestacionesService,
               private toolbar: ToolbarService,
               private formBuilder: FormBuilder,
-              private render2: Renderer2) {
+              private render2: Renderer2,
+              private employerStore: EmployerStore,
+              private locationsQuery: LocationsQuery) {
     this.formBuild();
   }
 
@@ -78,12 +89,15 @@ export class DatosEmpleadorComponent implements OnInit {
   ngOnInit(): void {
 
     // locations
-    this.lookupsService.getLocations().subscribe((data) => {
-      this.locations = data[0].children;
+    this.lookupsService.getLocations().subscribe((data) => {         
     }, ((error?: any) => {
       const err = error.message | error;
       console.warn(err);
     }));
+
+    this.locations$.subscribe((locations) => {
+      this.locations = locations;
+    });
 
     // initialize economic activities
     this.salaryHistoryCatalogService.getEconomicActivities().subscribe(
@@ -325,18 +339,25 @@ export class DatosEmpleadorComponent implements OnInit {
     this.calculoPrestacionesService.objectGlobal.startDate = employeeData.startDate;
     this.calculoPrestacionesService.objectGlobal.dismissalDate = employeeData.endDate;
     this.calculoPrestacionesService.objectGlobal.fixedSalary = salaryData.fixedSalary === 'SI' ? true : false;
+
+    let employer: EmployerDto = {
+      companySize: 0,
+      economicActivity: companyData.economicActivity,
+      employerId: "",
+      employerName: companyData.companyName,
+      identificationNumber: companyData.rtnNumber,
+      identificationType: IdentificationType.CARNET_RESIDENTE,
+      personType: companyData.personType
+    };
+
+    // call employer store
+    this.employerStore.add(employer);
+
+
     let data = {
       age: employeeData.employeeAge,
       email: employeeData.employeeEmail,
-      employer: {
-        companySize: 0,
-        economicActivity: companyData.economicActivity,
-        employerId: "",
-        employerName: companyData.companyName,
-        identificationNumber: companyData.rtnNumber,
-        identificationType: "CARNET_RESIDENTE",
-        personType: companyData.personType
-      },
+      employer,
       firstName: employeeData.employeeName,
       gender: employeeData.employeeSex,
       identificationNumber: employeeData.identityNumber,
