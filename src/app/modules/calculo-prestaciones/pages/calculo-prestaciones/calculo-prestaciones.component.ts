@@ -15,8 +15,7 @@ export class CalculoPrestacionesComponent implements OnInit {
     public calculoPrestacionesService: CalculoPrestacionesService) { }
 
   ngOnInit(): void {
-    
-
+    console.log(this.toolbarService.userTypeOf);
   }
 
 

@@ -15,6 +15,9 @@ import { EmployerDto } from 'src/app/models/employer-dto.model';
 import { IdentificationType } from 'src/app/models/enums/identification-type.enum';
 import { LocationsQuery } from '../../state/locations/locations.query';
 import { Locations } from 'src/app/models/locations.model';
+import { CalculoPrestacionesRequestType } from 'src/app/models/enums/calculo-prestaciones-request-type.enum';
+import { WorkerPersonEmployerRequestDto } from 'src/app/models/worker-person-employer-request-dto.model';
+import { TerminationContractType } from 'src/app/models/enums/termination-contract-type.enum';
 
 @Component({
   selector: 'app-datos-empleador',
@@ -71,7 +74,7 @@ export class DatosEmpleadorComponent implements OnInit {
   constructor(private lookupsService: LookupsService,
               private salaryHistoryCatalogService: SalaryHistoryCatalogService,
               private calculoPrestacionesService: CalculoPrestacionesService,
-              private toolbar: ToolbarService,
+              private toolbarService: ToolbarService,
               private formBuilder: FormBuilder,
               private render2: Renderer2,
               private employerStore: EmployerStore,
@@ -366,11 +369,13 @@ export class DatosEmpleadorComponent implements OnInit {
       localizationId: employeeData.municipality,
       phoneNumber: employeeData.employeePhone,
       requestId: 0,
-      requestType: this.toolbar.userTypeOf,
-      terminationContractType: this.toolbar.terminationContractType
+      requestType: CalculoPrestacionesRequestType.COMPANY,
+      terminationContractType: TerminationContractType.DESPIDO
     }
-    this.calculoPrestacionesService.sendEmployeeEmployerReq(data).subscribe((response: any) => {
-      console.log(response);
+    console.log('REQUEST: ',data);
+    this.calculoPrestacionesService.sendEmployeeEmployerReq(data)
+    .subscribe((response: any) => {
+      console.log(response); 
       const {employerId, requestId, workerPersonId, employer} = response;
       this.EMPLOYER_ID = employerId;
       this.REQUEST_ID = requestId;
@@ -450,7 +455,7 @@ export class DatosEmpleadorComponent implements OnInit {
       "salaryInKindOptionsType": speciesSalary.foodTime,
       "salaryInKindType": speciesSalary.optionSpeciesSalary,
       "startDate": salaryData.startDate,
-      "terminationContractType": this.toolbar.terminationContractType,
+      "terminationContractType": this.toolbarService.terminationContractType,
       "wasFiredWhilePregnant": false,
       "workerPersonId": this.WORKER_PERSON_ID
     }

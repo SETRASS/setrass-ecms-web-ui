@@ -1,15 +1,16 @@
-import { state } from "@angular/animations";
 import { Injectable } from "@angular/core";
-import { EntityState, EntityStore, StoreConfig } from "@datorama/akita";
+import { EntityState, EntityStore, Store, StoreConfig } from "@datorama/akita";
 import { Locations } from "src/app/models/locations.model";
 
 export interface LocationState extends EntityState<Locations, string> {
     isLoaded: false;
+    locations: Locations[];
 }
 
 export function createInitialState(): LocationState {
     return {
-        isLoaded: false
+        isLoaded: false,
+        locations: [] 
     };
 }
 
@@ -23,8 +24,6 @@ export class LocationStore extends EntityStore<LocationState> {
     updateLocations(isLoaded: boolean) {
         this.update((state: LocationState) => ({...state, isLoaded}));
     }
-
-    // 
 
     destroy(): void {
         this.updateLocations(false);

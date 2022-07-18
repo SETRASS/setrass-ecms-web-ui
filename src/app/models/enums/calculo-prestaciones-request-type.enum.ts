@@ -1,4 +1,4 @@
 export enum CalculoPrestacionesRequestType {
-  WORKER_PERSON,
-  COMPANY
+  WORKER_PERSON = 0,
+  COMPANY = 1
 }

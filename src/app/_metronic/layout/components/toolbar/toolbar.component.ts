@@ -5,12 +5,13 @@ import {
   OnInit,
   ViewChild,
 } from '@angular/core';
-import { NgForm, NgModel } from '@angular/forms';
 
 import { format } from 'date-fns';
 
 import { LayoutService } from '../../core/layout.service';
 import { ToolbarService } from './toolbar.service';
+import { CalculoPrestacionesRequestType } from 'src/app/models/enums/calculo-prestaciones-request-type.enum';
+
 
 @Component({
   selector: 'app-toolbar',
@@ -24,16 +25,30 @@ export class ToolbarComponent implements OnInit, AfterViewInit {
   };
   toolbarContainerCssClasses: string = '';
   pageTitleCssClasses: string = '';
-  userType: string;
+  userType: CalculoPrestacionesRequestType;
   contractType: any;
+  calculoPrestacionesRequestTypeArray: any[] = [];
 
   constructor(private layout: LayoutService, private toolbarService: ToolbarService) {}
 
   ngOnInit(): void {
+    
+    for(let item in CalculoPrestacionesRequestType){
+      if(isNaN(Number(item))){
+        this.calculoPrestacionesRequestTypeArray.push({
+          value: CalculoPrestacionesRequestType[item], 
+          label: item
+        });
+      }
+    }
+
+    console.log(this.calculoPrestacionesRequestTypeArray);
+
     this.toolbarContainerCssClasses = this.layout.getStringCSSClasses('toolbarContainer');
     this.pageTitleCssClasses = this.layout.getStringCSSClasses('pageTitle');
     this.pageTitleAttributes = this.layout.getHTMLAttributes('pageTitle');
     this.userType = this.toolbarService.userTypeOf;
+    console.log(this.userType);
     this.contractType = this.toolbarService.terminationContractType;
     console.log(this.contractType);
   }
@@ -57,6 +72,11 @@ export class ToolbarComponent implements OnInit, AfterViewInit {
   }
 
   getUserType(event: any){
-    this.toolbarService.userTypeOf = event.target.value;
+    let textSelected = event.target[event.target.selectedIndex].innerText;
+    this.toolbarService.userTypeOf = textSelected == 'Trabajador' ? CalculoPrestacionesRequestType.WORKER_PERSON : CalculoPrestacionesRequestType.COMPANY;
+  }
+
+  getContractType(event: any){
+    this.toolbarService.terminationContractType = event.target.value;
   }
 }

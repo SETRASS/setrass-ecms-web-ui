@@ -20,8 +20,10 @@ export class LookupsService extends BaseHttpService {
     return this.getRequest<Locations[]>(`${this.baseUrl}/v1/all`).pipe(
       map((locations) => {
         let hnLocations = locations.filter((l) => l.location.isoName === "HN");
-        this.locationStore.add(hnLocations[0].children);
-        return hnLocations[0].children;
+        let data = hnLocations[0].children.map(location => location);
+        console.log(data);
+        this.locationStore.add(data);
+        return data;
       }), tap(() => this.locationStore.updateLocations(true))
     );
   }
