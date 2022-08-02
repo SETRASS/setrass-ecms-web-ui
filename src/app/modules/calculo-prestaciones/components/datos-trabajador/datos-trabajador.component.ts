@@ -58,6 +58,7 @@ export class DatosTrabajadorComponent implements OnInit {
   totalCommissionsAverage: 0;
   totalExtraHoursAverage: 0;
   totalBonusesAverage: 0;
+  totalHistorySalaryAverage: 0;
   isSalaryFieldDisabled: boolean =true;
 
   //SAVE-BUTTON
@@ -116,7 +117,15 @@ export class DatosTrabajadorComponent implements OnInit {
     console.warn(err);
     }));
     
-    }
+    // company size
+    this.salaryHistoryCatalogService.getCompanySizes().subscribe((data) => {
+      this.companySizeList = data.map(val => ({id: val.id, name: `${val.minQty} a ${val.maxQty} Empleados`}));
+    }, (error) => {
+      const err = error.message | error;
+      console.warn(err);
+    });
+  }
+    
     
     stepperConfig()
     {
@@ -162,6 +171,7 @@ export class DatosTrabajadorComponent implements OnInit {
     companyData: this.formBuilder.group({
     companyName: ['', [Validators.required, Validators.minLength(5)]],
     economicActivity: ['', [Validators.required,]],
+    companySize:['',[ Validators.required]],
     startDate: ['', [Validators.required]],
     endDate: ['', [Validators.required]],
     fixedSalary: ['SI', [Validators.required]],
@@ -196,12 +206,24 @@ export class DatosTrabajadorComponent implements OnInit {
     monthlyBonus5: [0, []],
     monthlyBonus6: [0, []]
     }),
+    historySalary: this.formBuilder.group({
+      historySalary1: [0, []],
+      historySalary2: [0, []],
+      historySalary3: [0, []],
+      historySalary4: [0, []],
+      historySalary5: [0, []],
+      historySalary6: [0, []],
+      historySalary7: [0, []],
+      historySalary8: [0, []]
+      })
     }),
     
     speciesSalary: this.formBuilder.group({
     optionSpeciesSalary: ['NONE', [Validators.required]],
     foodTime: ['NONE', []]
-    })
+    }),
+
+    
     
     });
     
@@ -302,10 +324,26 @@ export class DatosTrabajadorComponent implements OnInit {
 
             case 'companyData.bonuses.monthlyBonus':
             this.totalBonusesAverage += (month1+ month2 + month3 + month4 + month5 + month6  ) / 6;
-            break;
+            break;       
 
 
     }
+
+    
+    }
+
+    getTotalAverageField2(element: string){
+      let year1 = Number(this.formEmployee.get(`${element}1`)?.value);
+      let year2 = Number(this.formEmployee.get(`${element}2`)?.value);
+      let year3 = Number(this.formEmployee.get(`${element}3`)?.value);
+      let year4 = Number(this.formEmployee.get(`${element}4`)?.value);
+      let year5 = Number(this.formEmployee.get(`${element}5`)?.value);
+      let year6 = Number(this.formEmployee.get(`${element}6`)?.value);
+      let year7 = Number(this.formEmployee.get(`${element}7`)?.value);   
+      let year8 = Number(this.formEmployee.get(`${element}8`)?.value);
+    
+    this.totalHistorySalaryAverage += (year1+ year2+ year3+ year4+ year5+ year6+ year7+ year8);
+    console.log(this.totalHistorySalaryAverage);
 
     }
 
@@ -427,7 +465,20 @@ export class DatosTrabajadorComponent implements OnInit {
         "startDate": companyData.startDate,
         "terminationContractType": this.toolbar.terminationContractType,
         "wasFiredWhilePregnant": false,
-        "workerPersonId": this.WORKER_PERSON_ID
+        "workerPersonId": this.WORKER_PERSON_ID,
+
+        "lastYearsSalary":[
+        companyData.historySalary.historysalary1,
+        companyData.historySalary.historysalary2,
+        companyData.historySalary.historysalary3,
+        companyData.historySalary.historysalary4,
+        companyData.historySalary.historysalary5,
+        companyData.historySalary.historysalary6,
+        companyData.historySalary.historysalary7,
+        companyData.historySalary.historysalary8,
+
+        ]
+        
       }
 
       this.saveButtonText ="";
@@ -475,4 +526,8 @@ export class DatosTrabajadorComponent implements OnInit {
     }
 
   }
+
+function getTotalAverageField2(element: string, string: any) {
+  throw new Error('Function not implemented.');
+}
 
