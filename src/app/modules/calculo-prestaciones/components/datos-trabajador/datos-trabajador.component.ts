@@ -51,7 +51,7 @@ export class DatosTrabajadorComponent implements OnInit {
   companySizeList: any[] = [];
   
   locationSelected:string;
-  currentMunicipioss: any[] = [];
+  currentMunicipios: any[] = [];
   currentEconomicActivity: any[] = [];
   totalSalaryAverage: 0; 
   totalCommissionsAverage: 0;
@@ -271,6 +271,12 @@ export class DatosTrabajadorComponent implements OnInit {
     get isSpeciesSalaryValid() {
     return this.formEmployee.get('speciesSalary')?.valid;
     }
+
+    getEconomicActivity(event: string) {
+      console.log(event);
+      console.log(this.getCompanyEmployeeWeight(event));
+      this.currentEconomicActivity = this.getCompanyEmployeeWeight(event);
+    }
     
     totalySpeciesSalary(percentage: string) {
     if (percentage ==='20%') return (Number(this.salaryValue) * 0.20).toFixed(2);
@@ -285,6 +291,11 @@ export class DatosTrabajadorComponent implements OnInit {
     return this.formEmployee.get(formControlName)?.touched &&
     this.formEmployee.get(formControlName)?.valid
     }
+
+    isInvalidField(formControlName: string) {
+      return this.formEmployee.get(formControlName)?.touched && 
+      this.formEmployee.get(formControlName)?.invalid
+    }
     
     getMunicipios(id: string) {
     return this.locations.find(val => val.location.id === id).children;
@@ -295,7 +306,7 @@ export class DatosTrabajadorComponent implements OnInit {
     }
     
     getLocation(event: any) {
-    this.currentMunicipioss = this.getMunicipios(event);
+    this.currentMunicipios = this.getMunicipios(event);
     }
     
     getTotalAverageField(element: string) {
