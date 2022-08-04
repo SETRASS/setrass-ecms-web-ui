@@ -3,7 +3,7 @@ import { EntityState, EntityStore, Store, StoreConfig } from "@datorama/akita";
 import { Locations } from "src/app/models/locations.model";
 
 export interface LocationState extends EntityState<Locations, string> {
-    isLoaded: false;
+    isLoaded: boolean;
     locations: Locations[];
 }
 
@@ -15,7 +15,7 @@ export function createInitialState(): LocationState {
 }
 
 @Injectable({providedIn: "root"})
-@StoreConfig({name: "locations", cache: {ttl: 600000}})
+@StoreConfig({name: "locations"})
 export class LocationStore extends EntityStore<LocationState> {
     constructor() {
         super(createInitialState());
@@ -25,7 +25,7 @@ export class LocationStore extends EntityStore<LocationState> {
         this.update((state: LocationState) => ({...state, isLoaded}));
     }
 
-    destroy(): void {
+    /* destroy(): void {
         this.updateLocations(false);
-    }
+    } */
 }

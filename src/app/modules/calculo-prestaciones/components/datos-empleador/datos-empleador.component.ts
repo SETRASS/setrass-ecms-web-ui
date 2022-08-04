@@ -1,5 +1,5 @@
 import {Component, ElementRef, OnInit, Renderer2, ViewChild} from '@angular/core';
-import {FormControl, FormGroup, Validators, FormBuilder} from '@angular/forms';
+import {FormControl, FormGroup, Validators, FormBuilder, FormArray} from '@angular/forms';
 
 import {IStepperOptions, StepperComponent, ToggleComponent} from 'src/app/_metronic/kt/components';
 import {PersonType} from 'src/app/models/enums/person-type.enum';
@@ -33,7 +33,7 @@ export class DatosEmpleadorComponent implements OnInit {
   stepper: any;
   formEmployer: FormGroup;
   stepperOptions: IStepperOptions = {
-    startIndex: 1,
+    startIndex: 5,
     animation: false,
     animationSpeed: '',
     animationNextClass: '',
@@ -85,7 +85,7 @@ export class DatosEmpleadorComponent implements OnInit {
 
   ngAfterViewInit(): void {
     this.stepperConfig();
-    this.saveButtonText = this.saveButtonIsOk ? "Realizar Calculo" : "Guardar";
+    this.saveButtonText = this.saveButtonIsOk ? "Realizar Cálculo" : "Guardar";
   }
 
 
@@ -99,6 +99,7 @@ export class DatosEmpleadorComponent implements OnInit {
     }));
 
     this.locations$.subscribe((locations) => {
+      console.log(locations);
       this.locations = locations;
     });
 
@@ -119,6 +120,9 @@ export class DatosEmpleadorComponent implements OnInit {
       const err = error.message | error;
       console.warn(err);
     });
+
+    this.addHistorySalaryYearField();
+    console.log(this.historySalaryField);
   }
 
   stepperConfig() {
@@ -145,6 +149,35 @@ export class DatosEmpleadorComponent implements OnInit {
       }
     });
   }
+
+  addHistorySalaryYearField(){
+    this.historySalaryField.push(this.createHistorySalaryFieldYear('2015',120));
+    this.historySalaryField.push(this.createHistorySalaryFieldYear('2016',1340));
+    this.historySalaryField.push(this.createHistorySalaryFieldYear('2017',2450));
+  }
+
+  private createHistorySalaryFieldYear(anio: string, amount: number){
+    return this.formBuilder.group({
+      years: [anio],
+      amount: [amount, Validators.required],
+    });
+  }
+
+  /**
+   * caso 1
+   * fechaInicio = 2000
+   * fechaFinal = 2022
+   * if(fechaInicio < 2015 && fechaFinal >= 2015 ){
+   *  [2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022]
+   * }
+   * 
+   * caso 2
+   * fechaInicio = 2018
+   * fechaFinal = 2022
+   * if(fechaInicio >= 2015){
+   * 
+   * }
+   */
 
   private formBuild() {
     this.formEmployer = this.formBuilder.group({
@@ -207,8 +240,10 @@ export class DatosEmpleadorComponent implements OnInit {
       speciesSalary: this.formBuilder.group({
         optionSpeciesSalary: ['NONE', [Validators.required]],
         foodTime: ['NONE', []]
-      })
+      }),
+      historySalary: this.formBuilder.array([])
     });
+
 
     this.formEmployer.get('salaryData.fixedSalary')?.valueChanges
       .subscribe(value => {
@@ -272,6 +307,10 @@ export class DatosEmpleadorComponent implements OnInit {
 
   get isSpeciesSalaryValid() {
     return this.formEmployer.get('speciesSalary')?.valid;
+  }
+
+  get historySalaryField(){
+    return this.formEmployer.get('historySalary') as FormArray;
   }
 
   totalSpeciesSalary(percentage: string) {
@@ -349,7 +388,7 @@ export class DatosEmpleadorComponent implements OnInit {
       employerId: "",
       employerName: companyData.companyName,
       identificationNumber: companyData.rtnNumber,
-      identificationType: IdentificationType.CARNET_RESIDENTE,
+      identificationType: IdentificationType.DNI,
       personType: companyData.personType
     };
 
@@ -369,8 +408,8 @@ export class DatosEmpleadorComponent implements OnInit {
       localizationId: employeeData.municipality,
       phoneNumber: employeeData.employeePhone,
       requestId: 0,
-      requestType: CalculoPrestacionesRequestType.COMPANY,
-      terminationContractType: TerminationContractType.DESPIDO
+      requestType: this.getCurrentRequestType(),
+      terminationContractType: this.getCurrentTerminationContract()
     }
     console.log('REQUEST: ',data);
     this.calculoPrestacionesService.sendEmployeeEmployerReq(data)
@@ -483,6 +522,14 @@ export class DatosEmpleadorComponent implements OnInit {
           console.warn(catchError);
         });
     }
+  }
+
+  getCurrentRequestType(){
+    return this.toolbarService.userTypeOf
+  }
+  
+  getCurrentTerminationContract(){
+    return this.toolbarService.terminationContractType;
   }
 
   scrollAnimation() {

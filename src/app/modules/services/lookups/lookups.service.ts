@@ -22,9 +22,9 @@ export class LookupsService extends BaseHttpService {
         let hnLocations = locations.filter((l) => l.location.isoName === "HN");
         let data = hnLocations[0].children.map(location => location);
         console.log(data);
-        this.locationStore.add(data);
+        this.locationStore.set(data);
         return data;
-      }), tap(() => this.locationStore.updateLocations(true))
+      }), tap(() => console.log(''))
     );
   }
 }

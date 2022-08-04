@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { CalculoPrestacionesRequestType } from 'src/app/models/enums/calculo-prestaciones-request-type.enum';
 import { TerminationContractType } from 'src/app/models/enums/termination-contract-type.enum';
 
@@ -7,9 +7,9 @@ import { TerminationContractType } from 'src/app/models/enums/termination-contra
 })
 export class ToolbarService {
   userTypeOf: CalculoPrestacionesRequestType = CalculoPrestacionesRequestType.WORKER_PERSON;
-  terminationContractType: string;
+  terminationContractType: TerminationContractType = TerminationContractType.DESPIDO;
 
-  constructor() {
-    this.terminationContractType = 'DESPIDO';
-   }
+  //terminationContract$ = new EventEmitter<TerminationContractType>();
+
+  constructor() {}
 }

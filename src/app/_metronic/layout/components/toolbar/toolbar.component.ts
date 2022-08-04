@@ -11,6 +11,7 @@ import { format } from 'date-fns';
 import { LayoutService } from '../../core/layout.service';
 import { ToolbarService } from './toolbar.service';
 import { CalculoPrestacionesRequestType } from 'src/app/models/enums/calculo-prestaciones-request-type.enum';
+import { TerminationContractType } from 'src/app/models/enums/termination-contract-type.enum';
 
 
 @Component({
@@ -26,8 +27,9 @@ export class ToolbarComponent implements OnInit, AfterViewInit {
   toolbarContainerCssClasses: string = '';
   pageTitleCssClasses: string = '';
   userType: CalculoPrestacionesRequestType;
-  contractType: any;
+  contractType: TerminationContractType;
   calculoPrestacionesRequestTypeArray: any[] = [];
+  terminationContractualArray: any[] = [];
 
   constructor(private layout: LayoutService, private toolbarService: ToolbarService) {}
 
@@ -41,8 +43,15 @@ export class ToolbarComponent implements OnInit, AfterViewInit {
         });
       }
     }
-
-    console.log(this.calculoPrestacionesRequestTypeArray);
+    
+    for(let item in TerminationContractType){
+      if(isNaN(Number(item))){
+        this.terminationContractualArray.push({
+          value: TerminationContractType[item],
+          label: item
+        })
+      }
+    }
 
     this.toolbarContainerCssClasses = this.layout.getStringCSSClasses('toolbarContainer');
     this.pageTitleCssClasses = this.layout.getStringCSSClasses('pageTitle');
@@ -77,6 +86,6 @@ export class ToolbarComponent implements OnInit, AfterViewInit {
   }
 
   getContractType(event: any){
-    this.toolbarService.terminationContractType = event.target.value;
+    this.toolbarService.terminationContractType = event.target.value === '1' ? TerminationContractType.DESPIDO: TerminationContractType.RENUNCIA;
   }
 }

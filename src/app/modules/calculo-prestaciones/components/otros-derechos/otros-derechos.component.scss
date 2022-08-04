@@ -1,3 +1,4 @@
+@import '../../../../../assets/sass/core/components/variables';
 .text-15{
     font-size: 15px;
 }
@@ -8,34 +9,73 @@
 .table.gy-7 td{
     padding: 1rem 0;
 }
-thead tr th h5{
-    color: #949699;
-    font-size: 15px;
+thead {
+    tr{
+        border-top:1px solid#5F6368 !important;
+        border-top-color: transparent !important;
+        position: relative;
+        th{
+            h5{
+                color: #949699;
+                font-size: 15px;
+            }
+            &:nth-child(1){
+                border-top-left-radius: 7px;
+                border-bottom-left-radius: 7px;
+            }
+            &:nth-child(6){
+                text-align: right;
+                border-top-right-radius: 7px;
+                border-bottom-right-radius: 7px;
+            }
+        } 
+    }
 }
-thead tr th:nth-child(1){
-    border-top-left-radius: 7px;
-    border-bottom-left-radius: 7px;
+
+tbody {
+    tr td{
+        padding-bottom: -3rem !important;
+        b{
+            color: #5F6368;
+            font-size: 15px;
+        }
+        &:nth-child(2){
+            font-family: 'Time New Roman',serif;
+            font-size: 17.2px;
+            color: #5F6368;
+        }
+        &:nth-child(3){
+            text-align: right;
+            font-size: 15px;
+            font-weight: 700;
+            color: #5F6368;
+        }
+        &:nth-child(4){
+            font-family:'Time New Roman',serif;
+            color: $gray-600;
+            font-size: 1.2rem;
+            padding-right: 5rem;
+        }
+    }
+    .panel{
+        border: none;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 5rem;
+        margin-top: -1.3rem;
+        width: 100%;
+        border-top: 5px solid white !important;
+        transition: all ease 5s;
+        td{
+            &:nth-child(1){
+                margin-left: 3rem !important;
+                color: $gray-600;
+            }
+            &:nth-child(2){
+                margin-left: 2rem !important;
+            } 
+        }
+    }
 }
-thead tr th:nth-child(6){
-    text-align: right;
-    border-top-right-radius: 7px;
-    border-bottom-right-radius: 7px;
-}
-tbody tr td{
-    padding-bottom: -3rem !important;
-}
-tbody tr td b{
-    color: #5F6368;
-    font-size: 15px;
-}
-tbody tr td:nth-child(2){
-    font-family: 'Time New Roman',serif;
-    font-size: 17.2px;
-    color: #5F6368;
-}
-tbody tr td:nth-child(3){
-    text-align: right;
-    font-size: 15px;
-    font-weight: 700;
-    color: #5F6368;
-}
+

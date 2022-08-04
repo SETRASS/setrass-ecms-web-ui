@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TerminationContractType } from 'src/app/models/enums/termination-contract-type.enum';
 import { ToolbarService } from 'src/app/_metronic/layout/components/toolbar/toolbar.service';
 
 
@@ -9,7 +10,7 @@ import { ToolbarService } from 'src/app/_metronic/layout/components/toolbar/tool
 })
 export class DerechosIdemnizacionesComponent implements OnInit {
 
-  currentContractType: any;
+  currentContractType: TerminationContractType;
 
   constructor(public contractType: ToolbarService) {
 
