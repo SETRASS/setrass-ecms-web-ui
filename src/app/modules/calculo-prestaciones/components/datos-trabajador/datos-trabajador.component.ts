@@ -1,5 +1,4 @@
 import { Component, ElementRef, OnInit,Renderer2, ViewChild } from '@angular/core';
-import * as bootstrap from 'bootstrap';
 import {FormControl, FormGroup, Validators, FormBuilder} from '@angular/forms';
 
 import {IStepperOptions, StepperComponent, ToggleComponent } from 'src/app/_metronic/kt/components';
