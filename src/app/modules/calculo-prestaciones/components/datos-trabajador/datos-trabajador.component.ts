@@ -1,6 +1,7 @@
 import { Component, ElementRef, OnInit,Renderer2, ViewChild } from '@angular/core';
 import {FormControl, FormGroup, Validators, FormBuilder} from '@angular/forms';
 
+
 import {IStepperOptions, StepperComponent, ToggleComponent } from 'src/app/_metronic/kt/components';
 import {PersonType } from 'src/app/models/enums/person-type.enum';
 
@@ -15,7 +16,7 @@ import { LocationsQuery } from '../../state/locations/locations.query';
 import { Locations} from 'src/app/models/locations.model';
 import { WorkerPersonEmployerRequestDto } from 'src/app/models/worker-person-employer-request-dto.model';
 import { EmployerDto } from 'src/app/models/employer-dto.model';
-import { WorkerPersonState, WorkerPersonStore } from '../../state/workerperson-employer-request/workerperson-employer-request.store';
+import { WorkerPersonStore } from '../../state/workerperson-employer-request/workerperson-employer-request.store';
 
 
 
@@ -23,10 +24,11 @@ import { WorkerPersonState, WorkerPersonStore } from '../../state/workerperson-e
 @Component({
   selector: 'app-datos-trabajador',
   templateUrl: './datos-trabajador.component.html',
-  styleUrls: ['./datos-trabajador.component.scss'],
+  styleUrls: ['./datos-trabajador.component.scss'], 
 })
 
 export class DatosTrabajadorComponent implements OnInit {
+
   @ViewChild('kt_stepper_vertical') stepperSteps: ElementRef;
   @ViewChild('salary') salaryField: ElementRef;
   @ViewChild('submit') btnSubmit: ElementRef;
@@ -36,7 +38,7 @@ export class DatosTrabajadorComponent implements OnInit {
 
   //public currentStep : Number = 1;
   stepperOptions: IStepperOptions = {
-    startIndex: 1,
+    startIndex: 4,
     animation: false,
     animationSpeed: '',
     animationNextClass: '',
@@ -53,11 +55,10 @@ export class DatosTrabajadorComponent implements OnInit {
   locationSelected:string;
   currentMunicipios: any[] = [];
   currentEconomicActivity: any[] = [];
-  totalSalaryAverage: 0; 
-  totalCommissionsAverage: 0;
-  totalExtraHoursAverage: 0;
-  totalBonusesAverage: 0;
-  totalHistorySalaryAverage: 0;
+  totalSalaryAverage = 0;
+  totalCommissionsAverage = 0;
+  totalExtraHoursAverage = 0;
+  totalBonusesAverage = 0;
   isSalaryFieldDisabled: boolean =true;
 
   //SAVE-BUTTON
@@ -135,8 +136,7 @@ export class DatosTrabajadorComponent implements OnInit {
     if(this.formEmployee.get('employeeData')?.valid && this.stepper1.getCurrentStepIndex() === 1){
         return this.stepper1.goNext(); 
     }
-    if (this.formEmployee.get('employeeData')?.valid && this.stepper1.getCurrentStepIndex() === 2) {
-        this.lookusService.getLocations();
+    if (this.formEmployee.get('locatationData')?.valid && this.stepper1.getCurrentStepIndex() === 2) {
         return this.stepper1.goNext();
     }
     
@@ -153,68 +153,63 @@ export class DatosTrabajadorComponent implements OnInit {
     }
     private formBuild(){
     this.formEmployee= this.formBuilder.group({
-    employeeData: this.formBuilder.group({
-    emloyeeName: ['', [Validators.required, Validators.minLength(13), Validators.maxLength(13), Validators.pattern(/^[0-9]+$/)]],
-    employeeLastname: ['', [Validators.required, Validators.minLength(13), Validators.maxLength(13), Validators.pattern(/^[0-9]+$/)]],
-    employeeSex: ['Masculino', [Validators.required] ],
-    employeeAge:[,[Validators.required, Validators.minLength(14), Validators.maxLength(85), Validators.pattern(/^[0-9]+$/)]],
-    typeIdentity: ['DNI', [Validators.required]],
-    identityNumber: ['', [Validators.required, Validators.minLength(13), Validators.maxLength(13), Validators.pattern(/^[0-9]+$/)]],
-    employeePhone: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(8)]],
-    employeeEmail: ['', [Validators.required, Validators.email]],
-    department: ['', [Validators.required]],
-    municipality: ['', [Validators.required]],
-    city: ['', [Validators.required]],
-    }),
+      employeeData: this.formBuilder.group({
+        employeeName: ['', [Validators.required,Validators.pattern(/^([Aa-zA-ZáéíóúÁÉÍÓÚÑñ]{2,}\s?){2,4}$/)]],
+        employeeLastName: ['', [Validators.required, Validators.pattern(/^([Aa-zA-ZáéíóúÁÉÍÓÚÑñ]{2,}\s?){2,4}$/)]],
+        employeeSex: ['Masculino', [Validators.required] ],
+        employeeAge:[,[Validators.required, Validators.minLength(14), Validators.maxLength(85), Validators.pattern(/^[0-9]+$/)]],
+        typeIdentity: ['DNI', [Validators.required]],
+        identityNumber: ['', [Validators.required, Validators.minLength(13), Validators.maxLength(13), Validators.pattern(/^[0-9]+$/)]],
+        employeePhone: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(8)]],
+        employeeEmail: ['', [Validators.required, Validators.email]],
+       
+      }),
+
+    locationData:this.formBuilder.group({
+      department: ['', [Validators.required]],
+      municipality: ['', [Validators.required]],
+      city: ['', [Validators.required]],
+    }), 
     
     companyData: this.formBuilder.group({
-    companyName: ['', [Validators.required, Validators.minLength(5)]],
-    economicActivity: ['', [Validators.required,]],
-    companySize:['',[ Validators.required]],
-    startDate: ['', [Validators.required]],
-    endDate: ['', [Validators.required]],
-    fixedSalary: ['SI', [Validators.required]],
-    salary: ['', [Validators.required]],
-    monthlySalaryAverage1: [0, []],
-    monthlySalaryAverage2: [0, []],
-    monthlySalaryAverage3: [0, []],
-    monthlySalaryAverage4: [0, []],
-    monthlySalaryAverage5: [0, []],
-    monthlySalaryAverage6: [0, []],
-    commissions: this.formBuilder.group({
-    monthlyCommissions1: [0, [Validators.pattern(/^[0-9]+$/)]],
-    monthlyCommissions2: [0, [Validators.pattern(/^[0-9]+$/)]],
-    monthlyCommissions3: [0, [Validators.pattern(/^[0-9]+$/)]],
-    monthlyCommissions4: [0, [Validators.pattern(/^[0-9]+$/)]],
-    monthlyCommissions5: [0, [Validators.pattern(/^[0-9]+$/)]],
-    monthlyCommissions6: [0, [Validators.pattern(/^[0-9]+$/)]]
-    }),
-    extraHours: this.formBuilder.group({
-    monthlyExtraHours1: [0, []],
-    monthlyExtraHours2: [0, []],
-    monthlyExtraHours3: [0, []],
-    monthlyExtraHours4: [0, []],
-    monthlyExtraHours5: [0, []],
-    monthlyExtraHours6: [0, []]
-    }),
-    bonuses: this.formBuilder.group({
-    monthlyBonus1: [0, []],
-    monthlyBonus2: [0, []],
-    monthlyBonus3: [0, []],
-    monthlyBonus4: [0, []],
-    monthlyBonus5: [0, []],
-    monthlyBonus6: [0, []]
-    }),
-    historySalary: this.formBuilder.group({
-      historySalary1: [0, []],
-      historySalary2: [0, []],
-      historySalary3: [0, []],
-      historySalary4: [0, []],
-      historySalary5: [0, []],
-      historySalary6: [0, []],
-      historySalary7: [0, []],
-      historySalary8: [0, []]
-      })
+      companyName: ['', [Validators.required, Validators.minLength(5)]],
+      economicActivity: ['', [Validators.required,]],
+      companySize:['',[ Validators.required]],
+      startDate: ['', [Validators.required]],
+      endDate: ['', [Validators.required]],
+      fixedSalary: ['SI', [Validators.required]],
+      salary: ['', [Validators.required]],
+      monthlySalaryAverage1: [0, []],
+      monthlySalaryAverage2: [0, []],
+      monthlySalaryAverage3: [0, []],
+      monthlySalaryAverage4: [0, []],
+      monthlySalaryAverage5: [0, []],
+      monthlySalaryAverage6: [0, []],
+      commissions: this.formBuilder.group({
+        monthlyCommissions1: [0, [Validators.pattern(/^[0-9]+$/)]],
+        monthlyCommissions2: [0, [Validators.pattern(/^[0-9]+$/)]],
+        monthlyCommissions3: [0, [Validators.pattern(/^[0-9]+$/)]],
+        monthlyCommissions4: [0, [Validators.pattern(/^[0-9]+$/)]],
+        monthlyCommissions5: [0, [Validators.pattern(/^[0-9]+$/)]],
+        monthlyCommissions6: [0, [Validators.pattern(/^[0-9]+$/)]]
+      }),
+      extraHours: this.formBuilder.group({
+        monthlyExtraHours1: [0, []],
+        monthlyExtraHours2: [0, []],
+        monthlyExtraHours3: [0, []],
+        monthlyExtraHours4: [0, []],
+        monthlyExtraHours5: [0, []],
+        monthlyExtraHours6: [0, []]
+      }),
+      bonuses: this.formBuilder.group({
+        monthlyBonus1: [0, []],
+        monthlyBonus2: [0, []],
+        monthlyBonus3: [0, []],
+        monthlyBonus4: [0, []],
+        monthlyBonus5: [0, []],
+        monthlyBonus6: [0, []]
+      }),
+     
     }),
     
     speciesSalary: this.formBuilder.group({
@@ -226,7 +221,8 @@ export class DatosTrabajadorComponent implements OnInit {
     
     });
     
-    this.formEmployee.get('companyData.fixedSalary')?.valueChanges.subscribe(value => {
+    this.formEmployee.get('companyData.fixedSalary')?.valueChanges.
+    subscribe(value => {
       console.log(value);
       if (value === 'NO') {
         for (let item =1; item<= 6; item++) {
@@ -308,58 +304,39 @@ export class DatosTrabajadorComponent implements OnInit {
     getLocation(event: any) {
     this.currentMunicipios = this.getMunicipios(event);
     }
+
+    
     
     getTotalAverageField(element: string) {
-    let month1 = Number(this.formEmployee.get(`${element}1`)?.value);
-    let month2 = Number(this.formEmployee.get(`${element}2`)?.value);
-    let month3 = Number(this.formEmployee.get(`${element}3`)?.value);
-    let month4 = Number(this.formEmployee.get(`${element}4`)?.value);
-    let month5 = Number(this.formEmployee.get(`${element}5`)?.value);
-    let month6 = Number(this.formEmployee.get(`${element}6`)?.value);
-
-    switch (element){
-      case 'companyData.monthlySalaryAverage':
-        this.totalSalaryAverage += (month1+ month2 + month3 + month4 + month5 + month6) / 6;
-        this.formEmployee.get('companyData.salary')?.setValue(this.totalSalaryAverage.toFixed(2));
-        console.log(this.totalSalaryAverage);
-        break;
-
-        case 'companyData.commisions.monthlyCommissions':
-          this.totalCommissionsAverage += (month1+ month2 + month3 + month4 + month5 + month6) / 6;
+      let month1 = Number(this.formEmployee.get(`${element}1`)?.value);
+      let month2 = Number(this.formEmployee.get(`${element}2`)?.value);
+      let month3 = Number(this.formEmployee.get(`${element}3`)?.value);
+      let month4 = Number(this.formEmployee.get(`${element}4`)?.value);
+      let month5 = Number(this.formEmployee.get(`${element}5`)?.value);
+      let month6 = Number(this.formEmployee.get(`${element}6`)?.value);
+      switch (element) {
+        case 'companyData.monthlySalaryAverage':
+          this.totalSalaryAverage += (month1 + month2 + month3 + month4 + month5 + month6) / 6;
+          this.formEmployee.get('companyData.salary')?.setValue(this.totalSalaryAverage.toFixed(2));
+          console.log(this.totalSalaryAverage);
           break;
-
+        case 'companyData.commissions.monthlyCommissions':
+          this.totalCommissionsAverage = (month1 + month2 + month3 + month4 + month5 + month6) / 6;
+          break;
         case 'companyData.extraHours.monthlyExtraHours':
-          this.totalExtraHoursAverage += (month1 + month2 + month3 + month4 + month5 + month6) / 6;
+          this.totalExtraHoursAverage = (month1 + month2 + month3 + month4 + month5 + month6) / 6;
           break;
-
-            case 'companyData.bonuses.monthlyBonus':
-            this.totalBonusesAverage += (month1+ month2 + month3 + month4 + month5 + month6  ) / 6;
-            break;       
-
-
+        case 'companyData.bonuses.monthlyBonus':
+          this.totalBonusesAverage = (month1 + month2 + month3 + month4 + month5 + month6) / 6;
+          break;
+      }
     }
 
     
-    }
-
-    getTotalAverageField2(element: string){
-      let year1 = Number(this.formEmployee.get(`${element}1`)?.value);
-      let year2 = Number(this.formEmployee.get(`${element}2`)?.value);
-      let year3 = Number(this.formEmployee.get(`${element}3`)?.value);
-      let year4 = Number(this.formEmployee.get(`${element}4`)?.value);
-      let year5 = Number(this.formEmployee.get(`${element}5`)?.value);
-      let year6 = Number(this.formEmployee.get(`${element}6`)?.value);
-      let year7 = Number(this.formEmployee.get(`${element}7`)?.value);   
-      let year8 = Number(this.formEmployee.get(`${element}8`)?.value);
-    
-    this.totalHistorySalaryAverage += (year1+ year2+ year3+ year4+ year5+ year6+ year7+ year8);
-    console.log(this.totalHistorySalaryAverage);
-
-    }
 
     postEmployeeAndEmployer(): void {
       console.log("Ok");
-        const {companyData, employeeData, salaryData, employer} = this.formEmployee.value;
+        const {companyData, employeeData, locationData, employer} = this.formEmployee.value;
         this.calculoPrestacionesService.objectGlobal.startDate = employeeData.startDate;
         this.calculoPrestacionesService.objectGlobal.dismissalDate = employeeData.endDate;
         this.calculoPrestacionesService.objectGlobal.fixedSalary = companyData.fixedSalary === 'SI' ? true : false;
@@ -375,7 +352,7 @@ export class DatosTrabajadorComponent implements OnInit {
         identificationNumber: employeeData.identityNumber,
         phoneNumber: employeeData.employeePhone,
         email: employeeData.employeeEmail,
-        localizationId: employeeData.localizationId,
+        localizationId: locationData.localizationId,
         employer,
         requestType: employeeData.requestType,
 
@@ -476,18 +453,6 @@ export class DatosTrabajadorComponent implements OnInit {
         "terminationContractType": this.toolbar.terminationContractType,
         "wasFiredWhilePregnant": false,
         "workerPersonId": this.WORKER_PERSON_ID,
-
-        "lastYearsSalary":[
-        companyData.historySalary.historysalary1,
-        companyData.historySalary.historysalary2,
-        companyData.historySalary.historysalary3,
-        companyData.historySalary.historysalary4,
-        companyData.historySalary.historysalary5,
-        companyData.historySalary.historysalary6,
-        companyData.historySalary.historysalary7,
-        companyData.historySalary.historysalary8,
-
-        ]
         
       }
 
