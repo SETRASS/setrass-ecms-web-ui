@@ -1,5 +1,5 @@
-<app-datos-empleador *ngIf="toolbarService.userTypeOf === 'COMPANY'"></app-datos-empleador>
-<app-datos-trabajador *ngIf="toolbarService.userTypeOf === 'WORKER_PERSON'" ></app-datos-trabajador>
+<app-datos-empleador *ngIf="toolbarService.userTypeOf === 1"></app-datos-empleador>
+<app-datos-trabajador *ngIf="toolbarService.userTypeOf === 0"></app-datos-trabajador>
 <br>
 <app-calculo-salarial *ngIf="calculoPrestacionesService.isShowCalculoSalarial"></app-calculo-salarial>
 <br>

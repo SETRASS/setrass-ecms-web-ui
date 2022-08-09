@@ -156,7 +156,8 @@ export const DefaultLayoutConfig: ILayout = {
   main: {
     componentName: 'main',
     type: 'default',
-    primaryColor: '#009EF7',
+    //primaryColor: '#009EF7',
+    primaryColor: '#59d0e1',
     darkSkinEnabled: true,
     body: {
       backgroundImage: 'assets/media/patterns/header-bg-2.jpg'

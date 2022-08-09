@@ -1,4 +1,5 @@
 <div class="card shadow-sm">
+    <div #overlay class="overlay"><div><span class="loader-recalulo"></span><h4>Recalculando...</h4></div></div>
     <div class="card-header">
         <h3 class="card-title">Derechos e Indemnizaciones</h3>
         <!--<div class="card-toolbar">
@@ -12,7 +13,7 @@
             <p>Habilite los derechos e indenizaciones a los que usted goza.</p>
         </div>
         <div class="row">
-            <div *ngIf="currentContractType === 'DESPIDO'" class="col-sm-6 px-10">
+            <div *ngIf="currentContractType === 1" class="col-sm-6 px-10">
                 <div class="d-flex justify-content-between mb-5">
                     <div class="form-check form-switch form-check-custom form-check-solid me-10">
                         <input class="form-check-input h-20px w-30px" type="checkbox" value="" id="flexSwitch20x30"/>
@@ -79,7 +80,8 @@
         </div>
         <div class="row"></div>
     </div>
-    <div class="card-footer d-flex justify-content-end">
+    <div class="card-footer d-flex justify-content-end gap-5">
+        <button type="button" class="btn btn-secondary" (click)="recalculo()">Recalcular</button>
         <button type="button" class="btn btn-primary">Siguiente</button>
     </div>
 </div>
