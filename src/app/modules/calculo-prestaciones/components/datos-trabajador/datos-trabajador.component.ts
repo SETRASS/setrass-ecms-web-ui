@@ -382,6 +382,7 @@ export class DatosTrabajadorComponent implements OnInit {
       
       }
 
+
       /* this.calculoPrestacionesService.sendEmployeeEmployerReq(data).subscribe((response: any)=>{
         console.log(response);
         const { requestId, workerPersonId} = response;
@@ -392,6 +393,8 @@ export class DatosTrabajadorComponent implements OnInit {
         console.log(this.REQUEST_ID);
         console.log(response);
       }) */
+
+
 
     }
 
@@ -527,7 +530,7 @@ export class DatosTrabajadorComponent implements OnInit {
     setMinDate(){
       this.minDate = this.formEmployee.get('companyData.startDate')?.value;
     }
-
+    
     addHistorySalaryFields(){
       //this.formEmployer.get('historySalary')?.setValue(this.formBuilder.array([]).clear());
       let years = getYearSelect(this.formEmployee.get('companyData.startDate')?.value,
