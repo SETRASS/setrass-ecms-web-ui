@@ -1,5 +1,6 @@
 import {Component, ElementRef, OnInit, Renderer2, ViewChild} from '@angular/core';
 import {FormControl, FormGroup, Validators, FormBuilder, FormArray} from '@angular/forms';
+import { format } from 'date-fns';
 
 import {IStepperOptions, StepperComponent, ToggleComponent} from 'src/app/_metronic/kt/components';
 import {PersonType} from 'src/app/models/enums/person-type.enum';
@@ -26,14 +27,20 @@ import { TerminationContractType } from 'src/app/models/enums/termination-contra
 })
 export class DatosEmpleadorComponent implements OnInit {
 
+  /* range = new FormGroup({
+    start: new FormControl<Date | null>(null),
+    end: new FormControl<Date | null>(null),
+  }); */
+
   // Variables
   @ViewChild('kt_stepper_vertical') stepperSteps: ElementRef;
   @ViewChild('salary') salaryField: ElementRef;
   @ViewChild('submit') btnSubmit: ElementRef;
+  @ViewChild('historySalaryYearField') txtHistorySalary: ElementRef;
   stepper: any;
   formEmployer: FormGroup;
   stepperOptions: IStepperOptions = {
-    startIndex: 5,
+    startIndex: 1,
     animation: false,
     animationSpeed: '',
     animationNextClass: '',
@@ -55,6 +62,7 @@ export class DatosEmpleadorComponent implements OnInit {
   totalExtraHoursAverage = 0;
   totalBonusesAverage = 0;
   isSalaryFieldDisabled: boolean = true;
+  minDate: string;
 
   //SAVE BUTTON / COMPUTE
   saveButtonIsOk = false;
@@ -92,7 +100,8 @@ export class DatosEmpleadorComponent implements OnInit {
   ngOnInit(): void {
 
     // locations
-    this.lookupsService.getLocations().subscribe((data) => {         
+    this.lookupsService.getLocations().subscribe((data) => { 
+      this.locations = data;        
     }, ((error?: any) => {
       const err = error.message | error;
       console.warn(err);
@@ -122,7 +131,13 @@ export class DatosEmpleadorComponent implements OnInit {
     });
 
     this.addHistorySalaryYearField();
-    console.log(this.historySalaryField);
+
+    setTimeout(() => {
+      const historySalaryElements : any = document.querySelectorAll('.historySalaryInput');
+      historySalaryElements.forEach((element:any) => element.setAttribute('disabled','true'));
+    },3000);
+    //this.render2.setAttribute(this.txtHistorySalary.nativeElement, 'disabled','true');
+
   }
 
   stepperConfig() {
@@ -158,7 +173,7 @@ export class DatosEmpleadorComponent implements OnInit {
 
   private createHistorySalaryFieldYear(anio: string, amount: number){
     return this.formBuilder.group({
-      years: [anio],
+      year: [anio],
       amount: [amount, Validators.required],
     });
   }
@@ -187,7 +202,7 @@ export class DatosEmpleadorComponent implements OnInit {
         rtnNumber: ['08011994058778', [Validators.required, Validators.minLength(14), Validators.maxLength(14), Validators.pattern(/^[0-9]+$/)]],
         dniNumber: ['', []],
         economicActivity: ['', [Validators.required,]],
-        companySize: ['', [Validators.required]]
+        companySize: ['', [Validators.required, Validators.pattern(/^[0-9]+$/)]]
       }),
       employeeData: this.formBuilder.group({
         typeIdentity: ['DNI', [Validators.required]],
@@ -202,7 +217,7 @@ export class DatosEmpleadorComponent implements OnInit {
         municipality: ['', [Validators.required]],
       }),
       salaryData: this.formBuilder.group({
-        startDate: ['2015-06-15', [Validators.required]],
+        startDate: [this.getFutureDate(5), [Validators.required]],
         endDate: ['2022-09-10', [Validators.required]],
         fixedSalary: ['SI', [Validators.required]],
         salary: ['20000', [Validators.required]],
@@ -311,6 +326,23 @@ export class DatosEmpleadorComponent implements OnInit {
 
   get historySalaryField(){
     return this.formEmployer.get('historySalary') as FormArray;
+  }
+
+  /**
+   * It takes a number of days and returns a date in the future
+   * @param {number} majorDays - number - The number of days you want to add to the current date.
+   * @returns A string in the format of yyyy-MM-dd
+   */
+  getFutureDate(majorDays?: number){
+    if(majorDays){
+      let totalDay = (new Date().getDate()) + majorDays;
+      return format(new Date().setDate(totalDay),'yyyy-MM-dd');
+    }
+    return format(new Date(),'yyyy-MM-dd');
+  }
+
+  setMinDate(){
+    this.minDate = this.formEmployer.get('salaryData.startDate')?.value;
   }
 
   totalSpeciesSalary(percentage: string) {
