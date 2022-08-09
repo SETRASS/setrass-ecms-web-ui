@@ -123,12 +123,12 @@ export class DatosEmpleadorComponent implements OnInit {
       });
 
     // company size
-    this.salaryHistoryCatalogService.getCompanySizes().subscribe((data) => {
+    /* this.salaryHistoryCatalogService.getCompanySizes().subscribe((data) => {
       this.companySizeList = data.map(val => ({id: val.id, name: `${val.minQty} a ${val.maxQty} Empleados`}));
     }, (error) => {
       const err = error.message | error;
       console.warn(err);
-    });
+    }); */
 
     this.addHistorySalaryYearField();
 
