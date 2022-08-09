@@ -371,7 +371,7 @@ export class DatosTrabajadorComponent implements OnInit {
       
       }
 
-      this.calculoPrestacionesService.sendEmployeeEmployerReq(data).subscribe((response: any)=>{
+      /*this.calculoPrestacionesService.sendEmployeeEmployerReq(data).subscribe((response: any)=>{
         console.log(response);
         const { requestId, workerPersonId} = response;
         this.REQUEST_ID = requestId;
@@ -380,7 +380,7 @@ export class DatosTrabajadorComponent implements OnInit {
         this.calculoPrestacionesService.objectGlobal.workerPersonId = workerPersonId;
         console.log(this.REQUEST_ID);
         console.log(response);
-      })
+      })*/
 
     }
 
