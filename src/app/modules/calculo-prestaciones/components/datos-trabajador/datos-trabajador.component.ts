@@ -510,7 +510,7 @@ export class DatosTrabajadorComponent implements OnInit {
       var endDate = new Date('companyData.endDate');
       
       while (endDate.getTime() >= startDate.getTime()) {
-        //startDate.setDate(startDate.getDate() + 1);
+        startDate.setDate(startDate.getDate()+1);
 
         console.log(startDate.getFullYear);
       }
