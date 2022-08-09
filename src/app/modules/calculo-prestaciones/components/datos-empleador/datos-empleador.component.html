@@ -908,7 +908,7 @@
                                   [class.is-invalid]="isInvalidField('salaryData.commissions.monthlyCommissions1')"
                                   type="number"
                                   class="form-control form-control-solid"
-                                  (change)="getTotalAverageField('salaryData.commissions.monthlyCommissions')"
+                                  (keyup)="getTotalAverageField('salaryData.commissions.monthlyCommissions')"
                                   />
                                   <div *ngIf="isInvalidField('salaryData.commissions.monthlyCommissions1')">
                                     <span

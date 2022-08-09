@@ -57,3 +57,23 @@
 
     
 }
+
+.muted{
+    color: $gray-700;
+}
+
+.historySalaryLabel{ 
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    input{
+        border: none;
+        display: inline;
+        font-size: inherit;
+        font-weight: inherit;
+        width: 50px;
+        &:disabled{
+            background-color: transparent;
+        }
+    }
+}
