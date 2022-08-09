@@ -454,7 +454,7 @@
                       <!--end::Input-->
                     </div>
                     
-                  <div class="col-sm-12 col-lg-3">
+                <div class="col-sm-12 col-lg-3">
                     <!--begin::Label-->
                     <label class="form-label"> Actividad económica </label>
                     <!--end::Label-->
@@ -720,77 +720,81 @@
 
               </div>
 
-              <div class="col-sm-12 col-lg-3">
-                <!--begin::Label-->
-                <label class="form-label"> Tamaño de la empresa </label>
-                <!--end::Label-->
-    
-                <!--begin::Switch-->
-                <ng-select
-                  formControlName="companySize"
-                  [class.is-valid]="isValidField('companyData.companySize')"
-                  [class.is-invalid]="isInvalidField('companyData.companySize')"
-                  type="text"
-                  class="form-select-solid"
-                  placeholder="">
-                  <ng-option *ngFor="let item companySizeList" [value]="item.id">{{item.name}}</ng-option>
-                <!-- <ng-option *ngFor="let item of currentEconomicActivity" [value]="item.companyEmployeeWeight">{{item.companyEmployeeWeight}}</ng-option> -->
-                </ng-select>
-                <!--end::Switch-->
-                <div  *ngIf="isInvalidField('companyData.companySize')">
-                    <span
-                    *ngIf="getErrorField('companyData.companySize', 'required')"
-                    class="text-danger"
-                    >Este campo es requerido</span>
+              <div class="row mb-10">
+                <div class="col-sm-12 col-lg-3">
+                  <!--begin::Label-->
+                  <label class="form-label"> Tamaño de la empresa </label>
+                  <!--end::Label-->
+      
+                  <!--begin::Switch-->
+                  <ng-select
+                    formControlName="companySize"
+                    [class.is-valid]="isValidField('companyData.companySize')"
+                    [class.is-invalid]="isInvalidField('companyData.companySize')"
+                    type="text"
+                    class="form-select-solid"
+                    placeholder="">
+                    <ng-option *ngFor="let item companySizeList" [value]="item.id">{{item.name}}</ng-option>
+                  <!-- <ng-option *ngFor="let item of currentEconomicActivity" [value]="item.companyEmployeeWeight">{{item.companyEmployeeWeight}}</ng-option> -->
+                  </ng-select>
+                  <!--end::Switch-->
+                  <div  *ngIf="isInvalidField('companyData.companySize')">
+                      <span
+                      *ngIf="getErrorField('companyData.companySize', 'required')"
+                      class="text-danger"
+                      >Este campo es requerido</span>
+                  </div>
                 </div>
-            </div>
-    
-            <!--div>
-              <mat-date-range-input [rangePicker]="picker">
-                <input matStartDate placeholder="Start Date"/>
-                <input matEndDate placeholder="End Date"/>
-              </mat-date-range-input>
-              <mat-datepicker-toggle matSuffix[for]="picker" ></mat-datepicker-toggle>
-              <mat-date-range-picker #picker></mat-date-range-picker>
-            </div-->
-
-            <div class="col-sm-12 col-lg-3">
-                <!--begin::Label-->
-                <label class="form-label d-flex align-items-center"> Fecha de inicio</label>
-                <!--end::Label-->
-                <!--begin::Input-->
-                <input
-                
-                  formControlName="startDate"
-                  [class.is-valid]="isValidField('companyData.startDate')"
-                  [class.is-invalid]="isInvalidField('companyData.startDate')" 
-                  type="date" 
-                  class="form-control form-control-solid" />
-                  <!--end::Input-->
-    
-                <div *ngIf="isInvalidField('companyData.startDate')">
-                    <span
-                    *ngIf="getErrorField('companyData.startDate', 'required')"
-                    class="text-danger"
-                    >Este campo es requerido.</span>
-                </div>
-            </div>
-    
-            <div class="col-sm-12 col-lg-3">
-                <!--begin::Label-->
-                <label class="form-label d-flex align-items-center"> Fecha de despido </label>
-                <!--end::Label-->
-                <!--begin::Input-->
-                <input 
-                    formControlName="endDate"
-                    [class.is-valid]="isValidField('companyData.endDate')"
-                    [class.is-invalid]="isInvalidField('companyData.endDate')"
-                    [min]="minDate"
+      
+              <!--div>
+                <mat-date-range-input [rangePicker]="picker">
+                  <input matStartDate placeholder="Start Date"/>
+                  <input matEndDate placeholder="End Date"/>
+                </mat-date-range-input>
+                <mat-datepicker-toggle matSuffix[for]="picker" ></mat-datepicker-toggle>
+                <mat-date-range-picker #picker></mat-date-range-picker>
+              </div-->
+  
+                <div class="col-sm-12 col-lg-3">
+                  <!--begin::Label-->
+                  <label class="form-label d-flex align-items-center"> Fecha de inicio</label>
+                  <!--end::Label-->
+                  <!--begin::Input-->
+                  <input
+                  
+                    formControlName="startDate"
+                    [class.is-valid]="isValidField('companyData.startDate')"
+                    [class.is-invalid]="isInvalidField('companyData.startDate')"
+                    (change)="setMinDate()" 
                     type="date" 
-                    class="form-control form-control-solid" 
-                />
+                    class="form-control form-control-solid" />
                     <!--end::Input-->
-            </div>
+      
+                  <div *ngIf="isInvalidField('companyData.startDate')">
+                      <span
+                      *ngIf="getErrorField('companyData.startDate', 'required')"
+                      class="text-danger"
+                      >Este campo es requerido.</span>
+                  </div>
+                </div>
+      
+                <div class="col-sm-12 col-lg-3">
+                  <!--begin::Label-->
+                  <label class="form-label d-flex align-items-center"> Fecha de despido </label>
+                  <!--end::Label-->
+                  <!--begin::Input-->
+                  <input 
+                      formControlName="endDate"
+                      [class.is-valid]="isValidField('companyData.endDate')"
+                      [class.is-invalid]="isInvalidField('companyData.endDate')"
+                      [min]="minDate"
+                      type="date" 
+                      class="form-control form-control-solid" 
+                  />
+                      <!--end::Input-->
+                </div>
+
+              </div>
 
              
       

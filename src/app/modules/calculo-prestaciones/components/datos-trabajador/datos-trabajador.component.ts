@@ -38,7 +38,7 @@ export class DatosTrabajadorComponent implements OnInit {
 
   //public currentStep : Number = 1;
   stepperOptions: IStepperOptions = {
-    startIndex: 4,
+    startIndex: 3,
     animation: false,
     animationSpeed: '',
     animationNextClass: '',
@@ -74,6 +74,7 @@ export class DatosTrabajadorComponent implements OnInit {
 
   locations$: Observable<Locations[]> = this.locationsQuery.selectAll();
   isLocationsLoaded$: Observable<boolean> = this.locationsQuery.selectLoaded$;
+  minDate: any;
 
 
 
@@ -331,7 +332,6 @@ export class DatosTrabajadorComponent implements OnInit {
           break;
       }
     }
-
     
 
     postEmployeeAndEmployer(): void {
@@ -500,9 +500,27 @@ export class DatosTrabajadorComponent implements OnInit {
       //his.formEmployee.valid ? console.log(this.formEmployee.value) : this.formEmployee.markAllAsTouched();
     }
 
+    setMinDate(){
+      this.minDate = this.formEmployee.get('companyData.startDate')?.value;
+    }
+
+    getyearselect(element: string){
+
+      var startDate = new Date('companyData.startDate');
+      var endDate = new Date('companyData.endDate');
+      
+      while (endDate.getTime() >= startDate.getTime()) {
+        //startDate.setDate(startDate.getDate() + 1);
+
+        console.log(startDate.getFullYear);
+      }
+
+      //var years=new Date('companyData.startDate').valueOf()-new Date('companyData.endDate').valueOf();
+    }
+
+  
+
   }
 
-function getTotalAverageField2(element: string, string: any) {
-  throw new Error('Function not implemented.');
-}
+
 
