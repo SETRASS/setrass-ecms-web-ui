@@ -1,6 +1,7 @@
 import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { TerminationContractType } from 'src/app/models/enums/termination-contract-type.enum';
 import { ToolbarService } from 'src/app/_metronic/layout/components/toolbar/toolbar.service';
+import { CalculoPrestacionesComponent } from '../../pages/calculo-prestaciones/calculo-prestaciones.component';
 
 
 
@@ -30,5 +31,6 @@ export class DerechosIdemnizacionesComponent implements OnInit {
     setTimeout(() => this.render2.removeClass(this.$overlay.nativeElement, 'active-overlay'), 8000);
     
   }
+
 
 }

@@ -3,6 +3,7 @@ import {IdentificationType} from "./enums/identification-type.enum";
 import {CalculoPrestacionesRequestType} from "./enums/calculo-prestaciones-request-type.enum";
 import {EmployerDto} from "./employer-dto.model";
 
+
 export interface WorkerPersonEmployerRequestDto {
   requestId: number;
   firstName: string;
