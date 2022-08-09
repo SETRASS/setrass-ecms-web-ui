@@ -4,6 +4,7 @@ import { format } from 'date-fns';
 
 import {IStepperOptions, StepperComponent, ToggleComponent} from 'src/app/_metronic/kt/components';
 import {PersonType} from 'src/app/models/enums/person-type.enum';
+import { getYearSelect } from '../../../../utils/utils';
 
 import {LookupsService} from "../../../services/lookups/lookups.service";
 import {SalaryHistoryCatalogService} from "../../../services/salary-history-catalog/salary-history-catalog.service";
@@ -19,6 +20,8 @@ import { Locations } from 'src/app/models/locations.model';
 import { CalculoPrestacionesRequestType } from 'src/app/models/enums/calculo-prestaciones-request-type.enum';
 import { WorkerPersonEmployerRequestDto } from 'src/app/models/worker-person-employer-request-dto.model';
 import { TerminationContractType } from 'src/app/models/enums/termination-contract-type.enum';
+
+
 
 @Component({
   selector: 'app-datos-empleador',
@@ -129,15 +132,6 @@ export class DatosEmpleadorComponent implements OnInit {
       const err = error.message | error;
       console.warn(err);
     }); */
-
-    this.addHistorySalaryYearField();
-
-    setTimeout(() => {
-      const historySalaryElements : any = document.querySelectorAll('.historySalaryInput');
-      historySalaryElements.forEach((element:any) => element.setAttribute('disabled','true'));
-    },3000);
-    //this.render2.setAttribute(this.txtHistorySalary.nativeElement, 'disabled','true');
-
   }
 
   stepperConfig() {
@@ -156,6 +150,7 @@ export class DatosEmpleadorComponent implements OnInit {
       }
 
       if (this.formEmployer.get('salaryData')?.valid && this.stepper.getCurrentStepIndex() === 3) {
+        this.addHistorySalaryFields();
         return this.stepper.goNext();
       }
 
@@ -165,34 +160,12 @@ export class DatosEmpleadorComponent implements OnInit {
     });
   }
 
-  addHistorySalaryYearField(){
-    this.historySalaryField.push(this.createHistorySalaryFieldYear('2015',120));
-    this.historySalaryField.push(this.createHistorySalaryFieldYear('2016',1340));
-    this.historySalaryField.push(this.createHistorySalaryFieldYear('2017',2450));
-  }
-
   private createHistorySalaryFieldYear(anio: string, amount: number){
     return this.formBuilder.group({
       year: [anio],
       amount: [amount, Validators.required],
     });
   }
-
-  /**
-   * caso 1
-   * fechaInicio = 2000
-   * fechaFinal = 2022
-   * if(fechaInicio < 2015 && fechaFinal >= 2015 ){
-   *  [2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022]
-   * }
-   * 
-   * caso 2
-   * fechaInicio = 2018
-   * fechaFinal = 2022
-   * if(fechaInicio >= 2015){
-   * 
-   * }
-   */
 
   private formBuild() {
     this.formEmployer = this.formBuilder.group({
@@ -562,6 +535,17 @@ export class DatosEmpleadorComponent implements OnInit {
   
   getCurrentTerminationContract(){
     return this.toolbarService.terminationContractType;
+  }
+
+  addHistorySalaryFields(){
+    //this.formEmployer.get('historySalary')?.setValue(this.formBuilder.array([]).clear());
+    let years = getYearSelect(this.formEmployer.get('salaryData.startDate')?.value,
+    this.formEmployer.get('salaryData.endDate')?.value);
+    console.log(years);
+    years.forEach((year:any) => this.historySalaryField.push(this.createHistorySalaryFieldYear(year,0)));
+    const historySalaryElements : any = document.querySelectorAll('.historySalaryInput');
+    historySalaryElements.forEach((element:any) => element.setAttribute('disabled','true'));
+    
   }
 
   scrollAnimation() {

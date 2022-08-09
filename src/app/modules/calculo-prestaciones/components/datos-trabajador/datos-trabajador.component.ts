@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnInit,Renderer2, ViewChild } from '@angular/core';
-import {FormControl, FormGroup, Validators, FormBuilder} from '@angular/forms';
+import {FormControl, FormGroup, Validators, FormBuilder, FormArray} from '@angular/forms';
 
 
 import {IStepperOptions, StepperComponent, ToggleComponent } from 'src/app/_metronic/kt/components';
@@ -17,6 +17,8 @@ import { Locations} from 'src/app/models/locations.model';
 import { WorkerPersonEmployerRequestDto } from 'src/app/models/worker-person-employer-request-dto.model';
 import { EmployerDto } from 'src/app/models/employer-dto.model';
 import { WorkerPersonStore } from '../../state/workerperson-employer-request/workerperson-employer-request.store';
+import { getYearSelect } from 'src/app/utils/utils';
+import { format } from 'date-fns';
 
 
 
@@ -100,15 +102,15 @@ export class DatosTrabajadorComponent implements OnInit {
     //search locations
 
     this.lookusService.getLocations().subscribe((data) =>{
-
+      this.locations = data;
     }, ((error?: any)=> {
       const err = error.message | error;
       console.warn(err);
     }));
 
-    this.locations$.subscribe((locations)=>{
+    /* this.locations$.subscribe((locations)=>{
       this.locations = locations;  
-    });
+    }); */
     
     //economicActivityList
     this.salaryHistoryCatalogService.getEconomicActivities().subscribe((data)=> {
@@ -119,12 +121,12 @@ export class DatosTrabajadorComponent implements OnInit {
     }));
     
     // company size
-    this.salaryHistoryCatalogService.getCompanySizes().subscribe((data) => {
+    /* this.salaryHistoryCatalogService.getCompanySizes().subscribe((data) => {
       this.companySizeList = data.map(val => ({id: val.id, name: `${val.minQty} a ${val.maxQty} Empleados`}));
     }, (error) => {
       const err = error.message | error;
       console.warn(err);
-    });
+    }); */
   }
     
     
@@ -142,6 +144,7 @@ export class DatosTrabajadorComponent implements OnInit {
     }
     
     if(this.formEmployee.get('companyData')?.valid && this.stepper1.getCurrentStepIndex() === 3) {
+      this.addHistorySalaryFields();
       return this.stepper1.goNext();
     }
     
@@ -175,9 +178,9 @@ export class DatosTrabajadorComponent implements OnInit {
     companyData: this.formBuilder.group({
       companyName: ['', [Validators.required, Validators.minLength(5)]],
       economicActivity: ['', [Validators.required,]],
-      companySize:['',[ Validators.required]],
-      startDate: ['', [Validators.required]],
-      endDate: ['', [Validators.required]],
+      companySize:['',[ Validators.required, Validators.pattern(/^[0-9]+$/)]],
+      startDate: ['2019-06-12', [Validators.required]],
+      endDate: [this.getFutureDate(5), [Validators.required]],
       fixedSalary: ['SI', [Validators.required]],
       salary: ['', [Validators.required]],
       monthlySalaryAverage1: [0, []],
@@ -217,9 +220,7 @@ export class DatosTrabajadorComponent implements OnInit {
     optionSpeciesSalary: ['NONE', [Validators.required]],
     foodTime: ['NONE', []]
     }),
-
-    
-    
+    historySalary: this.formBuilder.array([])    
     });
     
     this.formEmployee.get('companyData.fixedSalary')?.valueChanges.
@@ -256,6 +257,12 @@ export class DatosTrabajadorComponent implements OnInit {
     
     }
     
+    private createHistorySalaryFieldYear(anio: string, amount: number){
+      return this.formBuilder.group({
+        year: [anio],
+        amount: [amount, Validators.required],
+      });
+    }
     
     get salaryValue() {
     return this.formEmployee.get('companyData.salary')?.value;
@@ -332,6 +339,10 @@ export class DatosTrabajadorComponent implements OnInit {
           break;
       }
     }
+
+    get historySalaryField(){
+      return this.formEmployee.get('historySalary') as FormArray;
+    }
     
 
     postEmployeeAndEmployer(): void {
@@ -371,7 +382,7 @@ export class DatosTrabajadorComponent implements OnInit {
       
       }
 
-      this.calculoPrestacionesService.sendEmployeeEmployerReq(data).subscribe((response: any)=>{
+      /* this.calculoPrestacionesService.sendEmployeeEmployerReq(data).subscribe((response: any)=>{
         console.log(response);
         const { requestId, workerPersonId} = response;
         this.REQUEST_ID = requestId;
@@ -380,7 +391,7 @@ export class DatosTrabajadorComponent implements OnInit {
         this.calculoPrestacionesService.objectGlobal.workerPersonId = workerPersonId;
         console.log(this.REQUEST_ID);
         console.log(response);
-      })
+      }) */
 
     }
 
@@ -500,22 +511,31 @@ export class DatosTrabajadorComponent implements OnInit {
       //his.formEmployee.valid ? console.log(this.formEmployee.value) : this.formEmployee.markAllAsTouched();
     }
 
+    /**
+     * It takes a number of days and returns a date in the future
+     * @param {number} majorDays - number - The number of days you want to add to the current date.
+     * @returns A string in the format of yyyy-MM-dd
+     */
+    getFutureDate(majorDays?: number){
+      if(majorDays){
+        let totalDay = (new Date().getDate()) + majorDays;
+        return format(new Date().setDate(totalDay),'yyyy-MM-dd');
+      }
+      return format(new Date(),'yyyy-MM-dd');
+    }
+
     setMinDate(){
       this.minDate = this.formEmployee.get('companyData.startDate')?.value;
     }
 
-    getyearselect(element: string){
-
-      var startDate = new Date('companyData.startDate');
-      var endDate = new Date('companyData.endDate');
-      
-      while (endDate.getTime() >= startDate.getTime()) {
-        //startDate.setDate(startDate.getDate() + 1);
-
-        console.log(startDate.getFullYear);
-      }
-
-      //var years=new Date('companyData.startDate').valueOf()-new Date('companyData.endDate').valueOf();
+    addHistorySalaryFields(){
+      //this.formEmployer.get('historySalary')?.setValue(this.formBuilder.array([]).clear());
+      let years = getYearSelect(this.formEmployee.get('companyData.startDate')?.value,
+      this.formEmployee.get('companyData.endDate')?.value);
+      console.log(years);
+      years.forEach((year:any) => this.historySalaryField.push(this.createHistorySalaryFieldYear(year,0)));
+      const historySalaryElements : any = document.querySelectorAll('.historySalaryInput');
+      historySalaryElements.forEach((element:any) => element.setAttribute('disabled','true')); 
     }
 
   
