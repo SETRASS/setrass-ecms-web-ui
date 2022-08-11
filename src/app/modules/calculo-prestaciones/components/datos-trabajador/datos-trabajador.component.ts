@@ -19,6 +19,9 @@ import { EmployerDto } from 'src/app/models/employer-dto.model';
 import { WorkerPersonStore } from '../../state/workerperson-employer-request/workerperson-employer-request.store';
 import { getYearSelect } from 'src/app/utils/utils';
 import { format } from 'date-fns';
+import { CalculoPrestacionesRequestType } from 'src/app/models/enums/calculo-prestaciones-request-type.enum';
+import { TerminationContractType } from 'src/app/models/enums/termination-contract-type.enum';
+
 
 
 
@@ -31,6 +34,8 @@ import { format } from 'date-fns';
 
 export class DatosTrabajadorComponent implements OnInit {
 
+
+
   @ViewChild('kt_stepper_vertical') stepperSteps: ElementRef;
   @ViewChild('salary') salaryField: ElementRef;
   @ViewChild('submit') btnSubmit: ElementRef;
@@ -40,7 +45,7 @@ export class DatosTrabajadorComponent implements OnInit {
 
   //public currentStep : Number = 1;
   stepperOptions: IStepperOptions = {
-    startIndex: 3,
+    startIndex: 1,
     animation: false,
     animationSpeed: '',
     animationNextClass: '',
@@ -62,6 +67,7 @@ export class DatosTrabajadorComponent implements OnInit {
   totalExtraHoursAverage = 0;
   totalBonusesAverage = 0;
   isSalaryFieldDisabled: boolean =true;
+  
 
   //SAVE-BUTTON
   saveButtonIsOk =false;
@@ -76,7 +82,7 @@ export class DatosTrabajadorComponent implements OnInit {
 
   locations$: Observable<Locations[]> = this.locationsQuery.selectAll();
   isLocationsLoaded$: Observable<boolean> = this.locationsQuery.selectLoaded$;
-  minDate: any;
+  minDate: string;
 
 
 
@@ -87,7 +93,8 @@ export class DatosTrabajadorComponent implements OnInit {
               private formBuilder: FormBuilder,
               private render2: Renderer2,
               private workerPersonStore: WorkerPersonStore,
-              private locationsQuery: LocationsQuery) {
+              private locationsQuery: LocationsQuery)
+              {
     this.formBuild();            
     
   }
@@ -108,9 +115,9 @@ export class DatosTrabajadorComponent implements OnInit {
       console.warn(err);
     }));
 
-    /* this.locations$.subscribe((locations)=>{
+    this.locations$.subscribe((locations)=>{
       this.locations = locations;  
-    }); */
+    }); 
     
     //economicActivityList
     this.salaryHistoryCatalogService.getEconomicActivities().subscribe((data)=> {
@@ -139,7 +146,8 @@ export class DatosTrabajadorComponent implements OnInit {
     if(this.formEmployee.get('employeeData')?.valid && this.stepper1.getCurrentStepIndex() === 1){
         return this.stepper1.goNext(); 
     }
-    if (this.formEmployee.get('locatationData')?.valid && this.stepper1.getCurrentStepIndex() === 2) {
+    if (this.formEmployee.get('locationData')?.valid && this.stepper1.getCurrentStepIndex() === 2) {
+        this.postEmployeeAndEmployer();
         return this.stepper1.goNext();
     }
     
@@ -166,13 +174,12 @@ export class DatosTrabajadorComponent implements OnInit {
         identityNumber: ['', [Validators.required, Validators.minLength(13), Validators.maxLength(13), Validators.pattern(/^[0-9]+$/)]],
         employeePhone: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(8)]],
         employeeEmail: ['', [Validators.required, Validators.email]],
-       
+      
       }),
 
     locationData:this.formBuilder.group({
       department: ['', [Validators.required]],
       municipality: ['', [Validators.required]],
-      city: ['', [Validators.required]],
     }), 
     
     companyData: this.formBuilder.group({
@@ -213,7 +220,7 @@ export class DatosTrabajadorComponent implements OnInit {
         monthlyBonus5: [0, []],
         monthlyBonus6: [0, []]
       }),
-     
+
     }),
     
     speciesSalary: this.formBuilder.group({
@@ -344,16 +351,24 @@ export class DatosTrabajadorComponent implements OnInit {
       return this.formEmployee.get('historySalary') as FormArray;
     }
     
+    getCurrentRequestType(){
+      return this.toolbar.userTypeOf
+    }
+
+    getCurrentTerminationContract(){
+      return this.toolbar.terminationContractType;
+    }
+    
 
     postEmployeeAndEmployer(): void {
       console.log("Ok");
-        const {companyData, employeeData, locationData, employer} = this.formEmployee.value;
+        const {companyData, employeeData, locationData} = this.formEmployee.value;
         this.calculoPrestacionesService.objectGlobal.startDate = employeeData.startDate;
         this.calculoPrestacionesService.objectGlobal.dismissalDate = employeeData.endDate;
         this.calculoPrestacionesService.objectGlobal.fixedSalary = companyData.fixedSalary === 'SI' ? true : false;
 
 
-      let employee: WorkerPersonEmployerRequestDto = {
+      /*let employee: WorkerPersonEmployerRequestDto = {
         requestId: 0,
         firstName: employeeData.employeeName,
         lastName: employeeData.employeeLastname,
@@ -368,36 +383,62 @@ export class DatosTrabajadorComponent implements OnInit {
         requestType: employeeData.requestType,
 
 
-      };
+      };*/
 
-      this.workerPersonStore.add(employee);
-
-      let data = {
-      companyName: companyData.companyName,
-      economicActivity: companyData.economyActivity,
-      stardate: companyData.stardate,
-      dismissal: companyData.enddate,
-      fixedSalary: companyData.fixedSalary,
-      salary: companyData.salary,
       
+      
+      let employer:EmployerDto = {
+        companySize: 0,
+          economicActivity: "",
+          employerId: "",
+          employerName: "",
+          identificationNumber: "",
+          identificationType: IdentificationType.DNI,
+          personType: PersonType.JURIDICA
       }
 
+      let data:WorkerPersonEmployerRequestDto = {
+        age: employeeData.employeeAge,
+        email: employeeData.employeeEmail,
+        employer,
+        firstName: employeeData.employeeName,
+        gender: employeeData.employeeSex,
+        identificationNumber: employeeData.identityNumber,
+        identificationType: employeeData.typeIdentity,
+        lastName: employeeData.employeeLastname,
+        localizationId: employeeData.municipality,
+        phoneNumber: employeeData.employeePhone,
+        requestId: 0,
+        requestType: this.getCurrentRequestType(),
+        terminationContractType: this.getCurrentTerminationContract()
+        
+        }
+        
+        this.workerPersonStore.add(data);
 
-      /* this.calculoPrestacionesService.sendEmployeeEmployerReq(data).subscribe((response: any)=>{
+      this.calculoPrestacionesService.sendEmployeeEmployerReq(data).subscribe((response: any)=>{
         console.log(response);
-        const { requestId, workerPersonId} = response;
+        const { requestId, workerPersonId, employerId, employer} = response;
         this.REQUEST_ID = requestId;
         this.WORKER_PERSON_ID = workerPersonId;
         this.calculoPrestacionesService.objectGlobal.requestId = requestId;
         this.calculoPrestacionesService.objectGlobal.workerPersonId = workerPersonId;
+        this.calculoPrestacionesService.objectGlobal.employer = employer;
+        this.calculoPrestacionesService.objectGlobal.employerId = employerId;
         console.log(this.REQUEST_ID);
         console.log(response);
-      }) */
+      })
 
+      }
 
+      /*companyName: companyData.companyName,
+        economicActivity: companyData.economyActivity,
+        stardate: companyData.stardate,
+        dismissal: companyData.enddate,
+        fixedSalary: companyData.fixedSalary,
+        salary: companyData.salary,*/
 
-    }
-
+    
     postSalaryInfoRequest() {
       console.log("Ok");
       const {companyData, speciesSalary} = this.formEmployee.value;
@@ -476,8 +517,8 @@ export class DatosTrabajadorComponent implements OnInit {
         this.saveButtonIsOk = true;
         this.spinnerShow = true;
         this.calculoPrestacionesService.sendSalaryEmployeeInfo(data).subscribe(value => {
-          this.saveButtonText = "Realizar Calculo";
-          this.spinnerShow = false;
+        this.saveButtonText = "Realizar Calculo";
+        this.spinnerShow = false;
         });
       }
 
@@ -531,8 +572,10 @@ export class DatosTrabajadorComponent implements OnInit {
       this.minDate = this.formEmployee.get('companyData.startDate')?.value;
     }
     
-    addHistorySalaryFields(){
-      //this.formEmployer.get('historySalary')?.setValue(this.formBuilder.array([]).clear());
+    addHistorySalaryFields(){ 
+      if(this.historySalaryField.controls.length > 0){
+        this.historySalaryField.controls.splice(0,this.historySalaryField.controls.length);
+      }
       let years = getYearSelect(this.formEmployee.get('companyData.startDate')?.value,
       this.formEmployee.get('companyData.endDate')?.value);
       console.log(years);
@@ -541,9 +584,13 @@ export class DatosTrabajadorComponent implements OnInit {
       historySalaryElements.forEach((element:any) => element.setAttribute('disabled','true')); 
     }
 
+}
+
+   
+
   
 
-  }
+  
 
 
 

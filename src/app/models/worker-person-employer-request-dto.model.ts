@@ -2,6 +2,7 @@ import {Gender} from "./enums/gender.enum";
 import {IdentificationType} from "./enums/identification-type.enum";
 import {CalculoPrestacionesRequestType} from "./enums/calculo-prestaciones-request-type.enum";
 import {EmployerDto} from "./employer-dto.model";
+import { TerminationContractType } from "./enums/termination-contract-type.enum";
 
 
 export interface WorkerPersonEmployerRequestDto {
@@ -17,5 +18,6 @@ export interface WorkerPersonEmployerRequestDto {
   requestType: CalculoPrestacionesRequestType;
   employer: EmployerDto;
   localizationId: string;
+  terminationContractType: TerminationContractType;
   
 }

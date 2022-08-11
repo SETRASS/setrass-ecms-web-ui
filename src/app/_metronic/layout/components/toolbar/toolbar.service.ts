@@ -10,6 +10,8 @@ export class ToolbarService {
   terminationContractType: TerminationContractType = TerminationContractType.DESPIDO;
 
   //terminationContract$ = new EventEmitter<TerminationContractType>();
+  //click --> listeners
+
 
   constructor() {}
 }
