@@ -301,7 +301,7 @@
                   class="text-danger"
                   > Este campo es requerido.</span>
                   <span
-                  *nfIf="getErrorField('employeeData.identityNumber', 'minlength')"
+                  *ngIf="getErrorField('employeeData.identityNumber', 'minlength')"
                   class="text-danger"
                   > Debe contener al menos 14 caracteres.</span>
                   <span
@@ -433,22 +433,7 @@
                             </div>
                           </div>
     
-                    <div class="col-sm-12 col-lg-3">
-                      <!--begin::Label-->
-                      <label class="form-label">Ciudad </label>
-                      <!--end::Label-->
-    
-                      <!--begin::Switch-->
-                        <ng-select
-                          formControlName="city"
-                          [class.is-valid]="isValidField('locationData.city')"
-                          [class.is-invalid]="isInvalidField('locationData.city')"
-                          class="">
-                          <ng-option *ngFor="let value of currentMunicipios" [value]="value.location.id">{{value.location.name}}</ng-option>
-    
-                        </ng-select>
-                        <!--end::Switch-->
-                    </div>
+                    
                   </div>
                     <!--end::Input group-->
                 </div>

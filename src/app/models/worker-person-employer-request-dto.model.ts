@@ -19,4 +19,5 @@ export interface WorkerPersonEmployerRequestDto {
   employer: EmployerDto;
   localizationId: string;
   terminationContractType: TerminationContractType;
+
 }

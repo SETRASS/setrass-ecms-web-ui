@@ -19,7 +19,28 @@ export class CalculoSalarialComponent implements OnInit {
   @ViewChild('kt_stepper_vertical') stepperSteps: ElementRef
   @ViewChild ('salaryData') salaryField: ElementRef;
 
-              
+
+response: any={
+  "computedSalaries": {
+    "averageDailySalary": 0,
+    "averageLastSixMonthsBonusPayment": 0,
+    "averageMonthlyCommissionsSalary": 0,
+    "averageMonthlyOvertimeSalary": 0,
+    "averageMonthlySalary": 0, //Salario promedio diario
+    "baseMonthSalary": 0, //Salario base mensual
+    "ordinaryAverageDailySalary": 0,
+    "ordinaryAverageMonthlySalary": 0,
+    "ordinaryDailySalary": 0,
+    "salaryInKindComputeAmount": 0
+  },
+  "laborOld": {
+    "days": 0,
+    "months": 0,
+    "totalWorkedDays": 0,
+    "years": 0
+  },
+  
+}
 ngAfterViewInit(): void {
 
               }

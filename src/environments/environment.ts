@@ -5,7 +5,7 @@
 //const API_BASE = "http://10.152.1.202:8080";
 const API_BASE = "http://a17bd4950f19a40b18ffd9647a722e2e-1174112288.us-east-1.elb.amazonaws.com"; // lookup
 const API_BASE_EA = "http://ab7c63455f57a43fabe15e7322039b62-695484959.us-east-1.elb.amazonaws.com"; // companyActivity
-const API_BASE_SIR = "http://a6ff89c1bf1a94ce1b6c63287b6f8b57-1095738857.us-east-1.elb.amazonaws.com"; // saveSalaryEmployeeInfo
+const API_BASE_SIR = "http://development.svc-calc-prestaciones.ecms.trabajo.gob.hn"; // saveSalaryEmployeeInfo
 
 export const environment = {
   production: false,

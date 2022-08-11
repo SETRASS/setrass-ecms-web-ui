@@ -6,8 +6,8 @@
     <div class="card-body">
 
         <div class="d-flex justify-content-between text-15">
-            <p> <b>Antigüedad: </b> 9 años, 6 meses, 10 dias</p>
-            <p> <b>Dias Laborados: </b> 4115</p>
+            <p> <b>Antigüedad: </b> {{response.laborOld.years}} años, {{response.laborOld.months}} meses, {{response.laborOld.days}} dias</p>
+            <p> <b>Dias Laborados: </b> {{response.laborOld.totalWorkedDays}} años</p>
         </div>
 
         
@@ -24,32 +24,32 @@
                     <tr>
                         <td><b>Salario base mensual (SBM)</b></td>
                         <td></td>
-                        <td>L. 15,000.00</td>
+                        <td>L. {{response.computedSalaries.baseMonthSalary.toFixed(2)}}</td>
                     </tr>
                     <tr>
                         <td><b>Salario ordinario promedio mensual (SOPM)</b></td>
                         <td>SOD/12x14=</td>
-                        <td>L. 17,500.00</td>
+                        <td>L. {{response.computedSalaries.ordinaryAverageMonthlySalary.toFixed(2)}}</td>
                     </tr>
                     <tr>
                         <td><b>Salario promedio mensual (SPM)</b></td>
                         <td> SOPM=</td>
-                        <td>L. 40,485.00</td>
+                        <td>L. {{response.computedSalaries.averageMonthlySalary.toFixed(2)}}</td>
                     </tr>
                     <tr>
                         <td><b>Salario ordinario diario (SOD)</b></td>
                         <td>SBM/30=</td>
-                        <td>L. 583.33</td>
+                        <td>L. {{response.computedSalaries.ordinaryDailySalary.toFixed(2)}}</td>
                     </tr>
                     <tr>
                         <td><b>Salario ordinario promedio diario (SOPD)</b></td>
                         <td>SBM/30=</td>
-                        <td>L. 1,349.50</td>
+                        <td>L. {{response.computedSalaries.ordinaryAverageDailySalary.toFixed(2)}}</td>
                     </tr>
                     <tr>
                         <td><b>Salario promedio diario (SPD)</b></td>
                         <td>SBM/30=</td>
-                        <td>L. 1,349.50</td>
+                        <td>L. {{response.computedSalaries.averageDailySalary.toFixed(2)}}</td>
                     </tr>
 
                     
