@@ -27,7 +27,7 @@ import { TerminationContractType } from 'src/app/models/enums/termination-contra
 
 
 @Component({
-  selector: 'app-datos-trabajador',
+  selector: 'ecms-datos-trabajador',
   templateUrl: './datos-trabajador.component.html',
   styleUrls: ['./datos-trabajador.component.scss'], 
 })
@@ -107,6 +107,8 @@ export class DatosTrabajadorComponent implements OnInit {
     
     ngOnInit(): void {
     //search locations
+
+
 
     this.lookusService.getLocations().subscribe((data) =>{
       this.locations = data;
@@ -381,11 +383,10 @@ export class DatosTrabajadorComponent implements OnInit {
         localizationId: locationData.localizationId,
         employer,
         requestType: employeeData.requestType,
-
-
+        terminationContractType: TerminationContractType.DESPIDO
       };*/
 
-      
+       //this.workerPersonStore.add(employee);
       
       let employer:EmployerDto = {
         companySize: 0,

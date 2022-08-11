@@ -12,6 +12,7 @@ import { LayoutService } from '../../core/layout.service';
 import { ToolbarService } from './toolbar.service';
 import { CalculoPrestacionesRequestType } from 'src/app/models/enums/calculo-prestaciones-request-type.enum';
 import { TerminationContractType } from 'src/app/models/enums/termination-contract-type.enum';
+import { CalculoPrestacionesService } from 'src/app/modules/services/calculo-prestaciones/calculo-prestaciones.service';
 
 
 @Component({
@@ -31,7 +32,11 @@ export class ToolbarComponent implements OnInit, AfterViewInit {
   calculoPrestacionesRequestTypeArray: any[] = [];
   terminationContractualArray: any[] = [];
 
-  constructor(private layout: LayoutService, private toolbarService: ToolbarService) {}
+  constructor(
+    private layout: LayoutService, 
+    private toolbarService: ToolbarService,
+    private calculoPrestacionesService: CalculoPrestacionesService
+  ) {}
 
   ngOnInit(): void {
     
@@ -63,6 +68,7 @@ export class ToolbarComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
+    this.calculoPrestacionesService.terminationContractType$.emit(TerminationContractType.DESPIDO);
     if (this.ktPageTitle) {
       for (const key in this.pageTitleAttributes) {
         if (
@@ -86,6 +92,10 @@ export class ToolbarComponent implements OnInit, AfterViewInit {
   }
 
   getContractType(event: any){
-    this.toolbarService.terminationContractType = event.target.value === '1' ? TerminationContractType.DESPIDO: TerminationContractType.RENUNCIA;
+    //this.toolbarService.terminationContractType = event.target.value === '1' ? : TerminationContractType.RENUNCIA;
+    if(event.target.value === '1'){
+      return this.calculoPrestacionesService.terminationContractType$.emit(TerminationContractType.DESPIDO);
+    }
+    return this.calculoPrestacionesService.terminationContractType$.emit(TerminationContractType.RENUNCIA);
   }
 }
