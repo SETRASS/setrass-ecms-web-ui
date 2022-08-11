@@ -9,7 +9,5 @@ export class ToolbarService {
   userTypeOf: CalculoPrestacionesRequestType = CalculoPrestacionesRequestType.WORKER_PERSON;
   terminationContractType: TerminationContractType = TerminationContractType.DESPIDO;
 
-  //terminationContract$ = new EventEmitter<TerminationContractType>();
-
   constructor() {}
 }

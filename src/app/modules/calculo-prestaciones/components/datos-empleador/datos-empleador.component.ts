@@ -24,7 +24,7 @@ import { TerminationContractType } from 'src/app/models/enums/termination-contra
 
 
 @Component({
-  selector: 'app-datos-empleador',
+  selector: 'ecms-datos-empleador',
   templateUrl: './datos-empleador.component.html',
   styleUrls: ['./datos-empleador.component.scss']
 })
@@ -55,11 +55,11 @@ export class DatosEmpleadorComponent implements OnInit {
   economicActivityList: any[] = [];
   salaryRatesList: any[] = [];
   locations: any[] = [];
-  companySizeList: any[] = [];
 
   locationSelected: string;
   currentMunicipios: any[];
   currentEconomicActivity: any[];
+  currentTerminationContractType: TerminationContractType;
   totalSalaryAverage = 0;
   totalCommissionsAverage = 0;
   totalExtraHoursAverage = 0;
@@ -82,14 +82,16 @@ export class DatosEmpleadorComponent implements OnInit {
   locations$: Observable<Locations[]> = this.locationsQuery.selectAll();
   isLocationsLoaded$: Observable<boolean> = this.locationsQuery.selectLoaded$;
 
-  constructor(private lookupsService: LookupsService,
-              private salaryHistoryCatalogService: SalaryHistoryCatalogService,
-              private calculoPrestacionesService: CalculoPrestacionesService,
-              private toolbarService: ToolbarService,
-              private formBuilder: FormBuilder,
-              private render2: Renderer2,
-              private employerStore: EmployerStore,
-              private locationsQuery: LocationsQuery) {
+  constructor(
+    private lookupsService: LookupsService,
+    private salaryHistoryCatalogService: SalaryHistoryCatalogService,
+    private calculoPrestacionesService: CalculoPrestacionesService,
+    private toolbarService: ToolbarService,
+    private formBuilder: FormBuilder,
+    private render2: Renderer2,
+    private employerStore: EmployerStore,
+    private locationsQuery: LocationsQuery
+    ) {
     this.formBuild();
   }
 
@@ -101,7 +103,7 @@ export class DatosEmpleadorComponent implements OnInit {
 
 
   ngOnInit(): void {
-
+    
     // locations
     this.lookupsService.getLocations().subscribe((data) => { 
       this.locations = data;        
@@ -124,14 +126,10 @@ export class DatosEmpleadorComponent implements OnInit {
         const err = error.message | error;
         console.warn(err);
       });
-
-    // company size
-    /* this.salaryHistoryCatalogService.getCompanySizes().subscribe((data) => {
-      this.companySizeList = data.map(val => ({id: val.id, name: `${val.minQty} a ${val.maxQty} Empleados`}));
-    }, (error) => {
-      const err = error.message | error;
-      console.warn(err);
-    }); */
+    
+    this.calculoPrestacionesService.terminationContractType$
+    .subscribe((option:TerminationContractType) => this.currentTerminationContractType = option);
+    this.currentTerminationContractType = this.toolbarService.terminationContractType;
   }
 
   stepperConfig() {
@@ -538,7 +536,7 @@ export class DatosEmpleadorComponent implements OnInit {
   }
 
   addHistorySalaryFields(){
-    //this.formEmployer.get('historySalary')?.setValue(this.formBuilder.array([]).clear());
+    //this.historySalaryField.clear();
     let years = getYearSelect(this.formEmployer.get('salaryData.startDate')?.value,
     this.formEmployer.get('salaryData.endDate')?.value);
     console.log(years);

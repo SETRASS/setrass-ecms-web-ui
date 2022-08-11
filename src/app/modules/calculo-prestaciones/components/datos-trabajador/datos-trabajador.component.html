@@ -835,15 +835,15 @@
                     </div>
                     <div class="row mb-10">
                       <div class="col-sm-12">
-                        <ul class="nav nav-tabs nav-line-tabs nav-line-tabs-2x mb-5 fs-6">
-                          <li class="nav-item" role="presentation">
-                            <button class="nav-link active" data-bs-toggle="tab" role="tab" data-bs-target="#kt_tab_pane_4">Comisiones</button>
+                        <ul class="nav nav-tabs nav-line-tabs nav-line-tabs-2x mb-5 fs-6 d-flex">
+                          <li class="nav-item" role="presentation" style="flex:1">
+                            <button class="nav-link p-5 w-100 active" data-bs-toggle="tab" role="tab" data-bs-target="#kt_tab_pane_4"><h4 style="color: #979797">Comisiones</h4></button>
                           </li>
-                              <li class="nav-item">
-                                <button class="nav-link" data-bs-toggle="tab" role="tab" data-bs-target="#kt_tab_pane_5">Horas Extras</button>
+                          <li class="nav-item" style="flex:1">
+                            <button class="nav-link p-5 w-100" data-bs-toggle="tab" role="tab" data-bs-target="#kt_tab_pane_5"><h4 style="color: #979797">Horas Extras</h4></button>
                           </li>
-                              <li class="nav-item">
-                                <button class="nav-link" data-bs-toggle="tab" role="tab" data-bs-target="#kt_tab_pane_6">Bonificaciones</button>
+                              <li class="nav-item" style="flex:1">
+                                <button class="nav-link p-5 w-100" data-bs-toggle="tab" role="tab" data-bs-target="#kt_tab_pane_6"><h4 style="color: #979797">Bonificaciones</h4></button>
                             </li>
                         </ul>
                                   <div class="tab-content" id="myTabContent">
@@ -949,7 +949,7 @@
                                             <div class="col-sm-12 col-lg-3">
                                             <label class="form-label">Comision Mes 6</label>
                                             <input
-                                              formControName="monthlyCommissions6"
+                                              formControlName="monthlyCommissions6"
                                               [class.is-valid]="isValidField('companyData.commissions.monthlyCommissions6')"
                                               [class.is-invalid]="isInvalidField('companyData.commissions.monthlyCommissions6')"
                                               type="number" 

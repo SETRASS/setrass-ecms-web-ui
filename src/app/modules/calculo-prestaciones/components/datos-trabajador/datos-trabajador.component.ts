@@ -19,12 +19,13 @@ import { EmployerDto } from 'src/app/models/employer-dto.model';
 import { WorkerPersonStore } from '../../state/workerperson-employer-request/workerperson-employer-request.store';
 import { getYearSelect } from 'src/app/utils/utils';
 import { format } from 'date-fns';
+import { TerminationContractType } from 'src/app/models/enums/termination-contract-type.enum';
 
 
 
 
 @Component({
-  selector: 'app-datos-trabajador',
+  selector: 'ecms-datos-trabajador',
   templateUrl: './datos-trabajador.component.html',
   styleUrls: ['./datos-trabajador.component.scss'], 
 })
@@ -40,7 +41,7 @@ export class DatosTrabajadorComponent implements OnInit {
 
   //public currentStep : Number = 1;
   stepperOptions: IStepperOptions = {
-    startIndex: 3,
+    startIndex: 1,
     animation: false,
     animationSpeed: '',
     animationNextClass: '',
@@ -100,6 +101,8 @@ export class DatosTrabajadorComponent implements OnInit {
     
     ngOnInit(): void {
     //search locations
+
+
 
     this.lookusService.getLocations().subscribe((data) =>{
       this.locations = data;
@@ -366,8 +369,7 @@ export class DatosTrabajadorComponent implements OnInit {
         localizationId: locationData.localizationId,
         employer,
         requestType: employeeData.requestType,
-
-
+        terminationContractType: TerminationContractType.DESPIDO
       };
 
       this.workerPersonStore.add(employee);
@@ -532,7 +534,7 @@ export class DatosTrabajadorComponent implements OnInit {
     }
     
     addHistorySalaryFields(){
-      //this.formEmployer.get('historySalary')?.setValue(this.formBuilder.array([]).clear());
+      1
       let years = getYearSelect(this.formEmployee.get('companyData.startDate')?.value,
       this.formEmployee.get('companyData.endDate')?.value);
       console.log(years);

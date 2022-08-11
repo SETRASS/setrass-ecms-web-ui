@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import {BaseHttpService} from "../base-http.service";
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../../../environments/environment";
@@ -13,6 +13,7 @@ import { WorkerPersonStore } from '../../calculo-prestaciones/state/workerperson
   providedIn: 'root'
 })
 export class CalculoPrestacionesService extends BaseHttpService {
+
   readonly baseUrl = environment.API.SALARY_INFO_REQ;
   isShowEmployerData = true;
   isShowCalculoSalarial = true;
@@ -31,6 +32,8 @@ export class CalculoPrestacionesService extends BaseHttpService {
     dismissalDate: '',
     employer: {}
   }
+
+  terminationContractType$ = new EventEmitter<TerminationContractType>();
 
   constructor(http: HttpClient,
     private workerPersonStore: WorkerPersonStore) {
@@ -52,6 +55,7 @@ export class CalculoPrestacionesService extends BaseHttpService {
     return this.postRequest<any[]>(`${this.baseUrl}/calculo-prestaciones/salary-info-req/v1/add-new`, data);
   }
 
+  /* Sending a request to the backend to compute the salary. */
   sendSalaryEmployeeCompute(data: any): Observable<any[]> {
     return this.postRequest<any[]>(`${this.baseUrl}/calculo-prestaciones/salary-info-req/v1/compute`, data);
   }
