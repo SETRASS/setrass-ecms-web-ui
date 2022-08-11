@@ -112,10 +112,9 @@ export class DatosEmpleadorComponent implements OnInit {
       console.warn(err);
     }));
 
-    this.locations$.subscribe((locations) => {
-      console.log(locations);
+    /* this.locations$.subscribe((locations) => {
       this.locations = locations;
-    });
+    }); */
 
     // initialize economic activities
     this.salaryHistoryCatalogService.getEconomicActivities().subscribe(

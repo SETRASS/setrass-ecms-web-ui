@@ -21,7 +21,6 @@ export class LookupsService extends BaseHttpService {
       map((locations) => {
         let hnLocations = locations.filter((l) => l.location.isoName === "HN");
         let data = hnLocations[0].children.map(location => location);
-        console.log(data);
         this.locationStore.set(data);
         return data;
       }), tap(() => console.log(''))
