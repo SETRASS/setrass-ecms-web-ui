@@ -37,6 +37,7 @@ export class DatosTrabajadorComponent implements OnInit {
 
 
   @ViewChild('kt_stepper_vertical') stepperSteps: ElementRef;
+  @ViewChild('overlay') $overlay: ElementRef;
   @ViewChild('salary') salaryField: ElementRef;
   @ViewChild('submit') btnSubmit: ElementRef;
   stepper1: any;
@@ -62,6 +63,7 @@ export class DatosTrabajadorComponent implements OnInit {
   locationSelected:string;
   currentMunicipios: any[] = [];
   currentEconomicActivity: any[] = [];
+  currentTerminationContractType: TerminationContractType;
   totalSalaryAverage = 0;
   totalCommissionsAverage = 0;
   totalExtraHoursAverage = 0;
@@ -129,13 +131,9 @@ export class DatosTrabajadorComponent implements OnInit {
     console.warn(err);
     }));
     
-    // company size
-    /* this.salaryHistoryCatalogService.getCompanySizes().subscribe((data) => {
-      this.companySizeList = data.map(val => ({id: val.id, name: `${val.minQty} a ${val.maxQty} Empleados`}));
-    }, (error) => {
-      const err = error.message | error;
-      console.warn(err);
-    }); */
+    this.calculoPrestacionesService.terminationContractType$
+    .subscribe((option:TerminationContractType) => this.currentTerminationContractType = option);
+    this.currentTerminationContractType = this.toolbar.terminationContractType;
   }
     
     
@@ -149,11 +147,12 @@ export class DatosTrabajadorComponent implements OnInit {
         return this.stepper1.goNext(); 
     }
     if (this.formEmployee.get('locationData')?.valid && this.stepper1.getCurrentStepIndex() === 2) {
-        this.postEmployeeAndEmployer();
+        //this.postEmployeeAndEmployer();
         return this.stepper1.goNext();
     }
     
     if(this.formEmployee.get('companyData')?.valid && this.stepper1.getCurrentStepIndex() === 3) {
+      this.postEmployeeAndEmployer();
       this.addHistorySalaryFields();
       return this.stepper1.goNext();
     }
@@ -369,30 +368,13 @@ export class DatosTrabajadorComponent implements OnInit {
         this.calculoPrestacionesService.objectGlobal.dismissalDate = employeeData.endDate;
         this.calculoPrestacionesService.objectGlobal.fixedSalary = companyData.fixedSalary === 'SI' ? true : false;
 
-
-      /*let employee: WorkerPersonEmployerRequestDto = {
-        requestId: 0,
-        firstName: employeeData.employeeName,
-        lastName: employeeData.employeeLastname,
-        gender: employeeData.employeeSex,
-        age: employeeData.employeeAge,
-        identificationType: IdentificationType.CARNET_RESIDENTE,
-        identificationNumber: employeeData.identityNumber,
-        phoneNumber: employeeData.employeePhone,
-        email: employeeData.employeeEmail,
-        localizationId: locationData.localizationId,
-        employer,
-        requestType: employeeData.requestType,
-        terminationContractType: TerminationContractType.DESPIDO
-      };*/
-
        //this.workerPersonStore.add(employee);
       
       let employer:EmployerDto = {
-        companySize: 0,
-          economicActivity: "",
+        companySize: companyData.companySize,
+          economicActivity: companyData.economicActivity,
           employerId: "",
-          employerName: "",
+          employerName: companyData.companyName,
           identificationNumber: "",
           identificationType: IdentificationType.DNI,
           personType: PersonType.JURIDICA
@@ -411,13 +393,16 @@ export class DatosTrabajadorComponent implements OnInit {
         phoneNumber: employeeData.employeePhone,
         requestId: 0,
         requestType: this.getCurrentRequestType(),
-        terminationContractType: this.getCurrentTerminationContract()
+        terminationContractType: this.currentTerminationContractType
+      }
         
-        }
-        
-        this.workerPersonStore.add(data);
+      //this.workerPersonStore.add(data);
+      this.render2.addClass(this.$overlay.nativeElement, 'active-overlay');
 
       this.calculoPrestacionesService.sendEmployeeEmployerReq(data).subscribe((response: any)=>{
+        if(response){
+          this.render2.removeClass(this.$overlay.nativeElement, 'active-overlay');
+        }
         console.log(response);
         const { requestId, workerPersonId, employerId, employer} = response;
         this.REQUEST_ID = requestId;
@@ -427,7 +412,7 @@ export class DatosTrabajadorComponent implements OnInit {
         this.calculoPrestacionesService.objectGlobal.employer = employer;
         this.calculoPrestacionesService.objectGlobal.employerId = employerId;
         console.log(this.REQUEST_ID);
-        console.log(response);
+        console.log(this.calculoPrestacionesService.objectGlobal);
       })
 
       }
