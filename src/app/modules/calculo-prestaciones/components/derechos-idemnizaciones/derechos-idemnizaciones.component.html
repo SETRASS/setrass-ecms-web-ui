@@ -13,68 +13,68 @@
             <p>Habilite los derechos e indenizaciones a los que usted goza.</p>
         </div>
         <div class="row">
-            <div *ngIf="currentContractType === 1" class="col-sm-6 px-10">
+            <div class="col-sm-6 px-10">
                 <div class="d-flex justify-content-between mb-5">
                     <div class="form-check form-switch form-check-custom form-check-solid me-10">
-                        <input class="form-check-input h-20px w-30px" type="checkbox" value="" id="flexSwitch20x30"/>
+                        <input #ForewarningNotice [(ngModel)]="hasForewarningNotice" class="form-check-input h-20px w-30px" type="checkbox" value="" id="flexSwitch20x30"/>
                         <label class="form-check-label form-ecms-label" for="flexSwitch20x30">
                             Preaviso
                         </label>
                     </div>
-                    <span class="form-ecms-label">SPD X valor preaviso =</span>
-                    <span class="form-ecms-label">L. 35,000.00</span>
+                    <span class="form-ecms-label">{{store.forewarningNotice.formula}} =</span>
+                    <span class="form-ecms-label">{{store.forewarningNotice.currency}} {{store.forewarningNotice.amount}}</span>
                 </div>
                 <div class="d-flex justify-content-between mb-5">
                     <div class="form-check form-switch form-check-custom form-check-solid me-10">
-                        <input class="form-check-input h-20px w-30px" type="checkbox" value="" id="flexSwitch20x30"/>
+                        <input class="form-check-input h-20px w-30px" type="checkbox" checked disabled value="" id="flexSwitch20x30"/>
                         <label class="form-check-label" for="flexSwitch20x30">
                             Cesantía
                         </label>
                     </div>
-                    <span>SPD X valor preaviso =</span>
-                    <span>L. 87,500.00</span>
+                    <span>{{store.unemploymentAid.formula}} =</span>
+                    <span>{{store.unemploymentAid.currency}} {{store.unemploymentAid.amount}}</span>
                 </div>
                 <div class="d-flex justify-content-between mb-5">
                     <div class="form-check form-switch form-check-custom form-check-solid me-10">
-                        <input class="form-check-input h-20px w-30px" type="checkbox" value="" id="flexSwitch20x30"/>
+                        <input class="form-check-input h-20px w-30px" type="checkbox" checked disabled value="" id="flexSwitch20x30"/>
                         <label class="form-check-label" for="flexSwitch20x30">
                             Cesantía proporcional
                         </label>
                     </div>
-                    <span>SPD X valor preaviso =</span>
-                    <span>L. 16,090.00</span>
+                    <span>{{store.unemploymentAidProportional.formula}} =</span>
+                    <span>{{store.unemploymentAidProportional.currency}} {{store.unemploymentAidProportional.amount}}</span>
                 </div>
             </div>
             <div class="col-sm-6">
                 <div class="d-flex justify-content-between mb-5">
                     <div class="form-check form-switch form-check-custom form-check-solid me-10">
-                        <input class="form-check-input h-20px w-30px" type="checkbox" value="" id="flexSwitch20x30"/>
+                        <input [(ngModel)]="hasProportionalVacationPay" class="form-check-input h-20px w-30px" type="checkbox" value="" id="flexSwitch20x30"/>
                         <label class="form-check-label" for="flexSwitch20x30">
                             Vacaciones proporcional
                         </label>
                     </div>
-                    <span>SPD X valor preaviso =</span>
-                    <span>L. 10,726.85</span>
+                    <span>{{store.proportionalVacationPayment.formula}} =</span>
+                    <span>{{store.proportionalVacationPayment.currency}} {{store.proportionalVacationPayment.amount}}</span>
                 </div>
                 <div class="d-flex justify-content-between mb-5">
                     <div class="form-check form-switch form-check-custom form-check-solid me-10">
-                        <input class="form-check-input h-20px w-30px" type="checkbox" value="" id="flexSwitch20x30"/>
+                        <input class="form-check-input h-20px w-30px" type="checkbox" checked disabled value="" id="flexSwitch20x30"/>
                         <label class="form-check-label" for="flexSwitch20x30">
                             Treceavo mes proporcional
                         </label>
                     </div>
-                    <span>SPD X valor preaviso =</span>
-                    <span>L. 37,223.71</span>
+                    <span>{{store.proportionalThirteenthMonthRight.formula}} =</span>
+                    <span>{{store.proportionalThirteenthMonthRight.currency}} {{store.proportionalThirteenthMonthRight.amount}}</span>
                 </div>
                 <div class="d-flex justify-content-between mb-5">
                     <div class="form-check form-switch form-check-custom form-check-solid me-10">
-                        <input class="form-check-input h-20px w-30px" type="checkbox" value="" id="flexSwitch20x30"/>
+                        <input class="form-check-input h-20px w-30px" type="checkbox" checked disabled value="" id="flexSwitch20x30"/>
                         <label class="form-check-label" for="flexSwitch20x30">
                             Catorceavo mes proporcional
                         </label>
                     </div>
-                    <span>SPD X valor preaviso =</span>
-                    <span>L. 1,981.21</span>
+                    <span>{{store.proportionalFourteenthMonthRigh.formula}} =</span>
+                    <span>{{store.proportionalFourteenthMonthRigh.currency}} {{store.proportionalFourteenthMonthRigh.amount}}</span>
                 </div>
             </div>
         </div>

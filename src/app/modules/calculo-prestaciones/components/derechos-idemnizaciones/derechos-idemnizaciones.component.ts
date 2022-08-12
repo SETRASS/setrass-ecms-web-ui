@@ -15,34 +15,88 @@ import { CalculoPrestacionesComponent } from '../../pages/calculo-prestaciones/c
 export class DerechosIdemnizacionesComponent implements OnInit {
 
   @ViewChild('overlay') $overlay: ElementRef;
+  @ViewChild('ForewarningNotice') $preaviso: ElementRef;
   currentContractType: TerminationContractType;
   formCompensationRight: FormGroup;
+
+  store = {
+    forewarningNotice: {
+      amount: 0.00,
+      time: "60 dias",
+      factorAmount: 0.00,
+      formula: "60 dias X 0.00",
+      currency: "L."
+    },
+    proportionalFourteenthMonthRigh: {
+        amount: 0.00,
+        time: "",
+        factorAmount: 0.00,
+        formula: "",
+        currency: "L."
+    },
+    proportionalThirteenthMonthRight: {
+        amount: 0.00,
+        time: "",
+        factorAmount: 0.00,
+        formula: "",
+        currency: "L."
+    },
+    proportionalVacationPayment: {
+        amount: 0.00,
+        time: "",
+        factorAmount: 0.00,
+        formula: "",
+        currency: "L."
+    },
+    total: 0,
+    unemploymentAid: {
+        amount: 0.00,
+        time: "",
+        factorAmount: 0.00,
+        formula: "",
+        currency: "L."
+    },
+    unemploymentAidProportional: {
+        amount: 0.00,
+        time: "",
+        factorAmount: 0.00,
+        formula: "",
+        currency: "L."
+    }
+  }
+
+  hasForewarningNotice: boolean = true; 
+  hasProportionalVacationPay: boolean = true;
 
   constructor(
     public contractType: ToolbarService, 
     private render2: Renderer2,
-    private calculoPrestacionesService: CalculoPrestacionesService,
-    private formBuilder: FormBuilder
+    private calculoPrestacionesService: CalculoPrestacionesService
     ) {
-      this.formBuild();
+      
    }
 
   ngOnInit(): void {
     this.currentContractType = this.contractType.terminationContractType;
     this.calculoPrestacionesService
-    .terminationContractType$.subscribe((option: TerminationContractType) => this.currentContractType = option);
-    console.log(this.currentContractType);
+    .terminationContractType$.subscribe((option: TerminationContractType) => {
+      this.currentContractType = option;
+      if(this.currentContractType === 1){
+        this.render2.setAttribute(this.$preaviso.nativeElement, 'disabled', 'true');        
+      }else{
+        this.render2.removeAttribute(this.$preaviso.nativeElement, 'disabled');        
+      }
+    });
+    
   }
 
-  private formBuild(){
-    this.formCompensationRight = this.formBuilder.group({
-      hasForewarningNotice: [true, [Validators.required]],
-      hasProportionalVacationPay: [true, [Validators.required]]
-    });
-  }
 
   recalculo(){
     this.render2.addClass(this.$overlay.nativeElement, 'active-overlay');
+
+  /*   this.calculoPrestacionesService
+    .sendSalaryEmployeeCompute().subscribe(); */
+
     setTimeout(() => this.render2.removeClass(this.$overlay.nativeElement, 'active-overlay'), 8000);
   }
 
