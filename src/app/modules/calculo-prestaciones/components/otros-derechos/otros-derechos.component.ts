@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { FormBuilder, FormsModule ,FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
@@ -8,6 +8,9 @@ import { FormBuilder, FormsModule ,FormControl, FormGroup, Validators } from '@a
 })
 export class OtrosDerechosComponent implements OnInit {
 
+  @ViewChild('overlay') $overlay: ElementRef;
+  @ViewChild('panelPregnancyStatus') $panelPregnancyStatus: ElementRef;
+  @ViewChild('panelDaysOffPregnancy') $panelDaysOffPregnancy: ElementRef;
   otherRights: any[] = [
     {
       right: '¿La despidieron en estado de embarazo?',
@@ -20,7 +23,7 @@ export class OtrosDerechosComponent implements OnInit {
   isActivePregnancyStatus: boolean = false;
   isActiveDaysOffPregnancy: boolean = false;
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder, private render2: Renderer2) { }
 
   ngOnInit(): void {
   }
@@ -43,8 +46,26 @@ export class OtrosDerechosComponent implements OnInit {
     switch(controlName){
       case 'pregnancyStatus':
         this.isActivePregnancyStatus =! this.isActivePregnancyStatus;
+        this.isActivePregnancyStatus?
+        this.render2.addClass(this.$panelPregnancyStatus.nativeElement, 'active'):
+        this.render2.removeClass(this.$panelPregnancyStatus.nativeElement, 'active');
+        break;
+      case 'daysOffPregnancy':
+        this.isActiveDaysOffPregnancy =! this.isActiveDaysOffPregnancy;
+        this.isActiveDaysOffPregnancy? 
+        this.render2.addClass(this.$panelDaysOffPregnancy.nativeElement, 'active'):
+        this.render2.removeClass(this.$panelDaysOffPregnancy.nativeElement, 'active');
         break;
     }
+  }
+
+  recalculo(){
+    this.render2.addClass(this.$overlay.nativeElement, 'active-overlay');
+    
+    /*this.calculoPrestacionesService
+    .sendSalaryEmployeeCompute().subscribe();*/
+
+    setTimeout(() => this.render2.removeClass(this.$overlay.nativeElement, 'active-overlay'), 4000);
   }
 
 }

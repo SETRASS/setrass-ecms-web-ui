@@ -1,4 +1,4 @@
-<div class="card shadow-sm">
+<div id="compensation-rights" class="card shadow-sm">
     <div #overlay class="overlay"><div><span class="loader-recalulo"></span><h4>Recalculando...</h4></div></div>
     <div class="card-header">
         <h3 class="card-title">Derechos e Indemnizaciones</h3>
@@ -80,8 +80,8 @@
         </div>
         <div class="row"></div>
     </div>
-    <div class="card-footer d-flex justify-content-end gap-5">
+    <div class="card-footer d-flex justify-content-end gap-5" >
         <button type="button" class="btn btn-secondary" (click)="recalculo()">Recalcular</button>
-        <button type="button" class="btn btn-primary">Siguiente</button>
+        <a type="button" class="btn btn-primary" (click)="nextStep()" >Siguiente</a>
     </div>
 </div>

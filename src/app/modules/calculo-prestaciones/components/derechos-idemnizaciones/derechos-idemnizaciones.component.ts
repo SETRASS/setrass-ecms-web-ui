@@ -1,5 +1,6 @@
 import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TerminationContractType } from 'src/app/models/enums/termination-contract-type.enum';
 import { CalculoPrestacionesService } from 'src/app/modules/services/calculo-prestaciones/calculo-prestaciones.service';
 import { ToolbarService } from 'src/app/_metronic/layout/components/toolbar/toolbar.service';
@@ -71,7 +72,9 @@ export class DerechosIdemnizacionesComponent implements OnInit {
   constructor(
     public contractType: ToolbarService, 
     private render2: Renderer2,
-    private calculoPrestacionesService: CalculoPrestacionesService
+    private calculoPrestacionesService: CalculoPrestacionesService,
+    private route: ActivatedRoute,
+    private ruta: Router
     ) {
       
    }
@@ -87,17 +90,22 @@ export class DerechosIdemnizacionesComponent implements OnInit {
         this.render2.removeAttribute(this.$preaviso.nativeElement, 'disabled');        
       }
     });
-    
   }
 
 
   recalculo(){
     this.render2.addClass(this.$overlay.nativeElement, 'active-overlay');
 
-  /*   this.calculoPrestacionesService
-    .sendSalaryEmployeeCompute().subscribe(); */
+    /*this.calculoPrestacionesService
+    .sendSalaryEmployeeCompute().subscribe();*/
 
-    setTimeout(() => this.render2.removeClass(this.$overlay.nativeElement, 'active-overlay'), 8000);
+    setTimeout(() => this.render2.removeClass(this.$overlay.nativeElement, 'active-overlay'), 4000);
+  }
+
+  nextStep(){
+    this.ruta.navigate(['.'],{});
+    console.log(this.route);
+    console.log(this.ruta);
   }
 
 
