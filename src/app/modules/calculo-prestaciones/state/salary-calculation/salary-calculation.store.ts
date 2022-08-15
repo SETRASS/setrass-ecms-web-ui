@@ -8,9 +8,18 @@ export interface SalaryCalculationState extends EntityState<any, string> {
 }
 
 export function createInitialState(): SalaryCalculationState {
+    
+    
+    
     return {
         isLoaded: false,
-        data: {},
+        data: {
+            
+        },
+
+        cache:{
+        
+        }
     };
 }
 
