@@ -21,6 +21,8 @@ import { getYearSelect } from 'src/app/utils/utils';
 import { format } from 'date-fns';
 import { CalculoPrestacionesRequestType } from 'src/app/models/enums/calculo-prestaciones-request-type.enum';
 import { TerminationContractType } from 'src/app/models/enums/termination-contract-type.enum';
+import { SalaryCalculationStore } from '../../state/salary-calculation/salary-calculation.store';
+import { SalaryCalculationQuery } from '../../state/salary-calculation/salary-calculation.query';
 
 
 
@@ -40,6 +42,7 @@ export class DatosTrabajadorComponent implements OnInit {
   @ViewChild('overlay') $overlay: ElementRef;
   @ViewChild('salary') salaryField: ElementRef;
   @ViewChild('submit') btnSubmit: ElementRef;
+  @ViewChild('historySalaryYearField') txtHistorySalary: ElementRef;
   stepper1: any;
   formEmployee:FormGroup;
 
@@ -69,6 +72,9 @@ export class DatosTrabajadorComponent implements OnInit {
   totalExtraHoursAverage = 0;
   totalBonusesAverage = 0;
   isSalaryFieldDisabled: boolean =true;
+  minDate: string;
+  currentDataStore:object;
+  currentCacheData: object;
   
 
   //SAVE-BUTTON
@@ -84,7 +90,7 @@ export class DatosTrabajadorComponent implements OnInit {
 
   locations$: Observable<Locations[]> = this.locationsQuery.selectAll();
   isLocationsLoaded$: Observable<boolean> = this.locationsQuery.selectLoaded$;
-  minDate: string;
+  
 
 
 
@@ -95,7 +101,9 @@ export class DatosTrabajadorComponent implements OnInit {
               private formBuilder: FormBuilder,
               private render2: Renderer2,
               private workerPersonStore: WorkerPersonStore,
-              private locationsQuery: LocationsQuery)
+              private locationsQuery: LocationsQuery,
+              private salaryCalculationStore: SalaryCalculationStore,
+              private salaryCalculationQuery: SalaryCalculationQuery)
               {
     this.formBuild();            
     
@@ -134,6 +142,9 @@ export class DatosTrabajadorComponent implements OnInit {
     this.calculoPrestacionesService.terminationContractType$
     .subscribe((option:TerminationContractType) => this.currentTerminationContractType = option);
     this.currentTerminationContractType = this.toolbar.terminationContractType;
+
+    this.salaryCalculationQuery.getData().subscribe(res => this.currentDataStore=res);
+    this.salaryCalculationQuery.getCache().subscribe(res => this.currentCacheData=res);
   }
     
     
@@ -146,13 +157,12 @@ export class DatosTrabajadorComponent implements OnInit {
     if(this.formEmployee.get('employeeData')?.valid && this.stepper1.getCurrentStepIndex() === 1){
         return this.stepper1.goNext(); 
     }
-    if (this.formEmployee.get('locationData')?.valid && this.stepper1.getCurrentStepIndex() === 2) {
-        //this.postEmployeeAndEmployer();
+    if (this.formEmployee.get('companyData')?.valid && this.stepper1.getCurrentStepIndex() === 2) {
+        this.postEmployeeAndEmployer();
         return this.stepper1.goNext();
     }
     
-    if(this.formEmployee.get('companyData')?.valid && this.stepper1.getCurrentStepIndex() === 3) {
-      this.postEmployeeAndEmployer();
+    if(this.formEmployee.get('salaryData')?.valid && this.stepper1.getCurrentStepIndex() === 3) {
       this.addHistorySalaryFields();
       return this.stepper1.goNext();
     }
@@ -178,15 +188,16 @@ export class DatosTrabajadorComponent implements OnInit {
       
       }),
 
-    locationData:this.formBuilder.group({
+    companyData:this.formBuilder.group({
       department: ['', [Validators.required]],
       municipality: ['', [Validators.required]],
-    }), 
-    
-    companyData: this.formBuilder.group({
       companyName: ['', [Validators.required, Validators.minLength(5)]],
       economicActivity: ['', [Validators.required,]],
       companySize:['',[ Validators.required, Validators.pattern(/^[0-9]+$/)]],
+      personType: ['JURIDICA', [Validators.required]],
+    }), 
+    
+    salaryData: this.formBuilder.group({
       startDate: ['2019-06-12', [Validators.required]],
       endDate: [this.getFutureDate(5), [Validators.required]],
       fixedSalary: ['SI', [Validators.required]],
@@ -231,23 +242,23 @@ export class DatosTrabajadorComponent implements OnInit {
     historySalary: this.formBuilder.array([])    
     });
     
-    this.formEmployee.get('companyData.fixedSalary')?.valueChanges.
+    this.formEmployee.get('salaryData.fixedSalary')?.valueChanges.
     subscribe(value => {
       console.log(value);
       if (value === 'NO') {
         for (let item =1; item<= 6; item++) {
-          this.formEmployee.get(`companyData.monthlySalaryAverage${item}`)?.setValidators([Validators.required, Validators.pattern(/^[0-9]+$/)]);
+          this.formEmployee.get(`salaryData.monthlySalaryAverage${item}`)?.setValidators([Validators.required, Validators.pattern(/^[0-9]+$/)]);
         } 
-        this.formEmployee.get('companyData.salary')?.setValue(this.totalSalaryAverage);
+        this.formEmployee.get('salaryData.salary')?.setValue(this.totalSalaryAverage);
         this.render2.setAttribute(this.salaryField.nativeElement, 'disabled', 'false');
         this.isSalaryFieldDisabled = true;
         }else {
           for (let item = 1; item<= 6; item++) {
-            this.formEmployee.get(`companyData.monthlySalaryAverage${item}`)?.setValidators(null);
+            this.formEmployee.get(`salaryData.monthlySalaryAverage${item}`)?.setValidators(null);
           }
 
-          this.formEmployee.get('companyData.salary')?.setValue(0);
-          this.render2.setAttribute(this.salaryField.nativeElement, 'disabled', 'false');
+          this.formEmployee.get('salaryData.salary')?.setValue(0);
+          this.render2.removeAttribute(this.salaryField.nativeElement, 'disabled');
           this.isSalaryFieldDisabled =false;
 
         }
@@ -273,7 +284,7 @@ export class DatosTrabajadorComponent implements OnInit {
     }
     
     get salaryValue() {
-    return this.formEmployee.get('companyData.salary')?.value;
+    return this.formEmployee.get('salaryData.salary')?.value;
     }
     
     get speciesSalaryValue() {
@@ -331,18 +342,18 @@ export class DatosTrabajadorComponent implements OnInit {
       let month5 = Number(this.formEmployee.get(`${element}5`)?.value);
       let month6 = Number(this.formEmployee.get(`${element}6`)?.value);
       switch (element) {
-        case 'companyData.monthlySalaryAverage':
+        case 'salaryData.monthlySalaryAverage':
           this.totalSalaryAverage += (month1 + month2 + month3 + month4 + month5 + month6) / 6;
-          this.formEmployee.get('companyData.salary')?.setValue(this.totalSalaryAverage.toFixed(2));
+          this.formEmployee.get('salaryData.salary')?.setValue(this.totalSalaryAverage.toFixed(2));
           console.log(this.totalSalaryAverage);
           break;
-        case 'companyData.commissions.monthlyCommissions':
+        case 'salaryData.commissions.monthlyCommissions':
           this.totalCommissionsAverage = (month1 + month2 + month3 + month4 + month5 + month6) / 6;
           break;
-        case 'companyData.extraHours.monthlyExtraHours':
+        case 'salaryData.extraHours.monthlyExtraHours':
           this.totalExtraHoursAverage = (month1 + month2 + month3 + month4 + month5 + month6) / 6;
           break;
-        case 'companyData.bonuses.monthlyBonus':
+        case 'salaryData.bonuses.monthlyBonus':
           this.totalBonusesAverage = (month1 + month2 + month3 + month4 + month5 + month6) / 6;
           break;
       }
@@ -362,11 +373,11 @@ export class DatosTrabajadorComponent implements OnInit {
     
 
     postEmployeeAndEmployer(): void {
-      console.log("Ok");
-        const {companyData, employeeData, locationData} = this.formEmployee.value;
+      this.render2.addClass(this.$overlay.nativeElement, 'active-overlay');
+        const {salaryData, employeeData, companyData} = this.formEmployee.value;
         this.calculoPrestacionesService.objectGlobal.startDate = employeeData.startDate;
         this.calculoPrestacionesService.objectGlobal.dismissalDate = employeeData.endDate;
-        this.calculoPrestacionesService.objectGlobal.fixedSalary = companyData.fixedSalary === 'SI' ? true : false;
+        this.calculoPrestacionesService.objectGlobal.fixedSalary = salaryData.fixedSalary === 'SI' ? true : false;
 
        //this.workerPersonStore.add(employee);
       
@@ -389,30 +400,40 @@ export class DatosTrabajadorComponent implements OnInit {
         identificationNumber: employeeData.identityNumber,
         identificationType: employeeData.typeIdentity,
         lastName: employeeData.employeeLastName,
-        localizationId: locationData.municipality,
+        localizationId: companyData.municipality,
         phoneNumber: employeeData.employeePhone,
         requestId: 0,
         requestType: this.getCurrentRequestType(),
-        terminationContractType: this.currentTerminationContractType
+        terminationContractType: this.getCurrentTerminationContract()
       }
         
       //this.workerPersonStore.add(data);
-      this.render2.addClass(this.$overlay.nativeElement, 'active-overlay');
+      
+      console.log(data);
 
       this.calculoPrestacionesService.sendEmployeeEmployerReq(data).subscribe((response: any)=>{
         if(response){
           this.render2.removeClass(this.$overlay.nativeElement, 'active-overlay');
         }
         console.log(response);
-        const { requestId, workerPersonId, employerId, employer} = response;
-        this.REQUEST_ID = requestId;
-        this.WORKER_PERSON_ID = workerPersonId;
-        this.calculoPrestacionesService.objectGlobal.requestId = requestId;
-        this.calculoPrestacionesService.objectGlobal.workerPersonId = workerPersonId;
-        this.calculoPrestacionesService.objectGlobal.employer = employer;
-        this.calculoPrestacionesService.objectGlobal.employerId = employerId;
-        console.log(this.REQUEST_ID);
-        console.log(this.calculoPrestacionesService.objectGlobal);
+        const { requestId, workerPersonId, employer} = response;
+        let cache ={
+          requestId,
+          workerPersonId,
+          employer
+        }
+        this.salaryCalculationStore.update(state => {
+          return {
+            cache : {
+              ...state.cache,
+              cache
+            }
+          };
+        });
+        console.log(this.currentCacheData);
+
+        
+
       })
 
       }
@@ -427,51 +448,52 @@ export class DatosTrabajadorComponent implements OnInit {
     
     postSalaryInfoRequest() {
       console.log("Ok");
-      const {companyData, speciesSalary} = this.formEmployee.value;
+      const {salaryData, speciesSalary} = this.formEmployee.value;
+
       let data = {
-        "breastfeedingPaidHours": 0,
+        /*"breastfeedingPaidHours": 0,
         "daysOffPreAndPostNatalWasPaid": 0,
-        "daysPaidWasFiredWhilePregnant": 0,
-        "dismissalDate": companyData.endDate,
+        "daysPaidWasFiredWhilePregnant": 0,*/
+        "dismissalDate": salaryData.endDate,
         "employerId": this.EMPLOYER_ID,
-        "fixedSalary": companyData.fixedSalary === 'SI' ? true : false,
-        "hasForewarningNotice": true,
+        "fixedSalary": salaryData.fixedSalary === 'SI' ? true : false,
+        /*"hasForewarningNotice": true,
         "hasTakeVacationTimeLastYear": true,
         "howMuchOwedHolyDays": 0,
-        "howMuchOwedSeventhDay": 0,
+        "howMuchOwedSeventhDay": 0,*/
         "lastSixMonthsBonusPayment": [
-          companyData.bonuses.monthlyBonus1,
-          companyData.bonuses.monthlyBonus2,
-          companyData.bonuses.monthlyBonus3,
-          companyData.bonuses.monthlyBonus4,
-          companyData.bonuses.monthlyBonus5,
-          companyData.bonuses.monthlyBonus6,
+          salaryData.bonuses.monthlyBonus1,
+          salaryData.bonuses.monthlyBonus2,
+          salaryData.bonuses.monthlyBonus3,
+          salaryData.bonuses.monthlyBonus4,
+          salaryData.bonuses.monthlyBonus5,
+          salaryData.bonuses.monthlyBonus6,
         ],
         "lastSixMonthsSalary": [
-          companyData.monthlySalaryAverage1,
-          companyData.monthlySalaryAverage2,
-          companyData.monthlySalaryAverage3,
-          companyData.monthlySalaryAverage4,
-          companyData.monthlySalaryAverage5,
-          companyData.monthlySalaryAverage6,
+          salaryData.monthlySalaryAverage1,
+          salaryData.monthlySalaryAverage2,
+          salaryData.monthlySalaryAverage3,
+          salaryData.monthlySalaryAverage4,
+          salaryData.monthlySalaryAverage5,
+          salaryData.monthlySalaryAverage6,
         ],
         "lastSixMonthsSalaryCommissions": [
-          companyData.commissions.monthlyCommissions1,
-          companyData.commissions.monthlyCommissions2,
-          companyData.commissions.monthlyCommissions3,
-          companyData.commissions.monthlyCommissions4,
-          companyData.commissions.monthlyCommissions5,
-          companyData.commissions.monthlyCommissions6
+          salaryData.commissions.monthlyCommissions1,
+          salaryData.commissions.monthlyCommissions2,
+          salaryData.commissions.monthlyCommissions3,
+          salaryData.commissions.monthlyCommissions4,
+          salaryData.commissions.monthlyCommissions5,
+          salaryData.commissions.monthlyCommissions6
         ],
         "lastSixMonthsSalaryOverTime": [
-          companyData.extraHours.monthlyExtraHours1,
-          companyData.extraHours.monthlyExtraHours2,
-          companyData.extraHours.monthlyExtraHours3,
-          companyData.extraHours.monthlyExtraHours4,
-          companyData.extraHours.monthlyExtraHours5,
-          companyData.extraHours.monthlyExtraHours6
+          salaryData.extraHours.monthlyExtraHours1,
+          salaryData.extraHours.monthlyExtraHours2,
+          salaryData.extraHours.monthlyExtraHours3,
+          salaryData.extraHours.monthlyExtraHours4,
+          salaryData.extraHours.monthlyExtraHours5,
+          salaryData.extraHours.monthlyExtraHours6
         ],
-        "owedBonusVacations": true,
+        /*"owedBonusVacations": true,
         "owedBonusVacationsAmount": 0,
         "owedBreastfeedingHours": false,
         "owedDaysOffPreAndPostNatal": false,
@@ -486,13 +508,14 @@ export class DatosTrabajadorComponent implements OnInit {
         "owedSalary": false,
         "owedSalaryAmount": 0,
         "owedSeventhDay": false,
+        "wasFiredWhilePregnant": false,*/
+        
         "requestId": this.REQUEST_ID,
-        "salary": Number(companyData.salary),
+        "salary": Number(salaryData.salary),
         "salaryInKindOptionsType": speciesSalary.foodTime,
         "salaryInKindType": speciesSalary.optionSpeciesSalary,
-        "startDate": companyData.startDate,
+        "startDate": salaryData.startDate,
         "terminationContractType": this.toolbar.terminationContractType,
-        "wasFiredWhilePregnant": false,
         "workerPersonId": this.WORKER_PERSON_ID,
         
       }
@@ -555,15 +578,15 @@ export class DatosTrabajadorComponent implements OnInit {
     }
 
     setMinDate(){
-      this.minDate = this.formEmployee.get('companyData.startDate')?.value;
+      this.minDate = this.formEmployee.get('salaryData.startDate')?.value;
     }
     
     addHistorySalaryFields(){ 
       if(this.historySalaryField.controls.length > 0){
         this.historySalaryField.controls.splice(0,this.historySalaryField.controls.length);
       }
-      let years = getYearSelect(this.formEmployee.get('companyData.startDate')?.value,
-      this.formEmployee.get('companyData.endDate')?.value);
+      let years = getYearSelect(this.formEmployee.get('salaryData.startDate')?.value,
+      this.formEmployee.get('salaryData.endDate')?.value);
       console.log(years);
       years.forEach((year:any) => this.historySalaryField.push(this.createHistorySalaryFieldYear(year,0)));
       const historySalaryElements : any = document.querySelectorAll('.historySalaryInput');
@@ -572,7 +595,7 @@ export class DatosTrabajadorComponent implements OnInit {
 
 }
 
-   
+
 
   
 

@@ -7,6 +7,8 @@ import { TerminationContractType } from 'src/app/models/enums/termination-contra
 import { Gender } from 'src/app/models/enums/gender.enum';
 import { WorkerPersonEmployerRequestDto } from 'src/app/models/worker-person-employer-request-dto.model';
 import { WorkerPersonStore } from '../../calculo-prestaciones/state/workerperson/workerperson.store';
+import { SalaryCalculationQuery } from '../../calculo-prestaciones/state/salary-calculation/salary-calculation.query';
+import { SalaryCalculationStore } from '../../calculo-prestaciones/state/salary-calculation/salary-calculation.store';
 
 
 @Injectable({
@@ -36,7 +38,8 @@ export class CalculoPrestacionesService extends BaseHttpService {
   terminationContractType$ = new EventEmitter<TerminationContractType>();
 
   constructor(http: HttpClient,
-    private workerPersonStore: WorkerPersonStore) {
+    private workerPersonStore: WorkerPersonStore,
+    ) {
     super(http);
   }
 
@@ -46,17 +49,17 @@ export class CalculoPrestacionesService extends BaseHttpService {
       map( (workerPerson: WorkerPersonEmployerRequestDto) => { 
         this.workerPersonStore.add(workerPerson);
         return workerPerson;
-       }), tap(() => this.workerPersonStore.updateWorkerPerson(true))
+      }), tap(() => this.workerPersonStore.updateWorkerPerson(true))
     )
   }
   
   // Salary Info Request
   sendSalaryEmployeeInfo(data: any): Observable<any[]> {
-    return this.postRequest<any[]>(`${this.baseUrl}/calculo-prestaciones/salary-info-req/v1/add-new`, data);
+    return this.postRequest<any[]>(`${this.baseUrl}/calculo-prestaciones/salary-info-req/v1/compensations-rights/compute`, data);
   }
 
   /* Sending a request to the backend to compute the salary. */
   sendSalaryEmployeeCompute(data: any): Observable<any[]> {
-    return this.postRequest<any[]>(`${this.baseUrl}/calculo-prestaciones/salary-info-req/v1/compute`, data);
+    return this.postRequest<any[]>(`${this.baseUrl}/calculo-prestaciones/salary-info-req/v1/other-rights/compute`, data);
   }
 }
