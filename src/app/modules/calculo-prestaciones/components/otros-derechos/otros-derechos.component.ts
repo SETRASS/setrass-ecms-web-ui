@@ -1,5 +1,6 @@
+import { ThisReceiver } from '@angular/compiler';
 import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
-import { FormBuilder, FormsModule ,FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormsModule ,FormControl, FormGroup, Validators, FormArray } from '@angular/forms';
 
 @Component({
   selector: 'app-otros-derechos',
@@ -11,36 +12,138 @@ export class OtrosDerechosComponent implements OnInit {
   @ViewChild('overlay') $overlay: ElementRef;
   @ViewChild('panelPregnancyStatus') $panelPregnancyStatus: ElementRef;
   @ViewChild('panelDaysOffPregnancy') $panelDaysOffPregnancy: ElementRef;
-  otherRights: any[] = [
-    {
-      right: '¿La despidieron en estado de embarazo?',
-      timeField: '',
-      panel: ""
-    }
-  ];
+  @ViewChild('panelBreastFeedingHours') $panelBreastFeedingHours: ElementRef;
+  @ViewChild('panelSalaryReadjustment') $panelSalaryReadjustment: ElementRef;
+  @ViewChild('panelOwedHolyDays') $panelOwedHolyDays: ElementRef;
+  @ViewChild('panelOwedSeventhDay') $panelOwedSeventhDay: ElementRef;
 
-  formOtherRights: FormGroup;
+  
+  
+  
+  otherRightsRequest: any = {
+    haveSchoolAgeChildren: true,
+    historySalaries: [
+      {
+        salary: 0,
+        year: 0
+      }
+    ],
+    owedBonusVacationsRequest: {
+      owedBonusVacations: true,
+      owedBonusVacationsAmount: 0
+    },
+    owedFourteenthMonthRequest: [
+      {
+        salary: 0,
+        year: 0
+      }
+    ],
+    owedHolyRequest: {
+      howMuchOwedHolyDays: 0,
+      owedHolyDays: true
+    },
+    owedOtherPaymentsRequest: {
+      owedOtherPayments: true,
+      owedOtherPaymentsAmount: 0
+    },
+    owedOvertimeRequest: {
+      owedOvertime: true,
+      owedOvertimeType: "DIURNA",
+      owedOvertimeWork: 0
+    },
+    owedPaidPendingVacationsRequest: {
+      owedPaidPendingVacations: true,
+      owedPendingVacationsYears: 0
+    },
+    owedPendingFourteenthMonthRequest: {
+      fourteenthMonthPaid: 0,
+      owedPendingFourteenthMonth: true
+    },
+    owedPendingThirteenthMonthRequest: {
+      owedPendingThirteenthMonth: true,
+      thirteenthMonthPaid: 0
+    },
+    owedSalaryRequest: {
+      owedSalary: true,
+      owedSalaryAmount: 0
+    },
+    owedSeventhDayRequest: {
+      howMuchOwedSeventhDay: 0,
+      owedSeventhDay: true
+    },
+    owedThirteenthMonthRequest: [
+      {
+        salary: 0,
+        year: 0
+      }
+    ],
+    pregnantRequest: {
+      breastfeedingPaidHours: 0,
+      daysOffPreAndPostNatalWasPaid: 0,
+      daysPaidWasFiredWhilePregnant: 0,
+      owedBreastfeedingHours: true,
+      owedDaysOffPreAndPostNatal: true,
+      wasFiredWhilePregnant: true
+    }
+  };
+    
+  
+
+  formOtherRights= new FormGroup({
+   
+    pregnancyStatus: new FormControl('',[Validators.pattern(/^[0-9]+$/)]),
+    daysOffPregnancy: new FormControl ('',[Validators.pattern(/^[0-9]+$/)]),
+    breastFeedingHours: new FormControl('',[]),  
+    salaryReadjustment: new FormArray([]),
+    owedHolyDays: new FormControl ('',[])
+  });
   isActivePregnancyStatus: boolean = false;
   isActiveDaysOffPregnancy: boolean = false;
+  isActiveBreastFeedingHours: boolean = false;
+  isActiveSalaryReadjustment: boolean = false;
+  isActiveOwedHolyDays: boolean = false;
+  isActiveOwedSeventhDay: boolean = false;
+
+  
 
   constructor(private formBuilder: FormBuilder, private render2: Renderer2) { }
 
   ngOnInit(): void {
   }
 
+  
+
   buildForm(){
-    this.formOtherRights = this.formBuilder.group({
-      pregnancyStatus: ['',[]],
-      daysOffPregnancy: ['',[]],
-      breastfeedingHours: ['',[]],
-      salaryReadjustment: {
-        year1: ['2017',[]],
-        amountYear1: ['',[]],
-        year2: ['2016',[]],
-        amountYear2: ['',[]]
-      },
-    })
+    
   }
+
+  hiddenPanel(className: string){
+    document.querySelector(`.${className}`)?.classList.remove('active');
+    
+  }
+
+  editPanel(className: string){
+    document.querySelector(`.${className}`)?.classList.add('active');
+  }
+
+  isValidField(formControlName: string) {
+    return this.formOtherRights
+    .get(formControlName)?.touched &&
+      this.formOtherRights
+      .get(formControlName)?.valid
+  }
+
+  isInvalidField(formControlName: string) {
+    return this.formOtherRights
+    .get(formControlName)?.touched &&
+      this.formOtherRights
+      .get(formControlName)?.invalid
+  }
+
+  getErrorField(element: string, errorName: string) {
+    return this.formOtherRights.get(element)?.hasError(errorName);
+  }
+
 
   isActiveControl(controlName: string){
     switch(controlName){
@@ -56,6 +159,34 @@ export class OtrosDerechosComponent implements OnInit {
         this.render2.addClass(this.$panelDaysOffPregnancy.nativeElement, 'active'):
         this.render2.removeClass(this.$panelDaysOffPregnancy.nativeElement, 'active');
         break;
+      case 'breastFeedingHours':
+        this.isActiveBreastFeedingHours =! this.isActiveBreastFeedingHours;
+        this.isActiveBreastFeedingHours? 
+        this.render2.addClass(this.$panelBreastFeedingHours.nativeElement, 'active'):
+        this.render2.removeClass(this.$panelBreastFeedingHours.nativeElement, 'active');
+        break;
+      case 'salaryReadjustment':
+        this.isActiveSalaryReadjustment =! this.isActiveSalaryReadjustment;
+        this.isActiveSalaryReadjustment?
+        this.render2.addClass(this.$panelSalaryReadjustment.nativeElement, 'active'):
+        this.render2.removeClass(this.$panelSalaryReadjustment.nativeElement, 'active');
+        break;
+      case 'owedHolyDays':
+        this.isActiveOwedHolyDays =! this.isActiveOwedHolyDays;
+        this.isActiveOwedHolyDays?
+        this.render2.addClass(this.$panelOwedHolyDays.nativeElement, 'active'):
+        this.render2.removeClass(this.$panelOwedHolyDays.nativeElement, 'active');
+        break;
+      case 'owedSeventhDay':
+        this.isActiveOwedSeventhDay =! this.isActiveOwedSeventhDay;
+        this.isActiveOwedSeventhDay?
+        this.render2.addClass(this.$panelOwedSeventhDay.nativeElement, 'active'):
+        this.render2.removeClass(this.$panelOwedSeventhDay.nativeElement, 'active');
+        break;
+
+      
+      
+
     }
   }
 
