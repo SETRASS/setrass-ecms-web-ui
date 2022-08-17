@@ -1,6 +1,10 @@
+import { ThisReceiver } from '@angular/compiler';
 import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
-import { FormBuilder, FormsModule ,FormControl, FormGroup, Validators } from '@angular/forms';
+
+import { FormBuilder, FormsModule ,FormControl, FormGroup, Validators, FormArray } from '@angular/forms';
 import { Router } from '@angular/router';
+import { getDataStore } from 'src/app/utils/utils';
+
 
 @Component({
   selector: 'ecms-otros-derechos',
@@ -12,17 +16,293 @@ export class OtrosDerechosComponent implements OnInit {
   @ViewChild('overlay') $overlay: ElementRef;
   @ViewChild('panelPregnancyStatus') $panelPregnancyStatus: ElementRef;
   @ViewChild('panelDaysOffPregnancy') $panelDaysOffPregnancy: ElementRef;
-  otherRights: any[] = [
-    {
-      right: '¿La despidieron en estado de embarazo?',
-      timeField: '',
-      panel: ""
+  @ViewChild('panelBreastFeedingHours') $panelBreastFeedingHours: ElementRef;
+  @ViewChild('panelSalaryReadjustment') $panelSalaryReadjustment: ElementRef;
+  @ViewChild('panelOwedHolyDays') $panelOwedHolyDays: ElementRef;
+  @ViewChild('panelOwedSeventhDay') $panelOwedSeventhDay: ElementRef;
+  @ViewChild('panelOwedPaidPendingVacations') $panelOwedPaidPendingVacations: ElementRef;
+  @ViewChild('panelOwedBonusVacations') $panelOwedBonusVacations: ElementRef;
+  @ViewChild('panelOwedPendingThirteenthMonth') $panelOwedPendingThirteenthMonth: ElementRef;
+  @ViewChild('panelOwedThirteenthMonth') $panelOwedThirteenthMonth: ElementRef;
+  @ViewChild('panelOwedPendingFourteenthMonth') $panelOwedPendingFourteenthMonth: ElementRef;
+  @ViewChild('panelOwedFourteenthMonth') $panelOwedFourteenthMonth: ElementRef;
+  @ViewChild('panelOwedSalary') $panelOwedSalary: ElementRef;
+  @ViewChild('panelOwedOverTime') $panelOwedOverTime: ElementRef;
+  @ViewChild('panelHaveSchoolAgeChildren') $panelHaveSchoolAgeChildren: ElementRef;
+  @ViewChild('panelOwedHistorySalaries') $panelOwedHistorySalaries: ElementRef;
+  @ViewChild('panelOwedOtherPayments') $panelOwedOtherPayments: ElementRef;
+  
+  otherRightsRequest: any = {
+    haveSchoolAgeChildren: true,
+    historySalaries: [
+      {
+        "salary": 0,
+        "year": 0
+      }
+    ],
+    owedBonusVacationsRequest: {
+      owedBonusVacations: true,
+      owedBonusVacationsAmount: 0
+    },
+    owedFourteenthMonthRequest: [
+      {
+        salary: 0,
+        year: 0
+      }
+    ],
+    owedHolyRequest: {
+      howMuchOwedHolyDays: 0,
+      owedHolyDays: true
+    },
+    owedOtherPaymentsRequest: {
+      owedOtherPayments: true,
+      owedOtherPaymentsAmount: 0
+    },
+    owedOvertimeRequest: {
+      owedOvertime: true,
+      owedOvertimeType: "DIURNA",
+      owedOvertimeWork: 0
+    },
+    owedPaidPendingVacationsRequest: {
+      owedPaidPendingVacations: true,
+      owedPendingVacationsYears: 0
+    },
+    owedPendingFourteenthMonthRequest: {
+      fourteenthMonthPaid: 0,
+      owedPendingFourteenthMonth: true
+    },
+    owedPendingThirteenthMonthRequest: {
+      owedPendingThirteenthMonth: true,
+      thirteenthMonthPaid: 0
+    },
+    owedSalaryRequest: {
+      owedSalary: true,
+      owedSalaryAmount: 0
+    },
+    owedSeventhDayRequest: {
+      howMuchOwedSeventhDay: 0,
+      owedSeventhDay: true
+    },
+    owedThirteenthMonthRequest: [
+      {
+        salary: 0,
+        year: 0
+      }
+    ],
+    pregnantRequest: {
+      breastfeedingPaidHours: 0,
+      daysOffPreAndPostNatalWasPaid: 0,
+      daysPaidWasFiredWhilePregnant: 0,
+      owedBreastfeedingHours: true,
+      owedDaysOffPreAndPostNatal: true,
+      wasFiredWhilePregnant: true
     }
-  ];
+  };
 
-  formOtherRights: FormGroup;
+  response : any = {
+    "otherRights": {
+      "daysOffPreAndPostNatal": {
+        "amount": 0,
+        "currency": "string",
+        "factorAmount": 0,
+        "formula": "string",
+        "itemName": "string",
+        "objectKeyName": "string",
+        "time": "string"
+      },
+      "educationalBonusResponse": {
+        "amount": 0,
+        "currency": "string",
+        "factorAmount": 0,
+        "formula": "string",
+        "itemName": "string",
+        "objectKeyName": "string",
+        "time": "string"
+      },
+      "firedForWhilePregnant": {
+        "amount": 0,
+        "currency": "string",
+        "factorAmount": 0,
+        "formula": "string",
+        "itemName": "string",
+        "objectKeyName": "string",
+        "time": "string"
+      },
+      "owedBonusVacations": {
+        "amount": 0,
+        "currency": "string",
+        "factorAmount": 0,
+        "formula": "string",
+        "itemName": "string",
+        "objectKeyName": "string",
+        "time": "string"
+      },
+      "owedBreastfeedingHours": {
+        "amount": 0,
+        "currency": "string",
+        "factorAmount": 0,
+        "formula": "string",
+        "itemName": "string",
+        "objectKeyName": "string",
+        "time": "string"
+      },
+      "owedFourteenthMonth": {
+        "amount": 0,
+        "currency": "string",
+        "factorAmount": 0,
+        "formula": "string",
+        "itemName": "string",
+        "objectKeyName": "string",
+        "time": "string"
+      },
+      "owedHolyDays": {
+        "amount": 0,
+        "currency": "string",
+        "factorAmount": 0,
+        "formula": "string",
+        "itemName": "string",
+        "objectKeyName": "string",
+        "time": "string"
+      },
+      "owedOtherPayments": {
+        "amount": 0,
+        "currency": "string",
+        "factorAmount": 0,
+        "formula": "string",
+        "itemName": "string",
+        "objectKeyName": "string",
+        "time": "string"
+      },
+      "owedOvertime": {
+        "amount": 0,
+        "currency": "string",
+        "factorAmount": 0,
+        "formula": "string",
+        "itemName": "string",
+        "objectKeyName": "string",
+        "time": "string"
+      },
+      "owedPaidPendingVacations": {
+        "amount": 0,
+        "currency": "string",
+        "factorAmount": 0,
+        "formula": "string",
+        "itemName": "string",
+        "objectKeyName": "string",
+        "time": "string"
+      },
+      "owedPendingFourteenthMonth": {
+        "amount": 0,
+        "currency": "string",
+        "factorAmount": 0,
+        "formula": "string",
+        "itemName": "string",
+        "objectKeyName": "string",
+        "time": "string"
+      },
+      "owedPendingThirteenthMonth": {
+        "amount": 0,
+        "currency": "string",
+        "factorAmount": 0,
+        "formula": "string",
+        "itemName": "string",
+        "objectKeyName": "string",
+        "time": "string"
+      },
+      "owedSalary": {
+        "amount": 0,
+        "currency": "string",
+        "factorAmount": 0,
+        "formula": "string",
+        "itemName": "string",
+        "objectKeyName": "string",
+        "time": "string"
+      },
+      "owedSeventhDay": {
+        "amount": 0,
+        "currency": "string",
+        "factorAmount": 0,
+        "formula": "string",
+        "itemName": "string",
+        "objectKeyName": "string",
+        "time": "string"
+      },
+      "owedThirteenthMonth": {
+        "amount": 0,
+        "currency": "string",
+        "factorAmount": 0,
+        "formula": "string",
+        "itemName": "string",
+        "objectKeyName": "string",
+        "time": "string"
+      },
+      "salaryReadjustment": {
+        "amount": 0,
+        "currency": "string",
+        "factorAmount": 0,
+        "formula": "string",
+        "itemName": "string",
+        "objectKeyName": "string",
+        "time": "string"
+      },
+      "severanceSavings": {
+        "amount": 0,
+        "currency": "string",
+        "factorAmount": 0,
+        "formula": "string",
+        "itemName": "string",
+        "objectKeyName": "string",
+        "time": "string"
+      }
+    },
+
+  }
+    
+  
+
+  formOtherRights= new FormGroup({
+   
+    pregnancyStatus: new FormControl('',[Validators.pattern(/^[0-9]+$/)]),
+    daysOffPregnancy: new FormControl ('',[Validators.pattern(/^[0-9]+$/)]),
+    breastFeedingHours: new FormControl('',[Validators.pattern(/^[0-9]+$/)]),  
+    salaryReadjustment: new FormGroup({
+      status: new FormArray([])
+    }),
+    owedHolyDays: new FormControl ('',[Validators.pattern(/^[0-9]+$/)]),
+    owedSeventhDay: new FormControl ('',[Validators.pattern(/^[0-9]+$/)]),
+    owedPaidPendingVacations: new FormControl ('',[Validators.pattern(/^[0-9]+$/)]),
+    owedBonusVacations: new FormControl('',Validators.required),
+    owedPendingThirteenthMonth: new FormControl('',[Validators.required,Validators.pattern(/^[0-9]+$/)]),
+    owedThirteenthMonth: new FormControl('', [Validators.required, Validators.pattern(/^[0-9]+$/)]),
+    owedPendingFourteenthMonth: new FormControl('',[Validators.required, Validators.pattern(/^[0-9]+$/)]),
+    owedFourteenthMonth: new FormControl('',[Validators.required, Validators.pattern(/^[0-9]+$/)]),
+    owedSalary: new FormControl('', [Validators.required, Validators.pattern(/^[0-9]+$/)]),
+    owedOverTime: new FormControl('HORA DIURNA', [Validators.required]),
+    haveSchoolAgeChildren: new FormControl('',[]),
+    owedhistorySalaries: new FormArray([]),
+    owedOtherPayments: new FormControl('',[Validators.required, Validators.pattern(/^[0-9]+$/)])
+  
+  });
+
+
   isActivePregnancyStatus: boolean = false;
   isActiveDaysOffPregnancy: boolean = false;
+  isActiveBreastFeedingHours: boolean = false;
+  isActiveSalaryReadjustment: boolean = false;
+  isActiveOwedHolyDays: boolean = false;
+  isActiveOwedSeventhDay: boolean = false;
+  isActiveOwedPaidPendingVacations: boolean = false;
+  isActiveOwedBonusVacations: boolean = false;
+  isActiveOwedPendingThirteenthMonth: boolean =false;
+  isActiveOwedThirteenthMonth: boolean=false;
+  isActiveOwedPendingFourteenthMonth: boolean=false;
+  isActiveOwedFourteenthMonth: boolean=false;
+  isActiveOwedSalary: boolean = false;
+  isActiveHaveSchoolAgeChildren: boolean = false;
+  isActiveOwedHistorySalaries: boolean = false;
+  isActiveOwedOtherPayments: boolean = false;
+  
+  
 
   constructor(
     private formBuilder: FormBuilder, 
@@ -31,21 +311,63 @@ export class OtrosDerechosComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.response = getDataStore('salary-calculation')
   }
 
+  
+
   buildForm(){
-    this.formOtherRights = this.formBuilder.group({
-      pregnancyStatus: ['',[]],
-      daysOffPregnancy: ['',[]],
-      breastfeedingHours: ['',[]],
-      salaryReadjustment: {
-        year1: ['2017',[]],
-        amountYear1: ['',[]],
-        year2: ['2016',[]],
-        amountYear2: ['',[]]
-      },
-    })
+    
   }
+
+  hiddenPanel(className: string){
+    document.querySelector(`.${className}`)?.classList.remove('active');
+    
+  }
+
+  editPanel(className: string){
+    document.querySelector(`.${className}`)?.classList.add('active');
+  }
+
+  isValidField(formControlName: string) {
+    return this.formOtherRights
+    .get(formControlName)?.touched &&
+      this.formOtherRights
+      .get(formControlName)?.valid
+  }
+
+  isInvalidField(formControlName: string) {
+    return this.formOtherRights
+    .get(formControlName)?.touched &&
+      this.formOtherRights
+      .get(formControlName)?.invalid
+  }
+
+  getErrorField(element: string, errorName: string) {
+    return this.formOtherRights.get(element)?.hasError(errorName);
+  }
+
+  getLastTwoYearsSalaryReadjustment(){
+    let historySalaryArray = getDataStore('cache').historySalary;
+    if (historySalaryArray.length>2)
+    {
+      return historySalaryArray.splice(historySalaryArray.length-2, 2);
+      
+    }else if(historySalaryArray.length>0 && historySalaryArray.length<=2){
+      
+      return historySalaryArray;
+    }
+    }
+
+  
+
+  /*totalOverTime(percentage: string) {
+    if (percentage === '25%') return (Number(this.salaryValue) * 0.25).toFixed(2);
+    if (percentage === '50%') return (Number(this.salaryValue) * 0.50).toFixed(2);
+    if (percentage === '75%') return (Number(this.salaryValue) * 0.75).toFixed(2);
+  }
+  }*/
+
 
   isActiveControl(controlName: string){
     switch(controlName){
@@ -60,6 +382,90 @@ export class OtrosDerechosComponent implements OnInit {
         this.isActiveDaysOffPregnancy? 
         this.render2.addClass(this.$panelDaysOffPregnancy.nativeElement, 'active'):
         this.render2.removeClass(this.$panelDaysOffPregnancy.nativeElement, 'active');
+        break;
+      case 'breastFeedingHours':
+        this.isActiveBreastFeedingHours =! this.isActiveBreastFeedingHours;
+        this.isActiveBreastFeedingHours? 
+        this.render2.addClass(this.$panelBreastFeedingHours.nativeElement, 'active'):
+        this.render2.removeClass(this.$panelBreastFeedingHours.nativeElement, 'active');
+        break;
+      case 'salaryReadjustment':
+        this.isActiveSalaryReadjustment =! this.isActiveSalaryReadjustment;
+        this.isActiveSalaryReadjustment?
+        this.render2.addClass(this.$panelSalaryReadjustment.nativeElement, 'active'):
+        this.render2.removeClass(this.$panelSalaryReadjustment.nativeElement, 'active');
+        break;
+      case 'owedHolyDays':
+        this.isActiveOwedHolyDays =! this.isActiveOwedHolyDays;
+        this.isActiveOwedHolyDays?
+        this.render2.addClass(this.$panelOwedHolyDays.nativeElement, 'active'):
+        this.render2.removeClass(this.$panelOwedHolyDays.nativeElement, 'active');
+        break;
+      case 'owedSeventhDay':
+        this.isActiveOwedSeventhDay =! this.isActiveOwedSeventhDay;
+        this.isActiveOwedSeventhDay?
+        this.render2.addClass(this.$panelOwedSeventhDay.nativeElement, 'active'):
+        this.render2.removeClass(this.$panelOwedSeventhDay.nativeElement, 'active');
+        break;
+      case 'owedPaidPendingVacations':
+        this.isActiveOwedPaidPendingVacations =! this.isActiveOwedPaidPendingVacations;
+        this.isActiveOwedPaidPendingVacations?
+        this.render2.addClass(this.$panelOwedPaidPendingVacations.nativeElement, 'active'):
+        this.render2.removeClass(this.$panelOwedPaidPendingVacations.nativeElement, 'active');
+        break;
+      case 'owedBonusVacations':
+        this.isActiveOwedBonusVacations =! this.isActiveOwedBonusVacations;
+        this.isActiveOwedBonusVacations?
+        this.render2.addClass(this.$panelOwedBonusVacations.nativeElement,'active'):
+        this.render2.removeClass(this.$panelOwedBonusVacations.nativeElement, 'active');
+        break;
+      case 'owedPendingThirteenthMonth':
+        this.isActiveOwedPendingThirteenthMonth =! this.isActiveOwedPendingThirteenthMonth;
+        this.isActiveOwedPendingThirteenthMonth?
+        this.render2.addClass(this.$panelOwedPendingThirteenthMonth.nativeElement, 'active'):
+        this.render2.removeClass(this.$panelOwedPendingThirteenthMonth.nativeElement, 'active');
+        break;
+      case 'owedThirteenthMonth':
+        this.isActiveOwedThirteenthMonth =! this.isActiveOwedThirteenthMonth;
+        this.isActiveOwedThirteenthMonth?
+        this.render2.addClass(this.$panelOwedThirteenthMonth.nativeElement, 'active'):
+        this.render2.removeClass(this.$panelOwedThirteenthMonth.nativeElement, 'active');
+        break;
+      case 'owedPendingFourteenthMonth':
+        this.isActiveOwedPendingFourteenthMonth =! this.isActiveOwedPendingFourteenthMonth;
+        this.isActiveOwedPendingFourteenthMonth?
+        this.render2.addClass(this.$panelOwedPendingFourteenthMonth.nativeElement, 'active'):
+        this.render2.removeClass(this.$panelOwedPendingFourteenthMonth.nativeElement, 'active');
+        break;
+      case 'owedFourteenthMonth':
+        this.isActiveOwedFourteenthMonth =! this.isActiveOwedFourteenthMonth;
+        this.isActiveOwedFourteenthMonth?
+        this.render2.addClass(this.$panelOwedFourteenthMonth.nativeElement, 'active'):
+        this.render2.removeClass(this.$panelOwedFourteenthMonth.nativeElement, 'active');
+        break;
+      case 'owedSalary':
+        this.isActiveOwedSalary =! this.isActiveOwedSalary;
+        this.isActiveOwedSalary?
+        this.render2.addClass(this.$panelOwedSalary.nativeElement, 'active'):
+        this.render2.removeClass(this.$panelOwedSalary.nativeElement, 'active');
+        break;
+      case 'owedHaveSchoolAgeChildren':
+        this.isActiveHaveSchoolAgeChildren =! this.isActiveHaveSchoolAgeChildren;
+        this.isActiveHaveSchoolAgeChildren?
+        this.render2.addClass(this.$panelHaveSchoolAgeChildren.nativeElement, 'active'):
+        this.render2.removeClass(this.$panelHaveSchoolAgeChildren.nativeElement, 'active');
+        break;
+      case 'owedHistorySalaries':
+        this.isActiveOwedHistorySalaries =! this.isActiveOwedHistorySalaries;
+        this.isActiveOwedHistorySalaries?
+        this.render2.addClass(this.$panelOwedHistorySalaries.nativeElement, 'active'):
+        this.render2.removeClass(this.$panelOwedHistorySalaries.nativeElement, 'active');
+        break; 
+      case 'owedOtherPayments' :
+        this.isActiveOwedOtherPayments =! this.isActiveOwedOtherPayments;
+        this.isActiveOwedOtherPayments?
+        this.render2.addClass(this.$panelOwedOtherPayments.nativeElement, 'active'):
+        this.render2.removeClass(this.$panelOwedOtherPayments.nativeElement, 'active');
         break;
     }
   }
