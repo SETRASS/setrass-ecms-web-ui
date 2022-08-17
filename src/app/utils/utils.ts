@@ -14,3 +14,16 @@ export function getYearSelect(startDate: string, endDate: string){
     }
     return years;
 }
+
+export function setDataSalaryCalculationStore(data: object) {
+    localStorage.setItem('salary-calculation',JSON.stringify(data));
+}
+
+export function getDataStore(item: string) {
+    return JSON.parse(localStorage.getItem(item)!);
+}
+
+
+export function setDataCacheStore(data: object) {
+    localStorage.setItem('cache',JSON.stringify(data));
+}

@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TerminationContractType } from 'src/app/models/enums/termination-contract-type.enum';
 import { CalculoPrestacionesService } from 'src/app/modules/services/calculo-prestaciones/calculo-prestaciones.service';
+import { getDataStore } from 'src/app/utils/utils';
 import { ToolbarService } from 'src/app/_metronic/layout/components/toolbar/toolbar.service';
 import { CalculoPrestacionesComponent } from '../../pages/calculo-prestaciones/calculo-prestaciones.component';
 
@@ -21,48 +22,50 @@ export class DerechosIdemnizacionesComponent implements OnInit {
   formCompensationRight: FormGroup;
 
   store = {
-    forewarningNotice: {
-      amount: 0.00,
-      time: "60 dias",
-      factorAmount: 0.00,
-      formula: "60 dias X 0.00",
-      currency: "L."
-    },
-    proportionalFourteenthMonthRigh: {
+    "compensationRights":{
+      forewarningNotice: {
         amount: 0.00,
-        time: "",
+        time: "60 dias",
         factorAmount: 0.00,
-        formula: "",
+        formula: "60 dias X 0.00",
         currency: "L."
-    },
-    proportionalThirteenthMonthRight: {
-        amount: 0.00,
-        time: "",
-        factorAmount: 0.00,
-        formula: "",
-        currency: "L."
-    },
-    proportionalVacationPayment: {
-        amount: 0.00,
-        time: "",
-        factorAmount: 0.00,
-        formula: "",
-        currency: "L."
-    },
-    total: 0,
-    unemploymentAid: {
-        amount: 0.00,
-        time: "",
-        factorAmount: 0.00,
-        formula: "",
-        currency: "L."
-    },
-    unemploymentAidProportional: {
-        amount: 0.00,
-        time: "",
-        factorAmount: 0.00,
-        formula: "",
-        currency: "L."
+      },
+      proportionalFourteenthMonthRight: {
+          amount: 0.00,
+          time: "",
+          factorAmount: 0.00,
+          formula: "",
+          currency: "L."
+      },
+      proportionalThirteenthMonthRight: {
+          amount: 0.00,
+          time: "",
+          factorAmount: 0.00,
+          formula: "",
+          currency: "L."
+      },
+      proportionalVacation: {
+          amount: 0.00,
+          time: "",
+          factorAmount: 0.00,
+          formula: "",
+          currency: "L."
+      },
+      total: 0,
+      unemploymentAid: {
+          amount: 0.00,
+          time: "",
+          factorAmount: 0.00,
+          formula: "",
+          currency: "L."
+      },
+      unemploymentAidProportional: {
+          amount: 0.00,
+          time: "",
+          factorAmount: 0.00,
+          formula: "",
+          currency: "L."
+      }
     }
   }
 
@@ -73,13 +76,16 @@ export class DerechosIdemnizacionesComponent implements OnInit {
     public contractType: ToolbarService, 
     private render2: Renderer2,
     private calculoPrestacionesService: CalculoPrestacionesService,
-    private route: ActivatedRoute,
-    private ruta: Router
+    private route: Router
     ) {
       
    }
 
   ngOnInit(): void {
+
+    
+    this.store = getDataStore('salary-calculation');
+
     this.currentContractType = this.contractType.terminationContractType;
     this.calculoPrestacionesService
     .terminationContractType$.subscribe((option: TerminationContractType) => {
@@ -103,9 +109,7 @@ export class DerechosIdemnizacionesComponent implements OnInit {
   }
 
   nextStep(){
-    this.ruta.navigate(['.'],{});
-    console.log(this.route);
-    console.log(this.ruta);
+    this.route.navigateByUrl('/dashboard#other-rights');
   }
 
 
