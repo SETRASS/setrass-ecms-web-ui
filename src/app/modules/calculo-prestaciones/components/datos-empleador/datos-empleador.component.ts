@@ -154,6 +154,10 @@ export class DatosEmpleadorComponent implements OnInit {
       if (this.formEmployer.get('speciesSalary')?.valid && this.stepper.getCurrentStepIndex() === 4) {
         return this.stepper.goNext();
       }
+      
+      if (this.formEmployer.get('historySalary')?.valid && this.stepper.getCurrentStepIndex() === 5) {
+        return this.stepper.goNext();
+      }
     });
   }
 
@@ -506,7 +510,7 @@ export class DatosEmpleadorComponent implements OnInit {
     if (!this.saveButtonIsOk) {
       this.saveButtonIsOk = true;
       this.spinnerShow = true;
-      this.calculoPrestacionesService.sendSalaryEmployeeInfo(data).subscribe(value => {
+      this.calculoPrestacionesService.sendCompensationsRightsInfo(data).subscribe(value => {
         this.saveButtonText = "Realizar Calculo";
         this.spinnerShow = false;
       });
@@ -514,7 +518,7 @@ export class DatosEmpleadorComponent implements OnInit {
 
     if (this.saveButtonIsOk) {
       this.spinnerShow = false;
-      this.calculoPrestacionesService.sendSalaryEmployeeCompute(data)
+      this.calculoPrestacionesService.sendOtherRightsCompute(data)
         .subscribe((response: any) => {
           this.calculoPrestacionesService.objectGlobal = Object.assign(this.calculoPrestacionesService.objectGlobal, response);
           console.log('Global',this.calculoPrestacionesService.objectGlobal);

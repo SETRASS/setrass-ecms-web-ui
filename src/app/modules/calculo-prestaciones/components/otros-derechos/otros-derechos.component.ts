@@ -1,5 +1,6 @@
 import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { FormBuilder, FormsModule ,FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-otros-derechos',
@@ -23,7 +24,11 @@ export class OtrosDerechosComponent implements OnInit {
   isActivePregnancyStatus: boolean = false;
   isActiveDaysOffPregnancy: boolean = false;
 
-  constructor(private formBuilder: FormBuilder, private render2: Renderer2) { }
+  constructor(
+    private formBuilder: FormBuilder, 
+    private render2: Renderer2,
+    private route: Router
+  ) { }
 
   ngOnInit(): void {
   }
@@ -61,6 +66,7 @@ export class OtrosDerechosComponent implements OnInit {
 
   recalculo(){
     this.render2.addClass(this.$overlay.nativeElement, 'active-overlay');
+    this.route.navigateByUrl('/dashboard#compensation-rights');
     
     /*this.calculoPrestacionesService
     .sendSalaryEmployeeCompute().subscribe();*/

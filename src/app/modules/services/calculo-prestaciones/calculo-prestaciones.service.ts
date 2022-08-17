@@ -54,12 +54,12 @@ export class CalculoPrestacionesService extends BaseHttpService {
   }
   
   // Salary Info Request
-  sendSalaryEmployeeInfo(data: any): Observable<any[]> {
+  sendCompensationsRightsInfo(data: any): Observable<any[]> {
     return this.postRequest<any[]>(`${this.baseUrl}/calculo-prestaciones/salary-info-req/v1/compensations-rights/compute`, data);
   }
 
   /* Sending a request to the backend to compute the salary. */
-  sendSalaryEmployeeCompute(data: any): Observable<any[]> {
+  sendOtherRightsCompute(data: any): Observable<any[]> {
     return this.postRequest<any[]>(`${this.baseUrl}/calculo-prestaciones/salary-info-req/v1/other-rights/compute`, data);
   }
 }

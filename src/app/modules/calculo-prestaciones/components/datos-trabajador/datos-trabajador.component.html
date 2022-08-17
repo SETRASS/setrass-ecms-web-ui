@@ -1335,14 +1335,7 @@
                     </div>
                   </div>
                 </div>                
-              </div>              
-              <!-- <div *ngIf="speciesSalaryValue == 'vivienda'" class="row mb-10">
-                <div class="col-sm-12">
-                  <p> <b>Vivienda = SBM X 20%</b>  </p>
-                  <p> <b>Vivienda = {{salaryValue}} X 20%</b>  </p>
-                  <p> <b>Vivienda = {{totalSpeciesSalary('20%')}}</b>  </p>
-                </div>
-              </div> -->
+              </div>           
               <!--end::Input group-->
             </div>
             <!--end:: Salarios historicos-->
@@ -1370,12 +1363,12 @@
                     data-kt-stepper-action="submit"
                     >
                       <span class="indicator-label">
-                      {{saveButtonText}}
+                      Realizar cálculo
                       </span>
-                      <p *ngIf="saveButtonIsOk && (saveButtonText !== 'Realizar Calculo')" class="loader-btn" style="margin:0;padding: 0;"></p>
+                      <!-- <p *ngIf="saveButtonIsOk && (saveButtonText !== 'Realizar Calculo')" class="loader-btn" style="margin:0;padding: 0;"></p>
                       <span class="indicator=progress">
                         Espere un momento, por favor... <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
-                      </span>
+                      </span> -->
                     </button>
 
                     <button 

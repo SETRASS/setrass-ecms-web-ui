@@ -10,14 +10,14 @@ import {SalaryHistoryCatalogService} from "../../../services/salary-history-cata
 import {CalculoPrestacionesService} from 'src/app/modules/services/calculo-prestaciones/calculo-prestaciones.service';
 
 import { ToolbarService } from 'src/app/_metronic/layout/components/toolbar/toolbar.service';
-import { Observable } from 'rxjs';
+import { catchError, Observable } from 'rxjs';
 import { IdentificationType } from 'src/app/models/enums/identification-type.enum';
 import { LocationsQuery } from '../../state/locations/locations.query';
 import { Locations} from 'src/app/models/locations.model';
 import { WorkerPersonEmployerRequestDto } from 'src/app/models/worker-person-employer-request-dto.model';
 import { EmployerDto } from 'src/app/models/employer-dto.model';
 import { WorkerPersonStore } from '../../state/workerperson-employer-request/workerperson-employer-request.store';
-import { getYearSelect } from 'src/app/utils/utils';
+import { getDataStore, getYearSelect, setDataCacheStore, setDataSalaryCalculationStore } from 'src/app/utils/utils';
 import { format } from 'date-fns';
 import { CalculoPrestacionesRequestType } from 'src/app/models/enums/calculo-prestaciones-request-type.enum';
 import { TerminationContractType } from 'src/app/models/enums/termination-contract-type.enum';
@@ -74,7 +74,7 @@ export class DatosTrabajadorComponent implements OnInit {
   isSalaryFieldDisabled: boolean =true;
   minDate: string;
   currentDataStore:object;
-  currentCacheData: object;
+  currentCacheData: any;
   
 
   //SAVE-BUTTON
@@ -111,15 +111,12 @@ export class DatosTrabajadorComponent implements OnInit {
 
   ngAfterViewInit(): void{
     this.stepperConfig();
-    this.saveButtonText=this.saveButtonIsOk ? "Realizar Calculo" : "Guardar";
+    this.saveButtonText = this.saveButtonIsOk ? "Realizar Calculo" : "Guardar";
     
     }
     
     ngOnInit(): void {
-    //search locations
-
-
-
+    
     this.lookusService.getLocations().subscribe((data) =>{
       this.locations = data;
     }, ((error?: any)=> {
@@ -145,11 +142,12 @@ export class DatosTrabajadorComponent implements OnInit {
 
     this.salaryCalculationQuery.getData().subscribe(res => this.currentDataStore=res);
     this.salaryCalculationQuery.getCache().subscribe(res => this.currentCacheData=res);
-  }
+
+    this.currentCacheData = getDataStore('cache');
+    }
     
     
-    stepperConfig()
-    {
+    stepperConfig(){
     this.stepper1 = new StepperComponent(this.stepperSteps.nativeElement, this.stepperOptions);
     this.stepper1.on("kt.stepper.previous", () => this.stepper1.goPrev());
     this.stepper1.on("kt.stepper.next", () =>{
@@ -177,69 +175,65 @@ export class DatosTrabajadorComponent implements OnInit {
     private formBuild(){
     this.formEmployee= this.formBuilder.group({
       employeeData: this.formBuilder.group({
-        employeeName: ['', [Validators.required,Validators.pattern(/^([Aa-zA-ZáéíóúÁÉÍÓÚÑñ]{2,}\s?){2,4}$/)]],
-        employeeLastName: ['', [Validators.required, Validators.pattern(/^([Aa-zA-ZáéíóúÁÉÍÓÚÑñ]{2,}\s?){2,4}$/)]],
-        employeeSex: ['Masculino', [Validators.required] ],
-        employeeAge:[,[Validators.required, Validators.minLength(14), Validators.maxLength(85), Validators.pattern(/^[0-9]+$/)]],
+        employeeName: ['Jorge adalberto', [Validators.required,Validators.pattern(/^([Aa-zA-ZáéíóúÁÉÍÓÚÑñ]{2,}\s?){2,4}$/)]],
+        employeeLastName: ['Aguilar', [Validators.required, Validators.pattern(/^([Aa-zA-ZáéíóúÁÉÍÓÚÑñ]{2,}\s?){2,4}$/)]],
+        employeeSex: ['M', [Validators.required] ],
+        employeeAge:[20,[Validators.required, Validators.minLength(14), Validators.maxLength(85), Validators.pattern(/^[0-9]+$/)]],
         typeIdentity: ['DNI', [Validators.required]],
-        identityNumber: ['', [Validators.required, Validators.minLength(13), Validators.maxLength(13), Validators.pattern(/^[0-9]+$/)]],
-        employeePhone: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(8)]],
-        employeeEmail: ['', [Validators.required, Validators.email]],
-      
+        identityNumber: ['0801199405877', [Validators.required, Validators.minLength(13), Validators.maxLength(13), Validators.pattern(/^[0-9]+$/)]],
+        employeePhone: ['32866905', [Validators.required, Validators.minLength(8), Validators.maxLength(8)]],
+        employeeEmail: ['j@mail.com', [Validators.required, Validators.email]]
       }),
+      companyData:this.formBuilder.group({
+        department: ['', [Validators.required]],
+        municipality: ['', [Validators.required]],
+        companyName: ['Empresa XY', [Validators.required, Validators.minLength(5)]],
+        economicActivity: ['', [Validators.required,]],
+        companySize:[20,[ Validators.required, Validators.pattern(/^[0-9]+$/)]],
+        personType: ['JURIDICA', [Validators.required]],
+      }), 
+      salaryData: this.formBuilder.group({
+        startDate: ['2019-06-12', [Validators.required]],
+        endDate: [this.getFutureDate(5), [Validators.required]],
+        fixedSalary: ['SI', [Validators.required]],
+        salary: [18000, [Validators.required]],
+        monthlySalaryAverage1: [0, []],
+        monthlySalaryAverage2: [0, []],
+        monthlySalaryAverage3: [0, []],
+        monthlySalaryAverage4: [0, []],
+        monthlySalaryAverage5: [0, []],
+        monthlySalaryAverage6: [0, []],
+        commissions: this.formBuilder.group({
+          monthlyCommissions1: [0, [Validators.pattern(/^[0-9]+$/)]],
+          monthlyCommissions2: [0, [Validators.pattern(/^[0-9]+$/)]],
+          monthlyCommissions3: [0, [Validators.pattern(/^[0-9]+$/)]],
+          monthlyCommissions4: [0, [Validators.pattern(/^[0-9]+$/)]],
+          monthlyCommissions5: [0, [Validators.pattern(/^[0-9]+$/)]],
+          monthlyCommissions6: [0, [Validators.pattern(/^[0-9]+$/)]]
+        }),
+        extraHours: this.formBuilder.group({
+          monthlyExtraHours1: [0, []],
+          monthlyExtraHours2: [0, []],
+          monthlyExtraHours3: [0, []],
+          monthlyExtraHours4: [0, []],
+          monthlyExtraHours5: [0, []],
+          monthlyExtraHours6: [0, []]
+        }),
+        bonuses: this.formBuilder.group({
+          monthlyBonus1: [0, []],
+          monthlyBonus2: [0, []],
+          monthlyBonus3: [0, []],
+          monthlyBonus4: [0, []],
+          monthlyBonus5: [0, []],
+          monthlyBonus6: [0, []]
+        }),
 
-    companyData:this.formBuilder.group({
-      department: ['', [Validators.required]],
-      municipality: ['', [Validators.required]],
-      companyName: ['', [Validators.required, Validators.minLength(5)]],
-      economicActivity: ['', [Validators.required,]],
-      companySize:['',[ Validators.required, Validators.pattern(/^[0-9]+$/)]],
-      personType: ['JURIDICA', [Validators.required]],
-    }), 
-    
-    salaryData: this.formBuilder.group({
-      startDate: ['2019-06-12', [Validators.required]],
-      endDate: [this.getFutureDate(5), [Validators.required]],
-      fixedSalary: ['SI', [Validators.required]],
-      salary: ['', [Validators.required]],
-      monthlySalaryAverage1: [0, []],
-      monthlySalaryAverage2: [0, []],
-      monthlySalaryAverage3: [0, []],
-      monthlySalaryAverage4: [0, []],
-      monthlySalaryAverage5: [0, []],
-      monthlySalaryAverage6: [0, []],
-      commissions: this.formBuilder.group({
-        monthlyCommissions1: [0, [Validators.pattern(/^[0-9]+$/)]],
-        monthlyCommissions2: [0, [Validators.pattern(/^[0-9]+$/)]],
-        monthlyCommissions3: [0, [Validators.pattern(/^[0-9]+$/)]],
-        monthlyCommissions4: [0, [Validators.pattern(/^[0-9]+$/)]],
-        monthlyCommissions5: [0, [Validators.pattern(/^[0-9]+$/)]],
-        monthlyCommissions6: [0, [Validators.pattern(/^[0-9]+$/)]]
       }),
-      extraHours: this.formBuilder.group({
-        monthlyExtraHours1: [0, []],
-        monthlyExtraHours2: [0, []],
-        monthlyExtraHours3: [0, []],
-        monthlyExtraHours4: [0, []],
-        monthlyExtraHours5: [0, []],
-        monthlyExtraHours6: [0, []]
+      speciesSalary: this.formBuilder.group({
+        optionSpeciesSalary: ['NONE', [Validators.required]],
+        foodTime: ['NONE', []]
       }),
-      bonuses: this.formBuilder.group({
-        monthlyBonus1: [0, []],
-        monthlyBonus2: [0, []],
-        monthlyBonus3: [0, []],
-        monthlyBonus4: [0, []],
-        monthlyBonus5: [0, []],
-        monthlyBonus6: [0, []]
-      }),
-
-    }),
-    
-    speciesSalary: this.formBuilder.group({
-    optionSpeciesSalary: ['NONE', [Validators.required]],
-    foodTime: ['NONE', []]
-    }),
-    historySalary: this.formBuilder.array([])    
+      historySalary: this.formBuilder.array([])    
     });
     
     this.formEmployee.get('salaryData.fixedSalary')?.valueChanges.
@@ -279,7 +273,7 @@ export class DatosTrabajadorComponent implements OnInit {
     private createHistorySalaryFieldYear(anio: string, amount: number){
       return this.formBuilder.group({
         year: [anio],
-        amount: [amount, Validators.required],
+        amount: [, Validators.required],
       });
     }
     
@@ -293,6 +287,10 @@ export class DatosTrabajadorComponent implements OnInit {
     
     get isSpeciesSalaryValid() {
     return this.formEmployee.get('speciesSalary')?.valid;
+    }
+
+    get historySalaryValue() {
+      return this.formEmployee.get('historySalary')?.value;
     }
 
     getEconomicActivity(event: string) {
@@ -332,8 +330,6 @@ export class DatosTrabajadorComponent implements OnInit {
     this.currentMunicipios = this.getMunicipios(event);
     }
 
-    
-    
     getTotalAverageField(element: string) {
       let month1 = Number(this.formEmployee.get(`${element}1`)?.value);
       let month2 = Number(this.formEmployee.get(`${element}2`)?.value);
@@ -370,14 +366,10 @@ export class DatosTrabajadorComponent implements OnInit {
     getCurrentTerminationContract(){
       return this.toolbar.terminationContractType;
     }
-    
 
     postEmployeeAndEmployer(): void {
       this.render2.addClass(this.$overlay.nativeElement, 'active-overlay');
-        const {salaryData, employeeData, companyData} = this.formEmployee.value;
-        this.calculoPrestacionesService.objectGlobal.startDate = employeeData.startDate;
-        this.calculoPrestacionesService.objectGlobal.dismissalDate = employeeData.endDate;
-        this.calculoPrestacionesService.objectGlobal.fixedSalary = salaryData.fixedSalary === 'SI' ? true : false;
+      const {salaryData, employeeData, companyData} = this.formEmployee.value;
 
        //this.workerPersonStore.add(employee);
       
@@ -408,59 +400,24 @@ export class DatosTrabajadorComponent implements OnInit {
       }
         
       //this.workerPersonStore.add(data);
-      
-      console.log(data);
 
       this.calculoPrestacionesService.sendEmployeeEmployerReq(data).subscribe((response: any)=>{
-        if(response){
-          this.render2.removeClass(this.$overlay.nativeElement, 'active-overlay');
-        }
-        console.log(response);
+        response ? this.render2.removeClass(this.$overlay.nativeElement, 'active-overlay') : null;
         const { requestId, workerPersonId, employer} = response;
-        let cache ={
-          requestId,
-          workerPersonId,
-          employer
-        }
-        this.salaryCalculationStore.update(state => {
-          return {
-            cache : {
-              ...state.cache,
-              cache
-            }
-          };
-        });
+        setDataCacheStore({ requestId, workerPersonId, employer});
+        this.currentCacheData = getDataStore('cache');
         console.log(this.currentCacheData);
-
-        
-
       })
 
-      }
-
-      /*companyName: companyData.companyName,
-        economicActivity: companyData.economyActivity,
-        stardate: companyData.stardate,
-        dismissal: companyData.enddate,
-        fixedSalary: companyData.fixedSalary,
-        salary: companyData.salary,*/
-
+    }
     
     postSalaryInfoRequest() {
-      console.log("Ok");
+      this.render2.addClass(this.$overlay.nativeElement, 'active-overlay');
       const {salaryData, speciesSalary} = this.formEmployee.value;
-
       let data = {
-        /*"breastfeedingPaidHours": 0,
-        "daysOffPreAndPostNatalWasPaid": 0,
-        "daysPaidWasFiredWhilePregnant": 0,*/
         "dismissalDate": salaryData.endDate,
-        "employerId": this.EMPLOYER_ID,
+        "employerId": this.currentCacheData.employer.employerId,
         "fixedSalary": salaryData.fixedSalary === 'SI' ? true : false,
-        /*"hasForewarningNotice": true,
-        "hasTakeVacationTimeLastYear": true,
-        "howMuchOwedHolyDays": 0,
-        "howMuchOwedSeventhDay": 0,*/
         "lastSixMonthsBonusPayment": [
           salaryData.bonuses.monthlyBonus1,
           salaryData.bonuses.monthlyBonus2,
@@ -493,56 +450,92 @@ export class DatosTrabajadorComponent implements OnInit {
           salaryData.extraHours.monthlyExtraHours5,
           salaryData.extraHours.monthlyExtraHours6
         ],
-        /*"owedBonusVacations": true,
-        "owedBonusVacationsAmount": 0,
-        "owedBreastfeedingHours": false,
-        "owedDaysOffPreAndPostNatal": false,
-        "owedHolyDays": true,
-        "owedOtherPayments": true,
-        "owedOtherPaymentsAmount": 0,
-        "owedOvertime": true,
-        "owedOvertimeType": "DIURNA",
-        "owedOvertimeWork": 0,
-        "owedPaidPendingVacations": true,
-        "owedPendingVacationsYears": 0,
-        "owedSalary": false,
-        "owedSalaryAmount": 0,
-        "owedSeventhDay": false,
-        "wasFiredWhilePregnant": false,*/
-        
-        "requestId": this.REQUEST_ID,
+        "requestId": this.currentCacheData.requestId,
         "salary": Number(salaryData.salary),
         "salaryInKindOptionsType": speciesSalary.foodTime,
         "salaryInKindType": speciesSalary.optionSpeciesSalary,
         "startDate": salaryData.startDate,
         "terminationContractType": this.toolbar.terminationContractType,
-        "workerPersonId": this.WORKER_PERSON_ID,
-        
+        "workerPersonId": this.currentCacheData.workerPersonId,
+        "otherRightsRequest": {
+          "haveSchoolAgeChildren": true,
+          "historySalaries": [
+            {
+              "salary": 0,
+              "year": 0
+            }
+          ],
+          "owedBonusVacationsRequest": {
+            "owedBonusVacations": true,
+            "owedBonusVacationsAmount": 0
+          },
+          "owedFourteenthMonthRequest": [
+            {
+              "salary": 0,
+              "year": 0
+            }
+          ],
+          "owedHolyRequest": {
+            "howMuchOwedHolyDays": 0,
+            "owedHolyDays": true
+          },
+          "owedOtherPaymentsRequest": {
+            "owedOtherPayments": true,
+            "owedOtherPaymentsAmount": 0
+          },
+          "owedOvertimeRequest": {
+            "owedOvertime": true,
+            "owedOvertimeType": "DIURNA",
+            "owedOvertimeWork": 0
+          },
+          "owedPaidPendingVacationsRequest": {
+            "owedPaidPendingVacations": true,
+            "owedPendingVacationsYears": 0
+          },
+          "owedPendingFourteenthMonthRequest": {
+            "fourteenthMonthPaid": 0,
+            "owedPendingFourteenthMonth": true
+          },
+          "owedPendingThirteenthMonthRequest": {
+            "owedPendingThirteenthMonth": true,
+            "thirteenthMonthPaid": 0
+          },
+          "owedSalaryRequest": {
+            "owedSalary": true,
+            "owedSalaryAmount": 0
+          },
+          "owedSeventhDayRequest": {
+            "howMuchOwedSeventhDay": 0,
+            "owedSeventhDay": true
+          },
+          "owedThirteenthMonthRequest": [
+            {
+              "salary": 0,
+              "year": 0
+            }
+          ],
+          "pregnantRequest": {
+            "breastfeedingPaidHours": 0,
+            "daysOffPreAndPostNatalWasPaid": 0,
+            "daysPaidWasFiredWhilePregnant": 0,
+            "owedBreastfeedingHours": true,
+            "owedDaysOffPreAndPostNatal": true,
+            "wasFiredWhilePregnant": true
+          }
+        },
+        "compensationRightsRequest": {
+          "hasForewarningNotice": true,
+          "hasTakeVacationTimeLastYear": true
+        }      
       }
-
-      this.saveButtonText ="";
-
-      if(!this.saveButtonText){
-        this.saveButtonIsOk = true;
-        this.spinnerShow = true;
-        this.calculoPrestacionesService.sendSalaryEmployeeInfo(data).subscribe(value => {
-        this.saveButtonText = "Realizar Calculo";
-        this.spinnerShow = false;
-        });
-      }
-
-      if (this.saveButtonIsOk) {
-        this.spinnerShow = false;
-        this.calculoPrestacionesService.sendSalaryEmployeeCompute(data)
-          .subscribe((response: any) => {
-            this.calculoPrestacionesService.objectGlobal = Object.assign(this.calculoPrestacionesService.objectGlobal, response);
-            console.log('Global',this.calculoPrestacionesService.objectGlobal);
-            this.calculoPrestacionesService.isShowCalculoSalarial = true;
-            this.calculoPrestacionesService.isShowIndemnizaciones = true;
-          }, (catchError) => {
-            console.warn(catchError);
-          });
-      }
+      console.log(data);
+      setDataCacheStore(Object.assign(getDataStore('cache'),{historySalary: this.historySalaryValue}));
+      
+      this.calculoPrestacionesService.sendCompensationsRightsInfo(data).subscribe(response => {
+        response ? this.render2.removeClass(this.$overlay.nativeElement, 'active-overlay') : null;
+        setDataSalaryCalculationStore(response);
+        console.log(response);
+      }, (catchError) => console.warn(catchError));
     }
 
 
