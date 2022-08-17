@@ -117,7 +117,21 @@ tbody {
 
 .panel-pregnancy-status,
 .days-off-pregnancy,
-.breast-feeding-hours{
+.breast-feeding-hours,
+.salary-readjustment,
+.owed-holy-days,
+.owed-seventh-day,
+.owed-paid-pending-vacations,
+.owed-bonus-vacations,
+.owed-pending-thirteenth-month,
+.owed-thirteenth-month,
+.owed-pending-fourteenth-month,
+.owed-fourteenth-month,
+.owed.salary,
+.have-school-age-children,
+.owed-history-salaries,
+.owed-other-payment
+                     {
     visibility: collapse;
     .panel{
         display: none;
