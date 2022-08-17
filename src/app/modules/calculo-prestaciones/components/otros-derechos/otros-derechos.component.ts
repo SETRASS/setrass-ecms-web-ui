@@ -3,6 +3,7 @@ import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/co
 
 import { FormBuilder, FormsModule ,FormControl, FormGroup, Validators, FormArray } from '@angular/forms';
 import { Router } from '@angular/router';
+import { getDataStore } from 'src/app/utils/utils';
 
 
 @Component({
@@ -97,6 +98,165 @@ export class OtrosDerechosComponent implements OnInit {
       wasFiredWhilePregnant: true
     }
   };
+
+  response : any = {
+    "otherRights": {
+      "daysOffPreAndPostNatal": {
+        "amount": 0,
+        "currency": "string",
+        "factorAmount": 0,
+        "formula": "string",
+        "itemName": "string",
+        "objectKeyName": "string",
+        "time": "string"
+      },
+      "educationalBonusResponse": {
+        "amount": 0,
+        "currency": "string",
+        "factorAmount": 0,
+        "formula": "string",
+        "itemName": "string",
+        "objectKeyName": "string",
+        "time": "string"
+      },
+      "firedForWhilePregnant": {
+        "amount": 0,
+        "currency": "string",
+        "factorAmount": 0,
+        "formula": "string",
+        "itemName": "string",
+        "objectKeyName": "string",
+        "time": "string"
+      },
+      "owedBonusVacations": {
+        "amount": 0,
+        "currency": "string",
+        "factorAmount": 0,
+        "formula": "string",
+        "itemName": "string",
+        "objectKeyName": "string",
+        "time": "string"
+      },
+      "owedBreastfeedingHours": {
+        "amount": 0,
+        "currency": "string",
+        "factorAmount": 0,
+        "formula": "string",
+        "itemName": "string",
+        "objectKeyName": "string",
+        "time": "string"
+      },
+      "owedFourteenthMonth": {
+        "amount": 0,
+        "currency": "string",
+        "factorAmount": 0,
+        "formula": "string",
+        "itemName": "string",
+        "objectKeyName": "string",
+        "time": "string"
+      },
+      "owedHolyDays": {
+        "amount": 0,
+        "currency": "string",
+        "factorAmount": 0,
+        "formula": "string",
+        "itemName": "string",
+        "objectKeyName": "string",
+        "time": "string"
+      },
+      "owedOtherPayments": {
+        "amount": 0,
+        "currency": "string",
+        "factorAmount": 0,
+        "formula": "string",
+        "itemName": "string",
+        "objectKeyName": "string",
+        "time": "string"
+      },
+      "owedOvertime": {
+        "amount": 0,
+        "currency": "string",
+        "factorAmount": 0,
+        "formula": "string",
+        "itemName": "string",
+        "objectKeyName": "string",
+        "time": "string"
+      },
+      "owedPaidPendingVacations": {
+        "amount": 0,
+        "currency": "string",
+        "factorAmount": 0,
+        "formula": "string",
+        "itemName": "string",
+        "objectKeyName": "string",
+        "time": "string"
+      },
+      "owedPendingFourteenthMonth": {
+        "amount": 0,
+        "currency": "string",
+        "factorAmount": 0,
+        "formula": "string",
+        "itemName": "string",
+        "objectKeyName": "string",
+        "time": "string"
+      },
+      "owedPendingThirteenthMonth": {
+        "amount": 0,
+        "currency": "string",
+        "factorAmount": 0,
+        "formula": "string",
+        "itemName": "string",
+        "objectKeyName": "string",
+        "time": "string"
+      },
+      "owedSalary": {
+        "amount": 0,
+        "currency": "string",
+        "factorAmount": 0,
+        "formula": "string",
+        "itemName": "string",
+        "objectKeyName": "string",
+        "time": "string"
+      },
+      "owedSeventhDay": {
+        "amount": 0,
+        "currency": "string",
+        "factorAmount": 0,
+        "formula": "string",
+        "itemName": "string",
+        "objectKeyName": "string",
+        "time": "string"
+      },
+      "owedThirteenthMonth": {
+        "amount": 0,
+        "currency": "string",
+        "factorAmount": 0,
+        "formula": "string",
+        "itemName": "string",
+        "objectKeyName": "string",
+        "time": "string"
+      },
+      "salaryReadjustment": {
+        "amount": 0,
+        "currency": "string",
+        "factorAmount": 0,
+        "formula": "string",
+        "itemName": "string",
+        "objectKeyName": "string",
+        "time": "string"
+      },
+      "severanceSavings": {
+        "amount": 0,
+        "currency": "string",
+        "factorAmount": 0,
+        "formula": "string",
+        "itemName": "string",
+        "objectKeyName": "string",
+        "time": "string"
+      }
+    },
+
+  }
     
   
 
@@ -105,7 +265,9 @@ export class OtrosDerechosComponent implements OnInit {
     pregnancyStatus: new FormControl('',[Validators.pattern(/^[0-9]+$/)]),
     daysOffPregnancy: new FormControl ('',[Validators.pattern(/^[0-9]+$/)]),
     breastFeedingHours: new FormControl('',[Validators.pattern(/^[0-9]+$/)]),  
-    salaryReadjustment: new FormArray([]),
+    salaryReadjustment: new FormGroup({
+      status: new FormArray([])
+    }),
     owedHolyDays: new FormControl ('',[Validators.pattern(/^[0-9]+$/)]),
     owedSeventhDay: new FormControl ('',[Validators.pattern(/^[0-9]+$/)]),
     owedPaidPendingVacations: new FormControl ('',[Validators.pattern(/^[0-9]+$/)]),
@@ -149,6 +311,7 @@ export class OtrosDerechosComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.response = getDataStore('salary-calculation')
   }
 
   
@@ -183,6 +346,20 @@ export class OtrosDerechosComponent implements OnInit {
   getErrorField(element: string, errorName: string) {
     return this.formOtherRights.get(element)?.hasError(errorName);
   }
+
+  getLastTwoYearsSalaryReadjustment(){
+    let historySalaryArray = getDataStore('cache').historySalary;
+    if (historySalaryArray.length>2)
+    {
+      return historySalaryArray.splice(historySalaryArray.length-2, 2);
+      
+    }else if(historySalaryArray.length>0 && historySalaryArray.length<=2){
+      
+      return historySalaryArray;
+    }
+    }
+
+  
 
   /*totalOverTime(percentage: string) {
     if (percentage === '25%') return (Number(this.salaryValue) * 0.25).toFixed(2);

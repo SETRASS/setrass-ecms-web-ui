@@ -55,10 +55,10 @@
               <td>
               </td>
               <td>
-                <span>PEE = Días de indemnización X SPD</span>
+                <span>{{response.otherRights.firedForWhilePregnant.formula}}</span>
               </td>
               <td>
-                <span>L. </span>
+                <span> L . {{response.otherRights.firedForWhilePregnant.amount}} </span>
               </td>
               <td>
                 <span (click)="editPanel('panel-pregnancy-status')" class="svg-icon svg-icon-primary svg-icon-2hx"><svg xmlns="http://www.w3.org/2000/svg" width="24"
@@ -123,10 +123,10 @@
               <td>
               </td>
               <td>
-                <span>PDP = Días de descanso pre/post natal adeudado X SPD</span>
+                <span>{{response.otherRights.daysOffPreAndPostNatal.formula}}</span>
               </td>
               <td>
-                <span>L. 18,000.00</span>
+                <span> L . {{response.otherRights.daysOffPreAndPostNatal.amount}}</span>
               </td>
               <td>
                 <span  (click)="editPanel('days-off-pregnancy')" class="svg-icon svg-icon-primary svg-icon-2hx"><svg xmlns="http://www.w3.org/2000/svg" width="24"
@@ -191,10 +191,10 @@
               </td>
 
               <td>
-                <span>PHL=HLA x SPD/Horas diarias</span>
+                <span>{{response.otherRights.owedBreastfeedingHours.formula}}</span>
               </td>
               <td>
-                <span>L. 12,000.00</span>
+                <span> L . {{response.otherRights.owedBreastfeedingHours.amount}}</span>
               </td>
               <td>
                 <span (click)="editPanel('breast-feeding-hours')" class="svg-icon svg-icon-primary svg-icon-2hx"><svg xmlns="http://www.w3.org/2000/svg" width="24"
@@ -260,10 +260,10 @@
                 </div>
               </td>
               <td>
-                <span>RA= RA1+RA+RA3</span>
+                <span>{{response.otherRights.salaryReadjustment.formula}}</span>
               </td>
               <td>
-                <span>L. 12,000.00</span>
+                <span> L . {{response.otherRights.salaryReadjustment.amount}}</span>
               </td>
               <td>
                 <span  (click)="editPanel('salary-readjustment')" class="svg-icon svg-icon-primary svg-icon-2hx"><svg xmlns="http://www.w3.org/2000/svg" width="24"
@@ -289,7 +289,6 @@
                     </td>
                     <td>
                       <input 
-                      formControlName="salaryReadjustment"
                       [class.is-valid]="isValidField('salaryReadjustment')"
                       [class.is-invalid]="isInvalidField('salaryReadjustment')"
                       type="number" 
@@ -328,10 +327,10 @@
                 <div class="col-sm-12 col-lg-6"></div>
               </td>
               <td>
-                <span>Dias Adeudados x SPD</span>
+                <span>{{response.otherRights.owedHolyDays.formula}}</span>
               </td>
               <td>
-                <span>L. 4,000.00</span>
+                <span> L . {{response.otherRights.owedHolyDays.amount}}</span>
               </td>
               <td>
                 <span (click)="editPanel('owed-holy-days')" class="svg-icon svg-icon-primary svg-icon-2hx"><svg xmlns="http://www.w3.org/2000/svg" width="24"
@@ -397,10 +396,10 @@
                 <div class="col-sm-12 col-lg-6"> </div>
               </td>
               <td>
-                <span>Septimo día adeudado X SPD </span>
+                <span>{{response.otherRights.owedSeventhDay.formula}}</span>
               </td>
               <td>
-                <span>L. 5,932.51</span>
+                <span> L . {{response.otherRights.owedSeventhDay.amount}}</span>
               </td>
               <td>
                 <span (click)="editPanel('owed-seventh-day')" class="svg-icon svg-icon-primary svg-icon-2hx"><svg xmlns="http://www.w3.org/2000/svg" width="24"
@@ -472,10 +471,10 @@
                 <div class="col-sm-12 col-lg-6"> </div>
               </td>
               <td>
-                <span>Vacaciones adeudadas dias X SOPD</span>
+                <span>{{response.otherRights.owedPaidPendingVacations.formula}}</span>
               </td>
               <td>
-                <span>L. 5,932.51</span>
+                <span> L . {{response.otherRights.owedPaidPendingVacations.amount}}</span>
               </td>
               <td>
                 <span (click)="editPanel('owed-paid-pending-vacations')" class="svg-icon svg-icon-primary svg-icon-2hx"><svg xmlns="http://www.w3.org/2000/svg" width="24"
@@ -540,10 +539,10 @@
                 <div class="col-sm-12 col-lg-6"> </div>
               </td>
               <td>
-                <span></span>
+                <span>{{response.otherRights.owedBonusVacations.formula}}</span>
               </td>
               <td>
-                <span>L. 7,762.00</span>
+                <span> L .  {{response.otherRights.owedBonusVacations.amount}}</span>
               </td>
               <td>
                 <span (click)="editPanel('owed-bonus-vacations')" class="svg-icon svg-icon-primary svg-icon-2hx"><svg xmlns="http://www.w3.org/2000/svg" width="24"
@@ -607,10 +606,10 @@
                 <div class="col-sm-12 col-lg-6"> </div>
               </td>
               <td>
-                <span>DDPP x 13 Diario</span>
+                <span>{{response.otherRights.owedPendingThirteenthMonth.formula}}</span>
               </td>
               <td>
-                <span>L. 9,543.00</span>
+                <span> L .  {{response.otherRights.owedPendingThirteenthMonth.amount}}</span>
               </td>
               <td>
                 <span  (click)="editPanel('owed-pending-thirteenth-month')" class="svg-icon svg-icon-primary svg-icon-2hx"><svg xmlns="http://www.w3.org/2000/svg" width="24"
@@ -676,10 +675,10 @@
                 <div class="col-sm-12 col-lg-6"> </div>
               </td>
               <td>
-                <span>13vo1 + 13vo2</span>
+                <span>{{response.otherRights.owedThirteenthMonth.formula}}</span>
               </td>
               <td>
-                <span>L. 3,000.00</span>
+                <span> L . {{response.otherRights.owedThirteenthMonth.amount}}</span>
               </td>
               <td>
                 <span (click)="editPanel('owed-thirteenth-month')" class="svg-icon svg-icon-primary svg-icon-2hx"><svg xmlns="http://www.w3.org/2000/svg" width="24"
@@ -760,10 +759,10 @@
                 <div class="col-sm-12 col-lg-6"> </div>
               </td>
               <td>
-                <span>DDPP x 14 Diario</span>
+                <span>{{response.otherRights.owedPendingFourteenthMonth.formula}}</span>
               </td>
               <td>
-                <span>L. 9,543.00</span>
+                <span> L . {{response.otherRights.owedPendingFourteenthMonth.amount}}</span>
               </td>
               <td>
                 <span  (click)="editPanel('owed-pending-fourteenth-month')" class="svg-icon svg-icon-primary svg-icon-2hx"><svg xmlns="http://www.w3.org/2000/svg" width="24"
@@ -829,10 +828,10 @@
                 <div class="col-sm-12 col-lg-6"> </div>
               </td>
               <td>
-                <span>14vo1 +14vo2</span>
+                <span>{{response.otherRights.owedFourteenthMonth.formula}}</span>
               </td>
               <td>
-                <span>L. 3,000.00</span>
+                <span> L . {{response.otherRights.owedFourteenthMonth.amount}}</span>
               </td>
               <td>
                 <span (click)="editPanel('owed-fourteenth-month')" class="svg-icon svg-icon-primary svg-icon-2hx"><svg xmlns="http://www.w3.org/2000/svg" width="24"
@@ -913,10 +912,10 @@
                 <div class="col-sm-12 col-lg-6"> </div>
               </td>
               <td>
-                <span></span>
+                <span>{{response.otherRights.owedSalary.formula}}</span>
               </td>
               <td>
-                <span>L. 9,543.00</span>
+                <span> L . {{response.otherRights.owedSalary.amount}}</span>
               </td>
               <td>
                 <span  (click)="editPanel('owed-salary')" class="svg-icon svg-icon-primary svg-icon-2hx"><svg xmlns="http://www.w3.org/2000/svg" width="24"
@@ -982,10 +981,10 @@
                 
               </td>
               <td>
-                <span></span>
+                <span>{{response.otherRights.educationalBonusResponse.formula}}</span>
               </td>
               <td>
-                <span>L. </span>
+                <span> L . {{response.otherRights.educationalBonusResponse.amount}}  </span>
               </td>
               <td>
                 <span  (click)="editPanel('have-school-age-children')" class="svg-icon svg-icon-primary svg-icon-2hx"><svg xmlns="http://www.w3.org/2000/svg" width="24"
@@ -1039,10 +1038,10 @@
                 </div>
               </td>
               <td>
-                <span>RL= año1 + año2 + año3 +año4 + año5</span>
+                <span>{{response.otherRights.severanceSavings.formula}}</span>
               </td>
               <td>
-                <span>L. 2,000.00</span>
+                <span> L . {{response.otherRights.severanceSavings.amount}}</span>
               </td>
               <td>
                 <span (click)="editPanel('owed-history-salaries')" class="svg-icon svg-icon-primary svg-icon-2hx"><svg xmlns="http://www.w3.org/2000/svg" width="24"
@@ -1094,10 +1093,10 @@
                 </div>
               </td>
               <td>
-                <span></span>
+                <span>{{response.otherRights.owedOtherPayments.formula}}</span>
               </td>
               <td>
-                <span>L. 2,000.00</span>
+                <span> L . {{response.otherRights.owedOtherPayments.amount}} </span>
               </td>
               <td>
                 <span (click)="editPanel('owed-other-payment')" class="svg-icon svg-icon-primary svg-icon-2hx"><svg xmlns="http://www.w3.org/2000/svg" width="24"
