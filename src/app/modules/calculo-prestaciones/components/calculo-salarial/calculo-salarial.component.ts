@@ -11,7 +11,7 @@ import { ToolbarService } from 'src/app/_metronic/layout/components/toolbar/tool
 
 
 @Component({
-  selector: 'app-calculo-salarial',
+  selector: 'ecms-calculo-salarial',
   templateUrl: './calculo-salarial.component.html',
   styleUrls: ['./calculo-salarial.component.scss']
 })

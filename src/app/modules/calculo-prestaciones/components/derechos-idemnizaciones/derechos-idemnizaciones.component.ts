@@ -10,7 +10,7 @@ import { CalculoPrestacionesComponent } from '../../pages/calculo-prestaciones/c
 
 
 @Component({
-  selector: 'app-derechos-idemnizaciones',
+  selector: 'ecms-derechos-idemnizaciones',
   templateUrl: './derechos-idemnizaciones.component.html',
   styleUrls: ['./derechos-idemnizaciones.component.scss']
 })

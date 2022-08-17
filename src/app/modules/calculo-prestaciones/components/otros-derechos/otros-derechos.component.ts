@@ -3,7 +3,7 @@ import { FormBuilder, FormsModule ,FormControl, FormGroup, Validators } from '@a
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-otros-derechos',
+  selector: 'ecms-otros-derechos',
   templateUrl: './otros-derechos.component.html',
   styleUrls: ['./otros-derechos.component.scss']
 })

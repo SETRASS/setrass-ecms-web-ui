@@ -150,7 +150,7 @@
         <!--begin::Content-->
         <div class="flex-row-fluid">
           <!--begin::Form-->
-          <form class="form" [formGroup]="formEmployee" (ngSubmit)="formDataSend()" novalidate="novalidate">
+          <form class="form" [formGroup]="formEmployee" novalidate="novalidate">
             <!--begin::Group-->
             <div class="">
             <!--begin::Step 1 DATOS DEL TRABAJADOR-->
@@ -1358,7 +1358,8 @@
                 <div>
                     <button 
                     #submit
-                    type="submit" 
+                    type="button"
+                    (click)="formDataSend()" 
                     class="btn btn-primary" 
                     data-kt-stepper-action="submit"
                     >
