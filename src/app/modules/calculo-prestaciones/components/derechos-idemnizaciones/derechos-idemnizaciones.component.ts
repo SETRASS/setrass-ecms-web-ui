@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TerminationContractType } from 'src/app/models/enums/termination-contract-type.enum';
 import { CalculoPrestacionesService } from 'src/app/modules/services/calculo-prestaciones/calculo-prestaciones.service';
-import { getDataStore } from 'src/app/utils/utils';
+import { getDataStore, setDataSalaryCalculationStore } from 'src/app/utils/utils';
 import { ToolbarService } from 'src/app/_metronic/layout/components/toolbar/toolbar.service';
 import { CalculoPrestacionesComponent } from '../../pages/calculo-prestaciones/calculo-prestaciones.component';
 
@@ -66,7 +66,73 @@ export class DerechosIdemnizacionesComponent implements OnInit {
           formula: "",
           currency: "L."
       }
-    }
+    },
+    "otherRightsRequest": {
+      "haveSchoolAgeChildren": true,
+      "historySalaries": [
+        {
+          "salary": 0,
+          "year": 0
+        }
+      ],
+      "owedBonusVacationsRequest": {
+        "owedBonusVacations": true,
+        "owedBonusVacationsAmount": 0
+      },
+      "owedFourteenthMonthRequest": [
+        {
+          "salary": 0,
+          "year": 0
+        }
+      ],
+      "owedHolyRequest": {
+        "howMuchOwedHolyDays": 0,
+        "owedHolyDays": true
+      },
+      "owedOtherPaymentsRequest": {
+        "owedOtherPayments": true,
+        "owedOtherPaymentsAmount": 0
+      },
+      "owedOvertimeRequest": {
+        "owedOvertime": true,
+        "owedOvertimeType": "DIURNA",
+        "owedOvertimeWork": 0
+      },
+      "owedPaidPendingVacationsRequest": {
+        "owedPaidPendingVacations": true,
+        "owedPendingVacationsYears": 0
+      },
+      "owedPendingFourteenthMonthRequest": {
+        "fourteenthMonthPaid": 0,
+        "owedPendingFourteenthMonth": true
+      },
+      "owedPendingThirteenthMonthRequest": {
+        "owedPendingThirteenthMonth": true,
+        "thirteenthMonthPaid": 0
+      },
+      "owedSalaryRequest": {
+        "owedSalary": true,
+        "owedSalaryAmount": 0
+      },
+      "owedSeventhDayRequest": {
+        "howMuchOwedSeventhDay": 0,
+        "owedSeventhDay": true
+      },
+      "owedThirteenthMonthRequest": [
+        {
+          "salary": 0,
+          "year": 0
+        }
+      ],
+      "pregnantRequest": {
+        "breastfeedingPaidHours": 0,
+        "daysOffPreAndPostNatalWasPaid": 0,
+        "daysPaidWasFiredWhilePregnant": 0,
+        "owedBreastfeedingHours": true,
+        "owedDaysOffPreAndPostNatal": true,
+        "wasFiredWhilePregnant": true
+      }
+    },
   }
 
   hasForewarningNotice: boolean = true; 
@@ -74,8 +140,8 @@ export class DerechosIdemnizacionesComponent implements OnInit {
 
   constructor(
     public contractType: ToolbarService, 
-    private render2: Renderer2,
     private calculoPrestacionesService: CalculoPrestacionesService,
+    private render2: Renderer2,
     private route: Router
     ) {
       
@@ -101,11 +167,24 @@ export class DerechosIdemnizacionesComponent implements OnInit {
 
   recalculo(){
     this.render2.addClass(this.$overlay.nativeElement, 'active-overlay');
-
-    /*this.calculoPrestacionesService
-    .sendSalaryEmployeeCompute().subscribe();*/
-
-    setTimeout(() => this.render2.removeClass(this.$overlay.nativeElement, 'active-overlay'), 4000);
+    const {workerPersonId, requestId, employer} = getDataStore('cache');
+    console.log({workerPersonId, requestId, employer});
+    let dataRequest = {
+      "compensationRightsRequest": {
+        "hasForewarningNotice": this.hasForewarningNotice,
+        "hasTakeVacationTimeLastYear": this.hasProportionalVacationPay
+      },
+      "terminationContractType": this.contractType.terminationContractType,
+      "workerPersonId": workerPersonId,
+      "employerId": employer.employerId,
+      "requestId": requestId
+    }
+    this.calculoPrestacionesService.sendCompensationsRightsInfo(dataRequest)
+    .subscribe((res:any) => {
+      res?this.render2.removeClass(this.$overlay.nativeElement, 'active-overlay'):null;
+      setDataSalaryCalculationStore(res);
+      this.store = getDataStore('salary-calculation');
+    });
   }
 
   nextStep(){

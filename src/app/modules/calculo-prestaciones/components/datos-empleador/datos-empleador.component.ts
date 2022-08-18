@@ -4,7 +4,7 @@ import { format } from 'date-fns';
 
 import {IStepperOptions, StepperComponent, ToggleComponent} from 'src/app/_metronic/kt/components';
 import {PersonType} from 'src/app/models/enums/person-type.enum';
-import { getYearSelect } from '../../../../utils/utils';
+import { getDataStore, getYearSelect, setDataCacheStore, setDataSalaryCalculationStore } from '../../../../utils/utils';
 
 import {LookupsService} from "../../../services/lookups/lookups.service";
 import {SalaryHistoryCatalogService} from "../../../services/salary-history-catalog/salary-history-catalog.service";
@@ -20,6 +20,7 @@ import { Locations } from 'src/app/models/locations.model';
 import { CalculoPrestacionesRequestType } from 'src/app/models/enums/calculo-prestaciones-request-type.enum';
 import { WorkerPersonEmployerRequestDto } from 'src/app/models/worker-person-employer-request-dto.model';
 import { TerminationContractType } from 'src/app/models/enums/termination-contract-type.enum';
+import { Router } from '@angular/router';
 
 
 
@@ -32,6 +33,7 @@ export class DatosEmpleadorComponent implements OnInit {
 
   // Variables
   @ViewChild('kt_stepper_vertical') stepperSteps: ElementRef;
+  @ViewChild('overlay') $overlay: ElementRef;
   @ViewChild('salary') salaryField: ElementRef;
   @ViewChild('submit') btnSubmit: ElementRef;
   @ViewChild('historySalaryYearField') txtHistorySalary: ElementRef;
@@ -55,6 +57,7 @@ export class DatosEmpleadorComponent implements OnInit {
   currentMunicipios: any[];
   currentEconomicActivity: any[];
   currentTerminationContractType: TerminationContractType;
+  currentCacheData: any;
   totalSalaryAverage = 0;
   totalCommissionsAverage = 0;
   totalExtraHoursAverage = 0;
@@ -85,7 +88,8 @@ export class DatosEmpleadorComponent implements OnInit {
     private formBuilder: FormBuilder,
     private render2: Renderer2,
     private employerStore: EmployerStore,
-    private locationsQuery: LocationsQuery
+    private locationsQuery: LocationsQuery,
+    private route: Router
     ) {
     this.formBuild();
   }
@@ -105,10 +109,6 @@ export class DatosEmpleadorComponent implements OnInit {
       const err = error.message | error;
       console.warn(err);
     }));
-
-    /* this.locations$.subscribe((locations) => {
-      this.locations = locations;
-    }); */
 
     // initialize economic activities
     this.salaryHistoryCatalogService.getEconomicActivities().subscribe(
@@ -296,6 +296,10 @@ export class DatosEmpleadorComponent implements OnInit {
     return this.formEmployer.get('historySalary') as FormArray;
   }
 
+  get historySalaryValue() {
+    return this.formEmployer.get('historySalary')?.value;
+  }
+
   /**
    * It takes a number of days and returns a date in the future
    * @param {number} majorDays - number - The number of days you want to add to the current date.
@@ -376,7 +380,7 @@ export class DatosEmpleadorComponent implements OnInit {
   }
 
   postEmployeeAndEmployer(): void {
-    console.log("Ok");
+    this.render2.addClass(this.$overlay.nativeElement, 'active-overlay');
     const {companyData, employeeData, salaryData} = this.formEmployer.value;
     this.calculoPrestacionesService.objectGlobal.startDate = employeeData.startDate;
     this.calculoPrestacionesService.objectGlobal.dismissalDate = employeeData.endDate;
@@ -411,37 +415,23 @@ export class DatosEmpleadorComponent implements OnInit {
       requestType: this.getCurrentRequestType(),
       terminationContractType: this.getCurrentTerminationContract()
     }
-    console.log('REQUEST: ',data);
+    
     this.calculoPrestacionesService.sendEmployeeEmployerReq(data)
     .subscribe((response: any) => {
-      console.log(response); 
-      const {employerId, requestId, workerPersonId, employer} = response;
-      this.EMPLOYER_ID = employerId;
-      this.REQUEST_ID = requestId;
-      this.WORKER_PERSON_ID = workerPersonId;
-      this.calculoPrestacionesService.objectGlobal.employerId = employerId;
-      this.calculoPrestacionesService.objectGlobal.requestId = requestId;
-      this.calculoPrestacionesService.objectGlobal.workerPersonId = workerPersonId;
-      this.calculoPrestacionesService.objectGlobal.employer = employer;
-      console.log(this.REQUEST_ID);
-      console.log(response);
+      response ? this.render2.removeClass(this.$overlay.nativeElement, 'active-overlay') : null;
+      const {requestId, workerPersonId, employer} = response;
+      setDataCacheStore({employer, requestId, workerPersonId});
+      this.currentCacheData = getDataStore('cache');
     })
   }
 
   postSalaryInfoRequest() {
-    console.log("Ok");
+    this.render2.addClass(this.$overlay.nativeElement, 'active-overlay');
     const {salaryData, speciesSalary} = this.formEmployer.value;
     let data = {
-      "breastfeedingPaidHours": 0,
-      "daysOffPreAndPostNatalWasPaid": 0,
-      "daysPaidWasFiredWhilePregnant": 0,
       "dismissalDate": salaryData.endDate,
-      "employerId": this.EMPLOYER_ID,
+      "employerId": this.currentCacheData.employer.employerId,
       "fixedSalary": salaryData.fixedSalary === 'SI' ? true : false,
-      "hasForewarningNotice": true,
-      "hasTakeVacationTimeLastYear": true,
-      "howMuchOwedHolyDays": 0,
-      "howMuchOwedSeventhDay": 0,
       "lastSixMonthsBonusPayment": [
         salaryData.bonuses.monthlyBonus1,
         salaryData.bonuses.monthlyBonus2,
@@ -474,54 +464,30 @@ export class DatosEmpleadorComponent implements OnInit {
         salaryData.extraHours.monthlyExtraHours5,
         salaryData.extraHours.monthlyExtraHours6
       ],
-      "owedBonusVacations": true,
-      "owedBonusVacationsAmount": 0,
-      "owedBreastfeedingHours": false,
-      "owedDaysOffPreAndPostNatal": false,
-      "owedHolyDays": true,
-      "owedOtherPayments": true,
-      "owedOtherPaymentsAmount": 0,
-      "owedOvertime": true,
-      "owedOvertimeType": "DIURNA",
-      "owedOvertimeWork": 0,
-      "owedPaidPendingVacations": true,
-      "owedPendingVacationsYears": 0,
-      "owedSalary": false,
-      "owedSalaryAmount": 0,
-      "owedSeventhDay": false,
-      "requestId": this.REQUEST_ID,
+      "requestId": this.currentCacheData.requestId,
+      "workerPersonId": this.currentCacheData.workerPersonId,
       "salary": Number(salaryData.salary),
       "salaryInKindOptionsType": speciesSalary.foodTime,
       "salaryInKindType": speciesSalary.optionSpeciesSalary,
       "startDate": salaryData.startDate,
       "terminationContractType": this.toolbarService.terminationContractType,
       "wasFiredWhilePregnant": false,
-      "workerPersonId": this.WORKER_PERSON_ID
+      "compensationRightsRequest": {
+        "hasForewarningNotice": true,
+        "hasTakeVacationTimeLastYear": true
+      }
     }
-
-    this.saveButtonText = "";
-
-    if (!this.saveButtonIsOk) {
-      this.saveButtonIsOk = true;
-      this.spinnerShow = true;
-      this.calculoPrestacionesService.sendCompensationsRightsInfo(data).subscribe(value => {
-        this.saveButtonText = "Realizar Calculo";
-        this.spinnerShow = false;
-      });
-    }
-
-    if (this.saveButtonIsOk) {
-      this.spinnerShow = false;
-      this.calculoPrestacionesService.sendOtherRightsCompute(data)
-        .subscribe((response: any) => {
-          this.calculoPrestacionesService.objectGlobal = Object.assign(this.calculoPrestacionesService.objectGlobal, response);
-          console.log('Global',this.calculoPrestacionesService.objectGlobal);
-          this.calculoPrestacionesService.isShowCalculoSalarial = true;
-          this.calculoPrestacionesService.isShowIndemnizaciones = true;
-        }, (catchError) => {
-          console.warn(catchError);
-        });
-    }
+    setDataCacheStore(Object.assign(getDataStore('cache'),{historySalary: this.historySalaryValue}));
+    this.calculoPrestacionesService.sendCompensationsRightsInfo(data)
+    .subscribe(value => {
+      value ? this.render2.removeClass(this.$overlay.nativeElement, 'active-overlay') : null;
+      setDataSalaryCalculationStore(value);
+      this.calculoPrestacionesService.isShowCalculoSalarial$.emit(true);
+      this.calculoPrestacionesService.isShowCompensationRights$.emit(true);
+      setTimeout(() => {
+        this.route.navigate(['/dashboard'], {fragment: 'compensation-rights'});
+      }, 2000); 
+    });
   }
 
   getCurrentRequestType(){

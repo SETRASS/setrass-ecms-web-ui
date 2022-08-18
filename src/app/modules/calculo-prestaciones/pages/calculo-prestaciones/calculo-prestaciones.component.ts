@@ -21,13 +21,7 @@ export class CalculoPrestacionesComponent implements OnInit, AfterViewInit {
     public calculoPrestacionesService: CalculoPrestacionesService) { }
   
     ngAfterViewInit(): void {  
-      this.calculoPrestacionesService.isShowCalculoSalarial$.subscribe( val => {  
-        setTimeout(() => {
-          console.log('Pasados 3 segundos', val);
-          this.showSalaryCalculation = true;
-          console.log('var showSalaryCalculation: ', this.showSalaryCalculation);
-        }, 3000);
-      });
+      
     }
 
   ngOnInit(): void {
@@ -35,6 +29,11 @@ export class CalculoPrestacionesComponent implements OnInit, AfterViewInit {
 
     this.calculoPrestacionesService.userTypeOf$.subscribe(value => {
       this.userType = value;
+    });
+
+    this.calculoPrestacionesService.isShowCalculoSalarial$.subscribe( val => {
+      console.log('Compensation Rights: ', val);      
+      this.showSalaryCalculation = true;
     });
 
     this.calculoPrestacionesService.isShowCompensationRights$.subscribe(val => {

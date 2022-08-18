@@ -46,9 +46,7 @@ export class CalculoPrestacionesService extends BaseHttpService {
     private workerPersonStore: WorkerPersonStore,
     ) {
     super(http);
-    setTimeout(() => {
-      this.isShowCalculoSalarial$.emit(true);
-    }, 4000);
+    
   }
 
   sendEmployeeEmployerReq(data: WorkerPersonEmployerRequestDto): Observable<WorkerPersonEmployerRequestDto> {
@@ -63,11 +61,7 @@ export class CalculoPrestacionesService extends BaseHttpService {
   
   // Salary Info Request
   sendCompensationsRightsInfo(data: any): Observable<any[]> {
-    return this.postRequest<any[]>(`${this.baseUrl}/calculo-prestaciones/salary-info-req/v1/compensations-rights/compute`, data)
-    .pipe(tap(() => {
-      this.isShowCalculoSalarial$.emit(true)
-      setTimeout(() => this.isShowCalculoSalarial$.emit(true), 3000);
-    }));
+    return this.postRequest<any[]>(`${this.baseUrl}/calculo-prestaciones/salary-info-req/v1/compensations-rights/compute`, data);
   }
 
   /* Sending a request to the backend to compute the salary. */

@@ -402,7 +402,8 @@ export class DatosTrabajadorComponent implements OnInit {
         
       //this.workerPersonStore.add(data);
 
-      this.calculoPrestacionesService.sendEmployeeEmployerReq(data).subscribe((response: any)=>{
+      this.calculoPrestacionesService.sendEmployeeEmployerReq(data)
+      .subscribe((response: any)=>{
         response ? this.render2.removeClass(this.$overlay.nativeElement, 'active-overlay') : null;
         const { requestId, workerPersonId, employer} = response;
         setDataCacheStore({ requestId, workerPersonId, employer});
@@ -417,8 +418,6 @@ export class DatosTrabajadorComponent implements OnInit {
       const {salaryData, speciesSalary} = this.formEmployee.value;
       let data = {
         "dismissalDate": salaryData.endDate,
-        "employerId": this.currentCacheData.employer.employerId,
-        "fixedSalary": salaryData.fixedSalary === 'SI' ? true : false,
         "lastSixMonthsBonusPayment": [
           salaryData.bonuses.monthlyBonus1,
           salaryData.bonuses.monthlyBonus2,
@@ -451,6 +450,8 @@ export class DatosTrabajadorComponent implements OnInit {
           salaryData.extraHours.monthlyExtraHours5,
           salaryData.extraHours.monthlyExtraHours6
         ],
+        "employerId": this.currentCacheData.employer.employerId,
+        "fixedSalary": salaryData.fixedSalary === 'SI' ? true : false,
         "requestId": this.currentCacheData.requestId,
         "salary": Number(salaryData.salary),
         "salaryInKindOptionsType": speciesSalary.foodTime,
@@ -533,12 +534,13 @@ export class DatosTrabajadorComponent implements OnInit {
       setDataCacheStore(Object.assign(getDataStore('cache'),{historySalary: this.historySalaryValue}));
       
       this.calculoPrestacionesService.sendCompensationsRightsInfo(data).subscribe(response => {
+        this.calculoPrestacionesService.isShowCalculoSalarial$.emit(true);
+        this.calculoPrestacionesService.isShowCompensationRights$.emit(true);
         if(response){
           response ? this.render2.removeClass(this.$overlay.nativeElement, 'active-overlay') : null;
           setDataSalaryCalculationStore(response);
-          //this.calculoPrestacionesService.isShowCalculoSalarial$.emit(true);
-          //this.calculoPrestacionesService.isShowCompensationRights$.emit(true);
-          console.log(response);
+          this.calculoPrestacionesService.isShowCalculoSalarial$.emit(true);
+          this.calculoPrestacionesService.isShowCompensationRights$.emit(true);
         }
       }, (catchError) => console.warn(catchError));
     }
