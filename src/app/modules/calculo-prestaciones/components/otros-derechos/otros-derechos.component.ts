@@ -313,7 +313,7 @@ export class OtrosDerechosComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.response = getDataStore('salary-calculation')
+    this.response = getDataStore('salary-calculation') ? getDataStore('salary-calculation'): this.response;
   }
 
   
@@ -351,24 +351,13 @@ export class OtrosDerechosComponent implements OnInit {
 
   getLastTwoYearsSalaryReadjustment(){
     let historySalaryArray = getDataStore('cache').historySalary;
-    if (historySalaryArray.length>2)
-    {
+    if (historySalaryArray.length>2){
       return historySalaryArray.splice(historySalaryArray.length-2, 2);
       
-    }else if(historySalaryArray.length>0 && historySalaryArray.length<=2){
-      
+    }else if(historySalaryArray.length>0 && historySalaryArray.length<=2){ 
       return historySalaryArray;
     }
-    }
-
-  
-
-  /*totalOverTime(percentage: string) {
-    if (percentage === '25%') return (Number(this.salaryValue) * 0.25).toFixed(2);
-    if (percentage === '50%') return (Number(this.salaryValue) * 0.50).toFixed(2);
-    if (percentage === '75%') return (Number(this.salaryValue) * 0.75).toFixed(2);
   }
-  }*/
 
 
   isActiveControl(controlName: string){

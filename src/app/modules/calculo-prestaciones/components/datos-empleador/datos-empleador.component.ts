@@ -381,11 +381,7 @@ export class DatosEmpleadorComponent implements OnInit {
 
   postEmployeeAndEmployer(): void {
     this.render2.addClass(this.$overlay.nativeElement, 'active-overlay');
-    const {companyData, employeeData, salaryData} = this.formEmployer.value;
-    this.calculoPrestacionesService.objectGlobal.startDate = employeeData.startDate;
-    this.calculoPrestacionesService.objectGlobal.dismissalDate = employeeData.endDate;
-    this.calculoPrestacionesService.objectGlobal.fixedSalary = salaryData.fixedSalary === 'SI' ? true : false;
-
+    const {companyData, employeeData} = this.formEmployer.value;
     let employer: EmployerDto = {
       companySize: 0,
       economicActivity: companyData.economicActivity,

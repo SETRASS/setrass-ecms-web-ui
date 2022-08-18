@@ -544,12 +544,6 @@ export class DatosTrabajadorComponent implements OnInit {
         }
       }, (catchError) => console.warn(catchError));
     }
-    
-    mostrar(){
-      this.calculoPrestacionesService.isShowCalculoSalarial$.emit(this.val);
-      this.calculoPrestacionesService.isShowCompensationRights$.emit(this.val);
-    }
-
 
     scrollAnimation() {
       window.addEventListener("scroll", () => {
@@ -590,7 +584,6 @@ export class DatosTrabajadorComponent implements OnInit {
       }
       let years = getYearSelect(this.formEmployee.get('salaryData.startDate')?.value,
       this.formEmployee.get('salaryData.endDate')?.value);
-      console.log(years);
       years.forEach((year:any) => this.historySalaryField.push(this.createHistorySalaryFieldYear(year,0)));
       const historySalaryElements : any = document.querySelectorAll('.historySalaryInput');
       historySalaryElements.forEach((element:any) => element.setAttribute('disabled','true')); 

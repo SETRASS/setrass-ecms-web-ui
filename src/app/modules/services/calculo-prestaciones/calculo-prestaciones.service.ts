@@ -2,7 +2,7 @@ import { EventEmitter, Injectable } from '@angular/core';
 import {BaseHttpService} from "../base-http.service";
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../../../environments/environment";
-import {Observable, map, tap} from "rxjs";
+import {Observable, map, tap, Subject} from "rxjs";
 import { TerminationContractType } from 'src/app/models/enums/termination-contract-type.enum';
 import { Gender } from 'src/app/models/enums/gender.enum';
 import { WorkerPersonEmployerRequestDto } from 'src/app/models/worker-person-employer-request-dto.model';
@@ -22,31 +22,25 @@ export class CalculoPrestacionesService extends BaseHttpService {
   isShowIndemnizaciones = false;
   isShowOtrosDerechos = false;
   isShowExportPdf = false;
-  objectGlobal = {
-    userTypeOf: 'empleador',
-    terminationContractType: TerminationContractType.DESPIDO,
-    gender: Gender.Masculino ? 'M' : 'F',
-    requestId: '',
-    employerId: '',
-    workerPersonId: '',
-    fixedSalary: true,
-    startDate: '',
-    dismissalDate: '',
-    employer: {}
-  }
   userTypeOf$ = new EventEmitter<CalculoPrestacionesRequestType>();
   
   terminationContractType$ = new EventEmitter<TerminationContractType>();
-  isShowCalculoSalarial$ = new EventEmitter<boolean>();
-  isShowCompensationRights$ = new EventEmitter<boolean>();
-  isShowOtherRights$ = new EventEmitter<boolean>();
+  isShowCalculoSalarial$ = new EventEmitter<boolean>(true);
+  isShowCompensationRights$ = new EventEmitter<boolean>(true);
+  isShowOtherRights$ = new EventEmitter<boolean>(true);
   isShowExportPdf$ = new EventEmitter<boolean>();
+
+  private _refresh$ = new Subject<void>();
   
   constructor(http: HttpClient,
     private workerPersonStore: WorkerPersonStore,
     ) {
     super(http);
     
+  }
+
+  get refresh$(){
+    return this._refresh$;
   }
 
   sendEmployeeEmployerReq(data: WorkerPersonEmployerRequestDto): Observable<WorkerPersonEmployerRequestDto> {
@@ -61,7 +55,12 @@ export class CalculoPrestacionesService extends BaseHttpService {
   
   // Salary Info Request
   sendCompensationsRightsInfo(data: any): Observable<any[]> {
-    return this.postRequest<any[]>(`${this.baseUrl}/calculo-prestaciones/salary-info-req/v1/compensations-rights/compute`, data);
+    return this.postRequest<any[]>(`${this.baseUrl}/calculo-prestaciones/salary-info-req/v1/compensations-rights/compute`, data)
+    .pipe(
+      tap(() => {
+        this._refresh$.next();
+      })
+    );
   }
 
   /* Sending a request to the backend to compute the salary. */

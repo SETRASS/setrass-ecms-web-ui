@@ -1,6 +1,7 @@
 import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { TerminationContractType } from 'src/app/models/enums/termination-contract-type.enum';
 import { CalculoPrestacionesService } from 'src/app/modules/services/calculo-prestaciones/calculo-prestaciones.service';
 import { getDataStore, setDataSalaryCalculationStore } from 'src/app/utils/utils';
@@ -20,6 +21,8 @@ export class DerechosIdemnizacionesComponent implements OnInit {
   @ViewChild('ForewarningNotice') $preaviso: ElementRef;
   currentContractType: TerminationContractType;
   formCompensationRight: FormGroup;
+
+  suscription: Subscription;
 
   store = {
     "compensationRights":{
@@ -148,10 +151,7 @@ export class DerechosIdemnizacionesComponent implements OnInit {
    }
 
   ngOnInit(): void {
-
-    
-    this.store = getDataStore('salary-calculation');
-
+    this.store = getDataStore('salary-calculation') ? getDataStore('salary-calculation') :this.store ;
     this.currentContractType = this.contractType.terminationContractType;
     this.calculoPrestacionesService
     .terminationContractType$.subscribe((option: TerminationContractType) => {
@@ -161,6 +161,10 @@ export class DerechosIdemnizacionesComponent implements OnInit {
       }else{
         this.render2.removeAttribute(this.$preaviso.nativeElement, 'disabled');        
       }
+    });
+
+    this.suscription = this.calculoPrestacionesService.refresh$.subscribe(() => {
+      this.store = getDataStore('salary-calculation');
     });
   }
 

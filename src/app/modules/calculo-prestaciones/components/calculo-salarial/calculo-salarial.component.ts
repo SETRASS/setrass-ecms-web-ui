@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, Renderer2, ViewChild } from '@angular/core';
 // { StepperComponent } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { getDataStore  } from '../../../../utils/utils';
@@ -8,6 +8,7 @@ import { getDataStore  } from '../../../../utils/utils';
 import { CalculoPrestacionesService } from 'src/app/modules/services/calculo-prestaciones/calculo-prestaciones.service';
 
 import { ToolbarService } from 'src/app/_metronic/layout/components/toolbar/toolbar.service';
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -16,9 +17,11 @@ import { ToolbarService } from 'src/app/_metronic/layout/components/toolbar/tool
   styleUrls: ['./calculo-salarial.component.scss']
 })
 
-export class CalculoSalarialComponent implements OnInit {
+export class CalculoSalarialComponent implements OnInit, OnDestroy {
   @ViewChild('kt_stepper_vertical') stepperSteps: ElementRef
   @ViewChild ('salaryData') salaryField: ElementRef;
+
+  suscription: Subscription;
 
 
   response: any ={
@@ -42,12 +45,25 @@ export class CalculoSalarialComponent implements OnInit {
     },
     
   }
+
+  constructor(
+    private calculoPrestacionesService: CalculoPrestacionesService
+  ){}
+
   ngAfterViewInit(): void {
   }
   
   ngOnInit(): void {
-    this.response = getDataStore('salary-calculation');
+    this.response = getDataStore('salary-calculation') ? getDataStore('salary-calculation') : this.response;
 
+    this.suscription = this.calculoPrestacionesService.refresh$.subscribe(() => {
+      this.response = getDataStore('salary-calculation');
+    });
+
+  }
+
+  ngOnDestroy(): void{
+    this.suscription.unsubscribe();
   }
 
 
