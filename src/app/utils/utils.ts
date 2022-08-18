@@ -23,7 +23,14 @@ export function getDataStore(item: string) {
     return JSON.parse(localStorage.getItem(item)!);
 }
 
-
 export function setDataCacheStore(data: object) {
     localStorage.setItem('cache',JSON.stringify(data));
+}
+
+export function clearCacheData(){
+    localStorage.removeItem('cache');
+}
+
+export function clearSalaryCalculationData(){
+    localStorage.removeItem('salary-calculation');
 }

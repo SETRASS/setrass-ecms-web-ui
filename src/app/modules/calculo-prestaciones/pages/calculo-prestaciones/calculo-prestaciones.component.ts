@@ -44,7 +44,7 @@ export class CalculoPrestacionesComponent implements OnInit, AfterViewInit {
     });
     
     this.calculoPrestacionesService.isShowExportPdf$.subscribe(val => {
-      this.showExportPdf = val;
+      this.showExportPdf = true;
     });
 
     

@@ -17,7 +17,7 @@ import { Locations} from 'src/app/models/locations.model';
 import { WorkerPersonEmployerRequestDto } from 'src/app/models/worker-person-employer-request-dto.model';
 import { EmployerDto } from 'src/app/models/employer-dto.model';
 import { WorkerPersonStore } from '../../state/workerperson-employer-request/workerperson-employer-request.store';
-import { getDataStore, getYearSelect, setDataCacheStore, setDataSalaryCalculationStore } from 'src/app/utils/utils';
+import { clearCacheData, clearSalaryCalculationData, getDataStore, getYearSelect, setDataCacheStore, setDataSalaryCalculationStore } from 'src/app/utils/utils';
 import { format } from 'date-fns';
 import { CalculoPrestacionesRequestType } from 'src/app/models/enums/calculo-prestaciones-request-type.enum';
 import { TerminationContractType } from 'src/app/models/enums/termination-contract-type.enum';
@@ -138,13 +138,16 @@ export class DatosTrabajadorComponent implements OnInit {
     }));
     
     this.calculoPrestacionesService.terminationContractType$
-    .subscribe((option:TerminationContractType) => this.currentTerminationContractType = option);
+    .subscribe((option:TerminationContractType) => {
+      console.log(option);
+      this.currentTerminationContractType = option
+    });
     this.currentTerminationContractType = this.toolbar.terminationContractType;
 
     this.salaryCalculationQuery.getData().subscribe(res => this.currentDataStore=res);
     this.salaryCalculationQuery.getCache().subscribe(res => this.currentCacheData=res);
-
-    this.currentCacheData = getDataStore('cache');
+    clearCacheData();
+    clearSalaryCalculationData();
     }
     
     
@@ -397,7 +400,7 @@ export class DatosTrabajadorComponent implements OnInit {
         phoneNumber: employeeData.employeePhone,
         requestId: 0,
         requestType: this.getCurrentRequestType(),
-        terminationContractType: this.getCurrentTerminationContract()
+        terminationContractType: this.currentTerminationContractType
       }
         
       //this.workerPersonStore.add(data);

@@ -1,5 +1,6 @@
 @import '../../../../../assets/sass/core/components/variables';
 
+
 .stepper-title{
     font-size: 15px !important;
 }
@@ -91,8 +92,12 @@ tbody {
             color: #5F6368;
             font-size: 15px;
         }
+        &:nth-child(1){
+            
+            font-weight: 500;
+            
+        }
         &:nth-child(2){
-            font-family: 'Time New Roman',serif;
             font-size: 17.2px;
             color: #5F6368;
         }
@@ -107,6 +112,14 @@ tbody {
             color: $gray-600;
             font-size: 1.2rem;
             padding-right: 5rem;
+        }
+        &:nth-child(6){
+            cursor: pointer;
+        }
+        p{
+            margin-left: 3rem !important;
+            color: $gray-600;
+            padding-right: 15rem !important;
         }
     }
     .panel{
@@ -143,7 +156,8 @@ tbody {
 .owed-thirteenth-month,
 .owed-pending-fourteenth-month,
 .owed-fourteenth-month,
-.owed.salary,
+.owed-salary,
+.owed-over-time,
 .have-school-age-children,
 .owed-history-salaries,
 .owed-other-payment
