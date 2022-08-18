@@ -9,6 +9,7 @@ import { WorkerPersonEmployerRequestDto } from 'src/app/models/worker-person-emp
 import { WorkerPersonStore } from '../../calculo-prestaciones/state/workerperson/workerperson.store';
 import { SalaryCalculationQuery } from '../../calculo-prestaciones/state/salary-calculation/salary-calculation.query';
 import { SalaryCalculationStore } from '../../calculo-prestaciones/state/salary-calculation/salary-calculation.store';
+import { CalculoPrestacionesRequestType } from 'src/app/models/enums/calculo-prestaciones-request-type.enum';
 
 
 @Injectable({
@@ -17,11 +18,10 @@ import { SalaryCalculationStore } from '../../calculo-prestaciones/state/salary-
 export class CalculoPrestacionesService extends BaseHttpService {
 
   readonly baseUrl = environment.API.SALARY_INFO_REQ;
-  isShowEmployerData = true;
-  isShowCalculoSalarial = true;
-  isShowIndemnizaciones = true;
-  isShowOtrosDerechos = true;
-  isShowExportPdf = true;
+  isShowCalculoSalarial = false;
+  isShowIndemnizaciones = false;
+  isShowOtrosDerechos = false;
+  isShowExportPdf = false;
   objectGlobal = {
     userTypeOf: 'empleador',
     terminationContractType: TerminationContractType.DESPIDO,
@@ -34,13 +34,21 @@ export class CalculoPrestacionesService extends BaseHttpService {
     dismissalDate: '',
     employer: {}
   }
-
+  userTypeOf$ = new EventEmitter<CalculoPrestacionesRequestType>();
+  
   terminationContractType$ = new EventEmitter<TerminationContractType>();
-
+  isShowCalculoSalarial$ = new EventEmitter<boolean>();
+  isShowCompensationRights$ = new EventEmitter<boolean>();
+  isShowOtherRights$ = new EventEmitter<boolean>();
+  isShowExportPdf$ = new EventEmitter<boolean>();
+  
   constructor(http: HttpClient,
     private workerPersonStore: WorkerPersonStore,
     ) {
     super(http);
+    setTimeout(() => {
+      this.isShowCalculoSalarial$.emit(true);
+    }, 4000);
   }
 
   sendEmployeeEmployerReq(data: WorkerPersonEmployerRequestDto): Observable<WorkerPersonEmployerRequestDto> {
@@ -55,7 +63,11 @@ export class CalculoPrestacionesService extends BaseHttpService {
   
   // Salary Info Request
   sendCompensationsRightsInfo(data: any): Observable<any[]> {
-    return this.postRequest<any[]>(`${this.baseUrl}/calculo-prestaciones/salary-info-req/v1/compensations-rights/compute`, data);
+    return this.postRequest<any[]>(`${this.baseUrl}/calculo-prestaciones/salary-info-req/v1/compensations-rights/compute`, data)
+    .pipe(tap(() => {
+      this.isShowCalculoSalarial$.emit(true)
+      setTimeout(() => this.isShowCalculoSalarial$.emit(true), 3000);
+    }));
   }
 
   /* Sending a request to the backend to compute the salary. */

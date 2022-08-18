@@ -43,10 +43,10 @@ export class CalculoSalarialComponent implements OnInit {
     
   }
   ngAfterViewInit(): void {
-    this.response = getDataStore('salary-calculation');
   }
-
+  
   ngOnInit(): void {
+    this.response = getDataStore('salary-calculation');
 
   }
 

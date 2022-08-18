@@ -39,6 +39,8 @@ export class ToolbarComponent implements OnInit, AfterViewInit {
   ) {}
 
   ngOnInit(): void {
+    this.calculoPrestacionesService.userTypeOf$.emit(CalculoPrestacionesRequestType.WORKER_PERSON);
+    this.calculoPrestacionesService.terminationContractType$.emit(TerminationContractType.DESPIDO);
     
     for(let item in CalculoPrestacionesRequestType){
       if(isNaN(Number(item))){
@@ -62,13 +64,12 @@ export class ToolbarComponent implements OnInit, AfterViewInit {
     this.pageTitleCssClasses = this.layout.getStringCSSClasses('pageTitle');
     this.pageTitleAttributes = this.layout.getHTMLAttributes('pageTitle');
     this.userType = this.toolbarService.userTypeOf;
-    console.log(this.userType);
     this.contractType = this.toolbarService.terminationContractType;
     console.log(this.contractType);
   }
 
   ngAfterViewInit() {
-    this.calculoPrestacionesService.terminationContractType$.emit(TerminationContractType.DESPIDO);
+    
     if (this.ktPageTitle) {
       for (const key in this.pageTitleAttributes) {
         if (

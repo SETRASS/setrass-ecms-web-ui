@@ -30,11 +30,6 @@ import { TerminationContractType } from 'src/app/models/enums/termination-contra
 })
 export class DatosEmpleadorComponent implements OnInit {
 
-  /* range = new FormGroup({
-    start: new FormControl<Date | null>(null),
-    end: new FormControl<Date | null>(null),
-  }); */
-
   // Variables
   @ViewChild('kt_stepper_vertical') stepperSteps: ElementRef;
   @ViewChild('salary') salaryField: ElementRef;
@@ -100,7 +95,6 @@ export class DatosEmpleadorComponent implements OnInit {
     this.stepperConfig();
     this.saveButtonText = this.saveButtonIsOk ? "Realizar Cálculo" : "Guardar";
   }
-
 
   ngOnInit(): void {
     

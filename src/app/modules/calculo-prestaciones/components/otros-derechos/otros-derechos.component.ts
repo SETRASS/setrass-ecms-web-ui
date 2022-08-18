@@ -3,6 +3,7 @@ import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/co
 
 import { FormBuilder, FormsModule ,FormControl, FormGroup, Validators, FormArray } from '@angular/forms';
 import { Router } from '@angular/router';
+import { CalculoPrestacionesService } from 'src/app/modules/services/calculo-prestaciones/calculo-prestaciones.service';
 import { getDataStore } from 'src/app/utils/utils';
 
 
@@ -307,7 +308,8 @@ export class OtrosDerechosComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder, 
     private render2: Renderer2,
-    private route: Router
+    private route: Router,
+    private calculoPrestacionesService: CalculoPrestacionesService
   ) { }
 
   ngOnInit(): void {
@@ -478,6 +480,11 @@ export class OtrosDerechosComponent implements OnInit {
     .sendSalaryEmployeeCompute().subscribe();*/
 
     setTimeout(() => this.render2.removeClass(this.$overlay.nativeElement, 'active-overlay'), 4000);
+  }
+
+  nextStep(){
+    this.calculoPrestacionesService.isShowExportPdf$.emit(true);
+    this.route.navigateByUrl('/dashboard#export-pdf');
   }
 
 }

@@ -109,6 +109,7 @@ export class DerechosIdemnizacionesComponent implements OnInit {
   }
 
   nextStep(){
+    this.calculoPrestacionesService.isShowOtherRights$.emit(true);
     this.route.navigateByUrl('/dashboard#other-rights');
   }
 

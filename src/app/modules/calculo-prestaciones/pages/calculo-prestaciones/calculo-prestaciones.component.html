@@ -1,11 +1,11 @@
 <ecms-datos-empleador *ngIf="toolbarService.userTypeOf === 1"></ecms-datos-empleador>
 <ecms-datos-trabajador *ngIf="toolbarService.userTypeOf === 0"></ecms-datos-trabajador>
 <br>
-<ecms-calculo-salarial *ngIf="calculoPrestacionesService.isShowCalculoSalarial"></ecms-calculo-salarial>
+<ecms-calculo-salarial *ngIf="showSalaryCalculation"></ecms-calculo-salarial>
 <br>
-<ecms-derechos-idemnizaciones *ngIf="calculoPrestacionesService.isShowIndemnizaciones"></ecms-derechos-idemnizaciones>
+<ecms-derechos-idemnizaciones *ngIf="showCompensationRights"></ecms-derechos-idemnizaciones>
 <br>
-<ecms-otros-derechos *ngIf="calculoPrestacionesService.isShowOtrosDerechos"></ecms-otros-derechos>
+<ecms-otros-derechos *ngIf="showOtherRights"></ecms-otros-derechos>
 <br>
-<ecms-calculo-generado *ngIf="calculoPrestacionesService.isShowExportPdf"></ecms-calculo-generado>
+<ecms-calculo-generado *ngIf="showExportPdf"></ecms-calculo-generado>
 <br>

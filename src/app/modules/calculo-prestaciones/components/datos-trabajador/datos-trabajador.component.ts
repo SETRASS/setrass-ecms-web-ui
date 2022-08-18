@@ -46,6 +46,7 @@ export class DatosTrabajadorComponent implements OnInit {
   stepper1: any;
   formEmployee:FormGroup;
 
+  val = true;
 
   //public currentStep : Number = 1;
   stepperOptions: IStepperOptions = {
@@ -532,13 +533,20 @@ export class DatosTrabajadorComponent implements OnInit {
       setDataCacheStore(Object.assign(getDataStore('cache'),{historySalary: this.historySalaryValue}));
       
       this.calculoPrestacionesService.sendCompensationsRightsInfo(data).subscribe(response => {
-        response ? this.render2.removeClass(this.$overlay.nativeElement, 'active-overlay') : null;
-        setDataSalaryCalculationStore(response);
-        console.log(response);
+        if(response){
+          response ? this.render2.removeClass(this.$overlay.nativeElement, 'active-overlay') : null;
+          setDataSalaryCalculationStore(response);
+          //this.calculoPrestacionesService.isShowCalculoSalarial$.emit(true);
+          //this.calculoPrestacionesService.isShowCompensationRights$.emit(true);
+          console.log(response);
+        }
       }, (catchError) => console.warn(catchError));
     }
-
-
+    
+    mostrar(){
+      this.calculoPrestacionesService.isShowCalculoSalarial$.emit(this.val);
+      this.calculoPrestacionesService.isShowCompensationRights$.emit(this.val);
+    }
 
 
     scrollAnimation() {

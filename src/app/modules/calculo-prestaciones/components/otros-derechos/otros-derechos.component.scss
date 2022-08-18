@@ -1,5 +1,21 @@
 @import '../../../../../assets/sass/core/components/variables';
 
+.stepper-title{
+    font-size: 15px !important;
+}
+
+.is-valid{
+    border: 1px solid $success;
+}
+
+.is-invalid{
+    border: 1px solid $danger;
+}
+
+.text-danger{
+    color: $danger;
+}
+
 .overlay{
     position: absolute;
     background-color: rgba($primary, .9);
