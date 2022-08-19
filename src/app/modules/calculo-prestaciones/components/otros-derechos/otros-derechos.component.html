@@ -248,12 +248,12 @@
                   a los que aplica</p>
               </td>
               <td colspan="2">
-                 <div *ngFor="let item of getLastTwoYearsSalaryReadjustment" class="row mb-5">
+                 <div *ngFor="let item of getLastTwoYearsSalaryReadjustment" class="row mb-5 mt-2">
                   <div class="col-4">
-                    <input type="text" disabled="true" class="form-control form-control-solid" [value]="item.year"/>
+                    <input type="text" disabled="true" class="form-control form-control-solid" [value]="'Año '+item.year"/>
                   </div>
                   <div class="col-4">
-                    <input type="text" disabled="true" class="form-control form-control-solid" [value]="item.salary"/>
+                    <input type="text" disabled="true" class="form-control form-control-solid" [value]="'L. '+item.salary.toFixed(2)"/>
                   </div>
                  </div>
                  
@@ -1011,6 +1011,7 @@
                     ¿Tiene Hijos en edad escolar?
                   </label>
                 </div>
+                <p>Se le hara entrega del Bono Educativo</p>
               </td>
               <td>
                 <p>{{getValueFormField('haveSchoolAgeChildren')}}</p>
@@ -1075,17 +1076,17 @@
                 </div>
                 <p>Le apareceran los salarios anuales a los que aplica.</p>
               </td>
-              <td colspan="2">
+              <td>
                 <div *ngFor="let item of getYearsHistoryArray()" class="row mb-5">
                  <div class="col-4">
-                   <input type="text" disabled="true" class="form-control form-control-solid" [value]="item.year"/>
+                   <input type="text" disabled="true" class="form-control form-control-solid" [value]="'Año '+item.year"/>
                  </div>
                  <div class="col-4">
-                   <input type="text" disabled="true" class="form-control form-control-solid" [value]="item.salary"/>
+                   <input type="text" disabled="true" class="form-control form-control-solid" [value]="'L. '+item.salary.toFixed(2)"/>
                  </div>
                 </div>
-                
              </td>
+             <td></td>
               <td style="text-align:left; font-family: serif; font-weight: inherit;">
                 {{otherRights.severanceSavings.formula}}
               </td>

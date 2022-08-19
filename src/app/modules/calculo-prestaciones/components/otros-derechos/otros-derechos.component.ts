@@ -3,7 +3,7 @@ import {FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { CalculoPrestacionesService } from 'src/app/modules/services/calculo-prestaciones/calculo-prestaciones.service';
-import { getDataGender, getDataStore } from 'src/app/utils/utils';
+import { getDataGender, getDataStore, setDataCacheStore } from 'src/app/utils/utils';
 import { OtherRights } from 'src/app/models/other-rights.model';
 
 
@@ -433,12 +433,14 @@ export class OtrosDerechosComponent implements OnInit {
         break; 
       case 'owedOtherPayments' :
         this.isActiveOwedOtherPayments =! this.isActiveOwedOtherPayments;
-        this.isActiveOwedOtherPayments?
-        this.render2.addClass(this.$panelOwedOtherPayments.nativeElement, 'active'):
-        this.render2.removeClass(this.$panelOwedOtherPayments.nativeElement, 'active');
-        this.isActiveOwedOtherPayments?
-        this.formOtherRights.get(controlName)?.addValidators([Validators.required,Validators.pattern(/^[0-9]+$/)]):
-        this.formOtherRights.get(controlName)?.removeValidators([Validators.required,Validators.pattern(/^[0-9]+$/)]);
+        if(this.isActiveOwedOtherPayments){
+          this.render2.addClass(this.$panelOwedOtherPayments.nativeElement, 'active');
+          this.formOtherRights.get(controlName)?.addValidators([Validators.required,Validators.pattern(/^[0-9]+$/)]);
+        }else{
+          this.render2.removeClass(this.$panelOwedOtherPayments.nativeElement, 'active');
+          this.formOtherRights.get(controlName)?.removeValidators([Validators.required,Validators.pattern(/^[0-9]+$/)]);
+          this.formOtherRights.get(controlName)?.setValue(0);
+        }
         break;
     }
   }
@@ -446,10 +448,16 @@ export class OtrosDerechosComponent implements OnInit {
   recalculo(){
     if(getDataStore('cache').requestId){
       this.render2.addClass(this.$overlay.nativeElement, 'active-overlay');
-      let request = getDataStore('cache');       
-      request.otherRightsRequest = {
+      let requestOld = getDataStore('cache');
+      let keyToDelete = 'compensationRightsRequest';      
+      const newRequest = Object.keys(requestOld)
+        .reduce((prev, next) => { 
+          return next === keyToDelete ? prev : {...prev, [next]: requestOld[next]}
+        },{otherRightsRequest:{}});
+      
+        newRequest.otherRightsRequest = {
         haveSchoolAgeChildren: this.isActiveHaveSchoolAgeChildren ,
-        historySalaries: request.historySalaries,
+        historySalaries: requestOld.historySalaries,
         owedBonusVacationsRequest: {
           owedBonusVacations: this.isActiveOwedBonusVacations,
           owedBonusVacationsAmount: this.formOtherRights.get('owedBonusVacations')?.value
@@ -508,11 +516,12 @@ export class OtrosDerechosComponent implements OnInit {
           wasFiredWhilePregnant: this.isActivePregnancyStatus
         }
       }
+      console.log(newRequest);
+      setDataCacheStore(newRequest);
       this.calculoPrestacionesService
-      .sendOtherRightsCompute(request).subscribe((response: any) => {
+      .sendOtherRightsCompute(newRequest).subscribe((response: any) => {
         this.render2.removeClass(this.$overlay.nativeElement, 'active-overlay');
         this.otherRights = response.otherRights;
-        //setDataCacheStore(request);
       });
     }
   }

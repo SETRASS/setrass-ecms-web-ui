@@ -432,7 +432,7 @@ export class DatosTrabajadorComponent implements OnInit {
         terminationContractType: this.currentTerminationContractType,
         compensationRightsRequest: {
           hasForewarningNotice: true,
-          hasTakeVacationTimeLastYear: true
+          hasTakeVacationTimeLastYear: false
         },
         lastSixMonthsBonusPayment: [
           salaryData.bonuses.monthlyBonus1,
@@ -466,73 +466,7 @@ export class DatosTrabajadorComponent implements OnInit {
           salaryData.extraHours.monthlyExtraHours5,
           salaryData.extraHours.monthlyExtraHours6
         ],
-        historySalaries: this.historySalaryValue,
-        otherRightsRequest: {
-          haveSchoolAgeChildren: true,
-          historySalaries: [
-            {
-              salary: 0,
-              year: 0
-            }
-          ],
-          owedBonusVacationsRequest: {
-            owedBonusVacations: true,
-            owedBonusVacationsAmount: 0
-          },
-          owedFourteenthMonthRequest: [
-            {
-              salary: 0,
-              year: 0
-            }
-          ],
-          owedHolyRequest: {
-            howMuchOwedHolyDays: 0,
-            owedHolyDays: true
-          },
-          owedOtherPaymentsRequest: {
-            owedOtherPayments: true,
-            owedOtherPaymentsAmount: 0
-          },
-          owedOvertimeRequest: {
-            owedOvertime: true,
-            owedOvertimeType: "DIURNA",
-            owedOvertimeWork: 0
-          },
-          owedPaidPendingVacationsRequest: {
-            owedPaidPendingVacations: true,
-            owedPendingVacationsYears: 0
-          },
-          owedPendingFourteenthMonthRequest: {
-            fourteenthMonthPaid: 0,
-            owedPendingFourteenthMonth: true
-          },
-          owedPendingThirteenthMonthRequest: {
-            owedPendingThirteenthMonth: true,
-            thirteenthMonthPaid: 0
-          },
-          owedSalaryRequest: {
-            owedSalary: true,
-            owedSalaryAmount: 0
-          },
-          owedSeventhDayRequest: {
-            howMuchOwedSeventhDay: 0,
-            owedSeventhDay: true
-          },
-          owedThirteenthMonthRequest: [
-            {
-              salary: 0,
-              year: 0
-            }
-          ],
-          pregnantRequest: {
-            breastfeedingPaidHours: 0,
-            daysOffPreAndPostNatalWasPaid: 0,
-            daysPaidWasFiredWhilePregnant: 0,
-            owedBreastfeedingHours: true,
-            owedDaysOffPreAndPostNatal: true,
-            wasFiredWhilePregnant: true
-          }   
-        }    
+        historySalaries: this.historySalaryValue    
       }
       console.log(data);
       setDataCacheStore(data);

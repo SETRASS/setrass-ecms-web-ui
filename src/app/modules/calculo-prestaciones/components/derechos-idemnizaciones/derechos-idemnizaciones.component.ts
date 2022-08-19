@@ -68,7 +68,7 @@ export class DerechosIdemnizacionesComponent implements OnInit {
   formCompensationRight: FormGroup;
 
   hasForewarningNotice: boolean = true; 
-  hasProportionalVacationPay: boolean = true;
+  hasProportionalVacationPay: boolean = false;
 
   constructor(
     public contractType: ToolbarService, 
