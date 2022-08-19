@@ -33,6 +33,7 @@ export class OtrosDerechosComponent implements OnInit {
   @ViewChild('panelOwedHistorySalaries') $panelOwedHistorySalaries: ElementRef;
   @ViewChild('panelOwedOtherPayments') $panelOwedOtherPayments: ElementRef;
   
+  
 
   response : any = {
     "otherRights": {
@@ -192,6 +193,9 @@ export class OtrosDerechosComponent implements OnInit {
     },
 
   }
+
+  
+
     
   
 
@@ -204,9 +208,9 @@ export class OtrosDerechosComponent implements OnInit {
     owedSeventhDay: new FormControl (0),
     owedPaidPendingVacations: new FormControl (0,[]),
     owedBonusVacations: new FormControl(0,[]),
-    owedPendingThirteenthMonth: new FormControl('',[]),
+    owedPendingThirteenthMonth: new FormControl(0,[]),
     owedThirteenthMonth: new FormControl(0, []),
-    owedPendingFourteenthMonth: new FormControl('',[]),
+    owedPendingFourteenthMonth: new FormControl(0,[]),
     owedFourteenthMonth: new FormControl(0,[]),
     owedSalary: new FormControl(0, []),
     owedOverTime: new FormControl(0, []),
@@ -216,6 +220,7 @@ export class OtrosDerechosComponent implements OnInit {
   
   });
 
+  
 
   isActivePregnancyStatus: boolean = false;
   isActiveDaysOffPregnancy: boolean = false;
@@ -303,14 +308,13 @@ export class OtrosDerechosComponent implements OnInit {
     }
   }
 
-  
-  
   addSeveranceSavingFields(){ 
     /* if(this.historySalariesField.controls.length > 0){
       this.historySalariesField.controls.splice(0,this.historySalariesField.controls.length);
     } */
     let years = getDataStore('cache').historySalary
-    console.log(years);
+    //console.log(years);
+    return years;
    // years.forEach((year:any) => this.historySalariesField.push(this.createHistorySalaryFieldYear(year.year,year.amount)));
     /* const historySalaryElements : any = document.querySelectorAll('.historySalaryInput');
     historySalaryElements.forEach((element:any) => element.setAttribute('disabled','true'));  */
@@ -495,7 +499,7 @@ export class OtrosDerechosComponent implements OnInit {
         },
         owedOvertimeRequest: {
           owedOvertime: this.isActiveOwedOverTime,
-          owedOvertimeType: 0,
+          owedOvertimeType: this.formOtherRights.get('owedOverTimeType'),
           owedOvertimeWork: this.formOtherRights.get('owedOverTime')?.value
         },
         owedPaidPendingVacationsRequest: {

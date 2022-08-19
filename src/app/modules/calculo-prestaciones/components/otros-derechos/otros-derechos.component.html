@@ -352,9 +352,10 @@
                   </label>
                 </div>
               </td>
-              <td></td>
               <td>
                 <p>{{getValueFormField('owedSeventhDay')}}</p>
+              </td>
+              <td>
                 <div class="col-sm-12 col-lg-6"> </div>
               </td>
               <td>
@@ -601,7 +602,7 @@
                       <input
                         formControlName="owedPendingThirteenthMonth"
                         [class.is-valid]="isValidField('owedPendingThirteenthMonth')"
-                        [class.is-invalid]="isInvalidField('OwedPendingThirteenthMonth')"
+                        [class.is-invalid]="isInvalidField('owedPendingThirteenthMonth')"
                         type="number" 
                         class="form-control form-control-solid" 
                         />
@@ -822,8 +823,8 @@
                     <div class="cols-sm-12 col-lg-6">
                       <input
                         formControlName="owedFourteenthMonth"
-                        [class.is-valid]="isValidField('owedFourrteenthMonth')"
-                        [class.is-invalid]="isInvalidField('OwedFourteenthMonth')"
+                        [class.is-valid]="isValidField('owedFourteenthMonth')"
+                        [class.is-invalid]="isInvalidField('owedFourteenthMonth')"
                         type="number" 
                         class="form-control form-control-solid" 
                         />
@@ -852,7 +853,7 @@
                       </p>
                     </div>
                   </td>
-                    <button class="btn btn-primary btn-sm" (click)="validFieldButton(['owedFourrteenthMonth'],'owed-fourteenth-month')">Aceptar</button>
+                    <button class="btn btn-primary btn-sm" (click)="validFieldButton(['owedFourteenthMonth'],'owed-fourteenth-month')">Aceptar</button>
                 </div>
               </td>
             </tr> 
@@ -1043,7 +1044,12 @@
                   </td>
                   <td>
                     <div class="col-sm-12 col-lg-6">
-                      <input type="text" class="form-control form-control-solid" name="input1" placeholder="" value="" />
+                      <input
+                      formControlName="haveSchoolAgeChildren"
+                      [class.isValid]="isValidField('haveSchoolAgeChildren')"
+                      [class.isInvalid]="isInvalidField('haveSchoolAgeChildren')"
+                       type="number" 
+                      class="form-control form-control-solid"  />
                     </div>
                     
                   </td>
