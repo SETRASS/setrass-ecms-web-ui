@@ -1,15 +1,10 @@
-import { ThisReceiver } from '@angular/compiler';
 import { Component, ElementRef, Input, OnInit, Renderer2, ViewChild } from '@angular/core';
-
-import { FormBuilder, FormsModule ,FormControl, FormGroup, Validators, FormArray } from '@angular/forms';
+import {FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { CalculoPrestacionesService } from 'src/app/modules/services/calculo-prestaciones/calculo-prestaciones.service';
-
-import { timestamp } from 'rxjs';
-import { clearCacheData, clearSalaryCalculationData, getDataGender, getDataStore, getYearSelect, setDataCacheStore } from 'src/app/utils/utils';
+import { getDataGender, getDataStore } from 'src/app/utils/utils';
 import { OtherRights } from 'src/app/models/other-rights.model';
-
 
 
 @Component({
@@ -39,14 +34,14 @@ export class OtrosDerechosComponent implements OnInit {
   @ViewChild('panelOwedOtherPayments') $panelOwedOtherPayments: ElementRef;
   
   @Input() otherRights: OtherRights = {
-    "daysOffPreAndPostNatal": {
-      "amount": 0,
-      "currency": "string",
-      "factorAmount": 0,
-      "formula": "string",
-      "itemName": "string",
-      "objectKeyName": "string",
-      "time": "string"
+    daysOffPreAndPostNatal: {
+      amount: 0,
+      currency: "string",
+      factorAmount: 0,
+      formula: "string",
+      itemName: "string",
+      objectKeyName: "string",
+      time: "string"
     },
     educationalBonusResponse: {
       "amount": 0,
@@ -57,7 +52,7 @@ export class OtrosDerechosComponent implements OnInit {
       "objectKeyName": "string",
       "time": "string"
     },
-    "firedForWhilePregnant": {
+    firedForWhilePregnant: {
       "amount": 0,
       "currency": "string",
       "factorAmount": 0,
@@ -66,7 +61,7 @@ export class OtrosDerechosComponent implements OnInit {
       "objectKeyName": "string",
       "time": "string"
     },
-    "owedBonusVacations": {
+    owedBonusVacations: {
       "amount": 0,
       "currency": "string",
       "factorAmount": 0,
@@ -75,7 +70,7 @@ export class OtrosDerechosComponent implements OnInit {
       "objectKeyName": "string",
       "time": "string"
     },
-    "owedBreastfeedingHours": {
+    owedBreastfeedingHours: {
       "amount": 0,
       "currency": "string",
       "factorAmount": 0,
@@ -84,7 +79,7 @@ export class OtrosDerechosComponent implements OnInit {
       "objectKeyName": "string",
       "time": "string"
     },
-    "owedFourteenthMonth": {
+    owedFourteenthMonth: {
       "amount": 0,
       "currency": "string",
       "factorAmount": 0,
@@ -93,7 +88,7 @@ export class OtrosDerechosComponent implements OnInit {
       "objectKeyName": "string",
       "time": "string"
     },
-    "owedHolyDays": {
+    owedHolyDays: {
       "amount": 0,
       "currency": "string",
       "factorAmount": 0,
@@ -102,7 +97,7 @@ export class OtrosDerechosComponent implements OnInit {
       "objectKeyName": "string",
       "time": "string"
     },
-    "owedOtherPayments": {
+    owedOtherPayments: {
       "amount": 0,
       "currency": "string",
       "factorAmount": 0,
@@ -111,7 +106,7 @@ export class OtrosDerechosComponent implements OnInit {
       "objectKeyName": "string",
       "time": "string"
     },
-    "owedOvertime": {
+    owedOvertime: {
       "amount": 0,
       "currency": "string",
       "factorAmount": 0,
@@ -120,7 +115,7 @@ export class OtrosDerechosComponent implements OnInit {
       "objectKeyName": "string",
       "time": "string"
     },
-    "owedPaidPendingVacations": {
+    owedPaidPendingVacations: {
       "amount": 0,
       "currency": "string",
       "factorAmount": 0,
@@ -129,7 +124,7 @@ export class OtrosDerechosComponent implements OnInit {
       "objectKeyName": "string",
       "time": "string"
     },
-    "owedPendingFourteenthMonth": {
+    owedPendingFourteenthMonth: {
       "amount": 0,
       "currency": "string",
       "factorAmount": 0,
@@ -138,7 +133,7 @@ export class OtrosDerechosComponent implements OnInit {
       "objectKeyName": "string",
       "time": "string"
     },
-    "owedPendingThirteenthMonth": {
+    owedPendingThirteenthMonth: {
       "amount": 0,
       "currency": "string",
       "factorAmount": 0,
@@ -147,7 +142,7 @@ export class OtrosDerechosComponent implements OnInit {
       "objectKeyName": "string",
       "time": "string"
     },
-    "owedSalary": {
+    owedSalary: {
       "amount": 0,
       "currency": "string",
       "factorAmount": 0,
@@ -156,7 +151,7 @@ export class OtrosDerechosComponent implements OnInit {
       "objectKeyName": "string",
       "time": "string"
     },
-    "owedSeventhDay": {
+    owedSeventhDay: {
       "amount": 0,
       "currency": "string",
       "factorAmount": 0,
@@ -165,7 +160,7 @@ export class OtrosDerechosComponent implements OnInit {
       "objectKeyName": "string",
       "time": "string"
     },
-    "owedThirteenthMonth": {
+    owedThirteenthMonth: {
       "amount": 0,
       "currency": "string",
       "factorAmount": 0,
@@ -173,167 +168,26 @@ export class OtrosDerechosComponent implements OnInit {
       "itemName": "string",
       "objectKeyName": "string",
       "time": "string"
-
-  
-  
-
-  response : any = {
-    "otherRights": {
-      "daysOffPreAndPostNatal": {
-        "amount": 0,
-        "currency": "string",
-        "factorAmount": 0,
-        "formula": "string",
-        "itemName": "string",
-        "objectKeyName": "string",
-        "time": "string"
-      },
-      "educationalBonusResponse": {
-        "amount": 0,
-        "currency": "string",
-        "factorAmount": 0,
-        "formula": "string",
-        "itemName": "string",
-        "objectKeyName": "string",
-        "time": "string"
-      },
-      "firedForWhilePregnant": {
-        "amount": 0,
-        "currency": "string",
-        "factorAmount": 0,
-        "formula": "string",
-        "itemName": "string",
-        "objectKeyName": "string",
-        "time": "string"
-      },
-      "owedBonusVacations": {
-        "amount": 0,
-        "currency": "string",
-        "factorAmount": 0,
-        "formula": "string",
-        "itemName": "string",
-        "objectKeyName": "string",
-        "time": "string"
-      },
-      "owedBreastfeedingHours": {
-        "amount": 0,
-        "currency": "string",
-        "factorAmount": 0,
-        "formula": "string",
-        "itemName": "string",
-        "objectKeyName": "string",
-        "time": "string"
-      },
-      "owedFourteenthMonth": {
-        "amount": 0,
-        "currency": "string",
-        "factorAmount": 0,
-        "formula": "string",
-        "itemName": "string",
-        "objectKeyName": "string",
-        "time": "string"
-      },
-      "owedHolyDays": {
-        "amount": 0,
-        "currency": "string",
-        "factorAmount": 0,
-        "formula": "string",
-        "itemName": "string",
-        "objectKeyName": "string",
-        "time": "string"
-      },
-      "owedOtherPayments": {
-        "amount": 0,
-        "currency": "string",
-        "factorAmount": 0,
-        "formula": "string",
-        "itemName": "string",
-        "objectKeyName": "string",
-        "time": "string"
-      },
-      "owedOvertime": {
-        "amount": 0,
-        "currency": "string",
-        "factorAmount": 0,
-        "formula": "string",
-        "itemName": "string",
-        "objectKeyName": "string",
-        "time": "string"
-      },
-      "owedPaidPendingVacations": {
-        "amount": 0,
-        "currency": "string",
-        "factorAmount": 0,
-        "formula": "string",
-        "itemName": "string",
-        "objectKeyName": "string",
-        "time": "string"
-      },
-      "owedPendingFourteenthMonth": {
-        "amount": 0,
-        "currency": "string",
-        "factorAmount": 0,
-        "formula": "string",
-        "itemName": "string",
-        "objectKeyName": "string",
-        "time": "string"
-      },
-      "owedPendingThirteenthMonth": {
-        "amount": 0,
-        "currency": "string",
-        "factorAmount": 0,
-        "formula": "string",
-        "itemName": "string",
-        "objectKeyName": "string",
-        "time": "string"
-      },
-      "owedSalary": {
-        "amount": 0,
-        "currency": "string",
-        "factorAmount": 0,
-        "formula": "string",
-        "itemName": "string",
-        "objectKeyName": "string",
-        "time": "string"
-      },
-      "owedSeventhDay": {
-        "amount": 0,
-        "currency": "string",
-        "factorAmount": 0,
-        "formula": "string",
-        "itemName": "string",
-        "objectKeyName": "string",
-        "time": "string"
-      },
-      "owedThirteenthMonth": {
-        "amount": 0,
-        "currency": "string",
-        "factorAmount": 0,
-        "formula": "string",
-        "itemName": "string",
-        "objectKeyName": "string",
-        "time": "string"
-      },
-      "salaryReadjustment": {
-        "amount": 0,
-        "currency": "string",
-        "factorAmount": 0,
-        "formula": "string",
-        "itemName": "string",
-        "objectKeyName": "string",
-        "time": "string"
-      },
-      "severanceSavings": {
-        "amount": 0,
-        "currency": "string",
-        "factorAmount": 0,
-        "formula": "string",
-        "itemName": "string",
-        "objectKeyName": "string",
-        "time": "string"
-      }
-  } 
-
+    },
+    salaryReadjustment: {
+      "amount": 0,
+      "currency": "string",
+      "factorAmount": 0,
+      "formula": "string",
+      "itemName": "string",
+      "objectKeyName": "string",
+      "time": "string"
+    },
+    severanceSavings:{
+      "amount": 0,
+      "currency": "string",
+      "factorAmount": 0,
+      "formula": "string",
+      "itemName": "string",
+      "objectKeyName": "string",
+      "time": "string"
+    }
+  }
 
   formOtherRights= new FormGroup({
     pregnancyStatus: new FormControl(0,[]),
@@ -345,8 +199,10 @@ export class OtrosDerechosComponent implements OnInit {
     owedBonusVacations: new FormControl(0,[]),
     owedPendingThirteenthMonth: new FormControl(0,[]),
     owedThirteenthMonth: new FormControl(0, []),
+    owedThirteenthMonth2: new FormControl(0, []),
     owedPendingFourteenthMonth: new FormControl(0,[]),
     owedFourteenthMonth: new FormControl(0,[]),
+    owedFourteenthMonth2: new FormControl(0,[]),
     owedSalary: new FormControl(0, []),
     owedOverTime: new FormControl(0, []),
     owedOverTimeType: new FormControl('DIURNA'),
@@ -662,7 +518,6 @@ export class OtrosDerechosComponent implements OnInit {
   }
 
   nextStep(){
-    this.calculoPrestacionesService.isShowExportPdf$.emit(true);
     this.route.navigateByUrl('/dashboard#export-pdf');
   }
 

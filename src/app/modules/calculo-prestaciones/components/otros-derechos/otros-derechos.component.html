@@ -636,8 +636,8 @@
                   <p>{{getValueFormField('owedThirteenthMonth')}}</p>
                 </div>
               </td>
-              <td>
-                <div class="col-sm-12 col-lg-6"> </div>
+              <td style="text-align:left; font-weight: inherit;">
+                {{getValueFormField('owedThirteenthMonth2')}}
               </td>
               <td>
                 <span>{{otherRights.owedThirteenthMonth.formula}}</span>
@@ -686,21 +686,21 @@
                   <td>
                     <div class="col-sm-12 col-lg-6">
                       <input
-                        formControlName="owedThirteenthMonth"
-                        [class.is-valid]="isValidField('owedThirteenthMonth')"
-                        [class.is-invalid]="isInvalidField('OwedThirteenthMonth')"
+                        formControlName="owedThirteenthMonth2"
+                        [class.is-valid]="isValidField('owedThirteenthMonth2')"
+                        [class.is-invalid]="isInvalidField('owedThirteenthMonth2')"
                         type="number" 
                         class="form-control form-control-solid" 
                         />
-                      <p *ngIf="isInvalidField('owedThirteenthMonth')">
+                      <p *ngIf="isInvalidField('owedThirteenthMonth2')">
                         <span
-                        *ngIf="getErrorField('owedThirteenthMonth', 'pattern')"
+                        *ngIf="getErrorField('owedThirteenthMonth2', 'pattern')"
                         class="text-danger"
                         >Este campo es numerico.</span>
                       </p>
                     </div>
                   </td>
-                    <button class="btn btn-primary btn-sm" (click)="validFieldButton(['owedThirteenthMonth'],'owed-thirteenth-month')">Aceptar</button>
+                    <button class="btn btn-primary btn-sm" (click)="validFieldButton(['owedThirteenthMonth','owedThirteenthMonth2'],'owed-thirteenth-month')">Aceptar</button>
                 </div>
               </td>
             </tr> 
@@ -789,8 +789,8 @@
                   <p>{{getValueFormField('owedFourteenthMonth')}}</p>
                 </div>
               </td>
-              <td>
-                <div class="col-sm-12 col-lg-6"> </div>
+              <td style="text-align:left; font-weight: inherit;">
+                {{getValueFormField('owedFourteenthMonth2')}}
               </td>
               <td>
                 <span>{{otherRights.owedFourteenthMonth.formula}}</span>
@@ -839,21 +839,25 @@
                   <td>
                     <div class="col-sm-12 col-lg-6">
                       <input
-                        formControlName="owedFourteenthMonth"
-                        [class.is-valid]="isValidField('owedFourteenthMonth')"
-                        [class.is-invalid]="isInvalidField('owedFourteenthMonth')"
+                        formControlName="owedFourteenthMonth2"
+                        [class.is-valid]="isValidField('owedFourteenthMonth2')"
+                        [class.is-invalid]="isInvalidField('owedFourteenthMonth2')"
                         type="number" 
                         class="form-control form-control-solid" 
                         />
-                      <p *ngIf="isInvalidField('owedFourteenthMonth')">
+                      <p *ngIf="isInvalidField('owedFourteenthMonth2')">
                         <span
-                        *ngIf="getErrorField('owedFourteenthMonth', 'pattern')"
+                        *ngIf="getErrorField('owedFourteenthMonth2', 'pattern')"
                         class="text-danger"
                         >Este campo es numerico.</span>
                       </p>
                     </div>
                   </td>
+<<<<<<< HEAD
                     <button class="btn btn-primary btn-sm" (click)="validFieldButton(['owedFourteenthMonth'],'owed-fourteenth-month')">Aceptar</button>
+=======
+                    <button class="btn btn-primary btn-sm" (click)="validFieldButton(['owedFourrteenthMonth','owedFourrteenthMonth2'],'owed-fourteenth-month')">Aceptar</button>
+>>>>>>> 1fd6437 ([SDT-184] labels updated on ther rights components)
                 </div>
               </td>
             </tr> 
