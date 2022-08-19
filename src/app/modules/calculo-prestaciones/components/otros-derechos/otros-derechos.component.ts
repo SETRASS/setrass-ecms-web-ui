@@ -37,6 +37,7 @@ export class OtrosDerechosComponent implements OnInit {
   @ViewChild('panelHaveSchoolAgeChildren') $panelHaveSchoolAgeChildren: ElementRef;
   @ViewChild('panelOwedHistorySalaries') $panelOwedHistorySalaries: ElementRef;
   @ViewChild('panelOwedOtherPayments') $panelOwedOtherPayments: ElementRef;
+  
   @Input() otherRights: OtherRights = {
     "daysOffPreAndPostNatal": {
       "amount": 0,
@@ -172,27 +173,167 @@ export class OtrosDerechosComponent implements OnInit {
       "itemName": "string",
       "objectKeyName": "string",
       "time": "string"
-    },
-    "salaryReadjustment": {
-      "amount": 0,
-      "currency": "string",
-      "factorAmount": 0,
-      "formula": "string",
-      "itemName": "string",
-      "objectKeyName": "string",
-      "time": "string"
-    },
-    "severanceSavings": {
-      "amount": 0,
-      "currency": "string",
-      "factorAmount": 0,
-      "formula": "string",
-      "itemName": "string",
-      "objectKeyName": "string",
-      "time": "string"
-    }
 
-  }   
+  
+  
+
+  response : any = {
+    "otherRights": {
+      "daysOffPreAndPostNatal": {
+        "amount": 0,
+        "currency": "string",
+        "factorAmount": 0,
+        "formula": "string",
+        "itemName": "string",
+        "objectKeyName": "string",
+        "time": "string"
+      },
+      "educationalBonusResponse": {
+        "amount": 0,
+        "currency": "string",
+        "factorAmount": 0,
+        "formula": "string",
+        "itemName": "string",
+        "objectKeyName": "string",
+        "time": "string"
+      },
+      "firedForWhilePregnant": {
+        "amount": 0,
+        "currency": "string",
+        "factorAmount": 0,
+        "formula": "string",
+        "itemName": "string",
+        "objectKeyName": "string",
+        "time": "string"
+      },
+      "owedBonusVacations": {
+        "amount": 0,
+        "currency": "string",
+        "factorAmount": 0,
+        "formula": "string",
+        "itemName": "string",
+        "objectKeyName": "string",
+        "time": "string"
+      },
+      "owedBreastfeedingHours": {
+        "amount": 0,
+        "currency": "string",
+        "factorAmount": 0,
+        "formula": "string",
+        "itemName": "string",
+        "objectKeyName": "string",
+        "time": "string"
+      },
+      "owedFourteenthMonth": {
+        "amount": 0,
+        "currency": "string",
+        "factorAmount": 0,
+        "formula": "string",
+        "itemName": "string",
+        "objectKeyName": "string",
+        "time": "string"
+      },
+      "owedHolyDays": {
+        "amount": 0,
+        "currency": "string",
+        "factorAmount": 0,
+        "formula": "string",
+        "itemName": "string",
+        "objectKeyName": "string",
+        "time": "string"
+      },
+      "owedOtherPayments": {
+        "amount": 0,
+        "currency": "string",
+        "factorAmount": 0,
+        "formula": "string",
+        "itemName": "string",
+        "objectKeyName": "string",
+        "time": "string"
+      },
+      "owedOvertime": {
+        "amount": 0,
+        "currency": "string",
+        "factorAmount": 0,
+        "formula": "string",
+        "itemName": "string",
+        "objectKeyName": "string",
+        "time": "string"
+      },
+      "owedPaidPendingVacations": {
+        "amount": 0,
+        "currency": "string",
+        "factorAmount": 0,
+        "formula": "string",
+        "itemName": "string",
+        "objectKeyName": "string",
+        "time": "string"
+      },
+      "owedPendingFourteenthMonth": {
+        "amount": 0,
+        "currency": "string",
+        "factorAmount": 0,
+        "formula": "string",
+        "itemName": "string",
+        "objectKeyName": "string",
+        "time": "string"
+      },
+      "owedPendingThirteenthMonth": {
+        "amount": 0,
+        "currency": "string",
+        "factorAmount": 0,
+        "formula": "string",
+        "itemName": "string",
+        "objectKeyName": "string",
+        "time": "string"
+      },
+      "owedSalary": {
+        "amount": 0,
+        "currency": "string",
+        "factorAmount": 0,
+        "formula": "string",
+        "itemName": "string",
+        "objectKeyName": "string",
+        "time": "string"
+      },
+      "owedSeventhDay": {
+        "amount": 0,
+        "currency": "string",
+        "factorAmount": 0,
+        "formula": "string",
+        "itemName": "string",
+        "objectKeyName": "string",
+        "time": "string"
+      },
+      "owedThirteenthMonth": {
+        "amount": 0,
+        "currency": "string",
+        "factorAmount": 0,
+        "formula": "string",
+        "itemName": "string",
+        "objectKeyName": "string",
+        "time": "string"
+      },
+      "salaryReadjustment": {
+        "amount": 0,
+        "currency": "string",
+        "factorAmount": 0,
+        "formula": "string",
+        "itemName": "string",
+        "objectKeyName": "string",
+        "time": "string"
+      },
+      "severanceSavings": {
+        "amount": 0,
+        "currency": "string",
+        "factorAmount": 0,
+        "formula": "string",
+        "itemName": "string",
+        "objectKeyName": "string",
+        "time": "string"
+      }
+  } 
+
 
   formOtherRights= new FormGroup({
     pregnancyStatus: new FormControl(0,[]),
@@ -202,9 +343,9 @@ export class OtrosDerechosComponent implements OnInit {
     owedSeventhDay: new FormControl (0),
     owedPaidPendingVacations: new FormControl (0,[]),
     owedBonusVacations: new FormControl(0,[]),
-    owedPendingThirteenthMonth: new FormControl('',[]),
+    owedPendingThirteenthMonth: new FormControl(0,[]),
     owedThirteenthMonth: new FormControl(0, []),
-    owedPendingFourteenthMonth: new FormControl('',[]),
+    owedPendingFourteenthMonth: new FormControl(0,[]),
     owedFourteenthMonth: new FormControl(0,[]),
     owedSalary: new FormControl(0, []),
     owedOverTime: new FormControl(0, []),
@@ -213,6 +354,7 @@ export class OtrosDerechosComponent implements OnInit {
     owedOtherPayments: new FormControl(0,[])
   });
 
+  
 
   isActivePregnancyStatus: boolean = false;
   isActiveDaysOffPregnancy: boolean = false;
@@ -293,10 +435,11 @@ export class OtrosDerechosComponent implements OnInit {
       this.hiddenPanel(classPanel);
     }
   }
+
   
   getYearsHistoryArray(){
     return getDataStore('cache').historySalaries;
-  }
+    }
 
   isActiveControl(controlName: string){
     switch(controlName){
