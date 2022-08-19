@@ -98,14 +98,20 @@ tbody {
             
         }
         &:nth-child(2){
-            font-size: 17.2px;
+            font-size: 17px;
             color: #5F6368;
+            p{
+                font-size: 15px !important;
+            }
         }
         &:nth-child(3){
             text-align: right;
             font-size: 15px;
             font-weight: 700;
             color: #5F6368;
+            p{
+                font-size: 15px !important;
+            }
         }
         &:nth-child(4){
             font-family:'Time New Roman',serif;

@@ -39,7 +39,7 @@
           <tbody [formGroup]="formOtherRights">
             
               <!--Begin pregnacyStatus-->
-            <tr>
+            <tr *ngIf="currentSex === 'F'">
               <td>
                 <div class="form-check form-switch form-check-custom form-check-solid me-10">
                   <input class="form-check-input h-20px w-30px" type="checkbox"
@@ -55,10 +55,10 @@
               <td>
               </td>
               <td>
-                <span>{{response.otherRights.firedForWhilePregnant.formula}}</span>
+                <span>{{otherRights.firedForWhilePregnant.formula}}</span>
               </td>
               <td>
-                <span> L . {{response.otherRights.firedForWhilePregnant.amount}} </span>
+                <span> L . {{otherRights.firedForWhilePregnant.amount}} </span>
               </td>
               <td>
                 <span (click)="editPanel('panel-pregnancy-status')" class="svg-icon svg-icon-primary svg-icon-2hx"><svg xmlns="http://www.w3.org/2000/svg" width="24"
@@ -75,7 +75,7 @@
                   </svg></span>
               </td>
             </tr>
-            <tr #panelPregnancyStatus class="panel-pregnancy-status">
+            <tr #panelPregnancyStatus class="panel-pregnancy-status" *ngIf="currentSex === 'F'">
               <td  colspan="6">
                 <div class="panel">
                   <td>
@@ -105,7 +105,7 @@
             <!--End pregnancyStatus-->
 
             <!--Begin daysOffPregnancy -->
-            <tr>
+            <tr *ngIf="currentSex === 'F'">
               <td>
                 <div class="form-check form-switch form-check-custom form-check-solid me-10">
                   <input class="form-check-input h-20px w-30px" type="checkbox" 
@@ -123,10 +123,10 @@
               <td>
               </td>
               <td>
-                <span>{{response.otherRights.daysOffPreAndPostNatal.formula}}</span>
+                <span>{{otherRights.daysOffPreAndPostNatal.formula}}</span>
               </td>
               <td>
-                <span> L . {{response.otherRights.daysOffPreAndPostNatal.amount}}</span>
+                <span> L . {{otherRights.daysOffPreAndPostNatal.amount}}</span>
               </td>
               <td>
                 <span  (click)="editPanel('days-off-pregnancy')" class="svg-icon svg-icon-primary svg-icon-2hx"><svg xmlns="http://www.w3.org/2000/svg" width="24"
@@ -143,7 +143,7 @@
                   </svg></span>
               </td>
             </tr>
-            <tr #panelDaysOffPregnancy class="days-off-pregnancy">
+            <tr #panelDaysOffPregnancy class="days-off-pregnancy" *ngIf="currentSex === 'F'">
               <td colspan="6">
                 <div class="panel">
                   <td>
@@ -173,7 +173,7 @@
             <!--End daysOffPregnancy-->
 
             <!-- Begin breastFeedingHours-->
-            <tr>
+            <tr *ngIf="currentSex === 'F'">
               <td>
                 <div class="form-check form-switch form-check-custom form-check-solid me-10">
                   <input class="form-check-input h-20px w-30px" type="checkbox" 
@@ -191,10 +191,10 @@
               </td>
 
               <td>
-                <span>{{response.otherRights.owedBreastfeedingHours.formula}}</span>
+                <span>{{otherRights.owedBreastfeedingHours.formula}}</span>
               </td>
               <td>
-                <span> L . {{response.otherRights.owedBreastfeedingHours.amount}}</span>
+                <span> L . {{otherRights.owedBreastfeedingHours.amount}}</span>
               </td>
               <td>
                 <span (click)="editPanel('breast-feeding-hours')" class="svg-icon svg-icon-primary svg-icon-2hx"><svg xmlns="http://www.w3.org/2000/svg" width="24"
@@ -211,7 +211,7 @@
                   </svg></span>
               </td>
             </tr>
-            <tr #panelBreastFeedingHours class="breast-feeding-hours">
+            <tr #panelBreastFeedingHours class="breast-feeding-hours" *ngIf="currentSex === 'F'">
               <td colspan="6">
                 <div class="panel">
                   <td>
@@ -248,21 +248,21 @@
                   a los que aplica</p>
               </td>
               <td colspan="2">
-                 <div *ngFor="let item of lastTwoYearReadjustment" class="row mb-5">
+                 <div *ngFor="let item of getLastTwoYearsSalaryReadjustment" class="row mb-5">
                   <div class="col-4">
                     <input type="text" disabled="true" class="form-control form-control-solid" [value]="item.year"/>
                   </div>
                   <div class="col-4">
-                    <input type="text" disabled="true" class="form-control form-control-solid" [value]="item.amount"/>
+                    <input type="text" disabled="true" class="form-control form-control-solid" [value]="item.salary"/>
                   </div>
                  </div>
                  
               </td>
-              <td>
-                <span>{{response.otherRights.salaryReadjustment.formula}}</span>
+              <td style="text-align:left; font-family: serif; font-weight: inherit;">
+                <span>{{otherRights.salaryReadjustment.formula}}</span>
               </td>
               <td>
-                <span> L . {{response.otherRights.salaryReadjustment.amount}}</span>
+                <span> L . {{otherRights.salaryReadjustment.amount}}</span>
               </td>
               <td>
               </td>
@@ -289,10 +289,10 @@
                 <div class="col-sm-12 col-lg-6"></div>
               </td>
               <td>
-                <span>{{response.otherRights.owedHolyDays.formula}}</span>
+                <span>{{otherRights.owedHolyDays.formula}}</span>
               </td>
               <td>
-                <span> L . {{response.otherRights.owedHolyDays.amount}}</span>
+                <span> L . {{otherRights.owedHolyDays.amount}}</span>
               </td>
               <td>
                 <span (click)="editPanel('owed-holy-days')" class="svg-icon svg-icon-primary svg-icon-2hx"><svg xmlns="http://www.w3.org/2000/svg" width="24"
@@ -358,10 +358,10 @@
                 <div class="col-sm-12 col-lg-6"> </div>
               </td>
               <td>
-                <span>{{response.otherRights.owedSeventhDay.formula}}</span>
+                <span>{{otherRights.owedSeventhDay.formula}}</span>
               </td>
               <td>
-                <span> L . {{response.otherRights.owedSeventhDay.amount}}</span>
+                <span> L . {{otherRights.owedSeventhDay.amount}}</span>
               </td>
               <td>
                 <span (click)="editPanel('owed-seventh-day')" class="svg-icon svg-icon-primary svg-icon-2hx"><svg xmlns="http://www.w3.org/2000/svg" width="24"
@@ -382,7 +382,7 @@
               <td colspan="6">
                 <div class="panel">
                   <td> 
-                    <p>Le adudan pago septimo día</p>
+                    <p>Le adeudan pago septimo día</p>
                   </td>
                   <td>
                     <div class="col-sm-12 col-lg-6">
@@ -434,10 +434,10 @@
                 <div class="col-sm-12 col-lg-6"> </div>
               </td>
               <td>
-                <span>{{response.otherRights.owedPaidPendingVacations.formula}}</span>
+                <span>{{otherRights.owedPaidPendingVacations.formula}}</span>
               </td>
               <td>
-                <span> L . {{response.otherRights.owedPaidPendingVacations.amount}}</span>
+                <span> L . {{otherRights.owedPaidPendingVacations.amount}}</span>
               </td>
               <td>
                 <span (click)="editPanel('owed-paid-pending-vacations')" class="svg-icon svg-icon-primary svg-icon-2hx"><svg xmlns="http://www.w3.org/2000/svg" width="24"
@@ -502,10 +502,10 @@
                 <div class="col-sm-12 col-lg-6"> </div>
               </td>
               <td>
-                <span>{{response.otherRights.owedBonusVacations.formula}}</span>
+                <span>{{otherRights.owedBonusVacations.formula}}</span>
               </td>
               <td>
-                <span> L .  {{response.otherRights.owedBonusVacations.amount}}</span>
+                <span> L .  {{otherRights.owedBonusVacations.amount}}</span>
               </td>
               <td>
                 <span (click)="editPanel('owed-bonus-vacations')" class="svg-icon svg-icon-primary svg-icon-2hx"><svg xmlns="http://www.w3.org/2000/svg" width="24"
@@ -570,10 +570,10 @@
                 <div class="col-sm-12 col-lg-6"> </div>
               </td>
               <td>
-                <span>{{response.otherRights.owedPendingThirteenthMonth.formula}}</span>
+                <span>{{otherRights.owedPendingThirteenthMonth.formula}}</span>
               </td>
               <td>
-                <span> L .  {{response.otherRights.owedPendingThirteenthMonth.amount}}</span>
+                <span> L .  {{otherRights.owedPendingThirteenthMonth.amount}}</span>
               </td>
               <td>
                 <span  (click)="editPanel('owed-pending-thirteenth-month')" class="svg-icon svg-icon-primary svg-icon-2hx"><svg xmlns="http://www.w3.org/2000/svg" width="24"
@@ -639,10 +639,10 @@
                 <div class="col-sm-12 col-lg-6"> </div>
               </td>
               <td>
-                <span>{{response.otherRights.owedThirteenthMonth.formula}}</span>
+                <span>{{otherRights.owedThirteenthMonth.formula}}</span>
               </td>
               <td>
-                <span> L . {{response.otherRights.owedThirteenthMonth.amount}}</span>
+                <span> L . {{otherRights.owedThirteenthMonth.amount}}</span>
               </td>
               <td>
                 <span (click)="editPanel('owed-thirteenth-month')" class="svg-icon svg-icon-primary svg-icon-2hx"><svg xmlns="http://www.w3.org/2000/svg" width="24"
@@ -723,10 +723,10 @@
                 <div class="col-sm-12 col-lg-6"> </div>
               </td>
               <td>
-                <span>{{response.otherRights.owedPendingFourteenthMonth.formula}}</span>
+                <span>{{otherRights.owedPendingFourteenthMonth.formula}}</span>
               </td>
               <td>
-                <span> L . {{response.otherRights.owedPendingFourteenthMonth.amount}}</span>
+                <span> L . {{otherRights.owedPendingFourteenthMonth.amount}}</span>
               </td>
               <td>
                 <span  (click)="editPanel('owed-pending-fourteenth-month')" class="svg-icon svg-icon-primary svg-icon-2hx"><svg xmlns="http://www.w3.org/2000/svg" width="24"
@@ -792,10 +792,10 @@
                 <div class="col-sm-12 col-lg-6"> </div>
               </td>
               <td>
-                <span>{{response.otherRights.owedFourteenthMonth.formula}}</span>
+                <span>{{otherRights.owedFourteenthMonth.formula}}</span>
               </td>
               <td>
-                <span> L . {{response.otherRights.owedFourteenthMonth.amount}}</span>
+                <span> L . {{otherRights.owedFourteenthMonth.amount}}</span>
               </td>
               <td>
                 <span (click)="editPanel('owed-fourteenth-month')" class="svg-icon svg-icon-primary svg-icon-2hx"><svg xmlns="http://www.w3.org/2000/svg" width="24"
@@ -877,10 +877,10 @@
                 <div class="col-sm-12 col-lg-6"> </div>
               </td>
               <td>
-                <span>{{response.otherRights.owedSalary.formula}}</span>
+                <span>{{otherRights.owedSalary.formula}}</span>
               </td>
               <td>
-                <span> L . {{response.otherRights.owedSalary.amount}}</span>
+                <span> L . {{otherRights.owedSalary.amount}}</span>
               </td>
               <td>
                 <span  (click)="editPanel('owed-salary')" class="svg-icon svg-icon-primary svg-icon-2hx"><svg xmlns="http://www.w3.org/2000/svg" width="24"
@@ -947,10 +947,10 @@
                 </div>
               </td>
               <td>
-                <span>{{response.otherRights.owedOvertime.formula}}</span>
+                <span>{{otherRights.owedOvertime.formula}}</span>
               </td>
               <td>
-                <span> L . {{response.otherRights.owedOvertime.amount}}</span>
+                <span> L . {{otherRights.owedOvertime.amount}}</span>
               </td>
               <td>
                 <span (click)="editPanel('owed-over-time')" class="svg-icon svg-icon-primary svg-icon-2hx"><svg xmlns="http://www.w3.org/2000/svg" width="24"
@@ -1015,10 +1015,10 @@
                 
               </td>
               <td>
-                <span>{{response.otherRights.educationalBonusResponse.formula}}</span>
+                <span>{{otherRights.educationalBonusResponse.formula}}</span>
               </td>
               <td>
-                <span> L . {{response.otherRights.educationalBonusResponse.amount}}  </span>
+                <span> L . {{otherRights.educationalBonusResponse.amount}}  </span>
               </td>
               <td>
                 <span  (click)="editPanel('have-school-age-children')" class="svg-icon svg-icon-primary svg-icon-2hx"><svg xmlns="http://www.w3.org/2000/svg" width="24"
@@ -1070,16 +1070,16 @@
                    <input type="text" disabled="true" class="form-control form-control-solid" [value]="item.year"/>
                  </div>
                  <div class="col-4">
-                   <input type="text" disabled="true" class="form-control form-control-solid" [value]="item.amount"/>
+                   <input type="text" disabled="true" class="form-control form-control-solid" [value]="item.salary"/>
                  </div>
                 </div>
                 
              </td>
-              <td>
-                <span>{{response.otherRights.severanceSavings.formula}}</span>
+              <td style="text-align:left; font-family: serif; font-weight: inherit;">
+                {{otherRights.severanceSavings.formula}}
               </td>
               <td>
-                <span> L . {{response.otherRights.severanceSavings.amount}}</span>
+                <span> L . {{otherRights.severanceSavings.amount}}</span>
               </td>
               <td>
               </td>
@@ -1106,10 +1106,10 @@
                 </div>
               </td>
               <td>
-                <span>{{response.otherRights.owedOtherPayments.formula}}</span>
+                <span>{{otherRights.owedOtherPayments.formula}}</span>
               </td>
               <td>
-                <span> L . {{response.otherRights.owedOtherPayments.amount}} </span>
+                <span> L . {{otherRights.owedOtherPayments.amount}} </span>
               </td>
               <td>
                 <span (click)="editPanel('owed-other-payment')" class="svg-icon svg-icon-primary svg-icon-2hx"><svg xmlns="http://www.w3.org/2000/svg" width="24"

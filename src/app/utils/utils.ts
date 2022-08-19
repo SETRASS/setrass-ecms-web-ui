@@ -27,6 +27,14 @@ export function setDataCacheStore(data: object) {
     localStorage.setItem('cache',JSON.stringify(data));
 }
 
+export function setDataGender(data: string) {
+    localStorage.setItem('gender',data);
+}
+
+export function getDataGender() {
+    localStorage.getItem('gender');
+}
+
 export function clearCacheData(){
     localStorage.removeItem('cache');
 }

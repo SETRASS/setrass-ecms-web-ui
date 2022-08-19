@@ -1317,18 +1317,18 @@
                 >
                   <div [formGroupName]="i">
                     <label class="form-label historySalaryLabel"  >Año 
-                      <input type="text" class="historySalaryInput" formControlName="year"  />  
+                      <input type="text" class="historySalaryInput" formControlName="year" [disabled]="true"  />  
                     </label>
                     <input
-                      formControlName="amount"
-                      [class.is-valid]="isValidField('historySalary.'+i+'.amount')"
-                      [class.is-invalid]="isInvalidField('historySalary.'+i+'.amount')"
+                      formControlName="salary"
+                      [class.is-valid]="isValidField('historySalary.'+i+'.salary')"
+                      [class.is-invalid]="isInvalidField('historySalary.'+i+'.salary')"
                       type="number"
                       class="form-control form-control-solid"
                     />
-                    <div *ngIf="isInvalidField('historySalary.'+i+'.amount')">
+                    <div *ngIf="isInvalidField('historySalary.'+i+'.salary')">
                       <span
-                        *ngIf="getErrorField('historySalary.'+i+'.amount', 'required')"
+                        *ngIf="getErrorField('historySalary.'+i+'.salary', 'required')"
                         class="text-danger">
                         Este campo es requerido.
                       </span>

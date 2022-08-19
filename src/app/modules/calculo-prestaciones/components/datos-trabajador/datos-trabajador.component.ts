@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit,Renderer2, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, OnInit,Output,Renderer2, ViewChild } from '@angular/core';
 import {FormControl, FormGroup, Validators, FormBuilder, FormArray} from '@angular/forms';
 
 
@@ -17,7 +17,7 @@ import { Locations} from 'src/app/models/locations.model';
 import { WorkerPersonEmployerRequestDto } from 'src/app/models/worker-person-employer-request-dto.model';
 import { EmployerDto } from 'src/app/models/employer-dto.model';
 import { WorkerPersonStore } from '../../state/workerperson-employer-request/workerperson-employer-request.store';
-import { clearCacheData, clearSalaryCalculationData, getDataStore, getYearSelect, setDataCacheStore, setDataSalaryCalculationStore } from 'src/app/utils/utils';
+import { clearCacheData, clearSalaryCalculationData, getDataStore, getYearSelect, setDataCacheStore, setDataGender, setDataSalaryCalculationStore } from 'src/app/utils/utils';
 import { format } from 'date-fns';
 import { CalculoPrestacionesRequestType } from 'src/app/models/enums/calculo-prestaciones-request-type.enum';
 import { TerminationContractType } from 'src/app/models/enums/termination-contract-type.enum';
@@ -93,7 +93,7 @@ export class DatosTrabajadorComponent implements OnInit {
   isLocationsLoaded$: Observable<boolean> = this.locationsQuery.selectLoaded$;
   
 
-
+  @Output() calculoResponseEvent = new EventEmitter<any>();
 
   constructor(private lookusService: LookupsService,
               private salaryHistoryCatalogService: SalaryHistoryCatalogService,
@@ -146,8 +146,8 @@ export class DatosTrabajadorComponent implements OnInit {
 
     this.salaryCalculationQuery.getData().subscribe(res => this.currentDataStore=res);
     this.salaryCalculationQuery.getCache().subscribe(res => this.currentCacheData=res);
-    clearCacheData();
-    clearSalaryCalculationData();
+    /* clearCacheData();
+    clearSalaryCalculationData(); */
     }
     
     
@@ -274,10 +274,10 @@ export class DatosTrabajadorComponent implements OnInit {
     
     }
     
-    private createHistorySalaryFieldYear(anio: string, amount: number){
+    private createHistorySalaryFieldYear(anio: string, salary: number){
       return this.formBuilder.group({
         year: [anio],
-        amount: [, Validators.required],
+        salary: [, Validators.required],
       });
     }
     
@@ -403,13 +403,13 @@ export class DatosTrabajadorComponent implements OnInit {
         terminationContractType: this.currentTerminationContractType
       }
         
-      //this.workerPersonStore.add(data);
-
+      let req = getDataStore('cache');
+      setDataGender(employeeData.employeeSex);
       this.calculoPrestacionesService.sendEmployeeEmployerReq(data)
       .subscribe((response: any)=>{
         response ? this.render2.removeClass(this.$overlay.nativeElement, 'active-overlay') : null;
         const { requestId, workerPersonId, employer} = response;
-        setDataCacheStore({ requestId, workerPersonId, employer});
+        setDataCacheStore(Object.assign(req, { requestId, workerPersonId, employer}));
         this.currentCacheData = getDataStore('cache');
         console.log(this.currentCacheData);
       })
@@ -420,8 +420,21 @@ export class DatosTrabajadorComponent implements OnInit {
       this.render2.addClass(this.$overlay.nativeElement, 'active-overlay');
       const {salaryData, speciesSalary} = this.formEmployee.value;
       let data = {
-        "dismissalDate": salaryData.endDate,
-        "lastSixMonthsBonusPayment": [
+        requestId: this.currentCacheData.requestId,
+        startDate: salaryData.startDate,
+        dismissalDate: salaryData.endDate,
+        fixedSalary: salaryData.fixedSalary === 'SI' ? true : false,
+        salary: Number(salaryData.salary),
+        workerPersonId: this.currentCacheData.workerPersonId,
+        employerId: this.currentCacheData.employer.employerId,
+        salaryInKindType: speciesSalary.optionSpeciesSalary,
+        salaryInKindOptionsType: speciesSalary.foodTime,
+        terminationContractType: this.currentTerminationContractType,
+        compensationRightsRequest: {
+          hasForewarningNotice: true,
+          hasTakeVacationTimeLastYear: true
+        },
+        lastSixMonthsBonusPayment: [
           salaryData.bonuses.monthlyBonus1,
           salaryData.bonuses.monthlyBonus2,
           salaryData.bonuses.monthlyBonus3,
@@ -429,7 +442,7 @@ export class DatosTrabajadorComponent implements OnInit {
           salaryData.bonuses.monthlyBonus5,
           salaryData.bonuses.monthlyBonus6,
         ],
-        "lastSixMonthsSalary": [
+        lastSixMonthsSalary: [
           salaryData.monthlySalaryAverage1,
           salaryData.monthlySalaryAverage2,
           salaryData.monthlySalaryAverage3,
@@ -437,7 +450,7 @@ export class DatosTrabajadorComponent implements OnInit {
           salaryData.monthlySalaryAverage5,
           salaryData.monthlySalaryAverage6,
         ],
-        "lastSixMonthsSalaryCommissions": [
+        lastSixMonthsSalaryCommissions: [
           salaryData.commissions.monthlyCommissions1,
           salaryData.commissions.monthlyCommissions2,
           salaryData.commissions.monthlyCommissions3,
@@ -445,7 +458,7 @@ export class DatosTrabajadorComponent implements OnInit {
           salaryData.commissions.monthlyCommissions5,
           salaryData.commissions.monthlyCommissions6
         ],
-        "lastSixMonthsSalaryOverTime": [
+        lastSixMonthsSalaryOverTime: [
           salaryData.extraHours.monthlyExtraHours1,
           salaryData.extraHours.monthlyExtraHours2,
           salaryData.extraHours.monthlyExtraHours3,
@@ -453,98 +466,80 @@ export class DatosTrabajadorComponent implements OnInit {
           salaryData.extraHours.monthlyExtraHours5,
           salaryData.extraHours.monthlyExtraHours6
         ],
-        "employerId": this.currentCacheData.employer.employerId,
-        "fixedSalary": salaryData.fixedSalary === 'SI' ? true : false,
-        "requestId": this.currentCacheData.requestId,
-        "salary": Number(salaryData.salary),
-        "salaryInKindOptionsType": speciesSalary.foodTime,
-        "salaryInKindType": speciesSalary.optionSpeciesSalary,
-        "startDate": salaryData.startDate,
-        "terminationContractType": this.toolbar.terminationContractType,
-        "workerPersonId": this.currentCacheData.workerPersonId,
-        "otherRightsRequest": {
-          "haveSchoolAgeChildren": true,
-          "historySalaries": [
+        historySalaries: this.historySalaryValue,
+        otherRightsRequest: {
+          haveSchoolAgeChildren: true,
+          historySalaries: [
             {
-              "salary": 0,
-              "year": 0
+              salary: 0,
+              year: 0
             }
           ],
-          "owedBonusVacationsRequest": {
-            "owedBonusVacations": true,
-            "owedBonusVacationsAmount": 0
+          owedBonusVacationsRequest: {
+            owedBonusVacations: true,
+            owedBonusVacationsAmount: 0
           },
-          "owedFourteenthMonthRequest": [
+          owedFourteenthMonthRequest: [
             {
-              "salary": 0,
-              "year": 0
+              salary: 0,
+              year: 0
             }
           ],
-          "owedHolyRequest": {
-            "howMuchOwedHolyDays": 0,
-            "owedHolyDays": true
+          owedHolyRequest: {
+            howMuchOwedHolyDays: 0,
+            owedHolyDays: true
           },
-          "owedOtherPaymentsRequest": {
-            "owedOtherPayments": true,
-            "owedOtherPaymentsAmount": 0
+          owedOtherPaymentsRequest: {
+            owedOtherPayments: true,
+            owedOtherPaymentsAmount: 0
           },
-          "owedOvertimeRequest": {
-            "owedOvertime": true,
-            "owedOvertimeType": "DIURNA",
-            "owedOvertimeWork": 0
+          owedOvertimeRequest: {
+            owedOvertime: true,
+            owedOvertimeType: "DIURNA",
+            owedOvertimeWork: 0
           },
-          "owedPaidPendingVacationsRequest": {
-            "owedPaidPendingVacations": true,
-            "owedPendingVacationsYears": 0
+          owedPaidPendingVacationsRequest: {
+            owedPaidPendingVacations: true,
+            owedPendingVacationsYears: 0
           },
-          "owedPendingFourteenthMonthRequest": {
-            "fourteenthMonthPaid": 0,
-            "owedPendingFourteenthMonth": true
+          owedPendingFourteenthMonthRequest: {
+            fourteenthMonthPaid: 0,
+            owedPendingFourteenthMonth: true
           },
-          "owedPendingThirteenthMonthRequest": {
-            "owedPendingThirteenthMonth": true,
-            "thirteenthMonthPaid": 0
+          owedPendingThirteenthMonthRequest: {
+            owedPendingThirteenthMonth: true,
+            thirteenthMonthPaid: 0
           },
-          "owedSalaryRequest": {
-            "owedSalary": true,
-            "owedSalaryAmount": 0
+          owedSalaryRequest: {
+            owedSalary: true,
+            owedSalaryAmount: 0
           },
-          "owedSeventhDayRequest": {
-            "howMuchOwedSeventhDay": 0,
-            "owedSeventhDay": true
+          owedSeventhDayRequest: {
+            howMuchOwedSeventhDay: 0,
+            owedSeventhDay: true
           },
-          "owedThirteenthMonthRequest": [
+          owedThirteenthMonthRequest: [
             {
-              "salary": 0,
-              "year": 0
+              salary: 0,
+              year: 0
             }
           ],
-          "pregnantRequest": {
-            "breastfeedingPaidHours": 0,
-            "daysOffPreAndPostNatalWasPaid": 0,
-            "daysPaidWasFiredWhilePregnant": 0,
-            "owedBreastfeedingHours": true,
-            "owedDaysOffPreAndPostNatal": true,
-            "wasFiredWhilePregnant": true
-          }
-        },
-        "compensationRightsRequest": {
-          "hasForewarningNotice": true,
-          "hasTakeVacationTimeLastYear": true
-        }      
+          pregnantRequest: {
+            breastfeedingPaidHours: 0,
+            daysOffPreAndPostNatalWasPaid: 0,
+            daysPaidWasFiredWhilePregnant: 0,
+            owedBreastfeedingHours: true,
+            owedDaysOffPreAndPostNatal: true,
+            wasFiredWhilePregnant: true
+          }   
+        }    
       }
       console.log(data);
-      setDataCacheStore(Object.assign(getDataStore('cache'),{historySalary: this.historySalaryValue}));
-      
+      setDataCacheStore(data);
       this.calculoPrestacionesService.sendCompensationsRightsInfo(data).subscribe(response => {
-        this.calculoPrestacionesService.isShowCalculoSalarial$.emit(true);
-        this.calculoPrestacionesService.isShowCompensationRights$.emit(true);
-        if(response){
-          response ? this.render2.removeClass(this.$overlay.nativeElement, 'active-overlay') : null;
-          setDataSalaryCalculationStore(response);
-          this.calculoPrestacionesService.isShowCalculoSalarial$.emit(true);
-          this.calculoPrestacionesService.isShowCompensationRights$.emit(true);
-        }
+        response ? this.render2.removeClass(this.$overlay.nativeElement, 'active-overlay') : null;
+        setDataSalaryCalculationStore(response);
+        this.calculoResponseEvent.emit(response);
       }, (catchError) => console.warn(catchError));
     }
 
@@ -552,7 +547,6 @@ export class DatosTrabajadorComponent implements OnInit {
       window.addEventListener("scroll", () => {
         const scrollable = document.documentElement.scrollHeight - window.innerHeight;
         const scrolled = window.scrollY;
-  
         if(Math.ceil(scrolled) === scrollable){
           alert('Llegaste al Final');
         }   
