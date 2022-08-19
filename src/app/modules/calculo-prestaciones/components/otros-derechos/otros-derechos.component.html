@@ -79,7 +79,7 @@
               <td  colspan="6">
                 <div class="panel">
                   <td>
-                    <p>Días de indemnización pagados</p>
+                    <span>Días de indemnización pagados</span>
                   </td>
                   <td>
                     <input
@@ -89,12 +89,12 @@
                     type="number" 
                     class="form-control form-control-solid" 
                     />
-                    <p *ngIf="isInvalidField('pregnancyStatus')">
+                    <span *ngIf="isInvalidField('pregnancyStatus')">
                       <span
                       *ngIf="getErrorField('pregnancyStatus', 'pattern')"
                       class="text-danger"
                       >Este campo es numerico.</span>
-                    </p>
+                    </span>
                   </td>
                   <td>
                     <button class="btn btn-primary btn-sm" (click)="validFieldButton(['pregnancyStatus'],'panel-pregnancy-status')">Aceptar</button>
@@ -147,7 +147,7 @@
               <td colspan="6">
                 <div class="panel">
                   <td>
-                    <p>Cantidad de días de descanso pagados</p>
+                    <span>Cantidad de días de descanso pagados</span>
                   </td>
                   <td>
                     <input
@@ -215,7 +215,7 @@
               <td colspan="6">
                 <div class="panel">
                   <td>
-                    <p>Cantidad de horas de lactancia pagados</p>
+                    <span>Cantidad de horas de lactancia pagados</span>
                   </td>
                   <td>
                     <input
@@ -313,7 +313,7 @@
               <td colspan="6">
                 <div class="panel">
                   <td>
-                    <p>Le adeudan días feriados</p>
+                    <span>Le adeudan días feriados</span>
                   </td>
                   <td>
                     <div class="col-sm-12 col-lg-6">
@@ -383,7 +383,7 @@
               <td colspan="6">
                 <div class="panel">
                   <td> 
-                    <p>Le adeudan pago septimo día</p>
+                    <span>Le adeudan pago septimo día</span>
                   </td>
                   <td>
                     <div class="col-sm-12 col-lg-6">
@@ -459,7 +459,7 @@
               <td colspan="6">
                 <div class="panel">
                   <td>
-                    <p>¿A gozado de los ultimos 2 años de vacaciones?</p>
+                    <span>¿A gozado de los ultimos 2 años de vacaciones?</span>
                   </td>
                   <td>
                     <div class="col-sm-12 col-lg-6">
@@ -527,7 +527,7 @@
               <td colspan="6">
                 <div class="panel">
                   <td>
-                    <p>Le adeudan bono por vacaciones</p>
+                    <span>Le adeudan bono por vacaciones</span>
                   </td>
                   <td>
                     <div class="col-sm-12 col-lg-6">
@@ -595,7 +595,7 @@
               <td colspan="6">
                 <div class="panel">
                   <td>
-                    <p>¿Le adeudan el treceavo mes?</p>
+                    <span>¿Le adeudan el treceavo mes?</span>
                   </td>
                   <td>
                     <div class="col-sm-12 col-lg-6">
@@ -632,12 +632,18 @@
                 </div>
               </td>
               <td>
-                <div class="col-sm-12 col-lg-6">
-                  <p>{{getValueFormField('owedThirteenthMonth')}}</p>
+                <!-- <p>{{getValueFormField('owedThirteenthMonth')}}</p> -->
+                <div *ngFor="let item of getLastTwoYearsSalaryReadjustment" class="row mb-5 mt-2">
+                  <div class="col-4">
+                    <input type="text" disabled="true" class="form-control form-control-solid" [value]="'Año '+item.year"/>
+                  </div>
+                  <div class="col-4">
+                    <input type="text" disabled="true" class="form-control form-control-solid" [value]="'L. '+item.salary.toFixed(2)"/>
+                  </div>
                 </div>
               </td>
               <td style="text-align:left; font-weight: inherit;">
-                {{getValueFormField('owedThirteenthMonth2')}}
+                <!-- {{getValueFormField('owedThirteenthMonth2')}} ho -->
               </td>
               <td>
                 <span>{{otherRights.owedThirteenthMonth.formula}}</span>
@@ -664,7 +670,7 @@
               <td colspan="6">
                 <div class="panel">
                   <td>
-                    <p>¿Le adeudan el treceavo mes?</p>
+                    <span>¿Le adeudan el treceavo mes?</span>
                   </td>
                   <td>
                     <div class="cols-sm-12 col-lg-6">
@@ -748,7 +754,7 @@
               <td colspan="6">
                 <div class="panel">
                   <td>
-                    <p>¿Le adeudan el catorceavo mes?</p>
+                    <span>¿Le adeudan el catorceavo mes?</span>
                   </td>
                   <td>
                     <div class="col-sm-12 col-lg-6">
@@ -780,7 +786,7 @@
                   <input class="form-check-input h-20px w-30px" type="checkbox" 
                   (change)="isActiveControl('owedFourteenthMonth')" id="owedFourteenthMonth" />
                   <label class="form-check-label" for="owedFourteenthMonth">
-                    Catorceavo mes Adeudado
+                    Catorceavo mes adeudado
                   </label>
                 </div>
               </td>
@@ -817,47 +823,47 @@
               <td colspan="6">
                 <div class="panel">
                   <td>
-                    <p>¿Le adeudan el catorceavo mes?</p>
+                    <span>¿Le adeudan el catorceavo mes?</span>
                   </td>
                   <td>
-                    <div class="cols-sm-12 col-lg-6">
-                      <input
-                        formControlName="owedFourteenthMonth"
-                        [class.is-valid]="isValidField('owedFourteenthMonth')"
-                        [class.is-invalid]="isInvalidField('owedFourteenthMonth')"
-                        type="number" 
-                        class="form-control form-control-solid" 
-                        />
-                      <p *ngIf="isInvalidField('owedFourteenthMonth')">
-                        <span
-                        *ngIf="getErrorField('owedFourteenthMonth', 'pattern')"
-                        class="text-danger"
-                        >Este campo es numerico.</span>
-                      </p>
+                    <div class="row">
+                      <div class="col-4">
+                        <div>
+                          <input
+                            formControlName="owedFourteenthMonth"
+                            [class.is-valid]="isValidField('owedFourteenthMonth')"
+                            [class.is-invalid]="isInvalidField('owedFourteenthMonth')"
+                            type="number" 
+                            class="form-control form-control-solid" 
+                            />
+                          <p *ngIf="isInvalidField('owedFourteenthMonth')">
+                            <span
+                            *ngIf="getErrorField('owedFourteenthMonth', 'pattern')"
+                            class="text-danger"
+                            >Este campo es numerico.</span>
+                          </p>
+                        </div>
+                        <div>
+                          <input
+                          formControlName="owedFourteenthMonth2"
+                          [class.is-valid]="isValidField('owedFourteenthMonth2')"
+                          [class.is-invalid]="isInvalidField('owedFourteenthMonth2')"
+                          type="number" 
+                          class="form-control form-control-solid" 
+                          />
+                          <p *ngIf="isInvalidField('owedFourteenthMonth2')">
+                            <span
+                            *ngIf="getErrorField('owedFourteenthMonth2', 'pattern')"
+                            class="text-danger"
+                            >Este campo es numerico.</span>
+                          </p>
+                        </div>
+                      </div>
                     </div>
                   </td>
                   <td>
-                    <div class="col-sm-12 col-lg-6">
-                      <input
-                        formControlName="owedFourteenthMonth2"
-                        [class.is-valid]="isValidField('owedFourteenthMonth2')"
-                        [class.is-invalid]="isInvalidField('owedFourteenthMonth2')"
-                        type="number" 
-                        class="form-control form-control-solid" 
-                        />
-                      <p *ngIf="isInvalidField('owedFourteenthMonth2')">
-                        <span
-                        *ngIf="getErrorField('owedFourteenthMonth2', 'pattern')"
-                        class="text-danger"
-                        >Este campo es numerico.</span>
-                      </p>
-                    </div>
-                  </td>
-<<<<<<< HEAD
-                    <button class="btn btn-primary btn-sm" (click)="validFieldButton(['owedFourteenthMonth'],'owed-fourteenth-month')">Aceptar</button>
-=======
                     <button class="btn btn-primary btn-sm" (click)="validFieldButton(['owedFourrteenthMonth','owedFourrteenthMonth2'],'owed-fourteenth-month')">Aceptar</button>
->>>>>>> 1fd6437 ([SDT-184] labels updated on ther rights components)
+                  </td>
                 </div>
               </td>
             </tr> 
@@ -906,7 +912,7 @@
               <td colspan="6">
                 <div class="panel">
                   <td>
-                    <p>¿Le adeudan el salario?</p>
+                    <span>¿Le adeudan el salario?</span>
                   </td>
                   <td>
                     <div class="col-sm-12 col-lg-6">
@@ -1040,27 +1046,6 @@
                       fill="currentColor" />
                   </svg></span>
               </td>
-            </tr>
-            <tr #panelHaveSchoolAgeChildren class="have-school-age-children">
-              <td colspan="6">
-                <div class="panel">
-                  <td>
-                    <p>Se le hara entrega del Bono Educativo</p>
-                  </td>
-                  <td>
-                    <div class="col-sm-12 col-lg-6">
-                      <input
-                      formControlName="haveSchoolAgeChildren"
-                      [class.isValid]="isValidField('haveSchoolAgeChildren')"
-                      [class.isInvalid]="isInvalidField('haveSchoolAgeChildren')"
-                       type="number" 
-                      class="form-control form-control-solid"  />
-                    </div>
-                    
-                  </td>
-                    <button class="btn btn-primary btn-sm" (click)="validFieldButton(['haveSchoolAgeChildren'],'have-school-age-children')">Aceptar</button>
-                </div>
-              </td>
             </tr> 
             <!-- End haveSchoolAgeChildren-->
 
@@ -1142,7 +1127,7 @@
               <td colspan="6">
                 <div class="panel">
                   <td>
-                    <p>¿Recibe otros beneficios?</p>
+                    <span>¿Recibe otros beneficios?</span>
                   </td>
                   
                     <td>

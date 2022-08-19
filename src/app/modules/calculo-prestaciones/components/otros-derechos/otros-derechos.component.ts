@@ -462,12 +462,7 @@ export class OtrosDerechosComponent implements OnInit {
           owedBonusVacations: this.isActiveOwedBonusVacations,
           owedBonusVacationsAmount: this.formOtherRights.get('owedBonusVacations')?.value
         },
-        owedFourteenthMonthRequest: [
-          {
-            "salary": 0,
-            "year": 0
-          }
-        ],
+        owedFourteenthMonthRequest: this.getLastTwoYearsSalaryReadjustment,
         owedHolyRequest: {
           howMuchOwedHolyDays: this.formOtherRights.get('owedHolyDays'),
           owedHolyDays: this.isActiveOwedHolyDays
@@ -501,12 +496,7 @@ export class OtrosDerechosComponent implements OnInit {
           howMuchOwedSeventhDay: this.formOtherRights.get('owedSeventhDay')?.value,
           owedSeventhDay: this.isActiveOwedSeventhDay
         },
-        owedThirteenthMonthRequest: [
-          {
-            "salary": 0,
-            "year": 0
-          }
-        ],
+        owedThirteenthMonthRequest: this.getLastTwoYearsSalaryReadjustment,
         pregnantRequest: {
           breastfeedingPaidHours: this.formOtherRights.get('breastFeedingHours')?.value,
           daysOffPreAndPostNatalWasPaid: this.formOtherRights.get('daysOffPregnancy')?.value,
