@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, Renderer2, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -64,6 +64,7 @@ export class DerechosIdemnizacionesComponent implements OnInit {
         currency: "L."
     }
   };
+  @Output() compensationRightsResponseEvent = new EventEmitter<any>();
   currentContractType: TerminationContractType;
   formCompensationRight: FormGroup;
 
@@ -104,7 +105,7 @@ export class DerechosIdemnizacionesComponent implements OnInit {
       this.calculoPrestacionesService.sendCompensationsRightsInfo(store)
       .subscribe((res:any) => {
         res?this.render2.removeClass(this.$overlay.nativeElement, 'active-overlay'):null;
-        this.compensationRights = res.compensationRights
+        this.compensationRightsResponseEvent.emit(res.compensationRights);
       });
     }
   }

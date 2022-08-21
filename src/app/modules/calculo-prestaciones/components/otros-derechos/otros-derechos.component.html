@@ -256,7 +256,6 @@
                     <input type="text" disabled="true" class="form-control form-control-solid" [value]="'L. '+item.salary.toFixed(2)"/>
                   </div>
                  </div>
-                 
               </td>
               <td style="text-align:left; font-family: serif; font-weight: inherit;">
                 <span>{{otherRights.salaryReadjustment.formula}}</span>
@@ -1049,8 +1048,8 @@
             </tr> 
             <!-- End haveSchoolAgeChildren-->
 
-            <!--Begin historySalaries-->
-            <tr>
+            <!--Begin Reserva laboral-->
+            <tr *ngIf="currentTerminationContractType === 0">
               <td>
                 <div class="form-check form-switch form-check-custom form-check-solid me-10">
                   <input class="form-check-input h-20px w-30px" type="checkbox" 
@@ -1081,7 +1080,7 @@
               <td>
               </td>
             </tr> 
-            <!--End historySalaries-->
+            <!--End Reserva Laboral-->
 
              <!--Begin otherPayments-->
              <tr>

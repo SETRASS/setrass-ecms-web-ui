@@ -1,10 +1,12 @@
-import { Component, ElementRef, Input, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, Renderer2, ViewChild } from '@angular/core';
 import {FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { CalculoPrestacionesService } from 'src/app/modules/services/calculo-prestaciones/calculo-prestaciones.service';
-import { getDataGender, getDataStore, setDataCacheStore } from 'src/app/utils/utils';
+import { getDataGender, getDataStore, setDataCacheStore, setDataSalaryCalculationStore } from 'src/app/utils/utils';
 import { OtherRights } from 'src/app/models/other-rights.model';
+import { TerminationContractType } from 'src/app/models/enums/termination-contract-type.enum';
+import { ToolbarService } from 'src/app/_metronic/layout/components/toolbar/toolbar.service';
 
 
 @Component({
@@ -188,6 +190,7 @@ export class OtrosDerechosComponent implements OnInit {
       "time": "string"
     }
   }
+  @Output() otherRightsResponseEvent = new EventEmitter<any>();
 
   formOtherRights= new FormGroup({
     pregnancyStatus: new FormControl(0,[]),
@@ -230,15 +233,21 @@ export class OtrosDerechosComponent implements OnInit {
   isActiveOwedHistorySalaries: boolean = false;
   isActiveOwedOtherPayments: boolean = false;
 
+  currentTerminationContractType: TerminationContractType;
 
   constructor( 
     private render2: Renderer2,
     private route: Router,
-    private calculoPrestacionesService: CalculoPrestacionesService
+    private calculoPrestacionesService: CalculoPrestacionesService,
+    private toolbarService: ToolbarService
   ) { }
 
   ngOnInit(): void {
-    console.log(getDataGender());
+    this.currentTerminationContractType = this.toolbarService.terminationContractType;
+    this.calculoPrestacionesService.terminationContractType$
+    .subscribe((option:TerminationContractType) => {
+      this.currentTerminationContractType = option
+    });
   }
 
   hiddenPanel(className: string){
@@ -455,7 +464,7 @@ export class OtrosDerechosComponent implements OnInit {
           return next === keyToDelete ? prev : {...prev, [next]: requestOld[next]}
         },{otherRightsRequest:{}});
       
-        newRequest.otherRightsRequest = {
+      newRequest.otherRightsRequest = {
         haveSchoolAgeChildren: this.isActiveHaveSchoolAgeChildren ,
         historySalaries: requestOld.historySalaries,
         owedBonusVacationsRequest: {
@@ -464,7 +473,7 @@ export class OtrosDerechosComponent implements OnInit {
         },
         owedFourteenthMonthRequest: this.getLastTwoYearsSalaryReadjustment,
         owedHolyRequest: {
-          howMuchOwedHolyDays: this.formOtherRights.get('owedHolyDays'),
+          howMuchOwedHolyDays: this.formOtherRights.get('owedHolyDays')?.value,
           owedHolyDays: this.isActiveOwedHolyDays
         },
         owedOtherPaymentsRequest: {
@@ -511,7 +520,8 @@ export class OtrosDerechosComponent implements OnInit {
       this.calculoPrestacionesService
       .sendOtherRightsCompute(newRequest).subscribe((response: any) => {
         this.render2.removeClass(this.$overlay.nativeElement, 'active-overlay');
-        this.otherRights = response.otherRights;
+        setDataSalaryCalculationStore(response);
+        this.otherRightsResponseEvent.emit(response.otherRights);
       });
     }
   }

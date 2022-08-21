@@ -266,4 +266,12 @@ export class CalculoPrestacionesComponent implements OnInit, AfterViewInit {
     //this.otherRights = data.otherRights;
   }
 
+  compensationRightsListener(data: any){
+    this.compensationRights = data.compensationRights;
+  }
+
+  otherRightsListener(data: any){
+    this.otherRights = data.otherRights;
+  }
+
 }

@@ -411,7 +411,7 @@ export class DatosEmpleadorComponent implements OnInit {
       requestType: this.getCurrentRequestType(),
       terminationContractType: this.getCurrentTerminationContract()
     }
-    
+    //let req = getDataStore('cache');
     this.calculoPrestacionesService.sendEmployeeEmployerReq(data)
     .subscribe((response: any) => {
       response ? this.render2.removeClass(this.$overlay.nativeElement, 'active-overlay') : null;
