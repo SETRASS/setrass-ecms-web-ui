@@ -3,7 +3,7 @@ import {FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { CalculoPrestacionesService } from 'src/app/modules/services/calculo-prestaciones/calculo-prestaciones.service';
-import { getDataGender, getDataStore, setDataCacheStore, setDataSalaryCalculationStore } from 'src/app/utils/utils';
+import { getDataGender, getDataStore, scrollAnimationGoTo, setDataCacheStore, setDataSalaryCalculationStore } from 'src/app/utils/utils';
 import { OtherRights } from 'src/app/models/other-rights.model';
 import { TerminationContractType } from 'src/app/models/enums/termination-contract-type.enum';
 import { ToolbarService } from 'src/app/_metronic/layout/components/toolbar/toolbar.service';
@@ -191,6 +191,7 @@ export class OtrosDerechosComponent implements OnInit {
     }
   }
   @Output() otherRightsResponseEvent = new EventEmitter<any>();
+  @Output() showCalculoGeneradoEvent = new EventEmitter<boolean>();
 
   formOtherRights= new FormGroup({
     pregnancyStatus: new FormControl(0,[]),
@@ -527,7 +528,8 @@ export class OtrosDerechosComponent implements OnInit {
   }
 
   nextStep(){
-    this.route.navigateByUrl('/dashboard#export-pdf');
+    this.showCalculoGeneradoEvent.emit(true);
+    setTimeout(() => scrollAnimationGoTo('export-pdf'), 550);
   }
 
 }

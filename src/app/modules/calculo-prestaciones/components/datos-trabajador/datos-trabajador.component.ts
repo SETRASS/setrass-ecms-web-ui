@@ -17,16 +17,12 @@ import { Locations} from 'src/app/models/locations.model';
 import { WorkerPersonEmployerRequestDto } from 'src/app/models/worker-person-employer-request-dto.model';
 import { EmployerDto } from 'src/app/models/employer-dto.model';
 import { WorkerPersonStore } from '../../state/workerperson-employer-request/workerperson-employer-request.store';
-import { clearCacheData, clearSalaryCalculationData, getDataStore, getYearSelect, setDataCacheStore, setDataGender, setDataSalaryCalculationStore } from 'src/app/utils/utils';
+import { clearCacheData, clearSalaryCalculationData, getDataStore, getYearSelect, scrollAnimationGoTo, setDataCacheStore, setDataGender, setDataSalaryCalculationStore } from 'src/app/utils/utils';
 import { format } from 'date-fns';
 import { CalculoPrestacionesRequestType } from 'src/app/models/enums/calculo-prestaciones-request-type.enum';
 import { TerminationContractType } from 'src/app/models/enums/termination-contract-type.enum';
 import { SalaryCalculationStore } from '../../state/salary-calculation/salary-calculation.store';
 import { SalaryCalculationQuery } from '../../state/salary-calculation/salary-calculation.query';
-
-
-
-
 
 @Component({
   selector: 'ecms-datos-trabajador',
@@ -36,8 +32,6 @@ import { SalaryCalculationQuery } from '../../state/salary-calculation/salary-ca
 
 export class DatosTrabajadorComponent implements OnInit {
 
-
-
   @ViewChild('kt_stepper_vertical') stepperSteps: ElementRef;
   @ViewChild('overlay') $overlay: ElementRef;
   @ViewChild('salary') salaryField: ElementRef;
@@ -45,8 +39,6 @@ export class DatosTrabajadorComponent implements OnInit {
   @ViewChild('historySalaryYearField') txtHistorySalary: ElementRef;
   stepper1: any;
   formEmployee:FormGroup;
-
-  val = true;
 
   //public currentStep : Number = 1;
   stepperOptions: IStepperOptions = {
@@ -76,44 +68,30 @@ export class DatosTrabajadorComponent implements OnInit {
   minDate: string;
   currentDataStore:object;
   currentCacheData: any;
-  
 
-  //SAVE-BUTTON
-  saveButtonIsOk =false;
-  saveButtonText ='';
-
-//CONST
-  REQUEST_ID:string;
-  EMPLOYER_ID:string;
-  WORKER_PERSON_ID: string;
-  isResponseOk: boolean = false;
-  spinnerShow = false;
-
-  locations$: Observable<Locations[]> = this.locationsQuery.selectAll();
-  isLocationsLoaded$: Observable<boolean> = this.locationsQuery.selectLoaded$;
+  //locations$: Observable<Locations[]> = this.locationsQuery.selectAll();
+  //isLocationsLoaded$: Observable<boolean> = this.locationsQuery.selectLoaded$;
   
 
   @Output() calculoResponseEvent = new EventEmitter<any>();
 
-  constructor(private lookusService: LookupsService,
-              private salaryHistoryCatalogService: SalaryHistoryCatalogService,
-              private calculoPrestacionesService: CalculoPrestacionesService,
-              private toolbar: ToolbarService,
-              private formBuilder: FormBuilder,
-              private render2: Renderer2,
-              private workerPersonStore: WorkerPersonStore,
-              private locationsQuery: LocationsQuery,
-              private salaryCalculationStore: SalaryCalculationStore,
-              private salaryCalculationQuery: SalaryCalculationQuery)
-              {
-    this.formBuild();            
-    
-  }
+    constructor(private lookusService: LookupsService,
+                private salaryHistoryCatalogService: SalaryHistoryCatalogService,
+                private calculoPrestacionesService: CalculoPrestacionesService,
+                private toolbar: ToolbarService,
+                private formBuilder: FormBuilder,
+                private render2: Renderer2,
+                private workerPersonStore: WorkerPersonStore,
+                private locationsQuery: LocationsQuery,
+                private salaryCalculationStore: SalaryCalculationStore,
+                private salaryCalculationQuery: SalaryCalculationQuery)
+                {
+      this.formBuild();            
+      
+    }
 
-  ngAfterViewInit(): void{
-    this.stepperConfig();
-    this.saveButtonText = this.saveButtonIsOk ? "Realizar Calculo" : "Guardar";
-    
+    ngAfterViewInit(): void{
+      this.stepperConfig();  
     }
     
     ngOnInit(): void {
@@ -124,10 +102,6 @@ export class DatosTrabajadorComponent implements OnInit {
       const err = error.message | error;
       console.warn(err);
     }));
-
-    this.locations$.subscribe((locations)=>{
-      this.locations = locations;  
-    }); 
     
     //economicActivityList
     this.salaryHistoryCatalogService.getEconomicActivities().subscribe((data)=> {
@@ -146,9 +120,8 @@ export class DatosTrabajadorComponent implements OnInit {
 
     this.salaryCalculationQuery.getData().subscribe(res => this.currentDataStore=res);
     this.salaryCalculationQuery.getCache().subscribe(res => this.currentCacheData=res);
-    /* clearCacheData();
-    clearSalaryCalculationData(); */
     }
+
     
     
     stepperConfig(){
@@ -172,6 +145,10 @@ export class DatosTrabajadorComponent implements OnInit {
     if(this.formEmployee.get('speciesSalary') ?.valid && this.stepper1.getCurrentStepIndex() === 4) {
       return this.stepper1.goNext();
     }
+
+    if (this.formEmployee.get('historySalary')?.valid && this.stepper1.getCurrentStepIndex() === 5) {
+      return this.stepper1.goNext();
+    }
     
     });
     
@@ -179,28 +156,28 @@ export class DatosTrabajadorComponent implements OnInit {
     private formBuild(){
     this.formEmployee= this.formBuilder.group({
       employeeData: this.formBuilder.group({
-        employeeName: ['Jorge adalberto', [Validators.required,Validators.pattern(/^([Aa-zA-ZáéíóúÁÉÍÓÚÑñ]{2,}\s?){2,4}$/)]],
-        employeeLastName: ['Aguilar', [Validators.required, Validators.pattern(/^([Aa-zA-ZáéíóúÁÉÍÓÚÑñ]{2,}\s?){2,4}$/)]],
+        employeeName: ['', [Validators.required,Validators.pattern(/^([Aa-zA-ZáéíóúÁÉÍÓÚÑñ]{2,}\s?){2,4}$/)]],
+        employeeLastName: ['', [Validators.required, Validators.pattern(/^([Aa-zA-ZáéíóúÁÉÍÓÚÑñ]{2,}\s?){2,4}$/)]],
         employeeSex: ['M', [Validators.required] ],
-        employeeAge:[20,[Validators.required, Validators.minLength(14), Validators.maxLength(85), Validators.pattern(/^[0-9]+$/)]],
+        employeeAge:[,[Validators.required, Validators.minLength(14), Validators.maxLength(85), Validators.pattern(/^[0-9]+$/)]],
         typeIdentity: ['DNI', [Validators.required]],
-        identityNumber: ['0801199405877', [Validators.required, Validators.minLength(13), Validators.maxLength(13), Validators.pattern(/^[0-9]+$/)]],
-        employeePhone: ['32866905', [Validators.required, Validators.minLength(8), Validators.maxLength(8)]],
-        employeeEmail: ['j@mail.com', [Validators.required, Validators.email]]
+        identityNumber: ['', [Validators.required, Validators.minLength(13), Validators.maxLength(13), Validators.pattern(/^[0-9]+$/)]],
+        employeePhone: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(8)]],
+        employeeEmail: ['', [Validators.required, Validators.email]]
       }),
       companyData:this.formBuilder.group({
         department: ['', [Validators.required]],
         municipality: ['', [Validators.required]],
-        companyName: ['Empresa XY', [Validators.required, Validators.minLength(5)]],
+        companyName: ['', [Validators.required, Validators.minLength(5)]],
         economicActivity: ['', [Validators.required,]],
-        companySize:[20,[ Validators.required, Validators.pattern(/^[0-9]+$/)]],
+        companySize:[,[ Validators.required, Validators.pattern(/^[0-9]+$/)]],
         personType: ['JURIDICA', [Validators.required]],
       }), 
       salaryData: this.formBuilder.group({
         startDate: ['2019-06-12', [Validators.required]],
-        endDate: [this.getFutureDate(5), [Validators.required]],
+        endDate: [this.getFutureDate(), [Validators.required]],
         fixedSalary: ['SI', [Validators.required]],
-        salary: [18000, [Validators.required]],
+        salary: [, [Validators.required]],
         monthlySalaryAverage1: [0, []],
         monthlySalaryAverage2: [0, []],
         monthlySalaryAverage3: [0, []],
@@ -234,7 +211,7 @@ export class DatosTrabajadorComponent implements OnInit {
 
       }),
       speciesSalary: this.formBuilder.group({
-        optionSpeciesSalary: ['NONE', [Validators.required]],
+        optionSpeciesSalary: ['', [Validators.required]],
         foodTime: ['NONE', []]
       }),
       historySalary: this.formBuilder.array([])    
@@ -263,6 +240,15 @@ export class DatosTrabajadorComponent implements OnInit {
         this.haveSalary = value;
     });
 
+    this.formEmployee.get('speciesSalary.optionSpeciesSalary')?.valueChanges
+    .subscribe(value => {
+      if(value === 'FEED'){
+        this.formEmployee.get('speciesSalary.foodTime')?.setValidators([Validators.required]);
+      }else{
+        this.formEmployee.get('speciesSalary.foodTime')?.removeValidators([Validators.required]);
+      }
+    });
+
     this.formEmployee.get('employeeData.identityNumber')?.setValidators([Validators.required, Validators.minLength(13), Validators.maxLength(13), Validators.pattern(/^[0-9]+$/)]);
     
     this.formEmployee.get(`species.Salary.optionsSpeciesSalary`)?.valueChanges.subscribe(value => {
@@ -274,10 +260,10 @@ export class DatosTrabajadorComponent implements OnInit {
     
     }
     
-    private createHistorySalaryFieldYear(anio: string, salary: number){
+    private createHistorySalaryFieldYear(anio: string, salary: any){
       return this.formBuilder.group({
         year: [anio],
-        salary: [, Validators.required],
+        salary: [salary, [Validators.required]],
       });
     }
     
@@ -411,7 +397,6 @@ export class DatosTrabajadorComponent implements OnInit {
         const { requestId, workerPersonId, employer} = response;
         setDataCacheStore(Object.assign(req, { requestId, workerPersonId, employer}));
         this.currentCacheData = getDataStore('cache');
-        console.log(this.currentCacheData);
       })
 
     }
@@ -468,28 +453,17 @@ export class DatosTrabajadorComponent implements OnInit {
         ],
         historySalaries: this.historySalaryValue    
       }
-      console.log(data);
-      setDataCacheStore(data);
+      setDataCacheStore(Object.assign(getDataStore('cache'),{historySalary: this.historySalaryValue}));
       this.calculoPrestacionesService.sendCompensationsRightsInfo(data).subscribe(response => {
         response ? this.render2.removeClass(this.$overlay.nativeElement, 'active-overlay') : null;
         setDataSalaryCalculationStore(response);
         this.calculoResponseEvent.emit(response);
+        setTimeout(() => scrollAnimationGoTo('calculo-salarial'), 550);
       }, (catchError) => console.warn(catchError));
-    }
-
-    scrollAnimation() {
-      window.addEventListener("scroll", () => {
-        const scrollable = document.documentElement.scrollHeight - window.innerHeight;
-        const scrolled = window.scrollY;
-        if(Math.ceil(scrolled) === scrollable){
-          alert('Llegaste al Final');
-        }   
-      });
     }
   
     formDataSend() {
       this.postSalaryInfoRequest();
-      //his.formEmployee.valid ? console.log(this.formEmployee.value) : this.formEmployee.markAllAsTouched();
     }
 
     /**
@@ -515,7 +489,7 @@ export class DatosTrabajadorComponent implements OnInit {
       }
       let years = getYearSelect(this.formEmployee.get('salaryData.startDate')?.value,
       this.formEmployee.get('salaryData.endDate')?.value);
-      years.forEach((year:any) => this.historySalaryField.push(this.createHistorySalaryFieldYear(year,0)));
+      years.forEach((year:any) => this.historySalaryField.push(this.createHistorySalaryFieldYear(year,'')));
       const historySalaryElements : any = document.querySelectorAll('.historySalaryInput');
       historySalaryElements.forEach((element:any) => element.setAttribute('disabled','true')); 
     }

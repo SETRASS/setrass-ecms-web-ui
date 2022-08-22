@@ -5,7 +5,7 @@ import { Subscription } from 'rxjs';
 import { CompensationRights } from 'src/app/models/compensation-rights.model';
 import { TerminationContractType } from 'src/app/models/enums/termination-contract-type.enum';
 import { CalculoPrestacionesService } from 'src/app/modules/services/calculo-prestaciones/calculo-prestaciones.service';
-import { getDataStore, setDataCacheStore, setDataSalaryCalculationStore } from 'src/app/utils/utils';
+import { getDataStore, scrollAnimationGoTo, setDataCacheStore, setDataSalaryCalculationStore } from 'src/app/utils/utils';
 import { ToolbarService } from 'src/app/_metronic/layout/components/toolbar/toolbar.service';
 import { CalculoPrestacionesComponent } from '../../pages/calculo-prestaciones/calculo-prestaciones.component';
 
@@ -65,6 +65,7 @@ export class DerechosIdemnizacionesComponent implements OnInit {
     }
   };
   @Output() compensationRightsResponseEvent = new EventEmitter<any>();
+  @Output() showOtherRightsEvent = new EventEmitter<boolean>();
   currentContractType: TerminationContractType;
   formCompensationRight: FormGroup;
 
@@ -111,6 +112,7 @@ export class DerechosIdemnizacionesComponent implements OnInit {
   }
 
   nextStep(){
-    this.route.navigateByUrl('/dashboard#other-rights');
+    this.showOtherRightsEvent.emit(true);
+    setTimeout(() => scrollAnimationGoTo('other-rights'), 550);
   }  
 }

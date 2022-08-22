@@ -909,7 +909,7 @@
                                   [class.is-invalid]="isInvalidField('salaryData.commissions.monthlyCommissions1')"
                                   type="number"
                                   class="form-control form-control-solid"
-                                  (keyup)="getTotalAverageField('salaryData.commissions.monthlyCommissions')"
+                                  (change)="getTotalAverageField('salaryData.commissions.monthlyCommissions')"
                                   />
                                   <div *ngIf="isInvalidField('salaryData.commissions.monthlyCommissions1')">
                                     <span
@@ -1371,8 +1371,8 @@
               <!--begin::subtitle group-->
               <div class="row mb-10">
                 <div class="col-12">
-                  <p><b>Ingrese los salarios anuales de los últimos 5 años</b></p>
-                  <p class="muted">Se requiren los salarios anuales de los ultimos 5 años para realizar el cálculo de su reserva laboral y reajuste salarial</p>
+                  <p><b>Ingrese los salarios anuales de los últimos años</b></p>
+                  <p class="muted">Se requiren los salarios anuales de los últimos años para realizar el cálculo de su reserva laboral y reajuste salarial</p>
                 </div>
               </div>
               <!--end::Subtitle group-->
@@ -1431,7 +1431,7 @@
             <div>
               <button
                 #submit
-                type="submit"
+                type="button"
                 class="btn btn-primary"
                 data-kt-stepper-action="submit"
                 (click)="formDataSend()"
@@ -1447,8 +1447,6 @@
                 data-kt-stepper-action="next">
                 Siguiente
               </button>
-
-
             </div>
             <!--end::Wrapper-->
           </div>

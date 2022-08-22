@@ -15,6 +15,13 @@ export function getYearSelect(startDate: string, endDate: string){
     return years;
 }
 
+export function scrollAnimationGoTo(fragmentLinkName: string) {
+    window.scroll({
+      top: document.getElementById(fragmentLinkName)?.offsetTop! - 80,
+      behavior: 'smooth'
+    });
+}
+
 export function setDataSalaryCalculationStore(data: object) {
     localStorage.setItem('salary-calculation',JSON.stringify(data));
 }

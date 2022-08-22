@@ -17,10 +17,10 @@ import { ToolbarService } from 'src/app/_metronic/layout/components/toolbar/tool
 export class CalculoPrestacionesComponent implements OnInit, AfterViewInit {
 
   userType: CalculoPrestacionesRequestType;
-  showSalaryCalculation: boolean = true;
-  showCompensationRights: boolean = true;
-  showOtherRights: boolean = true;
-  showExportPdf: boolean = true;
+  showSalaryCalculation: boolean = false;
+  showCompensationRights: boolean = false;
+  showOtherRights: boolean = false;
+  showExportPdf: boolean = false;
 
   computedSalaries: ComputedSalaries = {
     averageDailySalary: 0,
@@ -263,6 +263,8 @@ export class CalculoPrestacionesComponent implements OnInit, AfterViewInit {
     this.computedSalaries = data.computedSalaries;
     this.laborOld = data.laborOld;
     this.compensationRights = data.compensationRights;
+    this.showSalaryCalculation = true;
+    this.showCompensationRights = true;
     //this.otherRights = data.otherRights;
   }
 
@@ -272,6 +274,14 @@ export class CalculoPrestacionesComponent implements OnInit, AfterViewInit {
 
   otherRightsListener(data: any){
     this.otherRights = data.otherRights;
+  }
+
+  showOtherRightsListener(data: boolean){
+    this.showOtherRights = true;
+  }
+
+  showCalculoGeneradoListener(data: any){
+    this.showExportPdf = true;
   }
 
 }
