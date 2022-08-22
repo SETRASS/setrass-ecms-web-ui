@@ -248,7 +248,7 @@
                   a los que aplica</p>
               </td>
               <td colspan="2">
-                 <div *ngFor="let item of getLastTwoYearsSalaryReadjustment" class="row mb-5 mt-2">
+                 <div *ngFor="let item of getLastTwoYearsSalaryReadjustment()" class="row mb-5 mt-2">
                   <div class="col-4">
                     <input type="text" disabled="true" class="form-control form-control-solid" [value]="'Año '+item.year"/>
                   </div>
@@ -564,7 +564,6 @@
               </td>
               <td>
                 <p>{{getValueFormField('owedPendingThirteenthMonth')}}</p>
-                
               </td>
               <td>
                 <div class="col-sm-12 col-lg-6"> </div>
@@ -631,13 +630,42 @@
                 </div>
               </td>
               <td>
-                <!-- <p>{{getValueFormField('owedThirteenthMonth')}}</p> -->
-                <div *ngFor="let item of getLastTwoYearsSalaryReadjustment" class="row mb-5 mt-2">
+                <div *ngIf="getLastTwoYearsSalaryReadjustment().length > 1" class="row mb-5 mt-2">
                   <div class="col-4">
-                    <input type="text" disabled="true" class="form-control form-control-solid" [value]="'Año '+item.year"/>
+                    <input
+                      [value]="getLastTwoYearsSalaryReadjustment()[1].year"
+                      [disabled]="true"
+                      type="number" 
+                      class="form-control form-control-solid" 
+                      />
                   </div>
                   <div class="col-4">
-                    <input type="text" disabled="true" class="form-control form-control-solid" [value]="'L. '+item.salary.toFixed(2)"/>
+                    <input
+                      [placeholder]="'L. '+getLastTwoYearsSalaryReadjustment()[1].salary"
+                      [disabled]="true"
+                      [value]="owedThirteenthMonth2Value"
+                      type="number"
+                      class="form-control form-control-solid" 
+                      />
+                  </div>
+                </div>
+                <div class="row mb-5">
+                  <div class="col-4">
+                    <input
+                      [value]="getLastTwoYearsSalaryReadjustment()[0].year"
+                      [disabled]="true"
+                      type="number" 
+                      class="form-control form-control-solid" 
+                      />
+                  </div>
+                  <div class="col-4">
+                    <input
+                      type="number" 
+                      class="form-control form-control-solid"
+                      [disabled]="true"
+                      [placeholder]="'L. '+getLastTwoYearsSalaryReadjustment()[0].salary" 
+                      [value]="owedThirteenthMonthValue"
+                      />
                   </div>
                 </div>
               </td>
@@ -672,40 +700,65 @@
                     <span>¿Le adeudan el treceavo mes?</span>
                   </td>
                   <td>
-                    <div class="cols-sm-12 col-lg-6">
-                      <input
-                        formControlName="owedThirteenthMonth"
-                        [class.is-valid]="isValidField('owedThirteenthMonth')"
-                        [class.is-invalid]="isInvalidField('OwedThirteenthMonth')"
-                        type="number" 
-                        class="form-control form-control-solid" 
-                        />
-                      <p *ngIf="isInvalidField('owedThirteenthMonth')">
-                        <span
-                        *ngIf="getErrorField('owedThirteenthMonth', 'pattern')"
-                        class="text-danger"
-                        >Este campo es numerico.</span>
-                      </p>
+                    <div *ngIf="getLastTwoYearsSalaryReadjustment().length > 1" class="row mb-5">
+                      <div class="col-4">
+                        <input
+                          [value]="getLastTwoYearsSalaryReadjustment()[1].year"
+                          [disabled]="true"
+                          type="number" 
+                          class="form-control form-control-solid" 
+                          />
+                      </div>
+                      <div class="col-4">
+                        <input
+                          formControlName="owedThirteenthMonth2"
+                          [class.is-valid]="isValidField('owedThirteenthMonth2')"
+                          [class.is-invalid]="isInvalidField('owedThirteenthMonth2')"
+                          [placeholder]="'L. '+getLastTwoYearsSalaryReadjustment()[1].salary"
+                          type="number" 
+                          class="form-control form-control-solid" 
+                          />
+                        <p *ngIf="isInvalidField('owedThirteenthMonth2')">
+                          <span
+                          *ngIf="getErrorField('owedThirteenthMonth2', 'pattern')"
+                          class="text-danger"
+                          >Este campo es numerico.</span>
+                        </p>
+                      </div>
+                    </div>
+                    <div class="row mb-5">
+                      <div class="col-4">
+                        <input
+                          [value]="getLastTwoYearsSalaryReadjustment()[0].year"
+                          [disabled]="true"
+                          type="number" 
+                          class="form-control form-control-solid" 
+                          />
+                      </div>
+                      <div class="col-4">
+                        <input
+                          formControlName="owedThirteenthMonth"
+                          [class.is-valid]="isValidField('owedThirteenthMonth')"
+                          [class.is-invalid]="isInvalidField('owedThirteenthMonth')"
+                          type="number" 
+                          class="form-control form-control-solid"
+                          [placeholder]="'L. '+getLastTwoYearsSalaryReadjustment()[0].salary" 
+                          />
+                        <p *ngIf="isInvalidField('owedThirteenthMonth')">
+                          <span
+                          *ngIf="getErrorField('owedThirteenthMonth', 'pattern')"
+                          class="text-danger"
+                          >Este campo es numerico.</span>
+                        </p>
+                      </div>
                     </div>
                   </td>
                   <td>
-                    <div class="col-sm-12 col-lg-6">
-                      <input
-                        formControlName="owedThirteenthMonth2"
-                        [class.is-valid]="isValidField('owedThirteenthMonth2')"
-                        [class.is-invalid]="isInvalidField('owedThirteenthMonth2')"
-                        type="number" 
-                        class="form-control form-control-solid" 
-                        />
-                      <p *ngIf="isInvalidField('owedThirteenthMonth2')">
-                        <span
-                        *ngIf="getErrorField('owedThirteenthMonth2', 'pattern')"
-                        class="text-danger"
-                        >Este campo es numerico.</span>
-                      </p>
-                    </div>
-                  </td>
                     <button class="btn btn-primary btn-sm" (click)="validFieldButton(['owedThirteenthMonth','owedThirteenthMonth2'],'owed-thirteenth-month')">Aceptar</button>
+                  </td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
                 </div>
               </td>
             </tr> 
@@ -726,7 +779,7 @@
                 <p>{{getValueFormField('owedPendingFourteenthMonth')}}</p>
               </td>
               <td>
-                <div class="col-sm-12 col-lg-6"> </div>
+                
               </td>
               <td>
                 <span>{{otherRights.owedPendingFourteenthMonth.formula}}</span>
@@ -790,12 +843,47 @@
                 </div>
               </td>
               <td>
-                <div class="col-sm-12 col-lg-6">
-                  <p>{{getValueFormField('owedFourteenthMonth')}}</p>
+                <div *ngIf="getLastTwoYearsSalaryReadjustment().length > 1" class="row mb-5 mt-2">
+                  <div class="col-4">
+                    <input
+                      [value]="getLastTwoYearsSalaryReadjustment()[1].year"
+                      [disabled]="true"
+                      type="number" 
+                      class="form-control form-control-solid" 
+                      />
+                  </div>
+                  <div class="col-4">
+                    <input
+                      [placeholder]="'L. '+getLastTwoYearsSalaryReadjustment()[1].salary"
+                      [disabled]="true"
+                      [value]="owedFourteenthMonth2Value"
+                      type="number"
+                      class="form-control form-control-solid" 
+                      />
+                  </div>
+                </div>
+                <div class="row mb-5">
+                  <div class="col-4">
+                    <input
+                      [value]="getLastTwoYearsSalaryReadjustment()[0].year"
+                      [disabled]="true"
+                      type="number" 
+                      class="form-control form-control-solid" 
+                      />
+                  </div>
+                  <div class="col-4">
+                    <input
+                      type="number" 
+                      class="form-control form-control-solid"
+                      [disabled]="true"
+                      [placeholder]="'L. '+getLastTwoYearsSalaryReadjustment()[0].salary" 
+                      [value]="owedFourteenthMonthValue"
+                      />
+                  </div>
                 </div>
               </td>
               <td style="text-align:left; font-weight: inherit;">
-                {{getValueFormField('owedFourteenthMonth2')}}
+                
               </td>
               <td>
                 <span>{{otherRights.owedFourteenthMonth.formula}}</span>
@@ -825,44 +913,65 @@
                     <span>¿Le adeudan el catorceavo mes?</span>
                   </td>
                   <td>
-                    <div class="row">
+                    <div *ngIf="getLastTwoYearsSalaryReadjustment().length > 1" class="row mb-5">
                       <div class="col-4">
-                        <div>
-                          <input
-                            formControlName="owedFourteenthMonth"
-                            [class.is-valid]="isValidField('owedFourteenthMonth')"
-                            [class.is-invalid]="isInvalidField('owedFourteenthMonth')"
-                            type="number" 
-                            class="form-control form-control-solid" 
-                            />
-                          <p *ngIf="isInvalidField('owedFourteenthMonth')">
-                            <span
-                            *ngIf="getErrorField('owedFourteenthMonth', 'pattern')"
-                            class="text-danger"
-                            >Este campo es numerico.</span>
-                          </p>
-                        </div>
-                        <div>
-                          <input
-                          formControlName="owedFourteenthMonth2"
-                          [class.is-valid]="isValidField('owedFourteenthMonth2')"
-                          [class.is-invalid]="isInvalidField('owedFourteenthMonth2')"
+                        <input
+                          [value]="getLastTwoYearsSalaryReadjustment()[1].year"
+                          [disabled]="true"
                           type="number" 
                           class="form-control form-control-solid" 
                           />
-                          <p *ngIf="isInvalidField('owedFourteenthMonth2')">
-                            <span
-                            *ngIf="getErrorField('owedFourteenthMonth2', 'pattern')"
-                            class="text-danger"
-                            >Este campo es numerico.</span>
-                          </p>
-                        </div>
+                      </div>
+                      <div class="col-4">
+                        <input
+                          formControlName="owedFourteenthMonth2"
+                          [class.is-valid]="isValidField('owedFourteenthMonth2')"
+                          [class.is-invalid]="isInvalidField('owedFourteenthMonth2')"
+                          [placeholder]="'L. '+getLastTwoYearsSalaryReadjustment()[1].salary"
+                          type="number" 
+                          class="form-control form-control-solid" 
+                          />
+                        <p *ngIf="isInvalidField('owedFourteenthMonth2')">
+                          <span
+                          *ngIf="getErrorField('owedFourteenthMonth2', 'pattern')"
+                          class="text-danger"
+                          >Este campo es numerico.</span>
+                        </p>
+                      </div>
+                    </div>
+                    <div class="row mb-5">
+                      <div class="col-4">
+                        <input
+                          [value]="getLastTwoYearsSalaryReadjustment()[0].year"
+                          [disabled]="true"
+                          type="number" 
+                          class="form-control form-control-solid" 
+                          />
+                      </div>
+                      <div class="col-4">
+                        <input
+                          formControlName="owedFourteenthMonth"
+                          [class.is-valid]="isValidField('owedFourteenthMonth')"
+                          [class.is-invalid]="isInvalidField('owedFourteenthMonth')"
+                          type="number" 
+                          class="form-control form-control-solid"
+                          [placeholder]="'L. '+getLastTwoYearsSalaryReadjustment()[0].salary" 
+                          />
+                        <p *ngIf="isInvalidField('owedFourteenthMonth')">
+                          <span
+                          *ngIf="getErrorField('owedFourteenthMonth', 'pattern')"
+                          class="text-danger"
+                          >Este campo es numerico.</span>
+                        </p>
                       </div>
                     </div>
                   </td>
                   <td>
-                    <button class="btn btn-primary btn-sm" (click)="validFieldButton(['owedFourrteenthMonth','owedFourrteenthMonth2'],'owed-fourteenth-month')">Aceptar</button>
+                    <button class="btn btn-primary btn-sm" (click)="validFieldButton(['owedFourteenthMonth','owedFourteenthMonth2'],'owed-fourteenth-month')">Aceptar</button>
                   </td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
                 </div>
               </td>
             </tr> 

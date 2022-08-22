@@ -256,8 +256,7 @@ export class OtrosDerechosComponent implements OnInit {
   }
 
   editPanel(className: string){
-    let isCheckElememt= document.getElementById(className);
-    console.log(isCheckElememt);
+    //let isCheckElememt= document.getElementById(className)?.checked
     document.querySelector(`.${className}`)?.classList.add('active');
   }
 
@@ -279,7 +278,7 @@ export class OtrosDerechosComponent implements OnInit {
     return this.formOtherRights.get(element)?.hasError(errorName);
   }
 
-  get getLastTwoYearsSalaryReadjustment(){
+  getLastTwoYearsSalaryReadjustment(){
     let historySalaryArray = getDataStore('cache').historySalaries;
     return historySalaryArray.length > 2?
     historySalaryArray.splice(historySalaryArray.length-2, 2):
@@ -301,11 +300,10 @@ export class OtrosDerechosComponent implements OnInit {
       this.hiddenPanel(classPanel);
     }
   }
-
   
   getYearsHistoryArray(){
     return getDataStore('cache').historySalaries;
-    }
+  }
 
   isActiveControl(controlName: string){
     switch(controlName){
@@ -389,9 +387,14 @@ export class OtrosDerechosComponent implements OnInit {
         this.isActiveOwedThirteenthMonth?
         this.render2.addClass(this.$panelOwedThirteenthMonth.nativeElement, 'active'):
         this.render2.removeClass(this.$panelOwedThirteenthMonth.nativeElement, 'active');
-        this.isActiveOwedThirteenthMonth?
-        this.formOtherRights.get(controlName)?.addValidators([Validators.required,Validators.pattern(/^[0-9]+$/)]):
-        this.formOtherRights.get(controlName)?.removeValidators([Validators.required,Validators.pattern(/^[0-9]+$/)]);
+        if(this.isActiveOwedThirteenthMonth){
+          this.formOtherRights.get(controlName)?.addValidators([Validators.required,Validators.pattern(/^[0-9]+$/)]);
+          this.getLastTwoYearsSalaryReadjustment().length > 1 ?
+          this.formOtherRights.get('owedThirteenthMonth2')?.addValidators([Validators.required,Validators.pattern(/^[0-9]+$/)]): null;
+        }else{
+          this.formOtherRights.get(controlName)?.removeValidators([Validators.required,Validators.pattern(/^[0-9]+$/)]);
+          this.formOtherRights.get('owedThirteenthMonth2')?.removeValidators([Validators.required,Validators.pattern(/^[0-9]+$/)]);
+        }
         break;
       case 'owedPendingFourteenthMonth':
         this.isActiveOwedPendingFourteenthMonth =! this.isActiveOwedPendingFourteenthMonth;
@@ -407,9 +410,14 @@ export class OtrosDerechosComponent implements OnInit {
         this.isActiveOwedFourteenthMonth?
         this.render2.addClass(this.$panelOwedFourteenthMonth.nativeElement, 'active'):
         this.render2.removeClass(this.$panelOwedFourteenthMonth.nativeElement, 'active');
-        this.isActiveOwedFourteenthMonth?
-        this.formOtherRights.get(controlName)?.addValidators([Validators.required,Validators.pattern(/^[0-9]+$/)]):
-        this.formOtherRights.get(controlName)?.removeValidators([Validators.required,Validators.pattern(/^[0-9]+$/)]);
+        if(this.isActiveOwedFourteenthMonth){
+          this.formOtherRights.get(controlName)?.addValidators([Validators.required,Validators.pattern(/^[0-9]+$/)]);
+          this.getLastTwoYearsSalaryReadjustment().length > 1 ?
+          this.formOtherRights.get('owedFourteenthMonth2')?.addValidators([Validators.required,Validators.pattern(/^[0-9]+$/)]): null;
+        }else{
+          this.formOtherRights.get(controlName)?.removeValidators([Validators.required,Validators.pattern(/^[0-9]+$/)]);
+          this.formOtherRights.get('owedFourteenthMonth2')?.removeValidators([Validators.required,Validators.pattern(/^[0-9]+$/)]);
+        }
         break;
       case 'owedSalary':
         this.isActiveOwedSalary =! this.isActiveOwedSalary;
@@ -455,6 +463,44 @@ export class OtrosDerechosComponent implements OnInit {
     }
   }
 
+  get owedThirteenthMonthValue(){
+    return this.formOtherRights.get('owedThirteenthMonth')?.value;
+  }
+
+  get owedThirteenthMonth2Value(){
+    return this.formOtherRights.get('owedThirteenthMonth2')?.value;
+  }
+
+  get owedFourteenthMonthValue(){
+    return this.formOtherRights.get('owedFourteenthMonth')?.value;
+  }
+  
+  get owedFourteenthMonth2Value(){
+    return this.formOtherRights.get('owedFourteenthMonth2')?.value;
+  }
+
+  getOwedThirteenthMonthArray(){
+    return this.getLastTwoYearsSalaryReadjustment().map((item: any, index: any) => {
+      if(index === 0){
+        return { year: item.year, salary: Number(this.formOtherRights.get('owedThirteenthMonth')?.value)  }
+      }
+      if(index === 1){
+        return { year: item.year, salary: Number(this.formOtherRights.get('owedThirteenthMonth2')?.value)  }
+      }
+    });
+  }
+  
+  getOwedFourteenthMonthArray(){
+    return this.getLastTwoYearsSalaryReadjustment().map((item: any, index: any) => {
+      if(index === 0){
+        return { year: item.year, salary: Number(this.formOtherRights.get('owedFourteenthMonth')?.value)  }
+      }
+      if(index === 1){
+        return { year: item.year, salary: Number(this.formOtherRights.get('owedFourteenthMonth2')?.value)  }
+      }
+    });
+  }
+
   recalculo(){
     if(getDataStore('cache').requestId){
       this.render2.addClass(this.$overlay.nativeElement, 'active-overlay');
@@ -472,7 +518,7 @@ export class OtrosDerechosComponent implements OnInit {
           owedBonusVacations: this.isActiveOwedBonusVacations,
           owedBonusVacationsAmount: this.formOtherRights.get('owedBonusVacations')?.value
         },
-        owedFourteenthMonthRequest: this.getLastTwoYearsSalaryReadjustment,
+        owedFourteenthMonthRequest: this.getOwedFourteenthMonthArray(),
         owedHolyRequest: {
           howMuchOwedHolyDays: this.formOtherRights.get('owedHolyDays')?.value,
           owedHolyDays: this.isActiveOwedHolyDays
@@ -506,7 +552,7 @@ export class OtrosDerechosComponent implements OnInit {
           howMuchOwedSeventhDay: this.formOtherRights.get('owedSeventhDay')?.value,
           owedSeventhDay: this.isActiveOwedSeventhDay
         },
-        owedThirteenthMonthRequest: this.getLastTwoYearsSalaryReadjustment,
+        owedThirteenthMonthRequest: this.getOwedThirteenthMonthArray(),
         pregnantRequest: {
           breastfeedingPaidHours: this.formOtherRights.get('breastFeedingHours')?.value,
           daysOffPreAndPostNatalWasPaid: this.formOtherRights.get('daysOffPregnancy')?.value,

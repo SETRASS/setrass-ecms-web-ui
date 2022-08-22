@@ -453,7 +453,12 @@ export class DatosTrabajadorComponent implements OnInit {
         ],
         historySalaries: this.historySalaryValue    
       }
-      setDataCacheStore(Object.assign(getDataStore('cache'),{historySalary: this.historySalaryValue}));
+      let storeOld = getDataStore('cache');
+      storeOld.historySalaries = this.historySalaryValue; 
+      setDataCacheStore(Object.assign(storeOld,{ 
+        startDate: salaryData.startDate, 
+        endDate: salaryData.endDate
+      }));
       this.calculoPrestacionesService.sendCompensationsRightsInfo(data).subscribe(response => {
         response ? this.render2.removeClass(this.$overlay.nativeElement, 'active-overlay') : null;
         setDataSalaryCalculationStore(response);

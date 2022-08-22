@@ -256,7 +256,13 @@ export class CalculoPrestacionesComponent implements OnInit, AfterViewInit {
     });
 
     setDataGender("F");
-    setDataCacheStore({historySalaries: [{year:'1821',salary:2000}]});
+    setDataCacheStore({
+      historySalaries: [
+        {year:'1821',salary:2000},
+        {year:'1822',salary:3000}
+      ], 
+      startDate: '2020-05-10', 
+      endDate: '2022-05-10'});
   }
 
   calculoResponseListener(data: any){

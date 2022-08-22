@@ -148,7 +148,7 @@ export class DatosEmpleadorComponent implements OnInit {
   private createHistorySalaryFieldYear(anio: string, amount: any){
     return this.formBuilder.group({
       year: [anio],
-      amount: [amount, [Validators.required]],
+      salary: [amount, [Validators.required]],
     });
   }
 
@@ -456,6 +456,7 @@ export class DatosEmpleadorComponent implements OnInit {
         "salaryInKindOptionsType": speciesSalary.foodTime,
         "salaryInKindType": speciesSalary.optionSpeciesSalary,
         "startDate": salaryData.startDate,
+        endDate: salaryData.endDate,
         "terminationContractType": this.toolbarService.terminationContractType,
         "wasFiredWhilePregnant": false,
         "compensationRightsRequest": {
@@ -463,7 +464,9 @@ export class DatosEmpleadorComponent implements OnInit {
           "hasTakeVacationTimeLastYear": false
         }
       }
-      setDataCacheStore(Object.assign(getDataStore('cache'),{historySalary: this.historySalaryValue}));
+      let storeOld = getDataStore('cache');
+      storeOld.historySalaries = this.historySalaryValue; 
+      setDataCacheStore(Object.assign(storeOld, data));
       this.calculoPrestacionesService.sendCompensationsRightsInfo(data)
       .subscribe(value => {
         value ? this.render2.removeClass(this.$overlay.nativeElement, 'active-overlay') : null;
