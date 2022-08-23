@@ -285,6 +285,7 @@ export class CalculoPrestacionesComponent implements OnInit, AfterViewInit {
     this.computedSalaries = data.computedSalaries;
     this.laborOld = data.laborOld;
     this.compensationRights = data.compensationRights;
+    this.compensationRightSubTotal = data.compensationRightSubTotal;
     this.showSalaryCalculation = true;
     this.showCompensationRights = true;
     //this.otherRights = data.otherRights;
