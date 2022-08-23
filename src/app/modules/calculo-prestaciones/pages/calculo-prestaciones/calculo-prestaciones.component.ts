@@ -1,13 +1,13 @@
-import { Component, Input, OnInit, AfterViewInit } from '@angular/core';
-import { Observable, of } from 'rxjs';
-import { CompensationRights } from 'src/app/models/compensation-rights.model';
-import { ComputedSalaries } from 'src/app/models/computed-salaries.model';
-import { CalculoPrestacionesRequestType } from 'src/app/models/enums/calculo-prestaciones-request-type.enum';
-import { LaborOld } from 'src/app/models/labor-old.model';
-import { OtherRights } from 'src/app/models/other-rights.model';
-import { CalculoPrestacionesService } from 'src/app/modules/services/calculo-prestaciones/calculo-prestaciones.service';
-import { setDataCacheStore, setDataGender } from 'src/app/utils/utils';
-import { ToolbarService } from 'src/app/_metronic/layout/components/toolbar/toolbar.service';
+import {Component, Input, OnInit, AfterViewInit} from '@angular/core';
+import {Observable, of} from 'rxjs';
+import {CompensationRights} from 'src/app/models/compensation-rights.model';
+import {ComputedSalaries} from 'src/app/models/computed-salaries.model';
+import {CalculoPrestacionesRequestType} from 'src/app/models/enums/calculo-prestaciones-request-type.enum';
+import {LaborOld} from 'src/app/models/labor-old.model';
+import {OtherRights} from 'src/app/models/other-rights.model';
+import {CalculoPrestacionesService} from 'src/app/modules/services/calculo-prestaciones/calculo-prestaciones.service';
+import {setDataCacheStore, setDataGender} from 'src/app/utils/utils';
+import {ToolbarService} from 'src/app/_metronic/layout/components/toolbar/toolbar.service';
 
 @Component({
   selector: 'app-calculo-prestaciones',
@@ -28,7 +28,7 @@ export class CalculoPrestacionesComponent implements OnInit, AfterViewInit {
     averageMonthlyCommissionsSalary: 0,
     averageMonthlyOvertimeSalary: 0,
     averageMonthlySalary: 0,
-    baseMonthSalary: 0, 
+    baseMonthSalary: 0,
     ordinaryAverageDailySalary: 0,
     ordinaryAverageMonthlySalary: 0,
     ordinaryDailySalary: 0,
@@ -42,6 +42,8 @@ export class CalculoPrestacionesComponent implements OnInit, AfterViewInit {
   };
   compensationRights: CompensationRights = {
     forewarningNotice: {
+      objectKeyName: "",
+      itemName: "",
       amount: 0.00,
       time: "60 dias",
       factorAmount: 0.00,
@@ -49,208 +51,218 @@ export class CalculoPrestacionesComponent implements OnInit, AfterViewInit {
       currency: "L."
     },
     proportionalFourteenthMonthRight: {
-        amount: 0.00,
-        time: "",
-        factorAmount: 0.00,
-        formula: "",
-        currency: "L."
+      objectKeyName: "",
+      itemName: "",
+      amount: 0.00,
+      time: "",
+      factorAmount: 0.00,
+      formula: "",
+      currency: "L."
     },
     proportionalThirteenthMonthRight: {
-        amount: 0.00,
-        time: "",
-        factorAmount: 0.00,
-        formula: "",
-        currency: "L."
+      objectKeyName: "",
+      itemName: "",
+      amount: 0.00,
+      time: "",
+      factorAmount: 0.00,
+      formula: "",
+      currency: "L."
     },
     proportionalVacation: {
-        amount: 0.00,
-        time: "",
-        factorAmount: 0.00,
-        formula: "",
-        currency: "L."
+      objectKeyName: "",
+      itemName: "",
+      amount: 0.00,
+      time: "",
+      factorAmount: 0.00,
+      formula: "",
+      currency: "L."
     },
     unemploymentAid: {
-        amount: 0.00,
-        time: "",
-        factorAmount: 0.00,
-        formula: "",
-        currency: "L."
+      objectKeyName: "",
+      itemName: "",
+      amount: 0.00,
+      time: "",
+      factorAmount: 0.00,
+      formula: "",
+      currency: "L."
     },
     unemploymentAidProportional: {
-        amount: 0.00,
-        time: "",
-        factorAmount: 0.00,
-        formula: "",
-        currency: "L."
+      objectKeyName: "",
+      itemName: "",
+      amount: 0.00,
+      time: "",
+      factorAmount: 0.00,
+      formula: "",
+      currency: "L."
     }
   }
   otherRights: OtherRights = {
-    "daysOffPreAndPostNatal": {
-      "amount": 0,
-      "currency": "string",
-      "factorAmount": 0,
-      "formula": "string",
-      "itemName": "string",
-      "objectKeyName": "string",
-      "time": "string"
+    daysOffPreAndPostNatal: {
+      amount: 0,
+      currency: "string",
+      factorAmount: 0,
+      formula: "string",
+      itemName: "string",
+      objectKeyName: "string",
+      time: "string"
     },
     educationalBonusResponse: {
-      "amount": 0,
-      "currency": "string",
-      "factorAmount": 0,
-      "formula": "string",
-      "itemName": "string",
-      "objectKeyName": "string",
-      "time": "string"
+      amount: 0,
+      currency: "string",
+      factorAmount: 0,
+      formula: "string",
+      itemName: "string",
+      objectKeyName: "string",
+      time: "string"
     },
-    "firedForWhilePregnant": {
-      "amount": 0,
-      "currency": "string",
-      "factorAmount": 0,
-      "formula": "string",
-      "itemName": "string",
-      "objectKeyName": "string",
-      "time": "string"
+    firedForWhilePregnant: {
+      amount: 0,
+      currency: "string",
+      factorAmount: 0,
+      formula: "string",
+      itemName: "string",
+      objectKeyName: "string",
+      time: "string"
     },
-    "owedBonusVacations": {
-      "amount": 0,
-      "currency": "string",
-      "factorAmount": 0,
-      "formula": "string",
-      "itemName": "string",
-      "objectKeyName": "string",
-      "time": "string"
+    owedBonusVacations: {
+      amount: 0,
+      currency: "string",
+      factorAmount: 0,
+      formula: "string",
+      itemName: "string",
+      objectKeyName: "string",
+      time: "string"
     },
-    "owedBreastfeedingHours": {
-      "amount": 0,
-      "currency": "string",
-      "factorAmount": 0,
-      "formula": "string",
-      "itemName": "string",
-      "objectKeyName": "string",
-      "time": "string"
+    owedBreastfeedingHours: {
+      amount: 0,
+      currency: "string",
+      factorAmount: 0,
+      formula: "string",
+      itemName: "string",
+      objectKeyName: "string",
+      time: "string"
     },
-    "owedFourteenthMonth": {
-      "amount": 0,
-      "currency": "string",
-      "factorAmount": 0,
-      "formula": "string",
-      "itemName": "string",
-      "objectKeyName": "string",
-      "time": "string"
+    owedFourteenthMonth: {
+      amount: 0,
+      currency: "string",
+      factorAmount: 0,
+      formula: "string",
+      itemName: "string",
+      objectKeyName: "string",
+      time: "string"
     },
-    "owedHolyDays": {
-      "amount": 0,
-      "currency": "string",
-      "factorAmount": 0,
-      "formula": "string",
-      "itemName": "string",
-      "objectKeyName": "string",
-      "time": "string"
+    owedHolyDays: {
+      amount: 0,
+      currency: "string",
+      factorAmount: 0,
+      formula: "string",
+      itemName: "string",
+      objectKeyName: "string",
+      time: "string"
     },
-    "owedOtherPayments": {
-      "amount": 0,
-      "currency": "string",
-      "factorAmount": 0,
-      "formula": "string",
-      "itemName": "string",
-      "objectKeyName": "string",
-      "time": "string"
+    owedOtherPayments: {
+      amount: 0,
+      currency: "string",
+      factorAmount: 0,
+      formula: "string",
+      itemName: "string",
+      objectKeyName: "string",
+      time: "string"
     },
-    "owedOvertime": {
-      "amount": 0,
-      "currency": "string",
-      "factorAmount": 0,
-      "formula": "string",
-      "itemName": "string",
-      "objectKeyName": "string",
-      "time": "string"
+    owedOvertime: {
+      amount: 0,
+      currency: "string",
+      factorAmount: 0,
+      formula: "string",
+      itemName: "string",
+      objectKeyName: "string",
+      time: "string"
     },
-    "owedPaidPendingVacations": {
-      "amount": 0,
-      "currency": "string",
-      "factorAmount": 0,
-      "formula": "string",
-      "itemName": "string",
-      "objectKeyName": "string",
-      "time": "string"
+    owedPaidPendingVacations: {
+      amount: 0,
+      currency: "string",
+      factorAmount: 0,
+      formula: "string",
+      itemName: "string",
+      objectKeyName: "string",
+      time: "string"
     },
-    "owedPendingFourteenthMonth": {
-      "amount": 0,
-      "currency": "string",
-      "factorAmount": 0,
-      "formula": "string",
-      "itemName": "string",
-      "objectKeyName": "string",
-      "time": "string"
+    owedPendingFourteenthMonth: {
+      amount: 0,
+      currency: "string",
+      factorAmount: 0,
+      formula: "string",
+      itemName: "string",
+      objectKeyName: "string",
+      time: "string"
     },
-    "owedPendingThirteenthMonth": {
-      "amount": 0,
-      "currency": "string",
-      "factorAmount": 0,
-      "formula": "string",
-      "itemName": "string",
-      "objectKeyName": "string",
-      "time": "string"
+    owedPendingThirteenthMonth: {
+      amount: 0,
+      currency: "string",
+      factorAmount: 0,
+      formula: "string",
+      itemName: "string",
+      objectKeyName: "string",
+      time: "string"
     },
-    "owedSalary": {
-      "amount": 0,
-      "currency": "string",
-      "factorAmount": 0,
-      "formula": "string",
-      "itemName": "string",
-      "objectKeyName": "string",
-      "time": "string"
+    owedSalary: {
+      amount: 0,
+      currency: "string",
+      factorAmount: 0,
+      formula: "string",
+      itemName: "string",
+      objectKeyName: "string",
+      time: "string"
     },
-    "owedSeventhDay": {
-      "amount": 0,
-      "currency": "string",
-      "factorAmount": 0,
-      "formula": "string",
-      "itemName": "string",
-      "objectKeyName": "string",
-      "time": "string"
+    owedSeventhDay: {
+      amount: 0,
+      currency: "string",
+      factorAmount: 0,
+      formula: "string",
+      itemName: "string",
+      objectKeyName: "string",
+      time: "string"
     },
-    "owedThirteenthMonth": {
-      "amount": 0,
-      "currency": "string",
-      "factorAmount": 0,
-      "formula": "string",
-      "itemName": "string",
-      "objectKeyName": "string",
-      "time": "string"
+    owedThirteenthMonth: {
+      amount: 0,
+      currency: "string",
+      factorAmount: 0,
+      formula: "string",
+      itemName: "string",
+      objectKeyName: "string",
+      time: "string"
     },
-    "salaryReadjustment": {
-      "amount": 0,
-      "currency": "string",
-      "factorAmount": 0,
-      "formula": "string",
-      "itemName": "string",
-      "objectKeyName": "string",
-      "time": "string"
+    salaryReadjustment: {
+      amount: 0,
+      currency: "string",
+      factorAmount: 0,
+      formula: "string",
+      itemName: "string",
+      objectKeyName: "string",
+      time: "string"
     },
-    "severanceSavings": {
-      "amount": 0,
-      "currency": "string",
-      "factorAmount": 0,
-      "formula": "string",
-      "itemName": "string",
-      "objectKeyName": "string",
-      "time": "string"
+    severanceSavings: {
+      amount: 0,
+      currency: "string",
+      factorAmount: 0,
+      formula: "string",
+      itemName: "string",
+      objectKeyName: "string",
+      time: "string"
     }
-
-  }   
+  };
 
   constructor(public toolbarService: ToolbarService,
-    public calculoPrestacionesService: CalculoPrestacionesService) { }
-  
-    ngAfterViewInit(): void {  
-      
-    }
+              public calculoPrestacionesService: CalculoPrestacionesService) {
+  }
+
+  ngAfterViewInit(): void {
+
+  }
 
   ngOnInit(): void {
     console.log(this.toolbarService.userTypeOf);
-    
+
     this.calculoPrestacionesService.userTypeOf$.subscribe(value => {
       this.userType = value;
     });
@@ -258,14 +270,15 @@ export class CalculoPrestacionesComponent implements OnInit, AfterViewInit {
     setDataGender("F");
     setDataCacheStore({
       historySalaries: [
-        {year:'1821',salary:2000},
-        {year:'1822',salary:3000}
-      ], 
-      startDate: '2020-05-10', 
-      endDate: '2022-05-10'});
+        {year: '1821', salary: 2000},
+        {year: '1822', salary: 3000}
+      ],
+      startDate: '2020-05-10',
+      endDate: '2022-05-10'
+    });
   }
 
-  calculoResponseListener(data: any){
+  calculoResponseListener(data: any) {
     this.computedSalaries = data.computedSalaries;
     this.laborOld = data.laborOld;
     this.compensationRights = data.compensationRights;
@@ -274,19 +287,19 @@ export class CalculoPrestacionesComponent implements OnInit, AfterViewInit {
     //this.otherRights = data.otherRights;
   }
 
-  compensationRightsListener(data: any){
-    this.compensationRights = data.compensationRights;
+  compensationRightsListener(data: any) {
+    this.compensationRights = data;
   }
 
-  otherRightsListener(data: any){
-    this.otherRights = data.otherRights;
+  otherRightsListener(data: any) {
+    this.otherRights = data;
   }
 
-  showOtherRightsListener(data: boolean){
+  showOtherRightsListener(data: boolean) {
     this.showOtherRights = true;
   }
 
-  showCalculoGeneradoListener(data: any){
+  showCalculoGeneradoListener(data: any) {
     this.showExportPdf = true;
   }
 

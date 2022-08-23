@@ -1,10 +1,10 @@
-import { AcountableItem } from "./acountable-item.model";
+import { AccountableItem } from "./acountable-item.model";
 
 export interface CompensationRights {
-    forewarningNotice: AcountableItem,
-    proportionalFourteenthMonthRight: AcountableItem,
-    proportionalThirteenthMonthRight: AcountableItem,
-    proportionalVacation: AcountableItem,
-    unemploymentAid: AcountableItem,
-    unemploymentAidProportional: AcountableItem
+    forewarningNotice: AccountableItem,
+    proportionalFourteenthMonthRight: AccountableItem,
+    proportionalThirteenthMonthRight: AccountableItem,
+    proportionalVacation: AccountableItem,
+    unemploymentAid: AccountableItem,
+    unemploymentAidProportional: AccountableItem
 }

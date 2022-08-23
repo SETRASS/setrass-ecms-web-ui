@@ -1,15 +1,15 @@
-<ecms-datos-empleador 
+<ecms-datos-empleador
     *ngIf="toolbarService.userTypeOf === 1"
     (calculoResponseEvent)="calculoResponseListener($event)"
 ></ecms-datos-empleador>
-<ecms-datos-trabajador 
+<ecms-datos-trabajador
     *ngIf="toolbarService.userTypeOf === 0"
     (calculoResponseEvent)="calculoResponseListener($event)"
     ></ecms-datos-trabajador>
 <br>
 <ecms-calculo-salarial
     [hidden]="!showSalaryCalculation"
-    [computedSalaries]="computedSalaries" 
+    [computedSalaries]="computedSalaries"
     [laborOld]="laborOld"
 ></ecms-calculo-salarial>
 <br>

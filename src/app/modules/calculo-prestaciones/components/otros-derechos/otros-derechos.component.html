@@ -9,9 +9,9 @@
     </div>
 
     <div class="py-5">
-    
-    
-    
+
+
+
     <div class="table-responsive ">
         <table class="table table-row-bordered table-row-gray-300  gy-7 gs-7">
           <thead>
@@ -37,7 +37,7 @@
             </tr>
           </thead>
           <tbody [formGroup]="formOtherRights">
-            
+
               <!--Begin pregnacyStatus-->
             <tr *ngIf="currentSex === 'F'">
               <td>
@@ -86,8 +86,8 @@
                     formControlName="pregnancyStatus"
                     [class.is-valid]="isValidField('pregnancyStatus')"
                     [class.is-invalid]="isInvalidField('pregnancyStatus')"
-                    type="number" 
-                    class="form-control form-control-solid" 
+                    type="number"
+                    class="form-control form-control-solid"
                     />
                     <span *ngIf="isInvalidField('pregnancyStatus')">
                       <span
@@ -108,7 +108,7 @@
             <tr *ngIf="currentSex === 'F'">
               <td>
                 <div class="form-check form-switch form-check-custom form-check-solid me-10">
-                  <input class="form-check-input h-20px w-30px" type="checkbox" 
+                  <input class="form-check-input h-20px w-30px" type="checkbox"
                   (change)="isActiveControl('daysOffPregnancy')" id="daysOffPregnancy" />
                   <label class="form-check-label" for="daysOffPregnancy">
                     ¿Le adeudan descanso Pre/Post natal?
@@ -154,8 +154,8 @@
                     formControlName="daysOffPregnancy"
                     [class.is-valid]="isValidField('daysOffPregnancy')"
                     [class.is-invalid]="isInvalidField('daysOffPregnancy')"
-                    type="number" 
-                    class="form-control form-control-solid" 
+                    type="number"
+                    class="form-control form-control-solid"
                     />
                     <p *ngIf="isInvalidField('daysOffPregnancy')">
                       <span
@@ -176,7 +176,7 @@
             <tr *ngIf="currentSex === 'F'">
               <td>
                 <div class="form-check form-switch form-check-custom form-check-solid me-10">
-                  <input class="form-check-input h-20px w-30px" type="checkbox" 
+                  <input class="form-check-input h-20px w-30px" type="checkbox"
                   (change)="isActiveControl('breastFeedingHours')" id="breastFeedingHours" />
                   <label class="form-check-label" for="breastFeedingHours">
                     ¿Le adeudan horas de lactancia?
@@ -187,7 +187,7 @@
                   <p>{{getValueFormField('breastFeedingHours')}}</p>
 
               </td>
-              <td>  
+              <td>
               </td>
 
               <td>
@@ -222,7 +222,7 @@
                     formControlName="breastFeedingHours"
                     [class.is-valid]="isValidField('breastFeedingHours')"
                     [class.is-invalid]="isInvalidField('breastFeedingHours')"
-                    type="number" 
+                    type="number"
                     class="form-control form-control-solid" />
                   </td>
                   <td>
@@ -232,13 +232,13 @@
               </td>
             </tr>
             <!--End breastFeedingHours-->
-            
+
 
             <!--Begin salaryReadjustment-->
             <tr>
               <td>
                 <div class="form-check form-switch form-check-custom form-check-solid me-10">
-                  <input class="form-check-input h-20px w-30px" type="checkbox"  
+                  <input class="form-check-input h-20px w-30px" type="checkbox"
                   (change)="isActiveControl('salaryReadjustment')" id="salaryReadjustment" />
                   <label class="form-check-label" for="salaryReadjustment">
                   Reajuste Salarial
@@ -272,18 +272,18 @@
             <tr>
               <td>
                 <div class="form-check form-switch form-check-custom form-check-solid me-10">
-                  <input class="form-check-input h-20px w-30px" type="checkbox" 
+                  <input class="form-check-input h-20px w-30px" type="checkbox"
                   (change)="isActiveControl('owedHolyDays')" id="owedHolyDays" />
                   <label class="form-check-label" for="owedHolyDays">
                     Dias Feriados
                   </label>
-                </div>  
+                </div>
               </td>
-               
+
               <td>
                 <p>{{getValueFormField('owedHolyDays')}}</p>
               </td>
-                
+
               <td>
                 <div class="col-sm-12 col-lg-6"></div>
               </td>
@@ -320,8 +320,8 @@
                         formControlName="owedHolyDays"
                         [class.is-valid]="isValidField('owedHolyDays')"
                         [class.is-invalid]="isInvalidField('owedHolyDays')"
-                        type="number" 
-                        class="form-control form-control-solid" 
+                        type="number"
+                        class="form-control form-control-solid"
                         />
                       <p *ngIf="isInvalidField('owedHolyDays')">
                         <span
@@ -336,7 +336,7 @@
                   </td>
                 </div>
               </td>
-            
+
             </tr>
             <!--End owedHolyDays-->
 
@@ -344,7 +344,7 @@
             <tr>
               <td>
                 <div class="form-check form-switch form-check-custom form-check-solid me-10">
-                  <input class="form-check-input h-20px w-30px" type="checkbox" 
+                  <input class="form-check-input h-20px w-30px" type="checkbox"
                   (change)="isActiveControl('owedSeventhDay')" id="owedSeventhDay" />
                   <label class="form-check-label" for="owedSeventhDay">
                     Septimo día
@@ -381,7 +381,7 @@
             <tr #panelOwedSeventhDay class="owed-seventh-day">
               <td colspan="6">
                 <div class="panel">
-                  <td> 
+                  <td>
                     <span>Le adeudan pago septimo día</span>
                   </td>
                   <td>
@@ -389,27 +389,27 @@
                       <input
                         formControlName="owedSeventhDay"
                         [class.is-valid]="isValidField('owedSeventhDay')"
-                        [class.is-invalid]="isInvalidField('owedSeventhDay')" 
-                        type="number" 
+                        [class.is-invalid]="isInvalidField('owedSeventhDay')"
+                        type="number"
                         class="form-control form-control-solid"
                         />
                         <p *ngIf="isInvalidField('owedSeventhDay')">
-                          <span 
+                          <span
                           *ngIf="getErrorField('owedSeventhDay', 'pattern')"
                           class="text-danger"
                           >Este campo es numerico
-          
+
                           </span>
                         </p>
                     </div>
                   </td>
-                  
+
                   <td>
                     <button class="btn btn-primary btn-sm" (click)="validFieldButton(['owedSeventhDay'],'owed-seventh-day')">Aceptar</button>
                   </td>
                 </div>
               </td>
-            
+
             </tr>
             <!--End owedSeventhDay-->
 
@@ -417,10 +417,10 @@
             <tr>
               <td>
                 <div class="form-check form-switch form-check-custom form-check-solid me-10">
-                  <input class="form-check-input h-20px w-30px" type="checkbox" 
+                  <input class="form-check-input h-20px w-30px" type="checkbox"
                   (change)="isActiveControl('owedPaidPendingVacations')"  id="owedPaidPendingVacations" />
                   <label class="form-check-label" for="owedPaidPendingVacations">
-                    
+
                     Vacaciones Pendientes
                   </label>
                 </div>
@@ -466,8 +466,8 @@
                         formControlName="owedPaidPendingVacations"
                         [class.is-valid]="isValidField('owedPaidPendingVacations')"
                         [class.is-invalid]="isInvalidField('owedPaidPendingVacations')"
-                        type="number" 
-                        class="form-control form-control-solid" 
+                        type="number"
+                        class="form-control form-control-solid"
                         />
                       <p *ngIf="isInvalidField('owedPaidPendingVacations')">
                         <span
@@ -480,7 +480,7 @@
                     <button class="btn btn-primary btn-sm" (click)="validFieldButton(['owedPaidPendingVacations'],'owed-paid-pending-vacations')">Aceptar</button>
                 </div>
               </td>
-            </tr>   
+            </tr>
             <!--End owedPaidPendingVacations-->
 
             <!--Begin owedBonusVacations-->
@@ -534,8 +534,8 @@
                         formControlName="owedBonusVacations"
                         [class.is-valid]="isValidField('owedBonusVacations')"
                         [class.is-invalid]="isInvalidField('owedBonusVacations')"
-                        type="number" 
-                        class="form-control form-control-solid" 
+                        type="number"
+                        class="form-control form-control-solid"
                         />
                       <p *ngIf="isInvalidField('owedBonusVacations')">
                         <span
@@ -548,14 +548,14 @@
                     <button class="btn btn-primary btn-sm" (click)="validFieldButton(['owedBonusVacations'],'owed-bonus-vacations')">Aceptar</button>
                 </div>
               </td>
-            </tr> 
+            </tr>
             <!--End owedBonusVacations-->
 
             <!-- Begin owedPedingThirteenthMonth-->
             <tr>
               <td>
                 <div class="form-check form-switch form-check-custom form-check-solid me-10">
-                  <input class="form-check-input h-20px w-30px" type="checkbox" 
+                  <input class="form-check-input h-20px w-30px" type="checkbox"
                   (change)="isActiveControl('owedPendingThirteenthMonth')"id="owedPendingThirteenthMonth" />
                   <label class="form-check-label" for="owedPendingThirteenthMonth">
                     Treceavos mes pendiente
@@ -601,8 +601,8 @@
                         formControlName="owedPendingThirteenthMonth"
                         [class.is-valid]="isValidField('owedPendingThirteenthMonth')"
                         [class.is-invalid]="isInvalidField('owedPendingThirteenthMonth')"
-                        type="number" 
-                        class="form-control form-control-solid" 
+                        type="number"
+                        class="form-control form-control-solid"
                         />
                       <p *ngIf="isInvalidField('owedPendingThirteenthMonth')">
                         <span
@@ -615,14 +615,14 @@
                     <button class="btn btn-primary btn-sm" (click)="validFieldButton(['owedPendingThirteenthMonth'],'owed-pending-thirteenth-month')">Aceptar</button>
                 </div>
               </td>
-            </tr> 
+            </tr>
             <!--End owedPedingThirteenthMonth-->
 
             <!-- Begin owedThirteenthMonth-->
             <tr>
               <td>
                 <div class="form-check form-switch form-check-custom form-check-solid me-10">
-                  <input class="form-check-input h-20px w-30px" type="checkbox" 
+                  <input class="form-check-input h-20px w-30px" type="checkbox"
                   (change)="isActiveControl('owedThirteenthMonth')" id="owedThirteenthMonth" />
                   <label class="form-check-label" for="owedThirteenthMonth">
                     Treceavo mes Adeudado
@@ -635,8 +635,8 @@
                     <input
                       [value]="getLastTwoYearsSalaryReadjustment()[1].year"
                       [disabled]="true"
-                      type="number" 
-                      class="form-control form-control-solid" 
+                      type="number"
+                      class="form-control form-control-solid"
                       />
                   </div>
                   <div class="col-4">
@@ -645,7 +645,7 @@
                       [disabled]="true"
                       [value]="owedThirteenthMonth2Value"
                       type="number"
-                      class="form-control form-control-solid" 
+                      class="form-control form-control-solid"
                       />
                   </div>
                 </div>
@@ -654,16 +654,16 @@
                     <input
                       [value]="getLastTwoYearsSalaryReadjustment()[0].year"
                       [disabled]="true"
-                      type="number" 
-                      class="form-control form-control-solid" 
+                      type="number"
+                      class="form-control form-control-solid"
                       />
                   </div>
                   <div class="col-4">
                     <input
-                      type="number" 
+                      type="number"
                       class="form-control form-control-solid"
                       [disabled]="true"
-                      [placeholder]="'L. '+getLastTwoYearsSalaryReadjustment()[0].salary" 
+                      [placeholder]="'L. '+getLastTwoYearsSalaryReadjustment()[0].salary"
                       [value]="owedThirteenthMonthValue"
                       />
                   </div>
@@ -705,8 +705,8 @@
                         <input
                           [value]="getLastTwoYearsSalaryReadjustment()[1].year"
                           [disabled]="true"
-                          type="number" 
-                          class="form-control form-control-solid" 
+                          type="number"
+                          class="form-control form-control-solid"
                           />
                       </div>
                       <div class="col-4">
@@ -715,8 +715,8 @@
                           [class.is-valid]="isValidField('owedThirteenthMonth2')"
                           [class.is-invalid]="isInvalidField('owedThirteenthMonth2')"
                           [placeholder]="'L. '+getLastTwoYearsSalaryReadjustment()[1].salary"
-                          type="number" 
-                          class="form-control form-control-solid" 
+                          type="number"
+                          class="form-control form-control-solid"
                           />
                         <p *ngIf="isInvalidField('owedThirteenthMonth2')">
                           <span
@@ -731,8 +731,8 @@
                         <input
                           [value]="getLastTwoYearsSalaryReadjustment()[0].year"
                           [disabled]="true"
-                          type="number" 
-                          class="form-control form-control-solid" 
+                          type="number"
+                          class="form-control form-control-solid"
                           />
                       </div>
                       <div class="col-4">
@@ -740,9 +740,9 @@
                           formControlName="owedThirteenthMonth"
                           [class.is-valid]="isValidField('owedThirteenthMonth')"
                           [class.is-invalid]="isInvalidField('owedThirteenthMonth')"
-                          type="number" 
+                          type="number"
                           class="form-control form-control-solid"
-                          [placeholder]="'L. '+getLastTwoYearsSalaryReadjustment()[0].salary" 
+                          [placeholder]="'L. '+getLastTwoYearsSalaryReadjustment()[0].salary"
                           />
                         <p *ngIf="isInvalidField('owedThirteenthMonth')">
                           <span
@@ -761,14 +761,14 @@
                   <td></td>
                 </div>
               </td>
-            </tr> 
+            </tr>
             <!-- End owedThirteenthMonth-->
 
              <!-- Begin owedPedingFourteenthMonth-->
              <tr>
               <td>
                 <div class="form-check form-switch form-check-custom form-check-solid me-10">
-                  <input class="form-check-input h-20px w-30px" type="checkbox" 
+                  <input class="form-check-input h-20px w-30px" type="checkbox"
                   (change)="isActiveControl('owedPendingFourteenthMonth')"id="owedPendingFourteenthMonth" />
                   <label class="form-check-label" for="owedPendingFourteenthMonth">
                     Catorceavo mes pendiente
@@ -779,7 +779,7 @@
                 <p>{{getValueFormField('owedPendingFourteenthMonth')}}</p>
               </td>
               <td>
-                
+
               </td>
               <td>
                 <span>{{otherRights.owedPendingFourteenthMonth.formula}}</span>
@@ -814,8 +814,8 @@
                         formControlName="owedPendingFourteenthMonth"
                         [class.is-valid]="isValidField('owedPendingFourteenthMonth')"
                         [class.is-invalid]="isInvalidField('OwedPendingFourteenthMonth')"
-                        type="number" 
-                        class="form-control form-control-solid" 
+                        type="number"
+                        class="form-control form-control-solid"
                         />
                       <p *ngIf="isInvalidField('owedPendingFourteenthMonth')">
                         <span
@@ -828,14 +828,14 @@
                     <button class="btn btn-primary btn-sm" (click)="validFieldButton(['owedPendingFourteenthMonth'],'owed-pending-fourteenth-month')">Aceptar</button>
                 </div>
               </td>
-            </tr> 
+            </tr>
             <!--End owedPedingFourteenthMonth-->
 
             <!-- Begin owedFourteenthMonth-->
             <tr>
               <td>
                 <div class="form-check form-switch form-check-custom form-check-solid me-10">
-                  <input class="form-check-input h-20px w-30px" type="checkbox" 
+                  <input class="form-check-input h-20px w-30px" type="checkbox"
                   (change)="isActiveControl('owedFourteenthMonth')" id="owedFourteenthMonth" />
                   <label class="form-check-label" for="owedFourteenthMonth">
                     Catorceavo mes adeudado
@@ -848,8 +848,8 @@
                     <input
                       [value]="getLastTwoYearsSalaryReadjustment()[1].year"
                       [disabled]="true"
-                      type="number" 
-                      class="form-control form-control-solid" 
+                      type="number"
+                      class="form-control form-control-solid"
                       />
                   </div>
                   <div class="col-4">
@@ -858,7 +858,7 @@
                       [disabled]="true"
                       [value]="owedFourteenthMonth2Value"
                       type="number"
-                      class="form-control form-control-solid" 
+                      class="form-control form-control-solid"
                       />
                   </div>
                 </div>
@@ -867,23 +867,23 @@
                     <input
                       [value]="getLastTwoYearsSalaryReadjustment()[0].year"
                       [disabled]="true"
-                      type="number" 
-                      class="form-control form-control-solid" 
+                      type="number"
+                      class="form-control form-control-solid"
                       />
                   </div>
                   <div class="col-4">
                     <input
-                      type="number" 
+                      type="number"
                       class="form-control form-control-solid"
                       [disabled]="true"
-                      [placeholder]="'L. '+getLastTwoYearsSalaryReadjustment()[0].salary" 
+                      [placeholder]="'L. '+getLastTwoYearsSalaryReadjustment()[0].salary"
                       [value]="owedFourteenthMonthValue"
                       />
                   </div>
                 </div>
               </td>
               <td style="text-align:left; font-weight: inherit;">
-                
+
               </td>
               <td>
                 <span>{{otherRights.owedFourteenthMonth.formula}}</span>
@@ -918,8 +918,8 @@
                         <input
                           [value]="getLastTwoYearsSalaryReadjustment()[1].year"
                           [disabled]="true"
-                          type="number" 
-                          class="form-control form-control-solid" 
+                          type="number"
+                          class="form-control form-control-solid"
                           />
                       </div>
                       <div class="col-4">
@@ -928,8 +928,8 @@
                           [class.is-valid]="isValidField('owedFourteenthMonth2')"
                           [class.is-invalid]="isInvalidField('owedFourteenthMonth2')"
                           [placeholder]="'L. '+getLastTwoYearsSalaryReadjustment()[1].salary"
-                          type="number" 
-                          class="form-control form-control-solid" 
+                          type="number"
+                          class="form-control form-control-solid"
                           />
                         <p *ngIf="isInvalidField('owedFourteenthMonth2')">
                           <span
@@ -944,8 +944,8 @@
                         <input
                           [value]="getLastTwoYearsSalaryReadjustment()[0].year"
                           [disabled]="true"
-                          type="number" 
-                          class="form-control form-control-solid" 
+                          type="number"
+                          class="form-control form-control-solid"
                           />
                       </div>
                       <div class="col-4">
@@ -953,9 +953,9 @@
                           formControlName="owedFourteenthMonth"
                           [class.is-valid]="isValidField('owedFourteenthMonth')"
                           [class.is-invalid]="isInvalidField('owedFourteenthMonth')"
-                          type="number" 
+                          type="number"
                           class="form-control form-control-solid"
-                          [placeholder]="'L. '+getLastTwoYearsSalaryReadjustment()[0].salary" 
+                          [placeholder]="'L. '+getLastTwoYearsSalaryReadjustment()[0].salary"
                           />
                         <p *ngIf="isInvalidField('owedFourteenthMonth')">
                           <span
@@ -974,14 +974,14 @@
                   <td></td>
                 </div>
               </td>
-            </tr> 
+            </tr>
             <!-- End owedFourteenthMonth-->
 
             <!-- Begin owedSalary-->
             <tr>
               <td>
                 <div class="form-check form-switch form-check-custom form-check-solid me-10">
-                  <input class="form-check-input h-20px w-30px" type="checkbox" 
+                  <input class="form-check-input h-20px w-30px" type="checkbox"
                   (change)="isActiveControl('owedSalary')" id="owedSalary" />
                   <label class="form-check-label" for="owedSalary">
                     Sueldo/Salario Adeudado
@@ -990,7 +990,7 @@
               </td>
               <td>
                 <p>{{getValueFormField('owedSalary')}}</p>
-                
+
               </td>
               <td>
                 <div class="col-sm-12 col-lg-6"> </div>
@@ -1028,8 +1028,8 @@
                         formControlName="owedSalary"
                         [class.is-valid]="isValidField('owedSalary')"
                         [class.is-invalid]="isInvalidField('owedSalary')"
-                        type="number" 
-                        class="form-control form-control-solid" 
+                        type="number"
+                        class="form-control form-control-solid"
                         />
                       <p *ngIf="isInvalidField('owedSalary')">
                         <span
@@ -1042,14 +1042,14 @@
                     <button class="btn btn-primary btn-sm" (click)="validFieldButton(['owedSalary'],'owed-salary')">Aceptar</button>
                 </div>
               </td>
-            </tr> 
+            </tr>
             <!-- End owedSalary-->
 
             <!--Begin owedOverTime-->
             <tr>
               <td>
                 <div class="form-check form-switch form-check-custom form-check-solid me-10">
-                  <input class="form-check-input h-20px w-30px" type="checkbox" 
+                  <input class="form-check-input h-20px w-30px" type="checkbox"
                   (change)="isActiveControl('owedOverTime')" id="owedOverTime" />
                   <label class="form-check-label" for="owedOverTime">
                     Horas extras trabajadas
@@ -1058,7 +1058,7 @@
               </td>
               <td>
                 <p>{{getValueFormField('owedOverTime')}}</p>
-                
+
               </td>
               <td>
                 <div class="col-sm-12 col-lg-6">
@@ -1090,7 +1090,7 @@
               <td colspan="6">
                 <div class="panel">
                   <td>
-                    <select 
+                    <select
                     formControlName="owedOverTimeType"
                     [class.is-valid]="isValidField('owedOverTimeType')"
                     [class.is-invalid]="isInvalidField('owedOverTimeType')"
@@ -1104,22 +1104,22 @@
                     <input
                     formControlName="owedOverTime"
                     [class.is-valid]="isValidField('owedOverTime')"
-                    [class.is-invalid]="isInvalidField('owedOverTime')" 
-                    type="number" 
-                    class="form-control form-control-solid" 
+                    [class.is-invalid]="isInvalidField('owedOverTime')"
+                    type="number"
+                    class="form-control form-control-solid"
                     />
                   </td>
                     <button class="btn btn-primary btn-sm" (click)="validFieldButton(['owedOverTime', 'owedOverTimeType'],'owed-over-time')">Aceptar</button>
                 </div>
               </td>
-            </tr> 
+            </tr>
             <!--End owedOverTime-->
 
             <!-- Begin haveSchoolAgeChildren-->
             <tr>
               <td>
                 <div class="form-check form-switch form-check-custom form-check-solid me-10">
-                  <input class="form-check-input h-20px w-30px" type="checkbox" 
+                  <input class="form-check-input h-20px w-30px" type="checkbox"
                   (change)="isActiveControl('haveSchoolAgeChildren')" id="haveSchoolAgeChildren" />
                   <label class="form-check-label" for="haveSchoolAgeChildren">
                     ¿Tiene Hijos en edad escolar?
@@ -1129,10 +1129,10 @@
               </td>
               <td>
                 <p>{{getValueFormField('haveSchoolAgeChildren')}}</p>
-                
+
               </td>
               <td>
-                
+
               </td>
               <td>
                 <span>{{otherRights.educationalBonusResponse.formula}}</span>
@@ -1154,14 +1154,14 @@
                       fill="currentColor" />
                   </svg></span>
               </td>
-            </tr> 
+            </tr>
             <!-- End haveSchoolAgeChildren-->
 
             <!--Begin Reserva laboral-->
             <tr *ngIf="currentTerminationContractType === 0">
               <td>
                 <div class="form-check form-switch form-check-custom form-check-solid me-10">
-                  <input class="form-check-input h-20px w-30px" type="checkbox" 
+                  <input class="form-check-input h-20px w-30px" type="checkbox"
                   (change)="isActiveControl('owedHistorySalaries')" id="owedHistorySalaries" />
                   <label class="form-check-label" for="owedHistorySalaries">
                     Reserva Laboral
@@ -1188,14 +1188,14 @@
               </td>
               <td>
               </td>
-            </tr> 
+            </tr>
             <!--End Reserva Laboral-->
 
              <!--Begin otherPayments-->
              <tr>
               <td>
                 <div class="form-check form-switch form-check-custom form-check-solid me-10">
-                  <input class="form-check-input h-20px w-30px" type="checkbox" 
+                  <input class="form-check-input h-20px w-30px" type="checkbox"
                   (change)="isActiveControl('owedOtherPayments')" id="owedOtherPayments" />
                   <label class="form-check-label" for="owedOtherPayments">
                     Otros Pagos
@@ -1237,15 +1237,15 @@
                   <td>
                     <span>¿Recibe otros beneficios?</span>
                   </td>
-                  
+
                     <td>
                       <div class="col-sm-12 col-lg-6">
                         <input
                           formControlName="owedOtherPayments"
                           [class.is-valid]="isValidField('owedOtherPayments')"
                           [class.is-invalid]="isInvalidField('owedOtherPayments')"
-                          type="text" 
-                          class="form-control form-control-solid" 
+                          type="text"
+                          class="form-control form-control-solid"
                           />
                         <p *ngIf="isInvalidField('owedOtherPayments')">
                           <span
@@ -1255,11 +1255,11 @@
                         </p>
                       </div>
                     </td>
-                    
+
                     <button class="btn btn-primary btn-sm" (click)="validFieldButton(['owedOtherPayments'],'owed-other-payment')">Aceptar</button>
                 </div>
               </td>
-            </tr> 
+            </tr>
             <!--End otherpayment-->
 
     </tbody>
