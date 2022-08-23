@@ -1,20 +1,31 @@
-import {Component, ElementRef, OnInit, Renderer2, ViewChild} from '@angular/core';
-import {FormControl, FormGroup, Validators, FormBuilder} from '@angular/forms';
+import {Component, ElementRef, EventEmitter, OnInit, Output, Renderer2, ViewChild} from '@angular/core';
+import {FormControl, FormGroup, Validators, FormBuilder, FormArray} from '@angular/forms';
+import { format } from 'date-fns';
 
 import {IStepperOptions, StepperComponent, ToggleComponent} from 'src/app/_metronic/kt/components';
 import {PersonType} from 'src/app/models/enums/person-type.enum';
+import { getDataStore, getYearSelect, scrollAnimationGoTo, setDataCacheStore, setDataGender, setDataSalaryCalculationStore } from '../../../../utils/utils';
 
 import {LookupsService} from "../../../services/lookups/lookups.service";
 import {SalaryHistoryCatalogService} from "../../../services/salary-history-catalog/salary-history-catalog.service";
-import {DomSanitizer, SafeHtml} from '@angular/platform-browser';
 import {CalculoPrestacionesService} from 'src/app/modules/services/calculo-prestaciones/calculo-prestaciones.service';
 
 import {ToolbarService} from 'src/app/_metronic/layout/components/toolbar/toolbar.service';
-import {catchError} from "rxjs";
-import {HttpClient} from "@angular/common/http";
+import {catchError, Observable} from "rxjs";
+import { EmployerStore } from '../../state/employer/employers.store';
+import { EmployerDto } from 'src/app/models/employer-dto.model';
+import { IdentificationType } from 'src/app/models/enums/identification-type.enum';
+import { LocationsQuery } from '../../state/locations/locations.query';
+import { Locations } from 'src/app/models/locations.model';
+import { CalculoPrestacionesRequestType } from 'src/app/models/enums/calculo-prestaciones-request-type.enum';
+import { WorkerPersonEmployerRequestDto } from 'src/app/models/worker-person-employer-request-dto.model';
+import { TerminationContractType } from 'src/app/models/enums/termination-contract-type.enum';
+import { Router } from '@angular/router';
+
+
 
 @Component({
-  selector: 'app-datos-empleador',
+  selector: 'ecms-datos-empleador',
   templateUrl: './datos-empleador.component.html',
   styleUrls: ['./datos-empleador.component.scss']
 })
@@ -22,8 +33,11 @@ export class DatosEmpleadorComponent implements OnInit {
 
   // Variables
   @ViewChild('kt_stepper_vertical') stepperSteps: ElementRef;
+  @ViewChild('overlay') $overlay: ElementRef;
   @ViewChild('salary') salaryField: ElementRef;
   @ViewChild('submit') btnSubmit: ElementRef;
+  @ViewChild('historySalaryYearField') txtHistorySalary: ElementRef;
+  @Output() calculoResponseEvent = new EventEmitter<any>();
   stepper: any;
   formEmployer: FormGroup;
   stepperOptions: IStepperOptions = {
@@ -39,53 +53,48 @@ export class DatosEmpleadorComponent implements OnInit {
   economicActivityList: any[] = [];
   salaryRatesList: any[] = [];
   locations: any[] = [];
-  companySizeList: any[] = [];
 
   locationSelected: string;
   currentMunicipios: any[];
   currentEconomicActivity: any[];
+  currentTerminationContractType: TerminationContractType;
+  currentCacheData: any;
   totalSalaryAverage = 0;
   totalCommissionsAverage = 0;
   totalExtraHoursAverage = 0;
   totalBonusesAverage = 0;
   isSalaryFieldDisabled: boolean = true;
+  minDate: string;
 
-  //SAVE BUTTON / COMPUTE
-  saveButtonIsOk = false;
-  saveButtonText = '';
 
-  // CONST
-  REQUEST_ID: string;
-  EMPLOYER_ID: string;
-  WORKER_PERSON_ID: string;
-  isResponseOk: boolean = false;
-  spinnerShow = false;
+  // states
+  //locations$: Observable<Locations[]> = this.locationsQuery.selectAll();
+  //isLocationsLoaded$: Observable<boolean> = this.locationsQuery.selectLoaded$;
 
-  constructor(private lookupsService: LookupsService,
-              private salaryHistoryCatalogService: SalaryHistoryCatalogService,
-              private calculoPrestacionesService: CalculoPrestacionesService,
-              private toolbar: ToolbarService,
-              private formBuilder: FormBuilder,
-              private render2: Renderer2,
-              private httpClient: HttpClient,
-              private sanitize: DomSanitizer) {
+  constructor(
+    private lookupsService: LookupsService,
+    private salaryHistoryCatalogService: SalaryHistoryCatalogService,
+    private calculoPrestacionesService: CalculoPrestacionesService,
+    private toolbarService: ToolbarService,
+    private formBuilder: FormBuilder,
+    private render2: Renderer2,
+    private employerStore: EmployerStore,
+    private locationsQuery: LocationsQuery,
+    private route: Router
+    ) {
     this.formBuild();
   }
 
 
   ngAfterViewInit(): void {
-    this.saveButtonText = this.saveButtonIsOk ? "Realizar Calculo" : "Guardar";
+    this.stepperConfig();
   }
 
-
   ngOnInit(): void {
-
-
-    setTimeout(() => this.stepperConfig(), 3000);
-
+    
     // locations
-    this.lookupsService.getLocations().subscribe((data) => {
-      this.locations = data[0].children;
+    this.lookupsService.getLocations().subscribe((data) => { 
+      this.locations = data;        
     }, ((error?: any) => {
       const err = error.message | error;
       console.warn(err);
@@ -100,17 +109,13 @@ export class DatosEmpleadorComponent implements OnInit {
         const err = error.message | error;
         console.warn(err);
       });
-
-    // company size
-    this.salaryHistoryCatalogService.getCompanySizes().subscribe((data) => {
-      this.companySizeList = data.map(val => ({id: val.id, name: `${val.minQty} a ${val.maxQty} Empleados`}));
-    }, (error) => {
-      const err = error.message | error;
-      console.warn(err);
-    });
+    
+    this.calculoPrestacionesService.terminationContractType$
+    .subscribe((option:TerminationContractType) => this.currentTerminationContractType = option);
+    this.currentTerminationContractType = this.toolbarService.terminationContractType;
   }
 
-  async stepperConfig() {
+  stepperConfig() {
     //this.render2.setAttribute(this.btnSubmit.nativeElement, 'disabled', 'true');
     this.stepper = new StepperComponent(this.stepperSteps.nativeElement, this.stepperOptions);
     this.stepper.on("kt.stepper.previous", () => this.stepper.goPrev());
@@ -126,12 +131,24 @@ export class DatosEmpleadorComponent implements OnInit {
       }
 
       if (this.formEmployer.get('salaryData')?.valid && this.stepper.getCurrentStepIndex() === 3) {
+        this.addHistorySalaryFields();
         return this.stepper.goNext();
       }
 
       if (this.formEmployer.get('speciesSalary')?.valid && this.stepper.getCurrentStepIndex() === 4) {
         return this.stepper.goNext();
       }
+      
+      if (this.formEmployer.get('historySalary')?.valid && this.stepper.getCurrentStepIndex() === 5) {
+        return this.stepper.goNext();
+      }
+    });
+  }
+
+  private createHistorySalaryFieldYear(anio: string, amount: any){
+    return this.formBuilder.group({
+      year: [anio],
+      salary: [amount, [Validators.required]],
     });
   }
 
@@ -143,7 +160,7 @@ export class DatosEmpleadorComponent implements OnInit {
         rtnNumber: ['08011994058778', [Validators.required, Validators.minLength(14), Validators.maxLength(14), Validators.pattern(/^[0-9]+$/)]],
         dniNumber: ['', []],
         economicActivity: ['', [Validators.required,]],
-        companySize: ['', [Validators.required]]
+        companySize: ['', [Validators.required, Validators.pattern(/^[0-9]+$/)]]
       }),
       employeeData: this.formBuilder.group({
         typeIdentity: ['DNI', [Validators.required]],
@@ -158,7 +175,7 @@ export class DatosEmpleadorComponent implements OnInit {
         municipality: ['', [Validators.required]],
       }),
       salaryData: this.formBuilder.group({
-        startDate: ['2015-06-15', [Validators.required]],
+        startDate: [this.getFutureDate(5), [Validators.required]],
         endDate: ['2022-09-10', [Validators.required]],
         fixedSalary: ['SI', [Validators.required]],
         salary: ['20000', [Validators.required]],
@@ -194,10 +211,12 @@ export class DatosEmpleadorComponent implements OnInit {
         }),
       }),
       speciesSalary: this.formBuilder.group({
-        optionSpeciesSalary: ['NONE', [Validators.required]],
+        optionSpeciesSalary: ['', [Validators.required]],
         foodTime: ['NONE', []]
-      })
+      }),
+      historySalary: this.formBuilder.array([])
     });
+
 
     this.formEmployer.get('salaryData.fixedSalary')?.valueChanges
       .subscribe(value => {
@@ -223,28 +242,26 @@ export class DatosEmpleadorComponent implements OnInit {
     this.formEmployer.get('companyData.personType')?.valueChanges
       .subscribe(value => {
         if (value === '0') {
-          this.formEmployer.get('companyData.rtnNumber')?.setValidators(null);
+          this.formEmployer.get('companyData.rtnNumber')?.setValidators([]);
           this.formEmployer.get('companyData.dniNumber')?.setValidators([Validators.required, Validators.minLength(13), Validators.maxLength(13), Validators.pattern(/^[0-9]+$/)]);
         }
         if (value === '1') {
           this.formEmployer.get('companyData.rtnNumber')?.setValidators([Validators.required, Validators.minLength(14), Validators.maxLength(14), Validators.pattern(/^[0-9]+$/)]);
-          this.formEmployer.get('companyData.dniNumber')?.setValidators(null);
+          this.formEmployer.get('companyData.dniNumber')?.setValidators([]);
         }
-        /* switch(value){
-          case '0':
-            break;
-          case '1':
-            break;
-        } */
       });
-
+    
     this.formEmployer.get('speciesSalary.optionSpeciesSalary')?.valueChanges
-      .subscribe(value => {
-        if (value === 'alimentacion') {
-          return this.formEmployer.get('speciesSalary.foodTime')?.setValidators([Validators.required]);
-        }
+    .subscribe(value => {
+      console.log(value);
+      console.log(this.formEmployer.get('speciesSalary.foodTime'));
+      console.log(this.formEmployer.get('speciesSalary'));
+      if(value === 'FEED'){
+        this.formEmployer.get('speciesSalary.foodTime')?.setValidators([Validators.required]);
+      }else{
         this.formEmployer.get('speciesSalary.foodTime')?.setValidators([]);
-      });
+      }
+    });
   }
 
   get typePersonValue() {
@@ -261,6 +278,31 @@ export class DatosEmpleadorComponent implements OnInit {
 
   get isSpeciesSalaryValid() {
     return this.formEmployer.get('speciesSalary')?.valid;
+  }
+
+  get historySalaryField(){
+    return this.formEmployer.get('historySalary') as FormArray;
+  }
+
+  get historySalaryValue() {
+    return this.formEmployer.get('historySalary')?.value;
+  }
+
+  /**
+   * It takes a number of days and returns a date in the future
+   * @param {number} majorDays - number - The number of days you want to add to the current date.
+   * @returns A string in the format of yyyy-MM-dd
+   */
+  getFutureDate(majorDays?: number){
+    if(majorDays){
+      let totalDay = (new Date().getDate()) + majorDays;
+      return format(new Date().setDate(totalDay),'yyyy-MM-dd');
+    }
+    return format(new Date(),'yyyy-MM-dd');
+  }
+
+  setMinDate(){
+    this.minDate = this.formEmployer.get('salaryData.startDate')?.value;
   }
 
   totalSpeciesSalary(percentage: string) {
@@ -325,24 +367,27 @@ export class DatosEmpleadorComponent implements OnInit {
     }
   }
 
-  postEmployeeAndEmployer() {
-    console.log("Ok");
-    const {companyData, employeeData, salaryData} = this.formEmployer.value;
-    this.calculoPrestacionesService.objectGlobal.startDate = employeeData.startDate;
-    this.calculoPrestacionesService.objectGlobal.dismissalDate = employeeData.endDate;
-    this.calculoPrestacionesService.objectGlobal.fixedSalary = salaryData.fixedSalary === 'SI' ? true : false;
+  postEmployeeAndEmployer(): void {
+    this.render2.addClass(this.$overlay.nativeElement, 'active-overlay');
+    const {companyData, employeeData} = this.formEmployer.value;
+    let employer: EmployerDto = {
+      companySize: 0,
+      economicActivity: companyData.economicActivity,
+      employerId: "",
+      employerName: companyData.companyName,
+      identificationNumber: companyData.rtnNumber,
+      identificationType: IdentificationType.DNI,
+      personType: companyData.personType
+    };
+
+    // call employer store
+    this.employerStore.add(employer);
+
+
     let data = {
       age: employeeData.employeeAge,
       email: employeeData.employeeEmail,
-      employer: {
-        companySize: 0,
-        economicActivity: companyData.economicActivity,
-        employerId: "",
-        employerName: companyData.companyName,
-        identificationNumber: companyData.rtnNumber,
-        identificationType: "CARNET_RESIDENTE",
-        personType: companyData.personType
-      },
+      employer,
       firstName: employeeData.employeeName,
       gender: employeeData.employeeSex,
       identificationNumber: employeeData.identityNumber,
@@ -351,135 +396,109 @@ export class DatosEmpleadorComponent implements OnInit {
       localizationId: employeeData.municipality,
       phoneNumber: employeeData.employeePhone,
       requestId: 0,
-      requestType: this.toolbar.userTypeOf,
-      terminationContractType: this.toolbar.terminationContractType
+      requestType: this.getCurrentRequestType(),
+      terminationContractType: this.getCurrentTerminationContract()
     }
-    this.calculoPrestacionesService.sendEmployeeEmployerReq(data).subscribe((response: any) => {
-      console.log(response);
-      const {employerId, requestId, workerPersonId, employer} = response;
-      this.EMPLOYER_ID = employerId;
-      this.REQUEST_ID = requestId;
-      this.WORKER_PERSON_ID = workerPersonId;
-      this.calculoPrestacionesService.objectGlobal.employerId = employerId;
-      this.calculoPrestacionesService.objectGlobal.requestId = requestId;
-      this.calculoPrestacionesService.objectGlobal.workerPersonId = workerPersonId;
-      this.calculoPrestacionesService.objectGlobal.employer = employer;
-      console.log(this.REQUEST_ID);
-      console.log(response);
+    let req = getDataStore('cache');
+    setDataGender(employeeData.employeeSex);
+    this.calculoPrestacionesService.sendEmployeeEmployerReq(data)
+    .subscribe((response: any) => {
+      response ? this.render2.removeClass(this.$overlay.nativeElement, 'active-overlay') : null;
+      const {requestId, workerPersonId, employer} = response;
+      setDataCacheStore(Object.assign(req, { requestId, workerPersonId, employer}));
+      this.currentCacheData = getDataStore('cache');
     })
   }
 
   postSalaryInfoRequest() {
-    console.log("Ok");
-    const {salaryData, speciesSalary} = this.formEmployer.value;
-    let data = {
-      "breastfeedingPaidHours": 0,
-      "daysOffPreAndPostNatalWasPaid": 0,
-      "daysPaidWasFiredWhilePregnant": 0,
-      "dismissalDate": salaryData.endDate,
-      "employerId": this.EMPLOYER_ID,
-      "fixedSalary": salaryData.fixedSalary === 'SI' ? true : false,
-      "hasForewarningNotice": true,
-      "hasTakeVacationTimeLastYear": true,
-      "howMuchOwedHolyDays": 0,
-      "howMuchOwedSeventhDay": 0,
-      "lastSixMonthsBonusPayment": [
-        salaryData.bonuses.monthlyBonus1,
-        salaryData.bonuses.monthlyBonus2,
-        salaryData.bonuses.monthlyBonus3,
-        salaryData.bonuses.monthlyBonus4,
-        salaryData.bonuses.monthlyBonus5,
-        salaryData.bonuses.monthlyBonus6,
-      ],
-      "lastSixMonthsSalary": [
-        salaryData.monthlySalaryAverage1,
-        salaryData.monthlySalaryAverage2,
-        salaryData.monthlySalaryAverage3,
-        salaryData.monthlySalaryAverage4,
-        salaryData.monthlySalaryAverage5,
-        salaryData.monthlySalaryAverage6,
-      ],
-      "lastSixMonthsSalaryCommissions": [
-        salaryData.commissions.monthlyCommissions1,
-        salaryData.commissions.monthlyCommissions2,
-        salaryData.commissions.monthlyCommissions3,
-        salaryData.commissions.monthlyCommissions4,
-        salaryData.commissions.monthlyCommissions5,
-        salaryData.commissions.monthlyCommissions6
-      ],
-      "lastSixMonthsSalaryOverTime": [
-        salaryData.extraHours.monthlyExtraHours1,
-        salaryData.extraHours.monthlyExtraHours2,
-        salaryData.extraHours.monthlyExtraHours3,
-        salaryData.extraHours.monthlyExtraHours4,
-        salaryData.extraHours.monthlyExtraHours5,
-        salaryData.extraHours.monthlyExtraHours6
-      ],
-      "owedBonusVacations": true,
-      "owedBonusVacationsAmount": 0,
-      "owedBreastfeedingHours": false,
-      "owedDaysOffPreAndPostNatal": false,
-      "owedHolyDays": true,
-      "owedOtherPayments": true,
-      "owedOtherPaymentsAmount": 0,
-      "owedOvertime": true,
-      "owedOvertimeType": "DIURNA",
-      "owedOvertimeWork": 0,
-      "owedPaidPendingVacations": true,
-      "owedPendingVacationsYears": 0,
-      "owedSalary": false,
-      "owedSalaryAmount": 0,
-      "owedSeventhDay": false,
-      "requestId": this.REQUEST_ID,
-      "salary": Number(salaryData.salary),
-      "salaryInKindOptionsType": speciesSalary.foodTime,
-      "salaryInKindType": speciesSalary.optionSpeciesSalary,
-      "startDate": salaryData.startDate,
-      "terminationContractType": this.toolbar.terminationContractType,
-      "wasFiredWhilePregnant": false,
-      "workerPersonId": this.WORKER_PERSON_ID
-    }
-
-    this.saveButtonText = "";
-
-    if (!this.saveButtonIsOk) {
-      this.saveButtonIsOk = true;
-      this.spinnerShow = true;
-      this.calculoPrestacionesService.sendSalaryEmployeeInfo(data).subscribe(value => {
-        this.saveButtonText = "Realizar Calculo";
-        this.spinnerShow = false;
-      });
-    }
-
-    if (this.saveButtonIsOk) {
-      this.spinnerShow = false;
-      this.calculoPrestacionesService.sendSalaryEmployeeCompute(data)
-        .subscribe((response: any) => {
-          this.calculoPrestacionesService.objectGlobal = Object.assign(this.calculoPrestacionesService.objectGlobal, response);
-          console.log('Global',this.calculoPrestacionesService.objectGlobal);
-          this.calculoPrestacionesService.isShowCalculoSalarial = true;
-          this.calculoPrestacionesService.isShowIndemnizaciones = true;
-          this.scrollAnimation();
-        }, (catchError) => {
-          console.warn(catchError);
-        });
+    if (this.formEmployer.get('historySalary')?.valid && this.stepper.getCurrentStepIndex() === 5) {
+      this.render2.addClass(this.$overlay.nativeElement, 'active-overlay');
+      const {salaryData, speciesSalary} = this.formEmployer.value;
+      let data = {
+        "dismissalDate": salaryData.endDate,
+        "employerId": this.currentCacheData.employer.employerId,
+        "fixedSalary": salaryData.fixedSalary === 'SI' ? true : false,
+        "lastSixMonthsBonusPayment": [
+          salaryData.bonuses.monthlyBonus1,
+          salaryData.bonuses.monthlyBonus2,
+          salaryData.bonuses.monthlyBonus3,
+          salaryData.bonuses.monthlyBonus4,
+          salaryData.bonuses.monthlyBonus5,
+          salaryData.bonuses.monthlyBonus6,
+        ],
+        "lastSixMonthsSalary": [
+          salaryData.monthlySalaryAverage1,
+          salaryData.monthlySalaryAverage2,
+          salaryData.monthlySalaryAverage3,
+          salaryData.monthlySalaryAverage4,
+          salaryData.monthlySalaryAverage5,
+          salaryData.monthlySalaryAverage6,
+        ],
+        "lastSixMonthsSalaryCommissions": [
+          salaryData.commissions.monthlyCommissions1,
+          salaryData.commissions.monthlyCommissions2,
+          salaryData.commissions.monthlyCommissions3,
+          salaryData.commissions.monthlyCommissions4,
+          salaryData.commissions.monthlyCommissions5,
+          salaryData.commissions.monthlyCommissions6
+        ],
+        "lastSixMonthsSalaryOverTime": [
+          salaryData.extraHours.monthlyExtraHours1,
+          salaryData.extraHours.monthlyExtraHours2,
+          salaryData.extraHours.monthlyExtraHours3,
+          salaryData.extraHours.monthlyExtraHours4,
+          salaryData.extraHours.monthlyExtraHours5,
+          salaryData.extraHours.monthlyExtraHours6
+        ],
+        "requestId": this.currentCacheData.requestId,
+        "workerPersonId": this.currentCacheData.workerPersonId,
+        "salary": Number(salaryData.salary),
+        "salaryInKindOptionsType": speciesSalary.foodTime,
+        "salaryInKindType": speciesSalary.optionSpeciesSalary,
+        "startDate": salaryData.startDate,
+        endDate: salaryData.endDate,
+        "terminationContractType": this.toolbarService.terminationContractType,
+        "wasFiredWhilePregnant": false,
+        "compensationRightsRequest": {
+          "hasForewarningNotice": true,
+          "hasTakeVacationTimeLastYear": false
+        }
+      }
+      let storeOld = getDataStore('cache');
+      storeOld.historySalaries = this.historySalaryValue; 
+      setDataCacheStore(Object.assign(storeOld, data));
+      this.calculoPrestacionesService.sendCompensationsRightsInfo(data)
+      .subscribe(value => {
+        value ? this.render2.removeClass(this.$overlay.nativeElement, 'active-overlay') : null;
+        setDataSalaryCalculationStore(value);
+        this.calculoResponseEvent.emit(value);
+        setTimeout(() => scrollAnimationGoTo('calculo-salarial'), 550);
+      }, (catchError) => console.warn(catchError));
     }
   }
 
-  scrollAnimation() {
-    window.addEventListener("scroll", () => {
-      const scrollable = document.documentElement.scrollHeight - window.innerHeight;
-      const scrolled = window.scrollY;
+  getCurrentRequestType(){
+    return this.toolbarService.userTypeOf
+  }
+  
+  getCurrentTerminationContract(){
+    return this.toolbarService.terminationContractType;
+  }
 
-      if(Math.ceil(scrolled) === scrollable){
-        alert('Llegaste al Final');
-      }
-    });
+  addHistorySalaryFields(){
+    if(this.historySalaryField.controls.length > 0){
+      this.historySalaryField.controls.splice(0,this.historySalaryField.controls.length);
+    }
+    let years = getYearSelect(this.formEmployer.get('salaryData.startDate')?.value,
+    this.formEmployer.get('salaryData.endDate')?.value);
+    years.forEach((year:any) => this.historySalaryField.push(this.createHistorySalaryFieldYear(year,'')));
+    const historySalaryElements = document.querySelectorAll('.historySalaryInput');
+    historySalaryElements.forEach((element:any) => element.setAttribute('disabled','true'));
+    
   }
 
   formDataSend() {
     this.postSalaryInfoRequest();
-    //this.formEmployer.valid ? console.log(this.formEmployer.value) : this.formEmployer.markAllAsTouched();
   }
 
 }

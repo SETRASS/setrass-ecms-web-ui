@@ -1,4 +1,5 @@
 <div class="card shadow-sm">
+  <div #overlay class="overlay"><div><span class="loader-recalulo"></span><h4>Procesando...</h4></div></div>
   <div class="card-header">
     <h3 class="card-title fs-3">Datos de la empresa</h3>
     <!--<div class="card-toolbar">
@@ -121,6 +122,33 @@
             <!--end::Label-->
           </div>
           <!--end::Step 4-->
+          
+          <!--begin::Step 5-->
+          <div class="stepper-item me-5" data-kt-stepper-element="nav">
+            <!--begin::Line-->
+            <div class="stepper-line w-40px"></div>
+            <!--end::Line-->
+
+            <!--begin::Icon-->
+            <div class="stepper-icon w-40px h-40px">
+              <i class="stepper-check fa-solid fa-check fs-2x"></i>
+              <span class="stepper-number">5</span>
+            </div>
+            <!--begin::Icon-->
+
+            <!--begin::Label-->
+            <div class="stepper-label">
+              <h3 class="stepper-title">
+                Salarios históricos
+              </h3>
+
+              <div class="stepper-desc">
+
+              </div>
+            </div>
+            <!--end::Label-->
+          </div>
+          <!--end::Step 5-->
         </div>
         <!--end::Nav-->
       </div>
@@ -128,7 +156,7 @@
       <!--begin::Content-->
       <div class="flex-row-fluid">
         <!--begin::Form-->
-        <form class="form" [formGroup]="formEmployer" (ngSubmit)="formDataSend()" novalidate="novalidate">
+        <form class="form" [formGroup]="formEmployer" novalidate="novalidate">
           <!--begin::Group-->
           <div class="">
             <!--begin:: Datos empresa-->
@@ -253,7 +281,6 @@
                     formControlName="economicActivity"
                     [class.is-valid]="isValidField('companyData.economicActivity')"
                     [class.is-invalid]="isInvalidField('companyData.economicActivity')"
-                    (change)="getEconomicActivity($event)"
                     class=""
                     placeholder="">
                     <ng-option *ngFor="let item of economicActivityList" [value]="item.id">{{item.name}}</ng-option>
@@ -266,27 +293,30 @@
                     >Este campo es requerido.</span>
                   </div>
                 </div>
+                
                 <div class="col-sm-12 col-lg-6">
                   <!--begin::Label-->
                   <label class="form-label">Tamaño de la empresa</label>
                   <!--end::Label-->
                   <!--begin::Input-->
-                  <ng-select
+                  <input
                     formControlName="companySize"
                     [class.is-valid]="isValidField('companyData.companySize')"
                     [class.is-invalid]="isInvalidField('companyData.companySize')"
-                    type="text"
-                    class="form-select-solid"
-                    placeholder="">
-                    <ng-option *ngFor="let item of companySizeList" [value]="item.id">{{item.name}}</ng-option>
-                    <!-- <ng-option *ngFor="let item of currentEconomicActivity" [value]="item.companyEmployeeWeight">{{item.companyEmployeeWeight}}</ng-option> -->
-                  </ng-select>
+                    type="number"
+                    class="form-control form-control-solid"
+                    placeholder=""
+                  />
                   <!--end::Input-->
                   <div *ngIf="isInvalidField('companyData.companySize')">
                     <span
                     *ngIf="getErrorField('companyData.companySize', 'required')"
                     class="text-danger"
                     >Este campo es requerido.</span>
+                    <span
+                    *ngIf="getErrorField('companyData.companySize', 'pattern')"
+                    class="text-danger"
+                    >Este campo es númerico.</span>
                   </div>
                 </div>
               </div>
@@ -514,7 +544,7 @@
                     app
                     >
                     <ng-option
-                      *ngFor="let location  of locations"
+                      *ngFor="let location of locations"
                       [value]="location.location.id" >
                       {{location.location.name}}
                     </ng-option>
@@ -555,6 +585,21 @@
             <div formGroupName="salaryData" class="flex-column gap-5" data-kt-stepper-element="content">
               <div class="row mb-10">
                 <div class="col-sm-12 col-lg-3">
+                  <!-- <mat-form-field appearance="fill">
+                    <mat-label>Enter a date range</mat-label>
+                    <mat-date-range-input [formGroup]="range" [rangePicker]="picker">
+                      <input matStartDate formControlName="start" placeholder="Start date">
+                      <input matEndDate formControlName="end" placeholder="End date">
+                    </mat-date-range-input>
+                    <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-date-range-picker #picker></mat-date-range-picker>
+                  
+                    <mat-error *ngIf="range.controls.start.hasError('matStartDateInvalid')">Invalid start date</mat-error>
+                    <mat-error *ngIf="range.controls.end.hasError('matEndDateInvalid')">Invalid end date</mat-error>
+                  </mat-form-field>
+                  
+                  <p>Selected range: {{range.value | json}}</p> -->
                   <!--begin::Label-->
                   <label class="form-label">Fecha de inicio</label>
                   <!--end::Label-->
@@ -563,6 +608,7 @@
                     formControlName="startDate"
                     [class.is-valid]="isValidField('salaryData.startDate')"
                     [class.is-invalid]="isInvalidField('salaryData.startDate')"
+                    (change)="setMinDate()"
                     type="date"
                     class="form-control form-control-solid"
                   />
@@ -584,6 +630,7 @@
                     formControlName="endDate"
                     [class.is-valid]="isValidField('salaryData.endDate')"
                     [class.is-invalid]="isInvalidField('salaryData.endDate')"
+                    [min]="minDate"
                     type="date"
                     class="form-control form-control-solid"
                   />
@@ -664,7 +711,7 @@
                           *ngIf="getErrorField('salaryData.monthlySalaryAverage1', 'pattern')"
                           class="text-danger"
                         >
-                           Este campo es númerico.
+                          Este campo es númerico.
                         </span>
                       </div>
 
@@ -784,7 +831,7 @@
                           *ngIf="getErrorField('salaryData.monthlySalaryAverage5', 'pattern')"
                           class="text-danger"
                         >
-                           Este campo es númerico.
+                          Este campo es númerico.
                         </span>
                       </div>
                     </div>
@@ -1317,7 +1364,55 @@
               </div> -->
               <!--end::Input group-->
             </div>
-            <!--begin:: Salario en especie-->
+            <!--end:: Salario en especie-->
+
+            <!--begin:: Salarios historico-->
+            <div class="flex-column gap-5" data-kt-stepper-element="content">
+              <!--begin::subtitle group-->
+              <div class="row mb-10">
+                <div class="col-12">
+                  <p><b>Ingrese los salarios anuales de los últimos años</b></p>
+                  <p class="muted">Se requiren los salarios anuales de los últimos años para realizar el cálculo de su reserva laboral y reajuste salarial</p>
+                </div>
+              </div>
+              <!--end::Subtitle group-->
+              <!--begin::Input group-->
+              <div class="row mb-5">
+                <div formArrayName="historySalary"
+                *ngFor="let item of historySalaryField.controls; let i=index"  
+                class="col-sm-12 col-lg-3 mb-5" 
+                >
+                  <div [formGroupName]="i">
+                    <label class="form-label historySalaryLabel"  >Salario año 
+                      <input type="text" class="historySalaryInput" formControlName="year"  />  
+                    </label>
+                    <input
+                      formControlName="salary"
+                      [class.is-valid]="isValidField('historySalary.'+i+'.salary')"
+                      [class.is-invalid]="isInvalidField('historySalary.'+i+'.salary')"
+                      type="number"
+                      class="form-control form-control-solid"
+                    />
+                    <div *ngIf="isInvalidField('historySalary.'+i+'.salary')">
+                      <span
+                        *ngIf="getErrorField('historySalary.'+i+'.salary', 'required')"
+                        class="text-danger">
+                        Este campo es requerido.
+                      </span>
+                    </div>
+                  </div>
+                </div>                
+              </div>              
+              <!-- <div *ngIf="speciesSalaryValue == 'vivienda'" class="row mb-10">
+                <div class="col-sm-12">
+                  <p> <b>Vivienda = SBM X 20%</b>  </p>
+                  <p> <b>Vivienda = {{salaryValue}} X 20%</b>  </p>
+                  <p> <b>Vivienda = {{totalSpeciesSalary('20%')}}</b>  </p>
+                </div>
+              </div> -->
+              <!--end::Input group-->
+            </div>
+            <!--end:: Salarios historicos-->
           </div>
           <!--end::Group-->
 
@@ -1336,16 +1431,13 @@
             <div>
               <button
                 #submit
-                type="submit"
+                type="button"
                 class="btn btn-primary"
                 data-kt-stepper-action="submit"
-              >
+                (click)="formDataSend()"
+                >
                 <span class="indicator-label">
-                  {{saveButtonText}}
-                </span>
-                <p *ngIf="saveButtonIsOk && (saveButtonText !== 'Realizar Calculo')" class="loader-btn" style="margin:0;padding: 0;"></p>
-                <span class="indicator-progress">
-                  Espere un momento, por favor... <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                  Realizar cálculo
                 </span>
               </button>
 

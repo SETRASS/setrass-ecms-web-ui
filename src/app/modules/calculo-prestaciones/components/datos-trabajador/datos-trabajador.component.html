@@ -1,573 +1,1392 @@
 <div class="card shadow-sm">
-    <div class="card-header">
-        <h3 class="card-title">Datos del trabajador</h3>
-        <div class="card-toolbar"></div>
-    </div>
-    <div class="card-body">
+  <div #overlay class="overlay"><div><span class="loader-recalulo"></span><h4>Procesando...</h4></div></div>
+  <div class="card-header">
+    <h3 class="card-title fs-3">Datos del trabajador</h3>
 
-        <!--begin::Stepper-->
-        <div #kt_stepper_vertical class="stepper stepper-pills stepper-column d-flex flex-column flex-lg-row">
-            <!--begin::Aside-->
-            <div class="d-flex flex-row-auto w-100 w-lg-300px">
-                <!--begin::Nav-->
-                <div class="stepper-nav flex-cente">
-                    <!--begin::Step 1-->
-                    <div class="stepper-item me-5 current" data-kt-stepper-element="nav">
-                        <!--begin::Line-->
-                        <div class="stepper-line w-40px"></div>
-                        <!--end::Line-->
+    <!--div class="card-toolbar"></div-->
+  </div>
+  <div class="card-body">
+    <!--begin::Stepper-->
+    <div #kt_stepper_vertical class="stepper stepper-pills stepper-column d-flex flex-column flex-lg-row">
+      <!--begin::Aside-->
+      <div class="d-flex flex-row-auto w-100 w-lg-300px">
+        <!--begin::Nav-->
+        <div class="stepper-nav flex-cente">
+          <!--begin::Step 1-->
+          <div class="stepper-item me-5 current" data-kt-stepper-element="nav">
+            <!--begin::Line-->
+            <div class="stepper-line w-40px"></div>
+            <!--end::Line-->
 
-                        <!--begin::Icon-->
-                        <div class="stepper-icon w-40px h-40px">
-                            <i class="stepper-check fas fa-check"></i>
-                            <span class="stepper-number">1</span>
-                        </div>
-                        <!--end::Icon-->
+            <!--begin::Icon-->
+            <div class="stepper-icon w-40px h-40px">
+              <i class="stepper-check fa-solid fa-check fs-2x"></i>
+              <span class="stepper-number">1</span>
+            </div>
+            <!--end::Icon-->
 
-                        <!--begin::Label-->
-                        <div class="stepper-label">
-                            <h3 class="stepper-title">Datos del trabajador</h3>
-                        </div>
-                        <!--end::Label-->
-                    </div>
-                    <!--end::Step 1-->
+            <!--begin::Label-->
+            <div class="stepper-label">
+              <h3 class="stepper-title">
+                Datos del trabajador
+              </h3>
 
-                    <!--begin::Step 2-->
-                    <div class="stepper-item me-5" data-kt-stepper-element="nav">
-                        <!--begin::Line-->
-                        <div class="stepper-line w-40px"></div>
-                        <!--end::Line-->
+              <div class="stepper-desc">
 
-                        <!--begin::Icon-->
-                        <div class="stepper-icon w-40px h-40px">
-                            <i class="stepper-check fas fa-check"></i>
-                            <span class="stepper-number">2</span>
-                        </div>
-                        <!--begin::Icon-->
+              </div>
+              <!--end::Label-->
+            </div>
+          </div>
+            <!--end::Step 1-->
 
-                        <!--begin::Label-->
-                        <div class="stepper-label">
-                            <h3 class="stepper-title">Datos demográficos</h3>
-                        </div>
-                        <!--end::Label-->
-                    </div>
-                    <!--end::Step 2-->
+            <!--begin::Step 2-->
+            <div class="stepper-item me-5" data-kt-stepper-element="nav">
+              <!--begin::Line-->
+              <div class="stepper-line w-40px"></div>
+              <!--end::Line-->
 
-                    <!--begin::Step 3-->
-                    <div class="stepper-item me-5" data-kt-stepper-element="nav">
-                        <!--begin::Line-->
-                        <div class="stepper-line w-40px"></div>
-                        <!--end::Line-->
+              <!--begin::Icon-->
+              <div class="stepper-icon w-40px h-40px">
+                <i class="stepper-check fa-solid fa-check fs-2x"></i>
+                <span class="stepper-number">2</span>
+              </div>
+              <!--begin::Icon-->
 
-                        <!--begin::Icon-->
-                        <div class="stepper-icon w-40px h-40px">
-                            <i class="stepper-check fas fa-check"></i>
-                            <span class="stepper-number">3</span>
-                        </div>
-                        <!--begin::Icon-->
+              <!--begin::Label-->
+              <div class="stepper-label">
+                <h3 class="stepper-title">
+                  Datos de la empresa
+                </h3>
 
-                        <!--begin::Label-->
-                        <div class="stepper-label">
-                            <h3 class="stepper-title">Datos salariales</h3>
-                        </div>
-                        <!--end::Label-->
-                    </div>
-                    <!--end::Step 3-->
+                <div class="stepper-desc">
 
-                    <!--begin::Step 4-->
-                    <div class="stepper-item me-5" data-kt-stepper-element="nav">
-                        <!--begin::Line-->
-                        <div class="stepper-line w-40px"></div>
-                        <!--end::Line-->
-
-                        <!--begin::Icon-->
-                        <div class="stepper-icon w-40px h-40px">
-                            <i class="stepper-check fas fa-check"></i>
-                            <span class="stepper-number">4</span>
-                        </div>
-                        <!--begin::Icon-->
-
-                        <!--begin::Label-->
-                        <div class="stepper-label">
-                            <h3 class="stepper-title">Salario en especie</h3>
-                        </div>
-                        <!--end::Label-->
-                    </div>
-                    <!--end::Step 4-->
                 </div>
-                <!--end::Nav-->
+              </div>
+              <!--end::Label-->
             </div>
+            <!--end::Step 2-->
 
-            <!--begin::Content-->
-            <div class="flex-row-fluid">
-                <!--begin::Form-->
-                <form class="form  " novalidate="novalidate">
-                    <!--begin::Group-->
-                    <div class="">
-                        <!--begin::Step 1 DATOS DEL TRABAJADOR-->
-                        <div class="flex-column gap-5 current " data-kt-stepper-element="content">
-                            <!--begin::Input group-->
-                            <div class="row mb-10">
-                                <div class="col-sm-12 col-lg-3">
-                                    <!--begin::Label-->
-                                    <label class="form-label">Nombre del trabajador </label>
-                                    <!--end::Label-->
+            <!--begin::Step 3-->
+            <div class="stepper-item me-5" data-kt-stepper-element="nav">
+              <!--begin::Line-->
+              <div class="stepper-line w-40px"></div>
+              <!--end::Line-->
 
-                                    <!--begin::Input-->
-                                    <input type="text" class="form-control form-control-solid" name="input1" placeholder="" value="" />
-                                    <!--end::Input-->
-                                </div>
-                                <div class="col-sm-12 col-lg-3">
-                                    <!--begin::Label-->
-                                    <label class="form-label">Apellido del trabajador </label>
-                                    <!--end::Label-->
+              <!--begin::Icon-->
+              <div class="stepper-icon w-40px h-40px">
+                <i class="stepper-check fa-solid fa-check fs-2x"></i>
+                <span class="stepper-number">3</span>
+              </div>
+              <!--begin::Icon-->
 
-                                    <!--begin::Input-->
-                                    <input type="text" class="form-control form-control-solid" name="input2" placeholder="" value="" />
-                                    <!--end::Input-->
-                                </div>
+              <!--begin::Label-->
+              <div class="stepper-label">
+                <h3 class="stepper-title">
+                  Datos salariales
+                </h3>
 
-                                <div class="col-sm-12 col-lg-3">
-                                    <!--begin::Label-->
-                                    <label class="form-label">Sexo </label>
-                                    <!--end::Label-->
-
-                                    <!--begin::Switch-->
-                                    <select type="text" class="form-select form-select-solid" name="input2" placeholder="">
-                                    <option value="0" disabled>Seleccione una opción</option>
-                                    <option value="1">Femenino</option>
-                                    <option value="2">Masculino</option>
-                                </select>
-                                    <!--end::Switch-->
-                                </div>
-
-
-
-                                <div class="col-sm-12 col-lg-3">
-                                    <!--begin::Label-->
-                                    <label class="form-label">Edad </label>
-                                    <!--end::Label-->
-
-                                    <!--begin::Input-->
-                                    <input type="number" class="form-control form-control-solid" name="input2" placeholder="" value="" />
-                                    <!--end::Input-->
-                                </div>
-                            </div>
-
-                            <div class="row mb-10">
-                                <div class="col-sm-12 col-lg-3">
-                                    <!--begin::Label-->
-                                    <label class="form-label">Tipo de identificación </label>
-                                    <!--end::Label-->
-
-                                    <!--begin::Switch-->
-                                    <select type="text" class="form-select form-select-solid" name="input2" placeholder="">
-                                        <option value="0" disabled>Seleccione una opción</option>
-                                        <option value="1">Identidad</option>
-                                        <option value="2">Pasaporte</option>
-                                        <option value="3">Carnet de residente</option>
-                                    </select>
-                                    <!--end::Switch-->
-                                </div>
-
-                                <div class="col-sm-12 col-lg-3">
-                                    <!--begin::Label-->
-                                    <label class="form-label">Identificación </label>
-                                    <!--end::Label-->
-
-                                    <!--begin::Input-->
-                                    <input type="text" class="form-control form-control-solid" name="input2" placeholder="" value="" />
-                                    <!--end::Input-->
-                                </div>
-                                <div class="col-sm-12 col-lg-3">
-                                    <!--begin::Label-->
-                                    <label class="form-label">Número telefónico </label>
-                                    <!--end::Label-->
-
-                                    <!--begin::Input-->
-                                    <input type="number" class="form-control form-control-solid" name="input2" placeholder="" value="" />
-                                    <!--end::Input-->
-                                </div>
-                                <div class="col-sm-12 col-lg-3">
-                                    <!--begin::Label-->
-                                    <label class="form-label">Correo eletrónico </label>
-                                    <!--end::Label-->
-
-                                    <!--begin::Input-->
-                                    <input type="mail" class="form-control form-control-solid" name="input2" placeholder="" value="" />
-                                    <!--end::Input-->
-                                </div>
-                            </div>
-                            <!--end::Input group-->
-
-                        </div>
-                        <!--begin::Step 1-->
-
-                        <!--begin::Step 2 DATOS DEMOGRAFICOS-->
-                        <div class="flex-column  gap-5 " data-kt-stepper-element="content">
-                            <!--begin::Input group-->
-                            <div class="row mb-10">
-                                <div class="col-sm-12 col-lg-3">
-                                    <!--begin::Label-->
-                                    <label class="form-label">Departamento </label>
-                                    <!--end::Label-->
-
-                                    <!--begin::Switch-->
-                                    <select type="text" class="form-select form-select-solid" name="input2" placeholder="">
-                                        <option value="0" disabled>Seleccione una opción</option>
-                                        <option value="1">Francisco Morazán</option>
-                                        <option value="2">Cortés</option>
-                                        <option value="3">El Paraíso</option>
-                                    </select>
-                                    <!--end::Switch-->
-                                </div>
-                                <div class="col-sm-12 col-lg-3">
-                                    <!--begin::Label-->
-                                    <label class="form-label">Municipio </label>
-                                    <!--end::Label-->
-
-                                    <!--begin::Switch-->
-                                    <select type="text" class="form-select form-select-solid" name="input2" placeholder="">
-                                <option value="0" disabled>Seleccione una opción</option>
-                                <option value="1">Distrito Central</option>
-                                <option value="2">San Pedro Sula</option>
-                                <option value="3">Danlí</option>
-                            </select>
-                                    <!--end::Switch-->
-                                </div>
-                                <div class="col-sm-12 col-lg-3">
-                                    <!--begin::Label-->
-                                    <label class="form-label">Ciudad </label>
-                                    <!--end::Label-->
-
-                                    <!--begin::Switch-->
-                                    <select type="text" class="form-select form-select-solid" name="input2" placeholder="">
-                                    <option value="0" disabled>Seleccione una opción</option>
-                                    <option value="1">Tegucigalpa</option>
-                                    <option value="2">San Pedro Sula</option>
-                                    <option value="3">Danlí</option>
-                                </select>
-                                    <!--end::Switch-->
-                                </div>
-                            </div>
-                            <!--end::Input group-->
-                        </div>
-                        <!--begin::Step -->
-
-
-                        <!--begin::Step 3 DATOS SALARIALES-->
-                        <div class="flex-column  gap-5" data-kt-stepper-element="content">
-                            <!--begin::Input group-->
-                            <div class="row mb-10">
-                                <div class="col-sm-12 col-lg-3">
-                                    <!--begin::Label-->
-                                    <label class="form-label d-flex align-items-center"> Nombre de la empresa </label>
-                                    <!--end::Label-->
-                                    <!--begin::Input-->
-                                    <input type="text" class="form-control form-control-solid" name="input1" placeholder="" value="" />
-                                    <!--end::Input-->
-                                </div>
-
-                                <div class="col-sm-12 col-lg-3">
-                                    <!--begin::Label-->
-                                    <label class="form-label"> Actividad económica </label>
-                                    <!--end::Label-->
-
-                                    <!--begin::Switch-->
-                                    <select type="text" class="form-select form-select-solid" name="input2" placeholder="">
-                                    <option value="0" disabled>Seleccione una opción</option>
-                                    <option value="1">Opcion1</option>
-                                    <option value="2">Opcion2</option>
-                                    <option value="3">Opcion3</option>
-                                </select>
-                                    <!--end::Switch-->
-                                </div>
-
-                                <div class="col-sm-12 col-lg-3">
-                                    <!--begin::Label-->
-                                    <label class="form-label">¿Recibe un salario fijo?</label>
-                                    <!--end::Label-->
-
-                                    <!--begin::Input-->
-                                    <select [(ngModel)]="haveSalary" [ngModelOptions]="{standalone: true}" class="form-select form-select-solid">
-                                      <option *ngFor="let option of salaryOptions">{{option}}</option>
-                                    </select>
-
-                                    <!--end::Input-->
-                                </div>
-
-                                <div class="col-sm-12 col-lg-3">
-                                    <!--begin::Label-->
-                                    <label class="form-label d-flex align-items-center"> Salario base </label>
-                                    <!--end::Label-->
-                                    <!--begin::Input-->
-                                    <input type="number" class="form-control form-control-solid" name="input1" placeholder="" value="" />
-                                    <!--end::Input-->
-                                </div>
-                            </div>
-                            <div class="row mb-10">
-                                <div *ngIf="haveSalary === 'NO'" class="row mb-10">
-                                    <div class="col-12">
-                                        <div class="row mb-10">
-                                            <b>Ingrese los salarios recibidos en los últimos seis meses.</b>
-                                        </div>
-                                        <div class="row mb-10">
-                                            <div class="col-sm-12 col-lg-3">
-                                                <!--begin::Label-->
-                                                <label class="form-label">Salario Mes 1</label>
-                                                <!--end::Label-->
-                                                <!--begin::Input-->
-                                                <input type="number" class="form-control form-control-solid" name="input1" placeholder="" value="" />
-
-                                                <!--end::Input-->
-                                            </div>
-                                            <div class="col-sm-12 col-lg-3">
-                                                <!--begin::Label-->
-                                                <label class="form-label">Salario Mes 2</label>
-                                                <!--end::Label-->
-                                                <!--begin::Input-->
-                                                <input type="number" class="form-control form-control-solid" name="input1" placeholder="" value="" />
-
-                                                <!--end::Input-->
-                                            </div>
-                                            <div class="col-sm-12 col-lg-3">
-                                                <!--begin::Label-->
-                                                <label class="form-label">Salario Mes 3</label>
-                                                <!--end::Label-->
-                                                <!--begin::Input-->
-                                                <input type="number" class="form-control form-control-solid" name="input1" placeholder="" value="" />
-
-                                                <!--end::Input-->
-                                            </div>
-                                            <div class="col-sm-12 col-lg-3">
-                                                <!--begin::Label-->
-                                                <label class="form-label">Salario Mes 4</label>
-                                                <!--end::Label-->
-                                                <!--begin::Input-->
-                                                <input type="number" class="form-control form-control-solid" name="input1" placeholder="" value="" />
-
-                                                <!--end::Input-->
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-sm-12 col-lg-3">
-                                                <!--begin::Label-->
-                                                <label class="form-label">Salario Mes 5</label>
-                                                <!--end::Label-->
-                                                <!--begin::Input-->
-                                                <input type="number" class="form-control form-control-solid" name="input1" placeholder="" value="" />
-
-                                                <!--end::Input-->
-                                            </div>
-                                            <div class="col-sm-12 col-lg-3">
-                                                <!--begin::Label-->
-                                                <label class="form-label">Salario Mes 6</label>
-                                                <!--end::Label-->
-                                                <!--begin::Input-->
-                                                <input type="number" class="form-control form-control-solid" name="input1" placeholder="" value="" />
-
-                                                <!--end::Input-->
-                                            </div>
-                                        </div>
-                                        <div class="row mt-10 d-flex justify-content-end">
-                                            <div class="col-6 d-flex justify-content-end">
-                                                <a href="#" class="btn btn-primary">Cálcular salario promedio</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-sm-12 col-lg-3">
-                                    <!--begin::Label-->
-                                    <label class="form-label"> Tamaño de la empresa </label>
-                                    <!--end::Label-->
-
-                                    <!--begin::Switch-->
-                                    <select type="text" class="form-select form-select-solid" name="input2" placeholder="">
-                                    <option value="0" disabled>Seleccione una opción</option>
-                                    <option value="1">0 a 10 Empleados</option>
-                                    <option value="2">11 a 20 Empleados</option>
-                                    <option value="2">22 a 30 Empleados</option>
-                                </select>
-                                    <!--end::Switch-->
-                                </div>
-
-                                <div class="col-sm-12 col-lg-3">
-                                    <!--begin::Label-->
-                                    <label class="form-label d-flex align-items-center"> Fecha de inicio </label>
-                                    <!--end::Label-->
-                                    <!--begin::Input-->
-                                    <input type="date" class="form-control form-control-solid" name="input1" placeholder="" value="" />
-                                    <!--end::Input-->
-                                </div>
-
-                                <div class="col-sm-12 col-lg-3">
-                                    <!--begin::Label-->
-                                    <label class="form-label d-flex align-items-center"> Fecha de despido </label>
-                                    <!--end::Label-->
-                                    <!--begin::Input-->
-                                    <input type="date" class="form-control form-control-solid" name="input1" placeholder="" value="" />
-                                    <!--end::Input-->
-                                </div>
-
-                            </div>
-
-
-                            <div class="row mb-10">
-                                <div class="col-12">
-                                    <div class="row mb-10">
-                                        <b>Seleccione los beneficios a los que gozó.</b>
-                                    </div>
-                                    <div class="row mb-10">
-                                        <div class="col-sm-12">
-                                            <ul class="nav nav-tabs nav-line-tabs nav-line-tabs-2x mb-5 fs-6">
-                                                <li class="nav-item" role="presentation">
-                                                    <button class="nav-link active" data-bs-toggle="tab" role="tab" data-bs-target="#kt_tab_pane_4">Comisiones</button>
-                                                </li>
-                                                <li class="nav-item">
-                                                    <button class="nav-link" data-bs-toggle="tab" role="tab" data-bs-target="#kt_tab_pane_5">Horas Extras</button>
-                                                </li>
-                                                <li class="nav-item">
-                                                    <button class="nav-link" data-bs-toggle="tab" role="tab" data-bs-target="#kt_tab_pane_6">Bonificaciones</button>
-                                                </li>
-                                            </ul>
-                                            <div class="tab-content" id="myTabContent">
-                                                <div class="tab-pane fade show active" id="kt_tab_pane_4" role="tabpanel">
-                                                    <div class="row mb-10">
-                                                        <div class="col-12 mt-5">
-                                                            <b>Ingrese la cantidad de comisiones de los últimos seis meses.</b>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row mb-10">
-                                                        <div class="col-sm-12 col-lg-3">
-                                                            <label class="form-label">Comision Mes 1</label>
-                                                            <input type="number" class="form-control form-control-solid" name="input1" placeholder="0" value="0" />
-                                                        </div>
-                                                        <div class="col-sm-12 col-lg-3">
-                                                            <label class="form-label">Comision Mes 2</label>
-                                                            <input type="number" class="form-control form-control-solid" name="input1" placeholder="0" value="0" />
-                                                        </div>
-                                                        <div class="col-sm-12 col-lg-3">
-                                                            <label class="form-label">Comision Mes 3</label>
-                                                            <input type="number" class="form-control form-control-solid" name="input1" placeholder="0" value="0" />
-                                                        </div>
-                                                        <div class="col-sm-12 col-lg-3">
-                                                            <label class="form-label">Comision Mes 4</label>
-                                                            <input type="number" class="form-control form-control-solid" name="input1" placeholder="0" value="0" />
-                                                        </div>
-                                                    </div>
-                                                    <div class="row mb-10">
-                                                        <div class="col-sm-12 col-lg-3">
-                                                            <label class="form-label">Comision Mes 5</label>
-                                                            <input type="number" class="form-control form-control-solid" name="input1" placeholder="0" value="0" />
-                                                        </div>
-                                                        <div class="col-sm-12 col-lg-3">
-                                                            <label class="form-label">Comision Mes 6</label>
-                                                            <input type="number" class="form-control form-control-solid" name="input1" placeholder="0" value="0" />
-                                                        </div>
-                                                    </div>
-                                                    <div class="row mb-10">
-                                                        <div class="col-sm-12 col-lg-3">
-                                                            <b>Comisiones Promedio</b>
-                                                        </div>
-                                                        <div class="col-sm-12 col-lg-9">
-                                                            ∑(M1 + M2 + M3 + M4 + M5 + M6) ÷ 6 = <b>L. 18,000.00</b>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="tab-pane fade" id="kt_tab_pane_5" role="tabpanel">
-                                                    Nulla est ullamco ut irure incididunt nulla Lorem Lorem minim irure officia enim reprehenderit.
-                                                </div>
-                                                <div class="tab-pane fade" id="kt_tab_pane_6" role="tabpanel">
-                                                    Sint sit mollit irure quis est nostrud cillum consequat Lorem esse do quis dolor esse fugiat sunt do.
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--end::Input group-->
-                        </div>
-                        <!--begin::Datos Salariales-->
-
-                        <!--begin:: Salario en especie-->
-                        <div class="flex-column gap-5" data-kt-stepper-element="content">
-                            <!--begin::subtitle group-->
-                            <div class="row mb-10">
-                                <div class="col-12">
-                                    <b>Seleccione la opción a la que usted aplica</b>
-                                </div>
-                            </div>
-                            <!--end::Subtitle group-->
-                            <!--begin::Input group-->
-                            <div class="row mb-10">
-                                <div class="col-sm-12 col-lg-4">
-                                    <button type="button" class="btn btn-light block" style="width: 100%;">Alimentación</button>
-                                </div>
-                                <div class="col-sm-12 col-lg-4">
-                                    <button type="button" class="btn btn-light" style="width: 100%;">Vivienda</button>
-                                </div>
-                                <div class="col-sm-12 col-lg-4">
-                                    <button href="#" class="btn btn-light" style="width: 100%;">Vivienda + Alimentación</button>
-                                </div>
-                            </div>
-                            <div class="row mb-10">
-                                <div class="col-sm-12 col-lg-4">
-                                    <button href="#" class="btn btn-light" style="width: 100%;">No aplica</button>
-                                </div>
-                            </div>
-                            <div class="row mb-10">
-                                <div class="col-12">
-                                    <div class="row mb-10">
-                                        <b>¿Cuántos tiempos de comida recibe?</b>
-                                    </div>
-                                    <div class="row mb-10">
-                                        <div class="col-sm-12 col-lg-4">
-                                            <button href="#" class="btn btn-light" style="width: 100%;">1 tiempo de comida</button>
-                                        </div>
-                                        <div class="col-sm-12 col-lg-4">
-                                            <button href="#" class="btn btn-light" style="width: 100%;">2 o más tiempos de comida</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--end::Input group-->
-                        </div>
-                        <!--begin:: Salario en especie-->
-                    </div>
-                    <!--end::Group-->
-
-                    <!--begin::Actions-->
-                    <div class="d-flex justify-content-end gap-5">
-                        <!--begin::Wrapper-->
-                        <div class="">
-                            <button type="button" class="btn btn-light btn-active-light-primary" data-kt-stepper-action="previous">
-                            Regresar
-                          </button>
-                        </div>
-                        <!--end::Wrapper-->
-
-                        <!--begin::Wrapper-->
-                        <div>
-                            <button type="button" class="btn btn-primary" data-kt-stepper-action="submit">
-                                    <span class="indicator-label">
-                                      Realizar cálculo
-                                    </span>
-                            <span class="indicator-progress">
-                                      Espere un momento, por favor... <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
-                                    </span>
-                          </button>
-
-                            <button type="button" class="btn btn-primary" data-kt-stepper-action="next">
-                            Siguiente
-                          </button>
-                        </div>
-                        <!--end::Wrapper-->
-                    </div>
-                    <!--end::Actions-->
-                </form>
-                <!--end::Form-->
+                <div class="stepper-desc">
+                </div>
+              </div>
+              <!--end::Label-->
             </div>
+            <!--end::Step 3-->
+
+            <!--begin::Step 4-->
+            <div class="stepper-item me-5" data-kt-stepper-element="nav">
+              <!--begin::Line-->
+              <div class="stepper-line w-40px"></div>
+              <!--end::Line-->
+
+              <!--begin::Icon-->
+              <div class="stepper-icon w-40px h-40px">
+                <i class="stepper-check fa-solid fa-check fs-2x"></i>
+                <span class="stepper-number">4</span>
+              </div>
+              <!--begin::Icon-->
+
+              <!--begin::Label-->
+              <div class="stepper-label">
+                <h3 class="stepper-title">
+                  Salario en especie
+                </h3>
+                <div class="stepper-desc">
+                </div>
+              </div>
+              <!--end::Label-->
+            </div>
+            <!--end::Step 4-->
+
+            <!--begin::Step 5-->
+          <div class="stepper-item me-5" data-kt-stepper-element="nav">
+            <!--begin::Line-->
+            <div class="stepper-line w-40px"></div>
+            <!--end::Line-->
+
+            <!--begin::Icon-->
+            <div class="stepper-icon w-40px h-40px">
+              <i class="stepper-check fa-solid fa-check fs-2x"></i>
+              <span class="stepper-number">5</span>
+            </div>
+            <!--begin::Icon-->
+
+            <!--begin::Label-->
+            <div class="stepper-label">
+              <h3 class="stepper-title">
+                Salarios históricos
+              </h3>
+
+              <div class="stepper-desc">
+
+              </div>
+            </div>
+            <!--end::Label-->
+          </div>
+          <!--end::Step 5-->
+          </div>
+          <!--end::Nav-->
         </div>
-        <!--end::Stepper-->
+
+        <!--begin::Content-->
+        <div class="flex-row-fluid">
+          <!--begin::Form-->
+          <form class="form" [formGroup]="formEmployee" novalidate="novalidate">
+            <!--begin::Group-->
+            <div class="">
+            <!--begin::Step 1 DATOS DEL TRABAJADOR-->
+              <div formGroupName="employeeData" class="flex-column gap-5 current " data-kt-stepper-element="content">
+                  <!--begin::Input group-->
+                  <div class="row mb-10">
+                    <div class="col-sm-12 col-lg-3">
+                      <!--begin::Label-->
+                      <label class="form-label">Nombre del trabajador </label>
+                      <!--end::Label-->
+                      <!--begin::Input-->
+                      <input 
+                        formControlName="employeeName"
+                        [class.is-valid]="isValidField('employeeData.employeeName')"
+                        [class.is-invalid]="isInvalidField('employeeData.employeeName')"
+                        type="text"
+                        class="form-control form-control-solid"
+                        placeholder="Jorge Adalberto"/>
+                      <!--end::Input-->
+                      <div *ngIf="isInvalidField('employeeData.employeeName')">
+                        <span  
+                        *ngIf="getErrorField('employeeData.employeeName', 'required')"
+                        class="text-danger"
+                        >Este campo es requerido.</span>
+                      </div>
+                    </div>
+                    <div class="col-sm-12 col-lg-3">
+                      <!--begin::Label-->
+                      <label class="form-label">Apellido del trabajador </label>
+                      <!--end::Label-->
+      
+                      <!--begin::Input-->
+                      <input
+                        formControlName="employeeLastName"
+                        [class.is-valid]="isValidField('employeeData.employeeLastName')"
+                        [class.is-invalid]="isInvalidField('employeeData.employeeLastName')"
+                        type="text" 
+                        class="form-control form-control-solid" 
+                        placeholder="Aguilar" />
+                      <!--end::Input-->
+                      <div *ngIf="isInvalidField('employeeData.employeeLastName')">
+                        <span
+                        *ngIf="getErrorField('employeeData.employeeLastName', 'required')"
+                        class="text-danger"
+                        >Este campo es requerido.</span>
+                      </div>
+                    </div>
+                  <div class="col-sm-12 col-lg-3">
+                    <!--begin::Label-->
+                    <label class="form-label">Sexo </label>
+                    <!--end::Label-->
+      
+                    <!--begin::Switch-->
+                    <select 
+                      formControlName="employeeSex"
+                      [class.is-valid]="isValidField('employeeData.employeeSex')"
+                      [class.is-invalid]="isInvalidField('employeeData.employeeSex')"
+                      class="form-select form-select-solid">
+                      <option value="M">Masculino</option>
+                      <option value="F">Femenino</option>
+                    </select>
+                    <!--end::Switch-->
+                    <span 
+                      *ngIf="getErrorField('employeeData.employeeSex', 'required')"
+                      class="text-danger"
+                      >Este campo es requerido.
+                    </span>
+                  </div>
+      
+      
+      
+                  <div class="col-sm-12 col-lg-3">
+                    <!--begin::Label-->
+                    <label class="form-label">Edad </label>
+                    <!--end::Label-->
+      
+                    <!--begin::Input-->
+                    <input
+                      formControlName="employeeAge"
+                      [class.is-valid]="isValidField('employeeData.employeeAge')"
+                      [class.is-invalid]="isInvalidField('employeeData.employeeAge')" 
+                      type="number" 
+                      class="form-control form-control-solid" 
+                      placeholder="30"  />
+                  <!--end::Input-->
+                   <div *ngIf="isValidField('employeeData.employeeAge')">
+                      <span
+                      *ngIf="getErrorField('employeeData.employeeAge', 'required')"
+                      class= "text-danger"
+                      >Este campo es requerido.</span>
+                      <span
+                      *ngIf="getErrorField('employeeData.employeeAge', 'min')"
+                      class="text-danger"
+                      > Debe tener al menos 14 años.</span>
+                      <span
+                      *ngIf="getErrorField('employeeData.employeeAge', 'max')"
+                      class="text-danger"
+                      > El límite de edad es de 85 años.</span>
+                      <span
+                      *ngIf="getErrorField('employeeData.employeeAge', 'pattern')"
+                      class="text-danger"
+                      > Este campo es númerico.</span>
+                    </div>
+                  </div>
+              </div>
+      
+              <div class="row mb-10">
+                  <div class="col-sm-12 col-lg-3">
+                  <!--begin::Label-->
+                  <label class="form-label">Tipo de identificación </label>
+                  <!--end::Label-->
+                  <!--begin::Switch-->
+                  <select 
+                    formControlName="typeIdentity"
+                    [class.is-valid]="isValidField('employeeData.typeIdentity')"
+                    [class.is-invalid]="isInvalidField('employeeData.typeIdentity')"
+                    class="form-select form-select-solid">
+                    <option value="DNI">DNI</option>
+                    <option value="CARNET_RESIDENTE">CARNET RESIDENTE</option>
+                    <option value="PASAPORTE">PASAPORTE</option>
+                  </select>
+                  <!--end::Switch-->
+                  <div *ngIf="isInvalidField('employeeData.typeIdentity')">
+                    <span
+                    *ngIf="getErrorField('employeeData.typeIdentity', 'required')"
+                    class="text-danger"
+                    >Este campo es requerido.</span>
+                  </div>
+                </div>
+      
+                <div class="col-sm-12 col-lg-3">
+                <!--begin::Label-->
+                <label class="form-label">Identificación </label>
+                <!--end::Label-->
+      
+                <!--begin::Input-->
+                <input
+                  formControlName="identityNumber"
+                  [class.is-valid]="isValidField('employeeData.identityNumber')"
+                  [class.is-invalid]="isInvalidField('employeeData.identityNumber')"
+                  type="text" 
+                  class="form-control form-control-solid" 
+                  placeholder="0801199520369"
+                  />
+                  <!--end::Input-->
+               <div *ngIf="isInvalidField('employeeData.identityNumber')">
+                <span
+                  *ngIf="getErrorField('employeeData.identityNumber', 'required')"
+                  class="text-danger"
+                  > Este campo es requerido.</span>
+                  <span
+                  *ngIf="getErrorField('employeeData.identityNumber', 'minlength')"
+                  class="text-danger"
+                  > Debe contener al menos 14 caracteres.</span>
+                  <span
+                  *ngIf="getErrorField('employeeData.identityNumber', 'maxlength')"
+                  class="text-danger"
+                  > Hay más de 14 caracteres.</span>
+                  <span
+                  *ngIf="getErrorField('employeeData.identityNumber', 'pattern')"
+                  class="text-danger"
+                  > Este campo es númerico.</span>
+                </div>
+      
+                  
+                </div>
+                <div class="col-sm-12 col-lg-3">
+                  <!--begin::Label-->
+                  <label class="form-label">Número telefónico </label>
+                  <!--end::Label-->
+                  <!--begin::Input-->
+                  <input 
+                    formControlName="employeePhone"
+                    [class.is-valid]="isValidField('employeeData.employeePhone')"
+                    [class.is-invalid]="isInvalidField('employeeData.employeePhone')"
+                    type="tel" 
+                    class="form-control form-control-solid"  
+                    placeholder="89107589"
+                    />
+                  <!--end::Input-->
+                  <div *ngIf="isInvalidField('employeeData.employeePhone')">
+                      <span
+                      *ngIf="getErrorField('employeeData.employeePhone', 'required')"
+                      class="text-danger"
+                      >Este campo es requerido.</span>
+                      <span
+                      *ngIf="getErrorField('employeeData.employeePhone', 'minlength')"
+                      class="text-danger"
+                      > Debe tener al menos 8 digitos.</span>
+                      <span
+                      *ngIf="getErrorField('employeeData.employeePhone', 'maxlength')"
+                      class="text-danger"
+                      > El límite es de 8 digitos.</span>
+                    </div>
+                  </div>
+                  <div class="col-sm-12 col-lg-3">
+                  <!--begin::Label-->
+                  <label class="form-label">Correo eletrónico </label>
+                  <!--end::Label-->
+                  <!--begin::Input-->
+                  <input 
+                    formControlName="employeeEmail"
+                    [class.is-valid]="isValidField('employeeData.employeeEmail')"
+                    [class.is-invalid]="isInvalidField('employeeData.employeeEmail')"
+                    type="email" 
+                    class="form-control form-control-solid" 
+                    placeholder="correo@gmail.com"
+                    >
+      
+                  <!--end::Input-->
+                  <div *ngIf="isInvalidField('employeeData.employeeEmail')">
+                    <span
+                    *ngIf="getErrorField('employeeData.employeeEmail', 'required')"
+                    class="text-danger"
+                    >Este campo es requerido.</span>
+                    <span
+                     *ngIf="getErrorField('employeeData.employeeEmail', 'email')"
+                    class="text-danger"
+                    > Debe ser un correo valido.</span>
+                  </div>
+                  </div>
+              <!--end::Input group-->
+      
+              </div>
+      
+              <!--begin::Step 2 DATOS DEMOGRAFICOS-->
+                 
+                      <!--begin::Step -->
+              </div>
+
+              <div formGroupName="companyData"  class="flex-column  gap-5 curent" data-kt-stepper-element="content">
+                <!--begin::Input group-->
+                <div class="row mb-10">
+
+                  <div class="col-sm-12 col-lg-3">
+                    <!--begin::Label-->
+                    <label class="form-label"> Nombre de la empresa </label>
+                    <!--end::Label-->
+                    <!--begin::Input-->
+                    <input 
+                      formControlName="companyName"
+                      [class.is-valid]="isValidField('companyData.companyName')"
+                      [class.is-invalid]="isInvalidField('companyData.companyName')"
+                      type="text"
+                      class="form-control form-control-solid" 
+                      placeholder="Empresa XYZ"/>
+                      <p *ngIf="isInvalidField('companyData.companyName')">
+                        <span
+                        *ngIf="getErrorField('companyData.companyName', 'required')"
+                        class="text-danger"
+                        >Este campo es requerido.</span>
+                        <span
+                        *ngIf="getErrorField('companyData.companyName', 'minlength')"
+                        class="text-danger"
+                        > Debe contener al menos 5 caracteres.</span>
+                        </p>
+                      <!--end::Input-->
+                  </div>
+                    
+                  <div class="col-sm-12 col-lg-3">
+                    <!--begin::Label-->
+                    <label class="form-label"> Actividad económica </label>
+                    <!--end::Label-->
+                    <!--begin::Switch-->
+                    <ng-select
+                      formControlName="economicActivity"
+                      [class.is-valid]="isValidField('companyData.economicActivity')"
+                      [class.is-invalid]="isInvalidField('companyData.economicActivity')"
+                      (change)="getEconomicActivity($event)" 
+                      class="" 
+                      placeholder=""> 
+                      <ng-option *ngFor="let item of economicActivityList" [value]="item.id">{{item.name}}</ng-option>
+                  </ng-select>
+                   <div *ngIf="isInvalidField('companyData.economicActivity')">
+                      <span
+                      *ngIf="getErrorField('companyData.economicActivity', 'required')"
+                      class="text-danger"
+                      >Este campo es requerido.</span>
+                  </div>
+                  <!--end::Switch-->
+                  </div>
+
+                  <div class="col-sm-12 col-lg-3">
+                    <!--begin::Label-->
+                    <label class="form-label"> Tamaño de la empresa </label>
+                    <!--end::Label-->
+        
+                    <!--begin::Switch-->
+                    <input
+                      formControlName="companySize"
+                      [class.is-valid]="isValidField('companyData.companySize')"
+                      [class.is-invalid]="isInvalidField('companyData.companySize')"
+                      type="number"
+                      class="form-control form-control-solid"
+                      placeholder="">
+                      
+                    <!--end::Switch-->
+                    <div  *ngIf="isInvalidField('companyData.companySize')">
+                        <span
+                        *ngIf="getErrorField('companyData.companySize', 'required')"
+                        class="text-danger"
+                        >Este campo es requerido</span>
+                        <span
+                        *ngIf="getErrorField('companyData.companySize', 'pattern')"
+                        class="text-danger"
+                        >Este campo es númerico</span>
+                    </div>
+                  </div>
+
+    
+                    
+                  </div>
+
+                  <div class="row mb-10">
+                    <div class="col-sm-12 col-lg-3">
+                      <!--begin::Label-->
+                        <label class="form-label">Departamento </label>
+                        <!--end::Label-->
+                        <!--begin::Switch-->
+                        <ng-select
+                          formControlName="department"
+                          [class.is-valid]="isValidField('companyData.department')"
+                          [class.is-invalid]="isInvalidField('companyData.department')"
+                          (change)="getLocation($event)"
+                          app
+                          >
+        
+                          <ng-option
+                            *ngFor="let location of locations"
+                            [value]="location.location.id" >
+                            {{location.location.name}}
+                          </ng-option>
+                        </ng-select>
+                        <!--end::Switch-->
+                        <div *ngIf="isInvalidField('companyData.department')">
+                          <span
+                           *ngIf="getErrorField('companyData.department', 'required')"
+                            class="text-danger"
+                            >Este campo es requerido.</span>
+                          </div>
+                    </div>
+                        <div class="col-sm-12 col-lg-3">
+                          <!--begin::Label-->
+                          <label class="form-label">Municipio </label>
+                          <!--end::Label-->
+        
+                          <!--begin::Switch-->
+                          <ng-select
+                            formControlName="municipality"
+                            [class.is-valid]="isValidField('companyData.municipality')"
+                            [class.is-invalid]="isInvalidField('companyData.municipality')"
+                            class="">
+                            <ng-option *ngFor="let value of currentMunicipios"  [value]="value.location.id">{{value.location.name}}</ng-option>    
+                          </ng-select>
+                                            
+                        <!--end::Switch-->
+                            <div *ngIf="isInvalidField('companyData.municipality')">
+                                <span
+                                *ngIf="getErrorField('companyData.municipality', 'required')"
+                                class="text-danger"
+                                >Este campo es requerido.</span>
+                                </div>
+                        </div>
+                  </div>
+                    <!--end::Input group-->
+                </div>
+
+              <div  formGroupName="salaryData" class="flex-column  gap-5" data-kt-stepper-element="content">
+                <!--begin::Input group-->
+                <div class="row mb-10">
+                  
+      
+                <div class="col-sm-10 col-lg-3">
+                  <!--begin::Label-->
+                  <label class="form-label">¿Recibe un salario fijo?</label>
+                  <!--end::Label-->
+      
+                  <!--begin::Input-->
+                  <select
+                    formControlName="fixedSalary"
+                    [class.is-valid]="isValidField('salaryData.fixedSalary')"
+                    [class.is-invalid]="isInvalidField('salaryData.fixedSalary')"
+                    class="form-select form-select-solid">
+                    <option *ngFor="let option of salaryOptions">{{option}}</option>
+                  </select>
+                  <!--end::Input-->
+                </div>
+
+
+                <div class="col-sm-12 col-lg-3">
+                  <!--begin::Label-->
+                  <label class="form-label">Salario mensual</label>
+                  <!--end::Label-->
+  
+                  <!--begin::Input-->
+                  <input
+                  #salary
+                  formControlName="salary"
+                  [class.is-valid]="isValidField('salaryData.salary')"
+                  [class.is-invalid]="isInvalidField('salaryData.salary')"
+                  type="number"
+                  class="form-control form-control-solid"
+                  placeholder="L. 18,000.00" value=""/>
+                  <!--end::Input-->
+                  <div *ngIf="isInvalidField('salaryData.salary')">
+                    <span
+                    *ngIf="getErrorField('salaryData.salary', 'required')"
+                    class="text-danger"
+                    >Este campo es requerido.</span>
+                  </div>
+                </div>
+
+                <div class="col-sm-12 col-lg-3">
+                  <!--begin::Label-->
+                  <label class="form-label d-flex align-items-center"> Fecha de inicio</label>
+                  <!--end::Label-->
+                  <!--begin::Input-->
+                  <input
+                  
+                    formControlName="startDate"
+                    [class.is-valid]="isValidField('salaryData.startDate')"
+                    [class.is-invalid]="isInvalidField('salaryData.startDate')"
+                    (change)="setMinDate()" 
+                    [max]="getFutureDate()"
+                    type="date" 
+                    class="form-control form-control-solid" />
+                    <!--end::Input-->
+      
+                  <div *ngIf="isInvalidField('salaryData.startDate')">
+                      <span
+                      *ngIf="getErrorField('salaryData.startDate', 'required')"
+                      class="text-danger"
+                      >Este campo es requerido.</span>
+                  </div>
+                </div>
+      
+                <div class="col-sm-12 col-lg-3">
+                  <!--begin::Label-->
+                  <label class="form-label d-flex align-items-center"> Fecha de despido </label>
+                  <!--end::Label-->
+                  <!--begin::Input-->
+                  <input 
+                      formControlName="endDate"
+                      [class.is-valid]="isValidField('salaryData.endDate')"
+                      [class.is-invalid]="isInvalidField('salaryData.endDate')"
+                      [min]="minDate"
+                      [max]="getFutureDate()"
+                      type="date" 
+                      class="form-control form-control-solid" 
+                  />
+                      <!--end::Input-->
+                </div>
+              </div>
+
+              <div *ngIf="haveSalary === 'NO'" class="row mb-10">
+                <div class="col-12">
+                <div class="row mb-10">
+                    <b>Ingrese los salarios recibidos en los últimos seis meses.</b>
+                </div>
+                    <div class="row mb-10">
+                      <div class="col-sm-12 col-lg-3">
+                        <!--begin::Label-->
+                        <label class="form-label">Salario Mes 1</label>
+                        <!--end::Label-->
+                        <!--begin::Input-->
+                        <input
+                          formControlName="monthlySalaryAverage1"
+                          [class.is-valid]="isValidField('salaryData.monthlySalaryAverage1')"
+                          [class.is-invalid]="isInvalidField('salaryData.monthlySalaryAverage1')"
+                          (change)="getTotalAverageField('salaryData.monthlySalaryAverage')" 
+                          type="number" 
+                          class="form-control form-control-solid" 
+                          placeholder="" 
+                        />
+                        <div *ngIf="isInvalidField('salaryData.monthlySalaryAverage1')">
+                            <span
+                            *ngIf="getErrorField('salaryData.monthlySalaryAverage1', 'required')"
+                            class="text-danger"
+                            >
+                            Este campo es requerido.
+                            </span>
+                            <span
+                            *ngIf="getErrorField('salaryData.monthlySalaryAverage1', 'pattern')"
+                            class="text-danger"
+                            >
+                            Este campo es númerico.
+                            </span>
+                        </div>
+                        <!--end::Input-->
+                        </div>
+                        <div class="col-sm-12 col-lg-3">
+                          <!--begin::Label-->
+                          <label class="form-label">Salario Mes 2</label>
+                          <!--end::Label-->
+                          <!--begin::Input-->
+                          <input 
+                            formControlName="monthlySalaryAverage2"
+                            [class.is-valid]="isValidField('salaryData.monthlySalaryAverage2')"
+                            [class.is-invalid]="isInvalidField('salaryData.monthlySalaryAverage2')"
+                            (change)="getTotalAverageField('salaryData.monthlySalaryAverage')"
+                            type="number" 
+                            class="form-control form-control-solid" 
+                          />
+                            <!--end::Input-->
+                          <div *ngIf="isInvalidField('salaryData.monthlySalaryAverage2')">
+                            <span
+                            *ngIf="getErrorField('salaryData.monthlySalaryAverage2', 'required')"
+                            class="text-danger"
+                            >
+                            Este campo es requerido.
+                            </span>
+                            <span
+                            *ngIf="getErrorField('salaryData.monthlySalaryAverage2', 'pattern')"
+                            class="text-danger"
+                            >
+                            Este campo es númerico.
+                        </span>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-lg-3">
+                        <!--begin::Label-->
+                        <label class="form-label">Salario Mes 3</label>
+                        <!--end::Label-->
+                        <!--begin::Input-->
+                        <input 
+                          formControlName="monthlySalaryAverage3"
+                          [class.is-valid]="isValidField('salaryData.monthlySalaryAverage3')"
+                          [class.is-invalid]="isInvalidField('salaryData.monthlySalaryAverage3')"
+                          (change)="getTotalAverageField('salaryData.monthlySalaryAverage')"
+                          type="number" 
+                          class="form-control form-control-solid" 
+                        />
+                                                    
+                        <div *ngIf="isInvalidField('salaryData.monthlySalaryAverage3')">
+                          <span
+                          *ngIf="getErrorField('salaryData.monthlySalaryAverage3', 'required')"
+                          class="text-danger"
+                        >
+                          Este campo es requerido.
+                        </span>
+                        <span
+                        *ngIf="getErrorField('salaryData.monthlySalaryAverage3', 'pattern')"
+                        class="text-danger"
+                        >
+                        Este campo es númerico.
+                        </span>
+                      </div>
+                    <!--end::Input-->
+                    </div>
+                    <div class="col-sm-12 col-lg-3">
+                        <!--begin::Label-->
+                        <label class="form-label">Salario Mes 4</label>
+                        <!--end::Label-->
+                        <!--begin::Input-->
+                        <input
+                          formControlName="monthlySalaryAverage4"
+                          [class.is-valid]="isValidField('salaryData.monthlySalaryAverage4')"
+                          [class.is-invalid]="isInvalidField('salaryData.monthlySalaryAverage4')"
+                          (change)="getTotalAverageField('salaryData.monthlySalaryAverage')"
+                          type="number" 
+                          class="form-control form-control-solid" 
+                        />
+    
+                        <div *ngIf="isInvalidField('salaryData.monthlySalaryAverage4')">
+                          <span
+                          *ngIf="getErrorField('salaryData.monthlySalaryAverage4', 'required')"
+                          class="text-danger"
+                        >
+                          Este campo es requerido.
+                        </span>
+                        <span
+                          *ngIf="getErrorField('salaryData.monthlySalaryAverage4', 'pattern')"
+                          class="text-danger"
+                        >
+                        Este campo es númerico.
+                        </span>
+                      </div>
+                      <!--end::Input-->
+                    </div>
+                  </div>
+                  
+            <div class="row">
+                  <div class="col-sm-12 col-lg-3">
+                        <!--begin::Label-->
+                        <label class="form-label">Salario Mes 5</label>
+                        <!--end::Label-->
+                        <!--begin::Input-->
+                        <input 
+                          formControlName="monthlySalaryAverage5"
+                          [class.is-valid]="isValidField('salaryData.monthlySalaryAverage5')"
+                          [class.is-invalid]="isInvalidField('salaryData.monthlySalaryAverage5')"
+                          (change)="getTotalAverageField('salaryData.monthlySalaryAverage')"
+                          type="number"
+                          class="form-control form-control-solid"
+                        />
+                        <!--end::Input-->
+                        <div *ngIf="isInvalidField('salaryData.monthlySalaryAverage5')">
+                          <span
+                            *ngIf="getErrorField('salaryData.monthlySalaryAverage5', 'required')"
+                            class="text-danger"
+                            >
+                            Este campo es requerido.
+                          </span>
+                          <span
+                            *ngIf="getErrorField('salaryData.monthlySalaryAverage5', 'pattern')"
+                            class="text-danger"
+                          >
+                          Este campo es númerico.
+                          </span>
+                        </div>
+                    <!--end::Input-->
+                    </div>
+                  <div class="col-sm-12 col-lg-3">
+                    <!--begin::Label-->
+                    <label class="form-label">Salario Mes 6</label>
+                    <!--end::Label-->
+                    <!--begin::Input-->
+                        <input 
+                          formControlName="monthlySalaryAverage6"
+                          [class.is-valid]="isValidField('salaryData.monthlySalaryAverage6')"
+                          [class.is-invalid]="isInvalidField('salaryData.monthlySalaryAverage6')"
+                          (change)="getTotalAverageField('salaryData.monthlySalaryAverage')"
+                          type="number" 
+                          class="form-control form-control-solid" 
+                        />
+    
+                      <!--end::Input-->
+                      <div *ngIf="isInvalidField('salaryData.monthlySalaryAverage6')">
+                        <span
+                          *ngIf="getErrorField('salaryData.monthlySalaryAverage6', 'required')"
+                          class="text-danger"
+                          >
+                          Este campo es requerido.
+                        </span>
+                        <span
+                        *ngIf="getErrorField('salaryData.monthlySalaryAverage6', 'pattern')"
+                        class="text-danger"
+                        >
+                        Este campo es númerico.
+                        </span>
+                      </div>
+                  </div>
+            </div>
+                  <div class="row mb-10 mt-10 d-flex justify-content-end align-items-center">
+
+                    <div class="col-sm-12 col-lg-4">
+                      <b>Salario Promedio</b>
+                    </div>
+                    <div class="col-sm-12 col-lg-4">
+                      ∑(S1 + S2 + S3 + S4 + S5 + S6) ÷ 6      =  L. <b>{{totalSalaryAverage.toFixed(2) }}</b>
+                    </div>
+                    <div class="col-4 d-flex justify-content-end">
+                        <a href="#" class="btn btn-primary">Cálcular salario promedio</a>
+                    </div>
+                  </div>
+                </div>
+            </div>
+
+              
+
+
+      
+              
+            <div class="row mb-10">
+                <div class="col-12">
+                    <div class="row mb-10">
+                      <b>Seleccione los beneficios a los que gozó.</b>
+                    </div>
+                    <div class="row mb-10">
+                      <div class="col-sm-12">
+                        <ul class="nav nav-tabs nav-line-tabs nav-line-tabs-2x mb-5 fs-6 d-flex">
+                          <li class="nav-item" role="presentation" style="flex:1">
+                            <button class="nav-link p-5 w-100 active" data-bs-toggle="tab" role="tab" data-bs-target="#kt_tab_pane_4"><h4 style="color: #979797">Comisiones</h4></button>
+                          </li>
+                          <li class="nav-item" style="flex:1">
+                            <button class="nav-link p-5 w-100" data-bs-toggle="tab" role="tab" data-bs-target="#kt_tab_pane_5"><h4 style="color: #979797">Horas Extras</h4></button>
+                          </li>
+                              <li class="nav-item" style="flex:1">
+                                <button class="nav-link p-5 w-100" data-bs-toggle="tab" role="tab" data-bs-target="#kt_tab_pane_6"><h4 style="color: #979797">Bonificaciones</h4></button>
+                            </li>
+                        </ul>
+                                  <div class="tab-content" id="myTabContent">
+                                      <div formGroupName="commissions" class="tab-pane fade show active" id="kt_tab_pane_4" role="tabpanel">
+                                    <div class="row mb-10">
+                                      <div class="col-12 mt-5">
+                                          <b>Ingrese la cantidad de comisiones de los últimos seis meses.</b>
+                                      </div>
+                                    </div>
+                                      <div class="row mb-10">
+                                        <div class="col-sm-12 col-lg-3">
+                                          <label class="form-label">Comision Mes 1</label>
+                                          <input
+                                            formControlName="monthlyCommissions1"
+                                            [class.is-valid]="isValidField('salaryData.commissions.monthlyCommissions1')"
+                                            [class.is-invalid]="isInvalidField('salaryData.commissions.monthlyCommissions1')"
+                                            type="number" 
+                                            class="form-control form-control-solid"
+                                            (change)="getTotalAverageField('salaryData.commissions.monthlyCommissions')"
+                                            />
+                                            <div *ngIf="isInvalidField('salaryData.commissions.monthlyCommissions1 ')">
+                                              <span
+                                                *ngIf="getErrorField('salaryData.commissions.monthlyCommissions1','pattern')"
+                                                class="text-danger">
+                                                Este campo es numerico
+                                              </span>
+                                            </div>
+                                          </div>
+                                          <div class="col-sm-12 col-lg-3">
+                                            <label class="form-label">Comision Mes 2</label>
+                                            <input
+                                              formControlName="monthlyCommissions2"
+                                              [class.is-valid]="isValidField('salaryData.commissions.monthlyCommissions2')"
+                                              [class.is-invalid]="isInvalidField('salaryData.commissions.monthlyCommissions2')"
+                                              type="number" 
+                                              class="form-control form-control-solid"
+                                              (change)="getTotalAverageField('salaryData.commissions.monthlyCommissions')"
+                                              />
+                                              <div *ngIf="isInvalidField('salaryData.commissions.monthlyCommissions2')">
+                                                  <span
+                                                  *ngIf="getErrorField('salaryData.commissions.monthlyCommissions2', 'pattern')"
+                                                    class="text-danger">
+                                                    Este campo es numerico
+                                                  </span>
+                                              </div>
+                                          </div>
+                                          <div class="col-sm-12 col-lg-3">
+                                              <label class="form-label">Comision Mes 3</label>
+                                              <input
+                                                formControlName="monthlyCommissions3"
+                                                [class.is-valid]="isValidField('salaryData.commissions.monthlyCommissions3')"
+                                                [class.is-invalid]="isInvalidField('salaryData.commissions.monthlyCommissions3')"
+                                                type="number" 
+                                                class="form-control form-control-solid"
+                                                (change)="getTotalAverageField('salaryData.commissions.monthlyCommissions')"
+                                              />
+                                              <div  *ngIf="isInvalidField('salaryData.commissions.monthlyCommissions3')">
+                                                  <span
+                                                    *ngIf="getErrorField('salaryData.commissions.monthlyCommissions3', 'pattern')"
+                                                    class="text-danger">
+                                                    Este campo es numerico
+                                                  </span>
+                                              </div>
+                                          </div>
+                                          <div class="col-sm-12 col-lg-3">
+                                              <label class="form-label">Comision Mes 4</label>
+                                              <input
+                                              formControlName="monthlyCommissions4"
+                                              [class.is-valid]="isValidField('salaryData.commissions.monthlyCommissions4')"
+                                              [class.is-invalid]="isInvalidField('salaryData.commissions.monthlyCommissions4')"
+                                              type="number"
+                                              class="form-control form-control-solid"
+                                              (change)="getTotalAverageField('salaryData.commissions.monthlyCommissions')"
+                                              />
+                                              <div *ngIf="isInvalidField('salaryData.commissions.monthlyCommissions4')">
+                                                  <span
+                                                  *ngIf="getErrorField('salaryData.commissions.monthlyCommissions4', 'pattern')"
+                                                  class="text-danger">
+                                                  Este campo es numerico
+                                                  </span>
+                                              </div>
+                                            </div>
+                                          </div>
+                                          <div class="row mb-10">
+                                            <div class="col-sm-12 col-lg-3">
+                                              <label class="form-label">Comision Mes 5</label>
+                                              <input
+                                              formControlName="monthlyCommissions5"
+                                              [class.is-valid]="isValidField('salaryData.commissions.monthlyCommissions5')"
+                                              [class.is-invalid]="isInvalidField('salaryData.commissions.monthlyCommissions5')"
+                                              type="number"
+                                              class="form-control form-control-solid"
+                                              (change)="getTotalAverageField('salaryData.commissions.monthlyCommissions')"
+                                              />
+                                              <div *ngIf="isInvalidField('salaryData.commissions.monthlyCommissions5 ')">
+                                                <span
+                                                  *ngIf="getErrorField('salaryData.commissions.monthlyCommissions5', 'pattern')"
+                                                  class="text-danger">
+                                                  Este campo es numerico
+                                                </span>
+                                              </div>
+                                            </div>
+                                            <div class="col-sm-12 col-lg-3">
+                                            <label class="form-label">Comision Mes 6</label>
+                                            <input
+                                              formControlName="monthlyCommissions6"
+                                              [class.is-valid]="isValidField('salaryData.commissions.monthlyCommissions6')"
+                                              [class.is-invalid]="isInvalidField('salaryData.commissions.monthlyCommissions6')"
+                                              type="number" 
+                                              class="form-control form-control-solid" 
+                                              (change)="getTotalAverageField('salaryData.commissions.monthlyCommissions')"
+                                            />
+                                            <div *ngIf="isInvalidField('salaryData.commissions.monthlyCommissions6')">
+                                              <span
+                                                *ngIf="getErrorField('salaryData.commissions.monthlyCommissions6', 'pattern')"
+                                                class="text-danger">
+                                                Este campo es numerico
+                                              </span>
+                                            </div>
+                                            </div>
+                                          </div>
+
+                                          <div class="row mb-10">
+                                          <div class="col-sm-12 col-lg-3">
+                                            <b>Comisiones Promedio</b>
+                                          </div>
+                                          <div class="col-sm-12 col-lg-9">
+                                            ∑(M1 + M2 + M3 + M4 + M5 + M6) ÷ 6 = <b>L. {{totalCommissionsAverage.toFixed(2)}}</b>
+                                          </div>
+                                        </div>
+                                      </div>
+
+                                      <div formGroupName="extraHours" class="tab-pane fade" id="kt_tab_pane_5" role="tabpanel">
+                                        <div class="row mb-10">
+                                          <div class="col-12 mt-5">
+                                            <b>Ingrese la cantidad de horas extras de los últimos seis meses.</b>
+                                          </div>
+                                        </div>
+                                        <div class="row mb-10">
+                                            <div class="col-sm-12 col-lg-3">
+                                            <label class="form-label">Horas extras Mes 1</label>
+                                            <input
+                                              formControlName="monthlyExtraHours1"
+                                              [class.is-valid]="isValidField('salaryData.extraHours.monthlyExtraHours1')"
+                                              [class.is-invalid]="isInvalidField('salaryData.extraHours.monthlyExtraHours1')"
+                                              type="number"
+                                              class="form-control form-control-solid"
+                                              (change)="getTotalAverageField('salaryData.extraHours.monthlyExtraHours')"
+                                            />
+                                            <div *ngIf="isInvalidField('salaryData.extraHours.monthlyExtraHours1')">
+                                              <span
+                                                *ngIf="getErrorField('salaryData.extraHours.monthlyExtraHours1', 'pattern')"
+                                                class="text-danger">
+                                                Este campo es númerico.
+                                              </span>
+                                              </div>
+                                            </div>
+                                            <div class="col-sm-12 col-lg-3">
+                                              <label class="form-label">Horas extras Mes 2</label>
+                                              <input
+                                                formControlName="monthlyExtraHours2"
+                                                [class.is-valid]="isValidField('salaryData.extraHours.monthlyExtraHours2')"
+                                                [class.is-invalid]="isInvalidField('salaryData.extraHours.monthlyExtraHours2')"
+                                                type="number"
+                                                class="form-control form-control-solid"
+                                                (change)="getTotalAverageField('salaryData.extraHours.monthlyExtraHours')"
+                                              />
+                                              <div *ngIf="isInvalidField('salaryData.extraHours.monthlyExtraHours2')">
+                                                <span
+                                                  *ngIf="getErrorField('salaryData.extraHours.monthlyExtraHours2', 'pattern')"
+                                                  class="text-danger">
+                                                  Este campo es númerico.
+                                                </span>
+                                              </div>
+                                            </div>
+                                            <div class="col-sm-12 col-lg-3">
+                                              <label class="form-label">Horas extras Mes 3</label>
+                                              <input
+                                                formControlName="monthlyExtraHours3"
+                                                [class.is-valid]="isValidField('salaryData.extraHours.monthlyExtraHours3')"
+                                                [class.is-invalid]="isInvalidField('salaryData.extraHours.monthlyExtraHours3')"
+                                                type="number"
+                                                class="form-control form-control-solid"
+                                                (change)="getTotalAverageField('salaryData.extraHours.monthlyExtraHours')"
+                                              />
+                                              <div *ngIf="isInvalidField('salaryData.extraHours.monthlyExtraHours3')">
+                                                <span
+                                                  *ngIf="getErrorField('salaryData.extraHours.monthlyExtraHours3', 'pattern')"
+                                                  class="text-danger">
+                                                  Este campo es númerico.
+                                                </span>
+                                              </div>
+                                            </div>
+                                            <div class="col-sm-12 col-lg-3">
+                                              <label class="form-label">Horas extras Mes 4</label>
+                                              <input
+                                                formControlName="monthlyExtraHours4"
+                                                [class.is-valid]="isValidField('salaryData.extraHours.monthlyExtraHours4')"
+                                                [class.is-invalid]="isInvalidField('salaryData.extraHours.monthlyExtraHours4')"
+                                                type="number"
+                                                class="form-control form-control-solid"
+                                                (change)="getTotalAverageField('salaryData.extraHours.monthlyExtraHours')"
+                                              />
+                                              <div *ngIf="isInvalidField('salaryData.extraHours.monthlyExtraHours4')">
+                                                <span
+                                                  *ngIf="getErrorField('salaryData.extraHours.monthlyExtraHours4', 'pattern')"
+                                                  class="text-danger">
+                                                  Este campo es númerico.
+                                                </span>
+                                              </div>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-10">
+                                            <div class="col-sm-12 col-lg-3">
+                                                <label class="form-label">Horas extras Mes 5</label>
+                                                <input
+                                                  formControlName="monthlyExtraHours5"
+                                                  [class.is-valid]="isValidField('salaryData.extraHours.monthlyExtraHours5')"
+                                                  [class.is-invalid]="isInvalidField('salaryData.extraHours.monthlyExtraHours5')"
+                                                  type="number"
+                                                  class="form-control form-control-solid"
+                                                  (change)="getTotalAverageField('salaryData.extraHours.monthlyExtraHours')"
+                                                />
+                                              <div *ngIf="isInvalidField('salaryData.extraHours.monthlyExtraHours5')">
+                                                  <span
+                                                    *ngIf="getErrorField('salaryData.extraHours.monthlyExtraHours5', 'pattern')"
+                                                    class="text-danger">
+                                                    Este campo es númerico.
+                                                  </span>
+                                              </div>
+                                            </div>
+                                            <div class="col-sm-12 col-lg-3">
+                                                <label class="form-label">Horas extras Mes 6</label>
+                                                <input
+                                                  formControlName="monthlyExtraHours6"
+                                                  [class.is-valid]="isValidField('salaryData.extraHours.monthlyExtraHours6')"
+                                                  [class.is-invalid]="isInvalidField('salaryData.extraHours.monthlyExtraHours6')"
+                                                  type="number"
+                                                  class="form-control form-control-solid"
+                                                  (input)="getTotalAverageField('salaryData.extraHours.monthlyExtraHours')"
+                                                />
+                                                <div *ngIf="isInvalidField('salaryData.extraHours.monthlyExtraHours6')">
+                                                  <span
+                                                  *ngIf="getErrorField('salaryData.extraHours.monthlyExtraHours6', 'pattern')"
+                                                  class="text-danger">
+                                                  Este campo es númerico.
+                                                  </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-10">
+                                          <div class="col-sm-12 col-lg-3">
+                                            <b>Horas Extras Promedio</b>
+                                          </div>
+                                          <div class="col-sm-12 col-lg-9">
+                                            ∑(M1 + M2 + M3 + M4 + M5 + M6) ÷ 6      =  <b>L. {{totalExtraHoursAverage.toFixed(2) }}</b>
+                                          </div>
+                                        </div>
+                                      </div>
+
+                                      <div formGroupName="bonuses" class="tab-pane fade" id="kt_tab_pane_6" role="tabpanel">
+                                          <div class="row mb-10">
+                                          <div class="col-12 mt-5">
+                                            <b>Ingrese la cantidad de bonificaciones de los últimos seis meses.</b>
+                                          </div>
+                                        </div>
+                                        <div class="row mb-10">
+                                          <div class="col-sm-12 col-lg-3">
+                                            <label class="form-label">Bonificación Mes 1</label>
+                                            <input
+                                            formControlName="monthlyBonus1"
+                                            [class.is-valid]="isValidField('salaryData.bonuses.monthlyBonus1')"
+                                            [class.is-invalid]="isInvalidField('salaryData.bonuses.monthlyBonus1')"
+                                            type="number"
+                                            class="form-control form-control-solid"
+                                            (change)="getTotalAverageField('salaryData.bonuses.monthlyBonus')"
+                                            />
+                                            <div *ngIf="isInvalidField('salaryData.bonuses.monthlyBonus1')">
+                                              <span
+                                                *ngIf="getErrorField('salaryData.bonuses.monthlyBonus1', 'pattern')"
+                                                class="text-danger">
+                                                Este campo es númerico.
+                                              </span>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12 col-lg-3">
+                                          <label class="form-label">Bonificación Mes 2</label>
+                                          <input
+                                            formControlName="monthlyBonus2"
+                                            [class.is-valid]="isValidField('salaryData.bonuses.monthlyBonus2')"
+                                            [class.is-invalid]="isInvalidField('salaryData.bonuses.monthlyBonus2')"
+                                            type="number"
+                                            class="form-control form-control-solid"
+                                            (change)="getTotalAverageField('salaryData.bonuses.monthlyBonus')"
+                                          />
+                                          <div *ngIf="isInvalidField('salaryData.bonuses.monthlyBonus2')">
+                                            <span
+                                              *ngIf="getErrorField('salaryData.bonuses.monthlyBonus2', 'pattern')"
+                                              class="text-danger">
+                                              Este campo es númerico.
+                                            </span>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12 col-lg-3">
+                                            <label class="form-label">Bonificación Mes 3</label>
+                                            <input
+                                            formControlName="monthlyBonus3"
+                                            [class.is-valid]="isValidField('salaryData.bonuses.monthlyBonus3')"
+                                            [class.is-invalid]="isInvalidField('salaryData.bonuses.monthlyBonus3')"
+                                            type="number"
+                                            class="form-control form-control-solid"
+                                            (change)="getTotalAverageField('salaryData.bonuses.monthlyBonus')"
+                                          />
+                                          <div *ngIf="isInvalidField('salaryData.bonuses.monthlyBonus3')">
+                                            <span
+                                              *ngIf="getErrorField('salaryData.bonuses.monthlyBonus3', 'pattern')"
+                                              class="text-danger">
+                                              Este campo es númerico.
+                                            </span>
+                                          </div>
+                                        </div>
+                                        <div class="col-sm-12 col-lg-3">
+                                            <label class="form-label">Bonificación Mes 4</label>
+                                            <input
+                                            formControlName="monthlyBonus4"
+                                            [class.is-valid]="isValidField('salaryData.bonuses.monthlyBonus4')"
+                                            [class.is-invalid]="isInvalidField('salaryData.bonuses.monthlyBonus4')"
+                                            type="number"
+                                            class="form-control form-control-solid"
+                                            (change)="getTotalAverageField('salaryData.bonuses.monthlyBonus')"
+                                          />
+                                          <div *ngIf="isInvalidField('salaryData.bonuses.monthlyBonus4')">
+                                              <span
+                                                *ngIf="getErrorField('salaryData.bonuses.monthlyBonus4', 'pattern')"
+                                                class="text-danger">
+                                                Este campo es númerico.
+                                              </span>
+                                          </div>
+                                        </div>
+                                        </div>
+                                        <div class="row mb-10">
+                                          <div class="col-sm-12 col-lg-3">
+                                            <label class="form-label">Bonificación Mes 5</label>
+                                            <input
+                                              formControlName="monthlyBonus5"
+                                              [class.is-valid]="isValidField('salaryData.bonuses.monthlyBonus5')"
+                                              [class.is-invalid]="isInvalidField('salaryData.bonuses.monthlyBonus5')"
+                                              type="number"
+                                              class="form-control form-control-solid"
+                                              (change)="getTotalAverageField('salaryData.bonuses.monthlyBonus')"
+                                            />
+                                            <div *ngIf="isInvalidField('salaryData.bonuses.monthlyBonus5')">
+                                              <span
+                                                *ngIf="getErrorField('salaryData.bonuses.monthlyBonus5', 'pattern')"
+                                                class="text-danger">
+                                                Este campo es númerico.
+                                              </span>
+                                            </div>
+                                          </div>
+                                          <div class="col-sm-12 col-lg-3">
+                                            <label class="form-label">Bonificación Mes 6</label>
+                                            <input
+                                              formControlName="monthlyBonus6"
+                                              [class.is-valid]="isValidField('salaryData.bonuses.monthlyBonus6')"
+                                              [class.is-invalid]="isInvalidField('salaryData.bonuses.monthlyBonus6')"
+                                              type="number"
+                                              class="form-control form-control-solid"
+                                              (change)="getTotalAverageField('salaryData.bonuses.monthlyBonus')"
+                                              />
+                                              <div *ngIf="isInvalidField('salaryData.bonuses.monthlyBonus6')">
+                                                <span
+                                                  *ngIf="getErrorField('salaryData.bonuses.monthlyBonus6', 'pattern')"
+                                                  class="text-danger">
+                                                  Este campo es númerico.
+                                                </span>
+                                              </div>
+                                            </div>
+                                          </div>
+                                          <div class="row mb-10">
+                                            <div class="col-sm-12 col-lg-3">
+                                                <b>Bonificaciones Promedio</b>
+                                            </div>
+                                            <div class="col-sm-12 col-lg-9">
+                                              ∑(B1 + B2 + B3 + B4 + B5 + B6) ÷ 6      =  <b>L. {{totalBonusesAverage.toFixed(2)}}</b>
+                                            </div>
+                                          </div>
+                                      </div> 
+                                  </div>
+                        </div>
+                                                    
+                            
+                    </div>
+                </div>
+            </div>
+              </div>
+              <!--begin::Datos Salariales-->
+      
+              <!--begin:: Salario en especie-->
+              <div formGroupName="speciesSalary" class="flex-column gap-5" data-kt-stepper-element="content">
+                <!--begin::subtitle group-->
+                <div class="row mb-10">
+                  <div class="col-12">
+                      <p><b>Seleccione la opción a la que usted aplica</b></p>
+                  </div>
+                </div>
+                <!--end::Subtitle group-->
+                <!--begin::Input group-->
+                <div class="row mb-2">
+                  <div class="col-sm-12 col-lg-4">
+                  <div class="radio-container">
+                    <input formControlName="optionSpeciesSalary" type="radio" name="optionSpeciesSalary" value="FEED" id="Aliemntacion">
+                      <div class="radio-tile">
+                          <label for="Alimetacion">Alimentación</label>
+                      </div>
+                    </div>
+                  </div>
+                                      
+                  <div class="col-sm-12 col-lg-4">
+                      <div class="radio-container">
+                        <input formControlName="optionSpeciesSalary" type="radio" name="optionSpeciesSalary" value="HOME" id="Vivienda">
+                          <div class="radio-tile">
+                          <label for="Vivienda">Vivienda</label>
+                          </div>
+                      </div>   
+                  </div>
+      
+                  <div class="col-sm-12 col-lg-4">
+                    <div class="radio-container">
+                      <input formControlName="optionSpeciesSalary" type="radio" name="optionSpeciesSalary" value="FEED_HOME" id="Vivienda+Alimentacion">
+                        <div class="radio-tile">
+                        <label for="Vivienda+Alimentacion">Vivienda y Alimentación</label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+      
+                  <div class="row mb-10">
+                    <div class="col-sm-12 col-lg-4">
+                        <div class="radio-container">
+                          <input formControlName="optionSpeciesSalary" type="radio" value="NONE" name="optionSpeciesSalary" id="noAplica">
+                          <div class="radio-tile">
+                            <label for="noAplica">No aplica</label>
+                          </div>
+                        </div>  
+                    </div>
+                  </div>
+                  <div *ngIf="speciesSalaryValue =='FEED'" class="row mb-10">
+                      <div class="col-12">
+                          <div class="row mb-10">
+                              <p data-bs-toggle="tooltip" data-bs-placement="top"><b>¿Cuántos tiempos de comida recibe?</b></p>
+                          </div>
+                          <div class="row mb-10">
+                            <div class="col-sm-12 col-lg-4">
+                              <!begin::Option-->
+                               <input formControlName="foodTime" type="radio" class="btn-check" value="ONE_MEAL" name="foodTime" id="kt_radio_buttons_2_option_1"/>
+                                  <label class="btn btn-outline btn-outline-dashed btn-outline-default w-100" for="kt_radio_buttons_2_option_1">
+                                    <span>1 tiempo de comida</span>
+                                     </label>
+                              </div>
+                            <div class="col-sm-12 col-lg-4">
+                                <input formControlName="foodTime" type="radio" class="btn-check" value="TWO_OR_MORE_MEALS" name="foodTime" id="kt_radio_buttons_2_option_2"/>
+                                  <label class="btn btn-outline btn-outline-dashed btn-outline-default w-100" for="kt_radio_buttons_2_option_2">
+                                      <span>2 o más tiempos de comida</span>
+                                  </label>
+                            </div>
+                          </div>
+                      </div>
+                    </div>
+                  <!--end::Input group-->
+              </div>
+
+              <!--begin:: Salarios historico-->
+            <div class="flex-column gap-5" data-kt-stepper-element="content">
+              <!--begin::subtitle group-->
+              <div class="row mb-10">
+                <div class="col-12">
+                  <p><b>Ingrese los salarios anuales de los últimos años</b></p>
+                  <p class="muted">Se requiren los salarios anuales de los últimos años para realizar el cálculo de su reserva laboral y reajuste salarial</p>
+                </div>
+              </div>
+              <!--end::Subtitle group-->
+              <!--begin::Input group-->
+              <div class="row mb-5">
+                <div formArrayName="historySalary"
+                *ngFor="let item of historySalaryField.controls; let i=index"  
+                class="col-sm-12 col-lg-3 mb-5" 
+                >
+                  <div [formGroupName]="i">
+                    <label class="form-label historySalaryLabel"  >Año 
+                      <input type="text" class="historySalaryInput" formControlName="year" [disabled]="true"  />  
+                    </label>
+                    <input
+                      formControlName="salary"
+                      [class.is-valid]="isValidField('historySalary.'+i+'.salary')"
+                      [class.is-invalid]="isInvalidField('historySalary.'+i+'.salary')"
+                      type="number"
+                      class="form-control form-control-solid"
+                    />
+                    <div *ngIf="isInvalidField('historySalary.'+i+'.salary')">
+                      <span
+                        *ngIf="getErrorField('historySalary.'+i+'.salary', 'required')"
+                        class="text-danger">
+                        Este campo es requerido.
+                      </span>
+                    </div>
+                  </div>
+                </div>                
+              </div>           
+              <!--end::Input group-->
+            </div>
+            <!--end:: Salarios historicos-->
+            </div>
+            <!--end::Group-->
+      
+            <!--begin Salarios Historicos--> 
+      
+            <!--begin::Actions-->
+            <div class="d-flex justify-content-end gap-5">
+                <!--begin::Wrapper-->
+                <div class="">
+                    <button type="button" class="btn btn-light btn-active-light-primary" data-kt-stepper-action="previous">
+                    Regresar
+                    </button>
+                </div>
+                <!--end::Wrapper-->
+
+                <!--begin::Wrapper-->
+                <div>
+                    <button 
+                    #submit
+                    type="button"
+                    (click)="formDataSend()" 
+                    class="btn btn-primary" 
+                    data-kt-stepper-action="submit"
+                    >
+                      <span class="indicator-label">
+                      Realizar cálculo
+                      </span>
+                      <!-- <p *ngIf="saveButtonIsOk && (saveButtonText !== 'Realizar Calculo')" class="loader-btn" style="margin:0;padding: 0;"></p>
+                      <span class="indicator=progress">
+                        Espere un momento, por favor... <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                      </span> -->
+                    </button>
+
+                    <button 
+                    type="button" 
+                    class="btn btn-primary" 
+                    data-kt-stepper-action="next">
+                    Siguiente
+                    </button>
+                </div>
+                <!--end::Wrapper-->
+            </div>
+            <!--end::Actions-->
+        </form>
+      <!--end::Form-->
     </div>
+  </div>
+  <!--end::Stepper-->
+</div>

@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgSelectModule } from '@ng-select/ng-select';
+import {MatDatepickerModule} from '@angular/material/datepicker';
 // Custom modules
 import {WidgetsModule} from "../../_metronic/partials";
 import {CalculoPrestacionesRoutingModule} from "./calculo-prestaciones-routing.module";
-import { NgSelectModule } from '@ng-select/ng-select';
 // Components
 import { DatosTrabajadorComponent } from './components/datos-trabajador/datos-trabajador.component';
 import { DatosEmpleadorComponent } from './components/datos-empleador/datos-empleador.component';
@@ -34,12 +35,14 @@ import { CalculoGeneradoComponent } from './components/calculo-generado/calculo-
     ReactiveFormsModule,
     WidgetsModule,
     ServicesModule,
+    MatDatepickerModule,
     CalculoPrestacionesRoutingModule,
     LayoutModule
   ],
   exports: [
     DatosTrabajadorComponent,
-    DatosEmpleadorComponent
+    DatosEmpleadorComponent,
+    MatDatepickerModule
   ]
 })
 export class CalculoPrestacionesModule { }

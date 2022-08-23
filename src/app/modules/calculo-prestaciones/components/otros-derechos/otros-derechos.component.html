@@ -1,390 +1,1275 @@
-<div class="card shadow-sm">
-    <div class="card-header">
-        <h3 class="card-title">Otros Derechos</h3>
+<div id="other-rights" class="card shadow-sm">
+  <div #overlay class="overlay"><div><span class="loader-recalulo"></span><h4>Recalculando...</h4></div></div>
+  <div class="card-header">
+    <h3 class="card-title">Otros Derechos</h3>
+  </div>
+  <div class="card-body">
+    <div class="row mb-5">
+      <p>Habilite los otros derechos a los que usted goza.</p>
     </div>
-    <div class="card-body">
-        <div class="row mb-5">
-            <p>Habilite los otros derechos a los que usted goza.</p>
-        </div>
 
-        <div class="py-5">
-            <div class="table-responsive ">
-                <table class="table table-row-bordered table-row-gray-300  gy-7 gs-7">
-                    <thead>
-                        <tr class="fw-bold fs-6 text-gray-800 table-active ">
-                            <th><h5>Derecho</h5></th>
-                            <th><h5>Tiempo</h5></th>
-                            <th><h5>Valor</h5></th>
-                            <th><h5>Factor</h5></th>
-                            <th><h5>Resultado</h5></th>
-                            <th><h5>Acción</h5></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>
-                                <div class="form-check form-switch form-check-custom form-check-solid me-10">
-                                    <input class="form-check-input h-20px w-30px" type="checkbox" value="" id="flexSwitch20x30" />
-                                    <label class="form-check-label" for="flexSwitch20x30">
-                                        ¿Le adeudan días feríados?
-                                </label>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="col-sm-12 col-lg-6">
-
-                                    <input type="text" class="form-control form-control-solid" name="input1" placeholder="" value="" />
-
-                                </div>
-                            </td>
-                            <td>
-                                <div class="col-sm-12 col-lg-6">
-
-                                    <input type="text" class="form-control form-control-solid" name="input1" placeholder="" value="" />
-
-                                </div>
-                            </td>
-                            <td>
-                                <span>L. 12,000.00</span>
-                            </td>
-                            <td>
-                                <span>L. 12,000.00</span>
-                            </td>
-                            <td>
-                                <span class="svg-icon svg-icon-primary svg-icon-2hx"><svg xmlns="http://www.w3.org/2000/svg"
-                                width="24" height="24" viewBox="0 0 12 36" fill="none">
-                                <path opacity="0.3" fill-rule="evenodd" clip-rule="evenodd"
-                                  d="M2 4.63158C2 3.1782 3.1782 2 4.63158 2H13.47C14.0155 2 14.278 2.66919 13.8778 3.04006L12.4556 4.35821C11.9009 4.87228 11.1726 5.15789 10.4163 5.15789H7.1579C6.05333 5.15789 5.15789 6.05333 5.15789 7.1579V16.8421C5.15789 17.9467 6.05333 18.8421 7.1579 18.8421H16.8421C17.9467 18.8421 18.8421 17.9467 18.8421 16.8421V13.7518C18.8421 12.927 19.1817 12.1387 19.7809 11.572L20.9878 10.4308C21.3703 10.0691 22 10.3403 22 10.8668V19.3684C22 20.8218 20.8218 22 19.3684 22H4.63158C3.1782 22 2 20.8218 2 19.3684V4.63158Z"
-                                  fill="currentColor" />
-                                <path
-                                  d="M10.9256 11.1882C10.5351 10.7977 10.5351 10.1645 10.9256 9.77397L18.0669 2.6327C18.8479 1.85165 20.1143 1.85165 20.8953 2.6327L21.3665 3.10391C22.1476 3.88496 22.1476 5.15129 21.3665 5.93234L14.2252 13.0736C13.8347 13.4641 13.2016 13.4641 12.811 13.0736L10.9256 11.1882Z"
-                                  fill="currentColor" />
-                                <path
-                                  d="M8.82343 12.0064L8.08852 14.3348C7.8655 15.0414 8.46151 15.7366 9.19388 15.6242L11.8974 15.2092C12.4642 15.1222 12.6916 14.4278 12.2861 14.0223L9.98595 11.7221C9.61452 11.3507 8.98154 11.5055 8.82343 12.0064Z"
-                                  fill="currentColor" />
-                              </svg></span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="form-check form-switch form-check-custom form-check-solid me-10">
-                                    <input class="form-check-input h-20px w-30px" type="checkbox" value="" id="flexSwitch20x30" />
-                                    <label class="form-check-label" for="flexSwitch20x30">
-                                        ¿Le adeudan el séptimo día?
-                                </label>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="col-sm-12 col-lg-6">
-                                    <input type="text" class="form-control form-control-solid" name="input1" placeholder="" value="" />
-                                </div>
-                            </td>
-                            <td>
-                                <div class="col-sm-12 col-lg-6"></div>
-                            </td>
-                            <td>
-                                <span>L. 4,000.00</span>
-                            </td>
-                            <td>
-                                <span>L. 4,000.00</span>
-                            </td>
-                            <td>
-                                <span class="svg-icon svg-icon-primary svg-icon-2hx"><svg xmlns="http://www.w3.org/2000/svg"
-                                width="24" height="24" viewBox="0 0 12 36" fill="none">
-                                <path opacity="0.3" fill-rule="evenodd" clip-rule="evenodd"
-                                  d="M2 4.63158C2 3.1782 3.1782 2 4.63158 2H13.47C14.0155 2 14.278 2.66919 13.8778 3.04006L12.4556 4.35821C11.9009 4.87228 11.1726 5.15789 10.4163 5.15789H7.1579C6.05333 5.15789 5.15789 6.05333 5.15789 7.1579V16.8421C5.15789 17.9467 6.05333 18.8421 7.1579 18.8421H16.8421C17.9467 18.8421 18.8421 17.9467 18.8421 16.8421V13.7518C18.8421 12.927 19.1817 12.1387 19.7809 11.572L20.9878 10.4308C21.3703 10.0691 22 10.3403 22 10.8668V19.3684C22 20.8218 20.8218 22 19.3684 22H4.63158C3.1782 22 2 20.8218 2 19.3684V4.63158Z"
-                                  fill="currentColor" />
-                                <path
-                                  d="M10.9256 11.1882C10.5351 10.7977 10.5351 10.1645 10.9256 9.77397L18.0669 2.6327C18.8479 1.85165 20.1143 1.85165 20.8953 2.6327L21.3665 3.10391C22.1476 3.88496 22.1476 5.15129 21.3665 5.93234L14.2252 13.0736C13.8347 13.4641 13.2016 13.4641 12.811 13.0736L10.9256 11.1882Z"
-                                  fill="currentColor" />
-                                <path
-                                  d="M8.82343 12.0064L8.08852 14.3348C7.8655 15.0414 8.46151 15.7366 9.19388 15.6242L11.8974 15.2092C12.4642 15.1222 12.6916 14.4278 12.2861 14.0223L9.98595 11.7221C9.61452 11.3507 8.98154 11.5055 8.82343 12.0064Z"
-                                  fill="currentColor" />
-                              </svg></span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="form-check form-switch form-check-custom form-check-solid me-10">
-                                    <input class="form-check-input h-20px w-30px" type="checkbox" value="" id="flexSwitch20x30" />
-                                    <label class="form-check-label" for="flexSwitch20x30">
-                                        ¿Tiene vacaciones pendientes?
-                                </label>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="col-sm-12 col-lg-6">
-                                    <input type="text" class="form-control form-control-solid" name="input1" placeholder="" value="" />
-                                </div>
-                            </td>
-                            <td>
-                                <div class="col-sm-12 col-lg-6"> </div>
-                            </td>
-                            <td>
-                                <span>L. 5,932.51</span>
-                            </td>
-                            <td>
-                                <span>L. 5,932.51</span>
-                            </td>
-                            <td>
-                                <span class="svg-icon svg-icon-primary svg-icon-2hx"><svg xmlns="http://www.w3.org/2000/svg"
-                                width="24" height="24" viewBox="0 0 12 36" fill="none">
-                                <path opacity="0.3" fill-rule="evenodd" clip-rule="evenodd"
-                                  d="M2 4.63158C2 3.1782 3.1782 2 4.63158 2H13.47C14.0155 2 14.278 2.66919 13.8778 3.04006L12.4556 4.35821C11.9009 4.87228 11.1726 5.15789 10.4163 5.15789H7.1579C6.05333 5.15789 5.15789 6.05333 5.15789 7.1579V16.8421C5.15789 17.9467 6.05333 18.8421 7.1579 18.8421H16.8421C17.9467 18.8421 18.8421 17.9467 18.8421 16.8421V13.7518C18.8421 12.927 19.1817 12.1387 19.7809 11.572L20.9878 10.4308C21.3703 10.0691 22 10.3403 22 10.8668V19.3684C22 20.8218 20.8218 22 19.3684 22H4.63158C3.1782 22 2 20.8218 2 19.3684V4.63158Z"
-                                  fill="currentColor" />
-                                <path
-                                  d="M10.9256 11.1882C10.5351 10.7977 10.5351 10.1645 10.9256 9.77397L18.0669 2.6327C18.8479 1.85165 20.1143 1.85165 20.8953 2.6327L21.3665 3.10391C22.1476 3.88496 22.1476 5.15129 21.3665 5.93234L14.2252 13.0736C13.8347 13.4641 13.2016 13.4641 12.811 13.0736L10.9256 11.1882Z"
-                                  fill="currentColor" />
-                                <path
-                                  d="M8.82343 12.0064L8.08852 14.3348C7.8655 15.0414 8.46151 15.7366 9.19388 15.6242L11.8974 15.2092C12.4642 15.1222 12.6916 14.4278 12.2861 14.0223L9.98595 11.7221C9.61452 11.3507 8.98154 11.5055 8.82343 12.0064Z"
-                                  fill="currentColor" />
-                              </svg></span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="form-check form-switch form-check-custom form-check-solid me-10">
-                                    <input class="form-check-input h-20px w-30px" type="checkbox" value="" id="flexSwitch20x30" />
-                                    <label class="form-check-label" for="flexSwitch20x30">
-                                        ¿Le adeudan el treceavo mes?
-                                </label>
-                                </div>
-                            </td>
-
-                            <td>
-                                <div class="col-sm-12 col-lg-6">
-                                    <input type="text" class="form-control form-control-solid" name="input1" placeholder="" value="" />
-                                </div>
-                            </td>
-                            <td>
-                                <div class="col-sm-12 col-lg-6"> </div>
-                            </td>
-                            <td>
-                                <span>L. 7,762.00</span>
-                            </td>
-                            <td>
-                                <span>L. 7,762.00</span>
-                            </td>
-                            <td>
-                                <span class="svg-icon svg-icon-primary svg-icon-2hx"><svg xmlns="http://www.w3.org/2000/svg"
-                                width="24" height="24" viewBox="0 0 12 36" fill="none">
-                                <path opacity="0.3" fill-rule="evenodd" clip-rule="evenodd"
-                                  d="M2 4.63158C2 3.1782 3.1782 2 4.63158 2H13.47C14.0155 2 14.278 2.66919 13.8778 3.04006L12.4556 4.35821C11.9009 4.87228 11.1726 5.15789 10.4163 5.15789H7.1579C6.05333 5.15789 5.15789 6.05333 5.15789 7.1579V16.8421C5.15789 17.9467 6.05333 18.8421 7.1579 18.8421H16.8421C17.9467 18.8421 18.8421 17.9467 18.8421 16.8421V13.7518C18.8421 12.927 19.1817 12.1387 19.7809 11.572L20.9878 10.4308C21.3703 10.0691 22 10.3403 22 10.8668V19.3684C22 20.8218 20.8218 22 19.3684 22H4.63158C3.1782 22 2 20.8218 2 19.3684V4.63158Z"
-                                  fill="currentColor" />
-                                <path
-                                  d="M10.9256 11.1882C10.5351 10.7977 10.5351 10.1645 10.9256 9.77397L18.0669 2.6327C18.8479 1.85165 20.1143 1.85165 20.8953 2.6327L21.3665 3.10391C22.1476 3.88496 22.1476 5.15129 21.3665 5.93234L14.2252 13.0736C13.8347 13.4641 13.2016 13.4641 12.811 13.0736L10.9256 11.1882Z"
-                                  fill="currentColor" />
-                                <path
-                                  d="M8.82343 12.0064L8.08852 14.3348C7.8655 15.0414 8.46151 15.7366 9.19388 15.6242L11.8974 15.2092C12.4642 15.1222 12.6916 14.4278 12.2861 14.0223L9.98595 11.7221C9.61452 11.3507 8.98154 11.5055 8.82343 12.0064Z"
-                                  fill="currentColor" />
-                              </svg></span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="form-check form-switch form-check-custom form-check-solid me-10">
-                                    <input class="form-check-input h-20px w-30px" type="checkbox" value="" id="flexSwitch20x30" />
-                                    <label class="form-check-label" for="flexSwitch20x30">
-                                        ¿Le adeudan el catorceavo mes?
-                                </label>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="col-sm-12 col-lg-6">
-                                    <input type="text" class="form-control form-control-solid" name="input1" placeholder="" value="" />
-                                </div>
-                            </td>
-                            <td>
-                                <div class="col-sm-12 col-lg-6"> </div>
-                            </td>
-                            <td>
-                                <span>L. 9,543.00</span>
-                            </td>
-                            <td>
-                                <span>L. 9,543.00</span>
-                            </td>
-                            <td>
-                                <span class="svg-icon svg-icon-primary svg-icon-2hx"><svg xmlns="http://www.w3.org/2000/svg"
-                                width="24" height="24" viewBox="0 0 12 36" fill="none">
-                                <path opacity="0.3" fill-rule="evenodd" clip-rule="evenodd"
-                                  d="M2 4.63158C2 3.1782 3.1782 2 4.63158 2H13.47C14.0155 2 14.278 2.66919 13.8778 3.04006L12.4556 4.35821C11.9009 4.87228 11.1726 5.15789 10.4163 5.15789H7.1579C6.05333 5.15789 5.15789 6.05333 5.15789 7.1579V16.8421C5.15789 17.9467 6.05333 18.8421 7.1579 18.8421H16.8421C17.9467 18.8421 18.8421 17.9467 18.8421 16.8421V13.7518C18.8421 12.927 19.1817 12.1387 19.7809 11.572L20.9878 10.4308C21.3703 10.0691 22 10.3403 22 10.8668V19.3684C22 20.8218 20.8218 22 19.3684 22H4.63158C3.1782 22 2 20.8218 2 19.3684V4.63158Z"
-                                  fill="currentColor" />
-                                <path
-                                  d="M10.9256 11.1882C10.5351 10.7977 10.5351 10.1645 10.9256 9.77397L18.0669 2.6327C18.8479 1.85165 20.1143 1.85165 20.8953 2.6327L21.3665 3.10391C22.1476 3.88496 22.1476 5.15129 21.3665 5.93234L14.2252 13.0736C13.8347 13.4641 13.2016 13.4641 12.811 13.0736L10.9256 11.1882Z"
-                                  fill="currentColor" />
-                                <path
-                                  d="M8.82343 12.0064L8.08852 14.3348C7.8655 15.0414 8.46151 15.7366 9.19388 15.6242L11.8974 15.2092C12.4642 15.1222 12.6916 14.4278 12.2861 14.0223L9.98595 11.7221C9.61452 11.3507 8.98154 11.5055 8.82343 12.0064Z"
-                                  fill="currentColor" />
-                              </svg></span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="form-check form-switch form-check-custom form-check-solid me-10">
-                                    <input class="form-check-input h-20px w-30px" type="checkbox" value="" id="flexSwitch20x30" />
-                                    <label class="form-check-label" for="flexSwitch20x30">
-                                        ¿Tiene sueldo/salario adeudado?
-                                </label>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="col-sm-12 col-lg-6">
-                                    <input type="text" class="form-control form-control-solid" name="input1" placeholder="" value="" />
-                                </div>
-                            </td>
-                            <td>
-                                <div class="col-sm-12 col-lg-6"> </div>
-                            </td>
-                            <td>
-                                <span>L. 3,000.00</span>
-                            </td>
-                            <td>
-                                <span>L. 3,000.00</span>
-                            </td>
-                            <td>
-                                <span class="svg-icon svg-icon-primary svg-icon-2hx"><svg xmlns="http://www.w3.org/2000/svg"
-                                width="24" height="24" viewBox="0 0 12 36" fill="none">
-                                <path opacity="0.3" fill-rule="evenodd" clip-rule="evenodd"
-                                  d="M2 4.63158C2 3.1782 3.1782 2 4.63158 2H13.47C14.0155 2 14.278 2.66919 13.8778 3.04006L12.4556 4.35821C11.9009 4.87228 11.1726 5.15789 10.4163 5.15789H7.1579C6.05333 5.15789 5.15789 6.05333 5.15789 7.1579V16.8421C5.15789 17.9467 6.05333 18.8421 7.1579 18.8421H16.8421C17.9467 18.8421 18.8421 17.9467 18.8421 16.8421V13.7518C18.8421 12.927 19.1817 12.1387 19.7809 11.572L20.9878 10.4308C21.3703 10.0691 22 10.3403 22 10.8668V19.3684C22 20.8218 20.8218 22 19.3684 22H4.63158C3.1782 22 2 20.8218 2 19.3684V4.63158Z"
-                                  fill="currentColor" />
-                                <path
-                                  d="M10.9256 11.1882C10.5351 10.7977 10.5351 10.1645 10.9256 9.77397L18.0669 2.6327C18.8479 1.85165 20.1143 1.85165 20.8953 2.6327L21.3665 3.10391C22.1476 3.88496 22.1476 5.15129 21.3665 5.93234L14.2252 13.0736C13.8347 13.4641 13.2016 13.4641 12.811 13.0736L10.9256 11.1882Z"
-                                  fill="currentColor" />
-                                <path
-                                  d="M8.82343 12.0064L8.08852 14.3348C7.8655 15.0414 8.46151 15.7366 9.19388 15.6242L11.8974 15.2092C12.4642 15.1222 12.6916 14.4278 12.2861 14.0223L9.98595 11.7221C9.61452 11.3507 8.98154 11.5055 8.82343 12.0064Z"
-                                  fill="currentColor" />
-                              </svg></span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="form-check form-switch form-check-custom form-check-solid me-10">
-                                    <input class="form-check-input h-20px w-30px" type="checkbox" value="" id="flexSwitch20x30" />
-                                    <label class="form-check-label" for="flexSwitch20x30">
-                                        ¿Tiene horas extras adeudadas?
-                                </label>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="col-sm-12 col-lg-6">
-                                    <input type="text" class="form-control form-control-solid" name="input1" placeholder="" value="" />
-                                </div>
-                            </td>
-                            <td>
-                                <div class="col-sm-12 col-lg-6"></div>
-                            </td>
-                            <td>
-                                <span>L. 546.87</span>
-                            </td>
-                            <td>
-                                <span>L. 546.87</span>
-                            </td>
-                            <td>
-                                <span class="svg-icon svg-icon-primary svg-icon-2hx"><svg xmlns="http://www.w3.org/2000/svg"
-                                width="24" height="24" viewBox="0 0 12 36" fill="none">
-                                <path opacity="0.3" fill-rule="evenodd" clip-rule="evenodd"
-                                  d="M2 4.63158C2 3.1782 3.1782 2 4.63158 2H13.47C14.0155 2 14.278 2.66919 13.8778 3.04006L12.4556 4.35821C11.9009 4.87228 11.1726 5.15789 10.4163 5.15789H7.1579C6.05333 5.15789 5.15789 6.05333 5.15789 7.1579V16.8421C5.15789 17.9467 6.05333 18.8421 7.1579 18.8421H16.8421C17.9467 18.8421 18.8421 17.9467 18.8421 16.8421V13.7518C18.8421 12.927 19.1817 12.1387 19.7809 11.572L20.9878 10.4308C21.3703 10.0691 22 10.3403 22 10.8668V19.3684C22 20.8218 20.8218 22 19.3684 22H4.63158C3.1782 22 2 20.8218 2 19.3684V4.63158Z"
-                                  fill="currentColor" />
-                                <path
-                                  d="M10.9256 11.1882C10.5351 10.7977 10.5351 10.1645 10.9256 9.77397L18.0669 2.6327C18.8479 1.85165 20.1143 1.85165 20.8953 2.6327L21.3665 3.10391C22.1476 3.88496 22.1476 5.15129 21.3665 5.93234L14.2252 13.0736C13.8347 13.4641 13.2016 13.4641 12.811 13.0736L10.9256 11.1882Z"
-                                  fill="currentColor" />
-                                <path
-                                  d="M8.82343 12.0064L8.08852 14.3348C7.8655 15.0414 8.46151 15.7366 9.19388 15.6242L11.8974 15.2092C12.4642 15.1222 12.6916 14.4278 12.2861 14.0223L9.98595 11.7221C9.61452 11.3507 8.98154 11.5055 8.82343 12.0064Z"
-                                  fill="currentColor" />
-                              </svg></span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="form-check form-switch form-check-custom form-check-solid me-10">
-                                    <input class="form-check-input h-20px w-30px" type="checkbox" value="" id="flexSwitch20x30" />
-                                    <label class="form-check-label" for="flexSwitch20x30">
-                                        ¿Tiene bono educativo adeudado?
-                                </label>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="col-sm-12 col-lg-6">
-                                    <input type="text" class="form-control form-control-solid" name="input1" placeholder="" value="" />
-                                </div>
-                            </td>
-                            <td>
-                                <div class="col-sm-12 col-lg-6">
-                                </div>
-                            </td>
-                            <td>
-                                <span>L. 21,000.00</span>
-                            </td>
-                            <td>
-                                <span>L. 21,000.00</span>
-                            </td>
-                            <td>
-                                <span class="svg-icon svg-icon-primary svg-icon-2hx"><svg xmlns="http://www.w3.org/2000/svg"
-                                width="24" height="24" viewBox="0 0 12 36" fill="none">
-                                <path opacity="0.3" fill-rule="evenodd" clip-rule="evenodd"
-                                  d="M2 4.63158C2 3.1782 3.1782 2 4.63158 2H13.47C14.0155 2 14.278 2.66919 13.8778 3.04006L12.4556 4.35821C11.9009 4.87228 11.1726 5.15789 10.4163 5.15789H7.1579C6.05333 5.15789 5.15789 6.05333 5.15789 7.1579V16.8421C5.15789 17.9467 6.05333 18.8421 7.1579 18.8421H16.8421C17.9467 18.8421 18.8421 17.9467 18.8421 16.8421V13.7518C18.8421 12.927 19.1817 12.1387 19.7809 11.572L20.9878 10.4308C21.3703 10.0691 22 10.3403 22 10.8668V19.3684C22 20.8218 20.8218 22 19.3684 22H4.63158C3.1782 22 2 20.8218 2 19.3684V4.63158Z"
-                                  fill="currentColor" />
-                                <path
-                                  d="M10.9256 11.1882C10.5351 10.7977 10.5351 10.1645 10.9256 9.77397L18.0669 2.6327C18.8479 1.85165 20.1143 1.85165 20.8953 2.6327L21.3665 3.10391C22.1476 3.88496 22.1476 5.15129 21.3665 5.93234L14.2252 13.0736C13.8347 13.4641 13.2016 13.4641 12.811 13.0736L10.9256 11.1882Z"
-                                  fill="currentColor" />
-                                <path
-                                  d="M8.82343 12.0064L8.08852 14.3348C7.8655 15.0414 8.46151 15.7366 9.19388 15.6242L11.8974 15.2092C12.4642 15.1222 12.6916 14.4278 12.2861 14.0223L9.98595 11.7221C9.61452 11.3507 8.98154 11.5055 8.82343 12.0064Z"
-                                  fill="currentColor" />
-                              </svg></span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="form-check form-switch form-check-custom form-check-solid me-10">
-                                    <input class="form-check-input h-20px w-30px" type="checkbox" value="" id="flexSwitch20x30" />
-                                    <label class="form-check-label" for="flexSwitch20x30">
-                                        ¿Usted recibe otros beneficios?
-                                </label>
-                                </div>
-                            </td>
+    <div class="py-5">
 
 
-                            <td>
-                                <div class="col-sm-12 col-lg-6">
-                                    <input type="text" class="form-control form-control-solid" name="input1" placeholder="" value="" />
-                                </div>
-                            </td>
-                            <td>
-                                <div class="col-sm-12 col-lg-6">
 
-                                </div>
-                            </td>
-                            <td>
-                                <span>L. 2,000.00</span>
-                            </td>
-                            <td>
-                                <span>L. 2,000.00</span>
-                            </td>
-                            <td>
-                                <span class="svg-icon svg-icon-primary svg-icon-2hx"><svg xmlns="http://www.w3.org/2000/svg"
-                                width="24" height="24" viewBox="0 0 12 36" fill="none">
-                                <path opacity="0.3" fill-rule="evenodd" clip-rule="evenodd"
-                                  d="M2 4.63158C2 3.1782 3.1782 2 4.63158 2H13.47C14.0155 2 14.278 2.66919 13.8778 3.04006L12.4556 4.35821C11.9009 4.87228 11.1726 5.15789 10.4163 5.15789H7.1579C6.05333 5.15789 5.15789 6.05333 5.15789 7.1579V16.8421C5.15789 17.9467 6.05333 18.8421 7.1579 18.8421H16.8421C17.9467 18.8421 18.8421 17.9467 18.8421 16.8421V13.7518C18.8421 12.927 19.1817 12.1387 19.7809 11.572L20.9878 10.4308C21.3703 10.0691 22 10.3403 22 10.8668V19.3684C22 20.8218 20.8218 22 19.3684 22H4.63158C3.1782 22 2 20.8218 2 19.3684V4.63158Z"
-                                  fill="currentColor" />
-                                <path
-                                  d="M10.9256 11.1882C10.5351 10.7977 10.5351 10.1645 10.9256 9.77397L18.0669 2.6327C18.8479 1.85165 20.1143 1.85165 20.8953 2.6327L21.3665 3.10391C22.1476 3.88496 22.1476 5.15129 21.3665 5.93234L14.2252 13.0736C13.8347 13.4641 13.2016 13.4641 12.811 13.0736L10.9256 11.1882Z"
-                                  fill="currentColor" />
-                                <path
-                                  d="M8.82343 12.0064L8.08852 14.3348C7.8655 15.0414 8.46151 15.7366 9.19388 15.6242L11.8974 15.2092C12.4642 15.1222 12.6916 14.4278 12.2861 14.0223L9.98595 11.7221C9.61452 11.3507 8.98154 11.5055 8.82343 12.0064Z"
-                                  fill="currentColor" />
-                              </svg></span>
-                            </td>
-                        </tr>
+    <div class="table-responsive ">
+        <table class="table table-row-bordered table-row-gray-300  gy-7 gs-7">
+          <thead>
+            <tr class="fw-bold fs-6 text-gray-800 table-active ">
+              <th>
+                <h5>Derecho</h5>
+              </th>
+              <th>
+                <h5>Tiempo</h5>
+              </th>
+              <th>
+                <h5>Valor</h5>
+              </th>
+              <th>
+                <h5>Factor</h5>
+              </th>
+              <th>
+                <h5>Resultado</h5>
+              </th>
+              <th>
+                <h5>Acción</h5>
+              </th>
+            </tr>
+          </thead>
+          <tbody [formGroup]="formOtherRights">
 
-                    </tbody>
+              <!--Begin pregnacyStatus-->
+            <tr *ngIf="currentSex === 'F'">
+              <td>
+                <div class="form-check form-switch form-check-custom form-check-solid me-10">
+                  <input class="form-check-input h-20px w-30px" type="checkbox"
+                    (change)="isActiveControl('pregnancyStatus')" id="pregnacyStatus" />
+                  <label class="form-check-label" for="pregnancyStatus">
+                    ¿La despidieron en estado de embarazo?
+                  </label>
+                </div>
+              </td>
+              <td>
+                <p> {{getValueFormField('pregnancyStatus')}}</p>
+              </td>
+              <td>
+              </td>
+              <td>
+                <span>{{otherRights.firedForWhilePregnant.formula}}</span>
+              </td>
+              <td>
+                <span> L . {{otherRights.firedForWhilePregnant.amount}} </span>
+              </td>
+              <td>
+                <span (click)="editPanel('panel-pregnancy-status')" class="svg-icon svg-icon-primary svg-icon-2hx"><svg xmlns="http://www.w3.org/2000/svg" width="24"
+                    height="24" viewBox="0 0 12 36" fill="none">
+                    <path opacity="0.3" fill-rule="evenodd" clip-rule="evenodd"
+                      d="M2 4.63158C2 3.1782 3.1782 2 4.63158 2H13.47C14.0155 2 14.278 2.66919 13.8778 3.04006L12.4556 4.35821C11.9009 4.87228 11.1726 5.15789 10.4163 5.15789H7.1579C6.05333 5.15789 5.15789 6.05333 5.15789 7.1579V16.8421C5.15789 17.9467 6.05333 18.8421 7.1579 18.8421H16.8421C17.9467 18.8421 18.8421 17.9467 18.8421 16.8421V13.7518C18.8421 12.927 19.1817 12.1387 19.7809 11.572L20.9878 10.4308C21.3703 10.0691 22 10.3403 22 10.8668V19.3684C22 20.8218 20.8218 22 19.3684 22H4.63158C3.1782 22 2 20.8218 2 19.3684V4.63158Z"
+                      fill="currentColor" />
+                    <path
+                      d="M10.9256 11.1882C10.5351 10.7977 10.5351 10.1645 10.9256 9.77397L18.0669 2.6327C18.8479 1.85165 20.1143 1.85165 20.8953 2.6327L21.3665 3.10391C22.1476 3.88496 22.1476 5.15129 21.3665 5.93234L14.2252 13.0736C13.8347 13.4641 13.2016 13.4641 12.811 13.0736L10.9256 11.1882Z"
+                      fill="currentColor" />
+                    <path
+                      d="M8.82343 12.0064L8.08852 14.3348C7.8655 15.0414 8.46151 15.7366 9.19388 15.6242L11.8974 15.2092C12.4642 15.1222 12.6916 14.4278 12.2861 14.0223L9.98595 11.7221C9.61452 11.3507 8.98154 11.5055 8.82343 12.0064Z"
+                      fill="currentColor" />
+                  </svg></span>
+              </td>
+            </tr>
+            <tr #panelPregnancyStatus class="panel-pregnancy-status" *ngIf="currentSex === 'F'">
+              <td  colspan="6">
+                <div class="panel">
+                  <td>
+                    <span>Días de indemnización pagados</span>
+                  </td>
+                  <td>
+                    <input
+                    formControlName="pregnancyStatus"
+                    [class.is-valid]="isValidField('pregnancyStatus')"
+                    [class.is-invalid]="isInvalidField('pregnancyStatus')"
+                    type="number"
+                    class="form-control form-control-solid"
+                    />
+                    <span *ngIf="isInvalidField('pregnancyStatus')">
+                      <span
+                      *ngIf="getErrorField('pregnancyStatus', 'pattern')"
+                      class="text-danger"
+                      >Este campo es numerico.</span>
+                    </span>
+                  </td>
+                  <td>
+                    <button class="btn btn-primary btn-sm" (click)="validFieldButton(['pregnancyStatus'],'panel-pregnancy-status')">Aceptar</button>
+                  </td>
+                </div>
+              </td>
+            </tr>
+            <!--End pregnancyStatus-->
+
+            <!--Begin daysOffPregnancy -->
+            <tr *ngIf="currentSex === 'F'">
+              <td>
+                <div class="form-check form-switch form-check-custom form-check-solid me-10">
+                  <input class="form-check-input h-20px w-30px" type="checkbox"
+                  (change)="isActiveControl('daysOffPregnancy')" id="daysOffPregnancy" />
+                  <label class="form-check-label" for="daysOffPregnancy">
+                    ¿Le adeudan descanso Pre/Post natal?
+                  </label>
+                </div>
+              </td>
+              <td>
+                <div class="col-sm-12 col-lg-6">
+                  <p>{{getValueFormField('daysOffPregnancy')}}</p>
+                </div>
+              </td>
+              <td>
+              </td>
+              <td>
+                <span>{{otherRights.daysOffPreAndPostNatal.formula}}</span>
+              </td>
+              <td>
+                <span> L . {{otherRights.daysOffPreAndPostNatal.amount}}</span>
+              </td>
+              <td>
+                <span  (click)="editPanel('days-off-pregnancy')" class="svg-icon svg-icon-primary svg-icon-2hx"><svg xmlns="http://www.w3.org/2000/svg" width="24"
+                    height="24" viewBox="0 0 12 36" fill="none">
+                    <path opacity="0.3" fill-rule="evenodd" clip-rule="evenodd"
+                      d="M2 4.63158C2 3.1782 3.1782 2 4.63158 2H13.47C14.0155 2 14.278 2.66919 13.8778 3.04006L12.4556 4.35821C11.9009 4.87228 11.1726 5.15789 10.4163 5.15789H7.1579C6.05333 5.15789 5.15789 6.05333 5.15789 7.1579V16.8421C5.15789 17.9467 6.05333 18.8421 7.1579 18.8421H16.8421C17.9467 18.8421 18.8421 17.9467 18.8421 16.8421V13.7518C18.8421 12.927 19.1817 12.1387 19.7809 11.572L20.9878 10.4308C21.3703 10.0691 22 10.3403 22 10.8668V19.3684C22 20.8218 20.8218 22 19.3684 22H4.63158C3.1782 22 2 20.8218 2 19.3684V4.63158Z"
+                      fill="currentColor" />
+                    <path
+                      d="M10.9256 11.1882C10.5351 10.7977 10.5351 10.1645 10.9256 9.77397L18.0669 2.6327C18.8479 1.85165 20.1143 1.85165 20.8953 2.6327L21.3665 3.10391C22.1476 3.88496 22.1476 5.15129 21.3665 5.93234L14.2252 13.0736C13.8347 13.4641 13.2016 13.4641 12.811 13.0736L10.9256 11.1882Z"
+                      fill="currentColor" />
+                    <path
+                      d="M8.82343 12.0064L8.08852 14.3348C7.8655 15.0414 8.46151 15.7366 9.19388 15.6242L11.8974 15.2092C12.4642 15.1222 12.6916 14.4278 12.2861 14.0223L9.98595 11.7221C9.61452 11.3507 8.98154 11.5055 8.82343 12.0064Z"
+                      fill="currentColor" />
+                  </svg></span>
+              </td>
+            </tr>
+            <tr #panelDaysOffPregnancy class="days-off-pregnancy" *ngIf="currentSex === 'F'">
+              <td colspan="6">
+                <div class="panel">
+                  <td>
+                    <span>Cantidad de días de descanso pagados</span>
+                  </td>
+                  <td>
+                    <input
+                    formControlName="daysOffPregnancy"
+                    [class.is-valid]="isValidField('daysOffPregnancy')"
+                    [class.is-invalid]="isInvalidField('daysOffPregnancy')"
+                    type="number"
+                    class="form-control form-control-solid"
+                    />
+                    <p *ngIf="isInvalidField('daysOffPregnancy')">
+                      <span
+                      *ngIf="getErrorField('daysOffPregnancy', 'pattern')"
+                      class="text-danger"
+                      >Este campo es numerico.</span>
+                    </p>
+                  </td>
+                  <td>
+                    <button class="btn btn-primary btn-sm" (click)="validFieldButton(['daysOffPregnancy'],'days-off-pregnancy')">Aceptar</button>
+                  </td>
+                </div>
+              </td>
+            </tr>
+            <!--End daysOffPregnancy-->
+
+            <!-- Begin breastFeedingHours-->
+            <tr *ngIf="currentSex === 'F'">
+              <td>
+                <div class="form-check form-switch form-check-custom form-check-solid me-10">
+                  <input class="form-check-input h-20px w-30px" type="checkbox"
+                  (change)="isActiveControl('breastFeedingHours')" id="breastFeedingHours" />
+                  <label class="form-check-label" for="breastFeedingHours">
+                    ¿Le adeudan horas de lactancia?
+                  </label>
+                </div>
+              </td>
+              <td>
+                  <p>{{getValueFormField('breastFeedingHours')}}</p>
+
+              </td>
+              <td>
+              </td>
+
+              <td>
+                <span>{{otherRights.owedBreastfeedingHours.formula}}</span>
+              </td>
+              <td>
+                <span> L . {{otherRights.owedBreastfeedingHours.amount}}</span>
+              </td>
+              <td>
+                <span (click)="editPanel('breast-feeding-hours')" class="svg-icon svg-icon-primary svg-icon-2hx"><svg xmlns="http://www.w3.org/2000/svg" width="24"
+                    height="24" viewBox="0 0 12 36" fill="none">
+                    <path opacity="0.3" fill-rule="evenodd" clip-rule="evenodd"
+                      d="M2 4.63158C2 3.1782 3.1782 2 4.63158 2H13.47C14.0155 2 14.278 2.66919 13.8778 3.04006L12.4556 4.35821C11.9009 4.87228 11.1726 5.15789 10.4163 5.15789H7.1579C6.05333 5.15789 5.15789 6.05333 5.15789 7.1579V16.8421C5.15789 17.9467 6.05333 18.8421 7.1579 18.8421H16.8421C17.9467 18.8421 18.8421 17.9467 18.8421 16.8421V13.7518C18.8421 12.927 19.1817 12.1387 19.7809 11.572L20.9878 10.4308C21.3703 10.0691 22 10.3403 22 10.8668V19.3684C22 20.8218 20.8218 22 19.3684 22H4.63158C3.1782 22 2 20.8218 2 19.3684V4.63158Z"
+                      fill="currentColor" />
+                    <path
+                      d="M10.9256 11.1882C10.5351 10.7977 10.5351 10.1645 10.9256 9.77397L18.0669 2.6327C18.8479 1.85165 20.1143 1.85165 20.8953 2.6327L21.3665 3.10391C22.1476 3.88496 22.1476 5.15129 21.3665 5.93234L14.2252 13.0736C13.8347 13.4641 13.2016 13.4641 12.811 13.0736L10.9256 11.1882Z"
+                      fill="currentColor" />
+                    <path
+                      d="M8.82343 12.0064L8.08852 14.3348C7.8655 15.0414 8.46151 15.7366 9.19388 15.6242L11.8974 15.2092C12.4642 15.1222 12.6916 14.4278 12.2861 14.0223L9.98595 11.7221C9.61452 11.3507 8.98154 11.5055 8.82343 12.0064Z"
+                      fill="currentColor" />
+                  </svg></span>
+              </td>
+            </tr>
+            <tr #panelBreastFeedingHours class="breast-feeding-hours" *ngIf="currentSex === 'F'">
+              <td colspan="6">
+                <div class="panel">
+                  <td>
+                    <span>Cantidad de horas de lactancia pagados</span>
+                  </td>
+                  <td>
+                    <input
+                    formControlName="breastFeedingHours"
+                    [class.is-valid]="isValidField('breastFeedingHours')"
+                    [class.is-invalid]="isInvalidField('breastFeedingHours')"
+                    type="number"
+                    class="form-control form-control-solid" />
+                  </td>
+                  <td>
+                    <button class="btn btn-primary btn-sm" (click)="validFieldButton(['breastFeedingHours'],'breast-feeding-hours')">Aceptar</button>
+                  </td>
+                </div>
+              </td>
+            </tr>
+            <!--End breastFeedingHours-->
 
 
-                </table>
-            </div>
-        </div>
-        <div class="row"></div>
-    </div>
-    <div class="card-footer d-flex justify-content-end">
-        <button type="button" class="btn btn-primary">Siguiente</button>
-    </div>
+            <!--Begin salaryReadjustment-->
+            <tr>
+              <td>
+                <div class="form-check form-switch form-check-custom form-check-solid me-10">
+                  <input class="form-check-input h-20px w-30px" type="checkbox"
+                  (change)="isActiveControl('salaryReadjustment')" id="salaryReadjustment" />
+                  <label class="form-check-label" for="salaryReadjustment">
+                  Reajuste Salarial
+                  </label>
+                </div>
+                <p class="muted ml-5">Le apareceran los salarios devengados
+                  a los que aplica</p>
+              </td>
+              <td colspan="2">
+                 <div *ngFor="let item of getLastTwoYearsSalaryReadjustment()" class="row mb-5 mt-2">
+                  <div class="col-4">
+                    <input type="text" disabled="true" class="form-control form-control-solid" [value]="'Año '+item.year"/>
+                  </div>
+                  <div class="col-4">
+                    <input type="text" disabled="true" class="form-control form-control-solid" [value]="'L. '+item.salary.toFixed(2)"/>
+                  </div>
+                 </div>
+              </td>
+              <td style="text-align:left; font-family: serif; font-weight: inherit;">
+                <span>{{otherRights.salaryReadjustment.formula}}</span>
+              </td>
+              <td>
+                <span> L . {{otherRights.salaryReadjustment.amount}}</span>
+              </td>
+              <td>
+              </td>
+            </tr>
+            <!-- End salaryReadjustment-->
+
+            <!--Begin owedHolyDays-->
+            <tr>
+              <td>
+                <div class="form-check form-switch form-check-custom form-check-solid me-10">
+                  <input class="form-check-input h-20px w-30px" type="checkbox"
+                  (change)="isActiveControl('owedHolyDays')" id="owedHolyDays" />
+                  <label class="form-check-label" for="owedHolyDays">
+                    Dias Feriados
+                  </label>
+                </div>
+              </td>
+
+              <td>
+                <p>{{getValueFormField('owedHolyDays')}}</p>
+              </td>
+
+              <td>
+                <div class="col-sm-12 col-lg-6"></div>
+              </td>
+              <td>
+                <span>{{otherRights.owedHolyDays.formula}}</span>
+              </td>
+              <td>
+                <span> L . {{otherRights.owedHolyDays.amount}}</span>
+              </td>
+              <td>
+                <span (click)="editPanel('owed-holy-days')" class="svg-icon svg-icon-primary svg-icon-2hx"><svg xmlns="http://www.w3.org/2000/svg" width="24"
+                    height="24" viewBox="0 0 12 36" fill="none">
+                    <path opacity="0.3" fill-rule="evenodd" clip-rule="evenodd"
+                      d="M2 4.63158C2 3.1782 3.1782 2 4.63158 2H13.47C14.0155 2 14.278 2.66919 13.8778 3.04006L12.4556 4.35821C11.9009 4.87228 11.1726 5.15789 10.4163 5.15789H7.1579C6.05333 5.15789 5.15789 6.05333 5.15789 7.1579V16.8421C5.15789 17.9467 6.05333 18.8421 7.1579 18.8421H16.8421C17.9467 18.8421 18.8421 17.9467 18.8421 16.8421V13.7518C18.8421 12.927 19.1817 12.1387 19.7809 11.572L20.9878 10.4308C21.3703 10.0691 22 10.3403 22 10.8668V19.3684C22 20.8218 20.8218 22 19.3684 22H4.63158C3.1782 22 2 20.8218 2 19.3684V4.63158Z"
+                      fill="currentColor" />
+                    <path
+                      d="M10.9256 11.1882C10.5351 10.7977 10.5351 10.1645 10.9256 9.77397L18.0669 2.6327C18.8479 1.85165 20.1143 1.85165 20.8953 2.6327L21.3665 3.10391C22.1476 3.88496 22.1476 5.15129 21.3665 5.93234L14.2252 13.0736C13.8347 13.4641 13.2016 13.4641 12.811 13.0736L10.9256 11.1882Z"
+                      fill="currentColor" />
+                    <path
+                      d="M8.82343 12.0064L8.08852 14.3348C7.8655 15.0414 8.46151 15.7366 9.19388 15.6242L11.8974 15.2092C12.4642 15.1222 12.6916 14.4278 12.2861 14.0223L9.98595 11.7221C9.61452 11.3507 8.98154 11.5055 8.82343 12.0064Z"
+                      fill="currentColor" />
+                  </svg></span>
+              </td>
+            </tr>
+            <tr #panelOwedHolyDays class="owed-holy-days">
+              <td colspan="6">
+                <div class="panel">
+                  <td>
+                    <span>Le adeudan días feriados</span>
+                  </td>
+                  <td>
+                    <div class="col-sm-12 col-lg-6">
+                      <input
+                        formControlName="owedHolyDays"
+                        [class.is-valid]="isValidField('owedHolyDays')"
+                        [class.is-invalid]="isInvalidField('owedHolyDays')"
+                        type="number"
+                        class="form-control form-control-solid"
+                        />
+                      <p *ngIf="isInvalidField('owedHolyDays')">
+                        <span
+                        *ngIf="getErrorField('owedHolyDays', 'pattern')"
+                        class="text-danger"
+                        >Este campo es numerico.</span>
+                      </p>
+                    </div>
+                  </td>
+                  <td>
+                    <button class="btn btn-primary btn-sm" (click)="validFieldButton(['owedHolyDays'],'owed-holy-days')">Aceptar</button>
+                  </td>
+                </div>
+              </td>
+
+            </tr>
+            <!--End owedHolyDays-->
+
+            <!--Begin owedseventhDay-->
+            <tr>
+              <td>
+                <div class="form-check form-switch form-check-custom form-check-solid me-10">
+                  <input class="form-check-input h-20px w-30px" type="checkbox"
+                  (change)="isActiveControl('owedSeventhDay')" id="owedSeventhDay" />
+                  <label class="form-check-label" for="owedSeventhDay">
+                    Septimo día
+                  </label>
+                </div>
+              </td>
+              <td>
+                <p>{{getValueFormField('owedSeventhDay')}}</p>
+              </td>
+              <td>
+                <div class="col-sm-12 col-lg-6"> </div>
+              </td>
+              <td>
+                <span>{{otherRights.owedSeventhDay.formula}}</span>
+              </td>
+              <td>
+                <span> L . {{otherRights.owedSeventhDay.amount}}</span>
+              </td>
+              <td>
+                <span (click)="editPanel('owed-seventh-day')" class="svg-icon svg-icon-primary svg-icon-2hx"><svg xmlns="http://www.w3.org/2000/svg" width="24"
+                    height="24" viewBox="0 0 12 36" fill="none">
+                    <path opacity="0.3" fill-rule="evenodd" clip-rule="evenodd"
+                      d="M2 4.63158C2 3.1782 3.1782 2 4.63158 2H13.47C14.0155 2 14.278 2.66919 13.8778 3.04006L12.4556 4.35821C11.9009 4.87228 11.1726 5.15789 10.4163 5.15789H7.1579C6.05333 5.15789 5.15789 6.05333 5.15789 7.1579V16.8421C5.15789 17.9467 6.05333 18.8421 7.1579 18.8421H16.8421C17.9467 18.8421 18.8421 17.9467 18.8421 16.8421V13.7518C18.8421 12.927 19.1817 12.1387 19.7809 11.572L20.9878 10.4308C21.3703 10.0691 22 10.3403 22 10.8668V19.3684C22 20.8218 20.8218 22 19.3684 22H4.63158C3.1782 22 2 20.8218 2 19.3684V4.63158Z"
+                      fill="currentColor" />
+                    <path
+                      d="M10.9256 11.1882C10.5351 10.7977 10.5351 10.1645 10.9256 9.77397L18.0669 2.6327C18.8479 1.85165 20.1143 1.85165 20.8953 2.6327L21.3665 3.10391C22.1476 3.88496 22.1476 5.15129 21.3665 5.93234L14.2252 13.0736C13.8347 13.4641 13.2016 13.4641 12.811 13.0736L10.9256 11.1882Z"
+                      fill="currentColor" />
+                    <path
+                      d="M8.82343 12.0064L8.08852 14.3348C7.8655 15.0414 8.46151 15.7366 9.19388 15.6242L11.8974 15.2092C12.4642 15.1222 12.6916 14.4278 12.2861 14.0223L9.98595 11.7221C9.61452 11.3507 8.98154 11.5055 8.82343 12.0064Z"
+                      fill="currentColor" />
+                  </svg></span>
+              </td>
+            </tr>
+            <tr #panelOwedSeventhDay class="owed-seventh-day">
+              <td colspan="6">
+                <div class="panel">
+                  <td>
+                    <span>Le adeudan pago septimo día</span>
+                  </td>
+                  <td>
+                    <div class="col-sm-12 col-lg-6">
+                      <input
+                        formControlName="owedSeventhDay"
+                        [class.is-valid]="isValidField('owedSeventhDay')"
+                        [class.is-invalid]="isInvalidField('owedSeventhDay')"
+                        type="number"
+                        class="form-control form-control-solid"
+                        />
+                        <p *ngIf="isInvalidField('owedSeventhDay')">
+                          <span
+                          *ngIf="getErrorField('owedSeventhDay', 'pattern')"
+                          class="text-danger"
+                          >Este campo es numerico
+
+                          </span>
+                        </p>
+                    </div>
+                  </td>
+
+                  <td>
+                    <button class="btn btn-primary btn-sm" (click)="validFieldButton(['owedSeventhDay'],'owed-seventh-day')">Aceptar</button>
+                  </td>
+                </div>
+              </td>
+
+            </tr>
+            <!--End owedSeventhDay-->
+
+            <!--Begin owedPaidPendingVacations-->
+            <tr>
+              <td>
+                <div class="form-check form-switch form-check-custom form-check-solid me-10">
+                  <input class="form-check-input h-20px w-30px" type="checkbox"
+                  (change)="isActiveControl('owedPaidPendingVacations')"  id="owedPaidPendingVacations" />
+                  <label class="form-check-label" for="owedPaidPendingVacations">
+
+                    Vacaciones Pendientes
+                  </label>
+                </div>
+              </td>
+              <td>
+                <p>{{getValueFormField('owedPaidPendingVacations')}}</p>
+                <div class="col-sm-12 col-lg-6">
+                </div>
+              </td>
+              <td>
+                <div class="col-sm-12 col-lg-6"> </div>
+              </td>
+              <td>
+                <span>{{otherRights.owedPaidPendingVacations.formula}}</span>
+              </td>
+              <td>
+                <span> L . {{otherRights.owedPaidPendingVacations.amount}}</span>
+              </td>
+              <td>
+                <span (click)="editPanel('owed-paid-pending-vacations')" class="svg-icon svg-icon-primary svg-icon-2hx"><svg xmlns="http://www.w3.org/2000/svg" width="24"
+                    height="24" viewBox="0 0 12 36" fill="none">
+                    <path opacity="0.3" fill-rule="evenodd" clip-rule="evenodd"
+                      d="M2 4.63158C2 3.1782 3.1782 2 4.63158 2H13.47C14.0155 2 14.278 2.66919 13.8778 3.04006L12.4556 4.35821C11.9009 4.87228 11.1726 5.15789 10.4163 5.15789H7.1579C6.05333 5.15789 5.15789 6.05333 5.15789 7.1579V16.8421C5.15789 17.9467 6.05333 18.8421 7.1579 18.8421H16.8421C17.9467 18.8421 18.8421 17.9467 18.8421 16.8421V13.7518C18.8421 12.927 19.1817 12.1387 19.7809 11.572L20.9878 10.4308C21.3703 10.0691 22 10.3403 22 10.8668V19.3684C22 20.8218 20.8218 22 19.3684 22H4.63158C3.1782 22 2 20.8218 2 19.3684V4.63158Z"
+                      fill="currentColor" />
+                    <path
+                      d="M10.9256 11.1882C10.5351 10.7977 10.5351 10.1645 10.9256 9.77397L18.0669 2.6327C18.8479 1.85165 20.1143 1.85165 20.8953 2.6327L21.3665 3.10391C22.1476 3.88496 22.1476 5.15129 21.3665 5.93234L14.2252 13.0736C13.8347 13.4641 13.2016 13.4641 12.811 13.0736L10.9256 11.1882Z"
+                      fill="currentColor" />
+                    <path
+                      d="M8.82343 12.0064L8.08852 14.3348C7.8655 15.0414 8.46151 15.7366 9.19388 15.6242L11.8974 15.2092C12.4642 15.1222 12.6916 14.4278 12.2861 14.0223L9.98595 11.7221C9.61452 11.3507 8.98154 11.5055 8.82343 12.0064Z"
+                      fill="currentColor" />
+                  </svg></span>
+              </td>
+            </tr>
+            <tr #panelOwedPaidPendingVacations class="owed-paid-pending-vacations">
+              <td colspan="6">
+                <div class="panel">
+                  <td>
+                    <span>¿A gozado de los ultimos 2 años de vacaciones?</span>
+                  </td>
+                  <td>
+                    <div class="col-sm-12 col-lg-6">
+                      <input
+                        formControlName="owedPaidPendingVacations"
+                        [class.is-valid]="isValidField('owedPaidPendingVacations')"
+                        [class.is-invalid]="isInvalidField('owedPaidPendingVacations')"
+                        type="number"
+                        class="form-control form-control-solid"
+                        />
+                      <p *ngIf="isInvalidField('owedPaidPendingVacations')">
+                        <span
+                        *ngIf="getErrorField('owedPaidPendingVacations', 'pattern')"
+                        class="text-danger"
+                        >Este campo es numerico.</span>
+                      </p>
+                    </div>
+                  </td>
+                    <button class="btn btn-primary btn-sm" (click)="validFieldButton(['owedPaidPendingVacations'],'owed-paid-pending-vacations')">Aceptar</button>
+                </div>
+              </td>
+            </tr>
+            <!--End owedPaidPendingVacations-->
+
+            <!--Begin owedBonusVacations-->
+            <tr>
+              <td>
+                <div class="form-check form-switch form-check-custom form-check-solid me-10">
+                  <input class="form-check-input h-20px w-30px" type="checkbox"
+                  (change)="isActiveControl('owedBonusVacations')"  id="owedBonusVacations" />
+                  <label class="form-check-label" for="owedBonusVacations">
+                    Bonificacion por Vacaciones
+                  </label>
+                </div>
+              </td>
+
+              <td>
+                <p>{{getValueFormField('owedBonusVacations')}}</p>
+              </td>
+              <td>
+                <div class="col-sm-12 col-lg-6"> </div>
+              </td>
+              <td>
+                <span>{{otherRights.owedBonusVacations.formula}}</span>
+              </td>
+              <td>
+                <span> L .  {{otherRights.owedBonusVacations.amount}}</span>
+              </td>
+              <td>
+                <span (click)="editPanel('owed-bonus-vacations')" class="svg-icon svg-icon-primary svg-icon-2hx"><svg xmlns="http://www.w3.org/2000/svg" width="24"
+                    height="24" viewBox="0 0 12 36" fill="none">
+                    <path opacity="0.3" fill-rule="evenodd" clip-rule="evenodd"
+                      d="M2 4.63158C2 3.1782 3.1782 2 4.63158 2H13.47C14.0155 2 14.278 2.66919 13.8778 3.04006L12.4556 4.35821C11.9009 4.87228 11.1726 5.15789 10.4163 5.15789H7.1579C6.05333 5.15789 5.15789 6.05333 5.15789 7.1579V16.8421C5.15789 17.9467 6.05333 18.8421 7.1579 18.8421H16.8421C17.9467 18.8421 18.8421 17.9467 18.8421 16.8421V13.7518C18.8421 12.927 19.1817 12.1387 19.7809 11.572L20.9878 10.4308C21.3703 10.0691 22 10.3403 22 10.8668V19.3684C22 20.8218 20.8218 22 19.3684 22H4.63158C3.1782 22 2 20.8218 2 19.3684V4.63158Z"
+                      fill="currentColor" />
+                    <path
+                      d="M10.9256 11.1882C10.5351 10.7977 10.5351 10.1645 10.9256 9.77397L18.0669 2.6327C18.8479 1.85165 20.1143 1.85165 20.8953 2.6327L21.3665 3.10391C22.1476 3.88496 22.1476 5.15129 21.3665 5.93234L14.2252 13.0736C13.8347 13.4641 13.2016 13.4641 12.811 13.0736L10.9256 11.1882Z"
+                      fill="currentColor" />
+                    <path
+                      d="M8.82343 12.0064L8.08852 14.3348C7.8655 15.0414 8.46151 15.7366 9.19388 15.6242L11.8974 15.2092C12.4642 15.1222 12.6916 14.4278 12.2861 14.0223L9.98595 11.7221C9.61452 11.3507 8.98154 11.5055 8.82343 12.0064Z"
+                      fill="currentColor" />
+                  </svg></span>
+              </td>
+            </tr>
+            <tr #panelOwedBonusVacations class="owed-bonus-vacations">
+              <td colspan="6">
+                <div class="panel">
+                  <td>
+                    <span>Le adeudan bono por vacaciones</span>
+                  </td>
+                  <td>
+                    <div class="col-sm-12 col-lg-6">
+                      <input
+                        formControlName="owedBonusVacations"
+                        [class.is-valid]="isValidField('owedBonusVacations')"
+                        [class.is-invalid]="isInvalidField('owedBonusVacations')"
+                        type="number"
+                        class="form-control form-control-solid"
+                        />
+                      <p *ngIf="isInvalidField('owedBonusVacations')">
+                        <span
+                        *ngIf="getErrorField('owedBonusVacations', 'pattern')"
+                        class="text-danger"
+                        >Este campo es numerico.</span>
+                      </p>
+                    </div>
+                  </td>
+                    <button class="btn btn-primary btn-sm" (click)="validFieldButton(['owedBonusVacations'],'owed-bonus-vacations')">Aceptar</button>
+                </div>
+              </td>
+            </tr>
+            <!--End owedBonusVacations-->
+
+            <!-- Begin owedPedingThirteenthMonth-->
+            <tr>
+              <td>
+                <div class="form-check form-switch form-check-custom form-check-solid me-10">
+                  <input class="form-check-input h-20px w-30px" type="checkbox"
+                  (change)="isActiveControl('owedPendingThirteenthMonth')"id="owedPendingThirteenthMonth" />
+                  <label class="form-check-label" for="owedPendingThirteenthMonth">
+                    Treceavos mes pendiente
+                  </label>
+                </div>
+              </td>
+              <td>
+                <p>{{getValueFormField('owedPendingThirteenthMonth')}}</p>
+              </td>
+              <td>
+                <div class="col-sm-12 col-lg-6"> </div>
+              </td>
+              <td>
+                <span>{{otherRights.owedPendingThirteenthMonth.formula}}</span>
+              </td>
+              <td>
+                <span> L .  {{otherRights.owedPendingThirteenthMonth.amount}}</span>
+              </td>
+              <td>
+                <span  (click)="editPanel('owed-pending-thirteenth-month')" class="svg-icon svg-icon-primary svg-icon-2hx"><svg xmlns="http://www.w3.org/2000/svg" width="24"
+                    height="24" viewBox="0 0 12 36" fill="none">
+                    <path opacity="0.3" fill-rule="evenodd" clip-rule="evenodd"
+                      d="M2 4.63158C2 3.1782 3.1782 2 4.63158 2H13.47C14.0155 2 14.278 2.66919 13.8778 3.04006L12.4556 4.35821C11.9009 4.87228 11.1726 5.15789 10.4163 5.15789H7.1579C6.05333 5.15789 5.15789 6.05333 5.15789 7.1579V16.8421C5.15789 17.9467 6.05333 18.8421 7.1579 18.8421H16.8421C17.9467 18.8421 18.8421 17.9467 18.8421 16.8421V13.7518C18.8421 12.927 19.1817 12.1387 19.7809 11.572L20.9878 10.4308C21.3703 10.0691 22 10.3403 22 10.8668V19.3684C22 20.8218 20.8218 22 19.3684 22H4.63158C3.1782 22 2 20.8218 2 19.3684V4.63158Z"
+                      fill="currentColor" />
+                    <path
+                      d="M10.9256 11.1882C10.5351 10.7977 10.5351 10.1645 10.9256 9.77397L18.0669 2.6327C18.8479 1.85165 20.1143 1.85165 20.8953 2.6327L21.3665 3.10391C22.1476 3.88496 22.1476 5.15129 21.3665 5.93234L14.2252 13.0736C13.8347 13.4641 13.2016 13.4641 12.811 13.0736L10.9256 11.1882Z"
+                      fill="currentColor" />
+                    <path
+                      d="M8.82343 12.0064L8.08852 14.3348C7.8655 15.0414 8.46151 15.7366 9.19388 15.6242L11.8974 15.2092C12.4642 15.1222 12.6916 14.4278 12.2861 14.0223L9.98595 11.7221C9.61452 11.3507 8.98154 11.5055 8.82343 12.0064Z"
+                      fill="currentColor" />
+                  </svg></span>
+              </td>
+            </tr>
+            <tr #panelOwedPendingThirteenthMonth class="owed-pending-thirteenth-month">
+              <td colspan="6">
+                <div class="panel">
+                  <td>
+                    <span>¿Le adeudan el treceavo mes?</span>
+                  </td>
+                  <td>
+                    <div class="col-sm-12 col-lg-6">
+                      <input
+                        formControlName="owedPendingThirteenthMonth"
+                        [class.is-valid]="isValidField('owedPendingThirteenthMonth')"
+                        [class.is-invalid]="isInvalidField('owedPendingThirteenthMonth')"
+                        type="number"
+                        class="form-control form-control-solid"
+                        />
+                      <p *ngIf="isInvalidField('owedPendingThirteenthMonth')">
+                        <span
+                        *ngIf="getErrorField('owedPendingThirteenthMonth', 'pattern')"
+                        class="text-danger"
+                        >Este campo es numerico.</span>
+                      </p>
+                    </div>
+                  </td>
+                    <button class="btn btn-primary btn-sm" (click)="validFieldButton(['owedPendingThirteenthMonth'],'owed-pending-thirteenth-month')">Aceptar</button>
+                </div>
+              </td>
+            </tr>
+            <!--End owedPedingThirteenthMonth-->
+
+            <!-- Begin owedThirteenthMonth-->
+            <tr>
+              <td>
+                <div class="form-check form-switch form-check-custom form-check-solid me-10">
+                  <input class="form-check-input h-20px w-30px" type="checkbox"
+                  (change)="isActiveControl('owedThirteenthMonth')" id="owedThirteenthMonth" />
+                  <label class="form-check-label" for="owedThirteenthMonth">
+                    Treceavo mes Adeudado
+                  </label>
+                </div>
+              </td>
+              <td>
+                <div *ngIf="getLastTwoYearsSalaryReadjustment().length > 1" class="row mb-5 mt-2">
+                  <div class="col-4">
+                    <input
+                      [value]="getLastTwoYearsSalaryReadjustment()[1].year"
+                      [disabled]="true"
+                      type="number"
+                      class="form-control form-control-solid"
+                      />
+                  </div>
+                  <div class="col-4">
+                    <input
+                      [placeholder]="'L. '+getLastTwoYearsSalaryReadjustment()[1].salary"
+                      [disabled]="true"
+                      [value]="owedThirteenthMonth2Value"
+                      type="number"
+                      class="form-control form-control-solid"
+                      />
+                  </div>
+                </div>
+                <div class="row mb-5">
+                  <div class="col-4">
+                    <input
+                      [value]="getLastTwoYearsSalaryReadjustment()[0].year"
+                      [disabled]="true"
+                      type="number"
+                      class="form-control form-control-solid"
+                      />
+                  </div>
+                  <div class="col-4">
+                    <input
+                      type="number"
+                      class="form-control form-control-solid"
+                      [disabled]="true"
+                      [placeholder]="'L. '+getLastTwoYearsSalaryReadjustment()[0].salary"
+                      [value]="owedThirteenthMonthValue"
+                      />
+                  </div>
+                </div>
+              </td>
+              <td style="text-align:left; font-weight: inherit;">
+                <!-- {{getValueFormField('owedThirteenthMonth2')}} ho -->
+              </td>
+              <td>
+                <span>{{otherRights.owedThirteenthMonth.formula}}</span>
+              </td>
+              <td>
+                <span> L . {{otherRights.owedThirteenthMonth.amount}}</span>
+              </td>
+              <td>
+                <span (click)="editPanel('owed-thirteenth-month')" class="svg-icon svg-icon-primary svg-icon-2hx"><svg xmlns="http://www.w3.org/2000/svg" width="24"
+                    height="24" viewBox="0 0 12 36" fill="none">
+                    <path opacity="0.3" fill-rule="evenodd" clip-rule="evenodd"
+                      d="M2 4.63158C2 3.1782 3.1782 2 4.63158 2H13.47C14.0155 2 14.278 2.66919 13.8778 3.04006L12.4556 4.35821C11.9009 4.87228 11.1726 5.15789 10.4163 5.15789H7.1579C6.05333 5.15789 5.15789 6.05333 5.15789 7.1579V16.8421C5.15789 17.9467 6.05333 18.8421 7.1579 18.8421H16.8421C17.9467 18.8421 18.8421 17.9467 18.8421 16.8421V13.7518C18.8421 12.927 19.1817 12.1387 19.7809 11.572L20.9878 10.4308C21.3703 10.0691 22 10.3403 22 10.8668V19.3684C22 20.8218 20.8218 22 19.3684 22H4.63158C3.1782 22 2 20.8218 2 19.3684V4.63158Z"
+                      fill="currentColor" />
+                    <path
+                      d="M10.9256 11.1882C10.5351 10.7977 10.5351 10.1645 10.9256 9.77397L18.0669 2.6327C18.8479 1.85165 20.1143 1.85165 20.8953 2.6327L21.3665 3.10391C22.1476 3.88496 22.1476 5.15129 21.3665 5.93234L14.2252 13.0736C13.8347 13.4641 13.2016 13.4641 12.811 13.0736L10.9256 11.1882Z"
+                      fill="currentColor" />
+                    <path
+                      d="M8.82343 12.0064L8.08852 14.3348C7.8655 15.0414 8.46151 15.7366 9.19388 15.6242L11.8974 15.2092C12.4642 15.1222 12.6916 14.4278 12.2861 14.0223L9.98595 11.7221C9.61452 11.3507 8.98154 11.5055 8.82343 12.0064Z"
+                      fill="currentColor" />
+                  </svg></span>
+              </td>
+            </tr>
+            <tr #panelOwedThirteenthMonth class="owed-thirteenth-month">
+              <td colspan="6">
+                <div class="panel">
+                  <td>
+                    <span>¿Le adeudan el treceavo mes?</span>
+                  </td>
+                  <td>
+                    <div *ngIf="getLastTwoYearsSalaryReadjustment().length > 1" class="row mb-5">
+                      <div class="col-4">
+                        <input
+                          [value]="getLastTwoYearsSalaryReadjustment()[1].year"
+                          [disabled]="true"
+                          type="number"
+                          class="form-control form-control-solid"
+                          />
+                      </div>
+                      <div class="col-4">
+                        <input
+                          formControlName="owedThirteenthMonth2"
+                          [class.is-valid]="isValidField('owedThirteenthMonth2')"
+                          [class.is-invalid]="isInvalidField('owedThirteenthMonth2')"
+                          [placeholder]="'L. '+getLastTwoYearsSalaryReadjustment()[1].salary"
+                          type="number"
+                          class="form-control form-control-solid"
+                          />
+                        <p *ngIf="isInvalidField('owedThirteenthMonth2')">
+                          <span
+                          *ngIf="getErrorField('owedThirteenthMonth2', 'pattern')"
+                          class="text-danger"
+                          >Este campo es numerico.</span>
+                        </p>
+                      </div>
+                    </div>
+                    <div class="row mb-5">
+                      <div class="col-4">
+                        <input
+                          [value]="getLastTwoYearsSalaryReadjustment()[0].year"
+                          [disabled]="true"
+                          type="number"
+                          class="form-control form-control-solid"
+                          />
+                      </div>
+                      <div class="col-4">
+                        <input
+                          formControlName="owedThirteenthMonth"
+                          [class.is-valid]="isValidField('owedThirteenthMonth')"
+                          [class.is-invalid]="isInvalidField('owedThirteenthMonth')"
+                          type="number"
+                          class="form-control form-control-solid"
+                          [placeholder]="'L. '+getLastTwoYearsSalaryReadjustment()[0].salary"
+                          />
+                        <p *ngIf="isInvalidField('owedThirteenthMonth')">
+                          <span
+                          *ngIf="getErrorField('owedThirteenthMonth', 'pattern')"
+                          class="text-danger"
+                          >Este campo es numerico.</span>
+                        </p>
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    <button class="btn btn-primary btn-sm" (click)="validFieldButton(['owedThirteenthMonth','owedThirteenthMonth2'],'owed-thirteenth-month')">Aceptar</button>
+                  </td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </div>
+              </td>
+            </tr>
+            <!-- End owedThirteenthMonth-->
+
+             <!-- Begin owedPedingFourteenthMonth-->
+             <tr>
+              <td>
+                <div class="form-check form-switch form-check-custom form-check-solid me-10">
+                  <input class="form-check-input h-20px w-30px" type="checkbox"
+                  (change)="isActiveControl('owedPendingFourteenthMonth')"id="owedPendingFourteenthMonth" />
+                  <label class="form-check-label" for="owedPendingFourteenthMonth">
+                    Catorceavo mes pendiente
+                  </label>
+                </div>
+              </td>
+              <td>
+                <p>{{getValueFormField('owedPendingFourteenthMonth')}}</p>
+              </td>
+              <td>
+
+              </td>
+              <td>
+                <span>{{otherRights.owedPendingFourteenthMonth.formula}}</span>
+              </td>
+              <td>
+                <span> L . {{otherRights.owedPendingFourteenthMonth.amount}}</span>
+              </td>
+              <td>
+                <span  (click)="editPanel('owed-pending-fourteenth-month')" class="svg-icon svg-icon-primary svg-icon-2hx"><svg xmlns="http://www.w3.org/2000/svg" width="24"
+                    height="24" viewBox="0 0 12 36" fill="none">
+                    <path opacity="0.3" fill-rule="evenodd" clip-rule="evenodd"
+                      d="M2 4.63158C2 3.1782 3.1782 2 4.63158 2H13.47C14.0155 2 14.278 2.66919 13.8778 3.04006L12.4556 4.35821C11.9009 4.87228 11.1726 5.15789 10.4163 5.15789H7.1579C6.05333 5.15789 5.15789 6.05333 5.15789 7.1579V16.8421C5.15789 17.9467 6.05333 18.8421 7.1579 18.8421H16.8421C17.9467 18.8421 18.8421 17.9467 18.8421 16.8421V13.7518C18.8421 12.927 19.1817 12.1387 19.7809 11.572L20.9878 10.4308C21.3703 10.0691 22 10.3403 22 10.8668V19.3684C22 20.8218 20.8218 22 19.3684 22H4.63158C3.1782 22 2 20.8218 2 19.3684V4.63158Z"
+                      fill="currentColor" />
+                    <path
+                      d="M10.9256 11.1882C10.5351 10.7977 10.5351 10.1645 10.9256 9.77397L18.0669 2.6327C18.8479 1.85165 20.1143 1.85165 20.8953 2.6327L21.3665 3.10391C22.1476 3.88496 22.1476 5.15129 21.3665 5.93234L14.2252 13.0736C13.8347 13.4641 13.2016 13.4641 12.811 13.0736L10.9256 11.1882Z"
+                      fill="currentColor" />
+                    <path
+                      d="M8.82343 12.0064L8.08852 14.3348C7.8655 15.0414 8.46151 15.7366 9.19388 15.6242L11.8974 15.2092C12.4642 15.1222 12.6916 14.4278 12.2861 14.0223L9.98595 11.7221C9.61452 11.3507 8.98154 11.5055 8.82343 12.0064Z"
+                      fill="currentColor" />
+                  </svg></span>
+              </td>
+            </tr>
+            <tr #panelOwedPendingFourteenthMonth class="owed-pending-fourteenth-month">
+              <td colspan="6">
+                <div class="panel">
+                  <td>
+                    <span>¿Le adeudan el catorceavo mes?</span>
+                  </td>
+                  <td>
+                    <div class="col-sm-12 col-lg-6">
+                      <input
+                        formControlName="owedPendingFourteenthMonth"
+                        [class.is-valid]="isValidField('owedPendingFourteenthMonth')"
+                        [class.is-invalid]="isInvalidField('OwedPendingFourteenthMonth')"
+                        type="number"
+                        class="form-control form-control-solid"
+                        />
+                      <p *ngIf="isInvalidField('owedPendingFourteenthMonth')">
+                        <span
+                        *ngIf="getErrorField('owedPendingFourteenthMonth', 'pattern')"
+                        class="text-danger"
+                        >Este campo es numerico.</span>
+                      </p>
+                    </div>
+                  </td>
+                    <button class="btn btn-primary btn-sm" (click)="validFieldButton(['owedPendingFourteenthMonth'],'owed-pending-fourteenth-month')">Aceptar</button>
+                </div>
+              </td>
+            </tr>
+            <!--End owedPedingFourteenthMonth-->
+
+            <!-- Begin owedFourteenthMonth-->
+            <tr>
+              <td>
+                <div class="form-check form-switch form-check-custom form-check-solid me-10">
+                  <input class="form-check-input h-20px w-30px" type="checkbox"
+                  (change)="isActiveControl('owedFourteenthMonth')" id="owedFourteenthMonth" />
+                  <label class="form-check-label" for="owedFourteenthMonth">
+                    Catorceavo mes adeudado
+                  </label>
+                </div>
+              </td>
+              <td>
+                <div *ngIf="getLastTwoYearsSalaryReadjustment().length > 1" class="row mb-5 mt-2">
+                  <div class="col-4">
+                    <input
+                      [value]="getLastTwoYearsSalaryReadjustment()[1].year"
+                      [disabled]="true"
+                      type="number"
+                      class="form-control form-control-solid"
+                      />
+                  </div>
+                  <div class="col-4">
+                    <input
+                      [placeholder]="'L. '+getLastTwoYearsSalaryReadjustment()[1].salary"
+                      [disabled]="true"
+                      [value]="owedFourteenthMonth2Value"
+                      type="number"
+                      class="form-control form-control-solid"
+                      />
+                  </div>
+                </div>
+                <div class="row mb-5">
+                  <div class="col-4">
+                    <input
+                      [value]="getLastTwoYearsSalaryReadjustment()[0].year"
+                      [disabled]="true"
+                      type="number"
+                      class="form-control form-control-solid"
+                      />
+                  </div>
+                  <div class="col-4">
+                    <input
+                      type="number"
+                      class="form-control form-control-solid"
+                      [disabled]="true"
+                      [placeholder]="'L. '+getLastTwoYearsSalaryReadjustment()[0].salary"
+                      [value]="owedFourteenthMonthValue"
+                      />
+                  </div>
+                </div>
+              </td>
+              <td style="text-align:left; font-weight: inherit;">
+
+              </td>
+              <td>
+                <span>{{otherRights.owedFourteenthMonth.formula}}</span>
+              </td>
+              <td>
+                <span> L . {{otherRights.owedFourteenthMonth.amount}}</span>
+              </td>
+              <td>
+                <span (click)="editPanel('owed-fourteenth-month')" class="svg-icon svg-icon-primary svg-icon-2hx"><svg xmlns="http://www.w3.org/2000/svg" width="24"
+                    height="24" viewBox="0 0 12 36" fill="none">
+                    <path opacity="0.3" fill-rule="evenodd" clip-rule="evenodd"
+                      d="M2 4.63158C2 3.1782 3.1782 2 4.63158 2H13.47C14.0155 2 14.278 2.66919 13.8778 3.04006L12.4556 4.35821C11.9009 4.87228 11.1726 5.15789 10.4163 5.15789H7.1579C6.05333 5.15789 5.15789 6.05333 5.15789 7.1579V16.8421C5.15789 17.9467 6.05333 18.8421 7.1579 18.8421H16.8421C17.9467 18.8421 18.8421 17.9467 18.8421 16.8421V13.7518C18.8421 12.927 19.1817 12.1387 19.7809 11.572L20.9878 10.4308C21.3703 10.0691 22 10.3403 22 10.8668V19.3684C22 20.8218 20.8218 22 19.3684 22H4.63158C3.1782 22 2 20.8218 2 19.3684V4.63158Z"
+                      fill="currentColor" />
+                    <path
+                      d="M10.9256 11.1882C10.5351 10.7977 10.5351 10.1645 10.9256 9.77397L18.0669 2.6327C18.8479 1.85165 20.1143 1.85165 20.8953 2.6327L21.3665 3.10391C22.1476 3.88496 22.1476 5.15129 21.3665 5.93234L14.2252 13.0736C13.8347 13.4641 13.2016 13.4641 12.811 13.0736L10.9256 11.1882Z"
+                      fill="currentColor" />
+                    <path
+                      d="M8.82343 12.0064L8.08852 14.3348C7.8655 15.0414 8.46151 15.7366 9.19388 15.6242L11.8974 15.2092C12.4642 15.1222 12.6916 14.4278 12.2861 14.0223L9.98595 11.7221C9.61452 11.3507 8.98154 11.5055 8.82343 12.0064Z"
+                      fill="currentColor" />
+                  </svg></span>
+              </td>
+            </tr>
+            <tr #panelOwedFourteenthMonth class="owed-fourteenth-month">
+              <td colspan="6">
+                <div class="panel">
+                  <td>
+                    <span>¿Le adeudan el catorceavo mes?</span>
+                  </td>
+                  <td>
+                    <div *ngIf="getLastTwoYearsSalaryReadjustment().length > 1" class="row mb-5">
+                      <div class="col-4">
+                        <input
+                          [value]="getLastTwoYearsSalaryReadjustment()[1].year"
+                          [disabled]="true"
+                          type="number"
+                          class="form-control form-control-solid"
+                          />
+                      </div>
+                      <div class="col-4">
+                        <input
+                          formControlName="owedFourteenthMonth2"
+                          [class.is-valid]="isValidField('owedFourteenthMonth2')"
+                          [class.is-invalid]="isInvalidField('owedFourteenthMonth2')"
+                          [placeholder]="'L. '+getLastTwoYearsSalaryReadjustment()[1].salary"
+                          type="number"
+                          class="form-control form-control-solid"
+                          />
+                        <p *ngIf="isInvalidField('owedFourteenthMonth2')">
+                          <span
+                          *ngIf="getErrorField('owedFourteenthMonth2', 'pattern')"
+                          class="text-danger"
+                          >Este campo es numerico.</span>
+                        </p>
+                      </div>
+                    </div>
+                    <div class="row mb-5">
+                      <div class="col-4">
+                        <input
+                          [value]="getLastTwoYearsSalaryReadjustment()[0].year"
+                          [disabled]="true"
+                          type="number"
+                          class="form-control form-control-solid"
+                          />
+                      </div>
+                      <div class="col-4">
+                        <input
+                          formControlName="owedFourteenthMonth"
+                          [class.is-valid]="isValidField('owedFourteenthMonth')"
+                          [class.is-invalid]="isInvalidField('owedFourteenthMonth')"
+                          type="number"
+                          class="form-control form-control-solid"
+                          [placeholder]="'L. '+getLastTwoYearsSalaryReadjustment()[0].salary"
+                          />
+                        <p *ngIf="isInvalidField('owedFourteenthMonth')">
+                          <span
+                          *ngIf="getErrorField('owedFourteenthMonth', 'pattern')"
+                          class="text-danger"
+                          >Este campo es numerico.</span>
+                        </p>
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    <button class="btn btn-primary btn-sm" (click)="validFieldButton(['owedFourteenthMonth','owedFourteenthMonth2'],'owed-fourteenth-month')">Aceptar</button>
+                  </td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </div>
+              </td>
+            </tr>
+            <!-- End owedFourteenthMonth-->
+
+            <!-- Begin owedSalary-->
+            <tr>
+              <td>
+                <div class="form-check form-switch form-check-custom form-check-solid me-10">
+                  <input class="form-check-input h-20px w-30px" type="checkbox"
+                  (change)="isActiveControl('owedSalary')" id="owedSalary" />
+                  <label class="form-check-label" for="owedSalary">
+                    Sueldo/Salario Adeudado
+                  </label>
+                </div>
+              </td>
+              <td>
+                <p>{{getValueFormField('owedSalary')}}</p>
+
+              </td>
+              <td>
+                <div class="col-sm-12 col-lg-6"> </div>
+              </td>
+              <td>
+                <span>{{otherRights.owedSalary.formula}}</span>
+              </td>
+              <td>
+                <span> L . {{otherRights.owedSalary.amount}}</span>
+              </td>
+              <td>
+                <span  (click)="editPanel('owed-salary')" class="svg-icon svg-icon-primary svg-icon-2hx"><svg xmlns="http://www.w3.org/2000/svg" width="24"
+                    height="24" viewBox="0 0 12 36" fill="none">
+                    <path opacity="0.3" fill-rule="evenodd" clip-rule="evenodd"
+                      d="M2 4.63158C2 3.1782 3.1782 2 4.63158 2H13.47C14.0155 2 14.278 2.66919 13.8778 3.04006L12.4556 4.35821C11.9009 4.87228 11.1726 5.15789 10.4163 5.15789H7.1579C6.05333 5.15789 5.15789 6.05333 5.15789 7.1579V16.8421C5.15789 17.9467 6.05333 18.8421 7.1579 18.8421H16.8421C17.9467 18.8421 18.8421 17.9467 18.8421 16.8421V13.7518C18.8421 12.927 19.1817 12.1387 19.7809 11.572L20.9878 10.4308C21.3703 10.0691 22 10.3403 22 10.8668V19.3684C22 20.8218 20.8218 22 19.3684 22H4.63158C3.1782 22 2 20.8218 2 19.3684V4.63158Z"
+                      fill="currentColor" />
+                    <path
+                      d="M10.9256 11.1882C10.5351 10.7977 10.5351 10.1645 10.9256 9.77397L18.0669 2.6327C18.8479 1.85165 20.1143 1.85165 20.8953 2.6327L21.3665 3.10391C22.1476 3.88496 22.1476 5.15129 21.3665 5.93234L14.2252 13.0736C13.8347 13.4641 13.2016 13.4641 12.811 13.0736L10.9256 11.1882Z"
+                      fill="currentColor" />
+                    <path
+                      d="M8.82343 12.0064L8.08852 14.3348C7.8655 15.0414 8.46151 15.7366 9.19388 15.6242L11.8974 15.2092C12.4642 15.1222 12.6916 14.4278 12.2861 14.0223L9.98595 11.7221C9.61452 11.3507 8.98154 11.5055 8.82343 12.0064Z"
+                      fill="currentColor" />
+                  </svg></span>
+              </td>
+            </tr>
+            <tr #panelOwedSalary class="owed-salary">
+              <td colspan="6">
+                <div class="panel">
+                  <td>
+                    <span>¿Le adeudan el salario?</span>
+                  </td>
+                  <td>
+                    <div class="col-sm-12 col-lg-6">
+                      <input
+                        formControlName="owedSalary"
+                        [class.is-valid]="isValidField('owedSalary')"
+                        [class.is-invalid]="isInvalidField('owedSalary')"
+                        type="number"
+                        class="form-control form-control-solid"
+                        />
+                      <p *ngIf="isInvalidField('owedSalary')">
+                        <span
+                        *ngIf="getErrorField('owedSalary', 'pattern')"
+                        class="text-danger"
+                        >Este campo es numerico.</span>
+                      </p>
+                    </div>
+                  </td>
+                    <button class="btn btn-primary btn-sm" (click)="validFieldButton(['owedSalary'],'owed-salary')">Aceptar</button>
+                </div>
+              </td>
+            </tr>
+            <!-- End owedSalary-->
+
+            <!--Begin owedOverTime-->
+            <tr>
+              <td>
+                <div class="form-check form-switch form-check-custom form-check-solid me-10">
+                  <input class="form-check-input h-20px w-30px" type="checkbox"
+                  (change)="isActiveControl('owedOverTime')" id="owedOverTime" />
+                  <label class="form-check-label" for="owedOverTime">
+                    Horas extras trabajadas
+                  </label>
+                </div>
+              </td>
+              <td>
+                <p>{{getValueFormField('owedOverTime')}}</p>
+
+              </td>
+              <td>
+                <div class="col-sm-12 col-lg-6">
+
+                </div>
+              </td>
+              <td>
+                <span>{{otherRights.owedOvertime.formula}}</span>
+              </td>
+              <td>
+                <span> L . {{otherRights.owedOvertime.amount}}</span>
+              </td>
+              <td>
+                <span (click)="editPanel('owed-over-time')" class="svg-icon svg-icon-primary svg-icon-2hx"><svg xmlns="http://www.w3.org/2000/svg" width="24"
+                    height="24" viewBox="0 0 12 36" fill="none">
+                    <path opacity="0.3" fill-rule="evenodd" clip-rule="evenodd"
+                      d="M2 4.63158C2 3.1782 3.1782 2 4.63158 2H13.47C14.0155 2 14.278 2.66919 13.8778 3.04006L12.4556 4.35821C11.9009 4.87228 11.1726 5.15789 10.4163 5.15789H7.1579C6.05333 5.15789 5.15789 6.05333 5.15789 7.1579V16.8421C5.15789 17.9467 6.05333 18.8421 7.1579 18.8421H16.8421C17.9467 18.8421 18.8421 17.9467 18.8421 16.8421V13.7518C18.8421 12.927 19.1817 12.1387 19.7809 11.572L20.9878 10.4308C21.3703 10.0691 22 10.3403 22 10.8668V19.3684C22 20.8218 20.8218 22 19.3684 22H4.63158C3.1782 22 2 20.8218 2 19.3684V4.63158Z"
+                      fill="currentColor" />
+                    <path
+                      d="M10.9256 11.1882C10.5351 10.7977 10.5351 10.1645 10.9256 9.77397L18.0669 2.6327C18.8479 1.85165 20.1143 1.85165 20.8953 2.6327L21.3665 3.10391C22.1476 3.88496 22.1476 5.15129 21.3665 5.93234L14.2252 13.0736C13.8347 13.4641 13.2016 13.4641 12.811 13.0736L10.9256 11.1882Z"
+                      fill="currentColor" />
+                    <path
+                      d="M8.82343 12.0064L8.08852 14.3348C7.8655 15.0414 8.46151 15.7366 9.19388 15.6242L11.8974 15.2092C12.4642 15.1222 12.6916 14.4278 12.2861 14.0223L9.98595 11.7221C9.61452 11.3507 8.98154 11.5055 8.82343 12.0064Z"
+                      fill="currentColor" />
+                  </svg></span>
+              </td>
+            </tr>
+            <tr #panelOwedOverTime class="owed-over-time">
+              <td colspan="6">
+                <div class="panel">
+                  <td>
+                    <select
+                    formControlName="owedOverTimeType"
+                    [class.is-valid]="isValidField('owedOverTimeType')"
+                    [class.is-invalid]="isInvalidField('owedOverTimeType')"
+                    class="form-select form-select-solid">
+                    <option value="DIURNA">DIURNA</option>
+                    <option value="MIXTA">MIXTA</option>
+                    <option value="NOCTURNA">NOCTURNA</option>
+                  </select>
+                  </td>
+                  <td>
+                    <input
+                    formControlName="owedOverTime"
+                    [class.is-valid]="isValidField('owedOverTime')"
+                    [class.is-invalid]="isInvalidField('owedOverTime')"
+                    type="number"
+                    class="form-control form-control-solid"
+                    />
+                  </td>
+                    <button class="btn btn-primary btn-sm" (click)="validFieldButton(['owedOverTime', 'owedOverTimeType'],'owed-over-time')">Aceptar</button>
+                </div>
+              </td>
+            </tr>
+            <!--End owedOverTime-->
+
+            <!-- Begin haveSchoolAgeChildren-->
+            <tr>
+              <td>
+                <div class="form-check form-switch form-check-custom form-check-solid me-10">
+                  <input class="form-check-input h-20px w-30px" type="checkbox"
+                  (change)="isActiveControl('haveSchoolAgeChildren')" id="haveSchoolAgeChildren" />
+                  <label class="form-check-label" for="haveSchoolAgeChildren">
+                    ¿Tiene Hijos en edad escolar?
+                  </label>
+                </div>
+                <p>Se le hara entrega del Bono Educativo</p>
+              </td>
+              <td>
+                <p>{{getValueFormField('haveSchoolAgeChildren')}}</p>
+
+              </td>
+              <td>
+
+              </td>
+              <td>
+                <span>{{otherRights.educationalBonusResponse.formula}}</span>
+              </td>
+              <td>
+                <span> L . {{otherRights.educationalBonusResponse.amount}}  </span>
+              </td>
+              <td>
+                <span  (click)="editPanel('have-school-age-children')" class="svg-icon svg-icon-primary svg-icon-2hx"><svg xmlns="http://www.w3.org/2000/svg" width="24"
+                    height="24" viewBox="0 0 12 36" fill="none">
+                    <path opacity="0.3" fill-rule="evenodd" clip-rule="evenodd"
+                      d="M2 4.63158C2 3.1782 3.1782 2 4.63158 2H13.47C14.0155 2 14.278 2.66919 13.8778 3.04006L12.4556 4.35821C11.9009 4.87228 11.1726 5.15789 10.4163 5.15789H7.1579C6.05333 5.15789 5.15789 6.05333 5.15789 7.1579V16.8421C5.15789 17.9467 6.05333 18.8421 7.1579 18.8421H16.8421C17.9467 18.8421 18.8421 17.9467 18.8421 16.8421V13.7518C18.8421 12.927 19.1817 12.1387 19.7809 11.572L20.9878 10.4308C21.3703 10.0691 22 10.3403 22 10.8668V19.3684C22 20.8218 20.8218 22 19.3684 22H4.63158C3.1782 22 2 20.8218 2 19.3684V4.63158Z"
+                      fill="currentColor" />
+                    <path
+                      d="M10.9256 11.1882C10.5351 10.7977 10.5351 10.1645 10.9256 9.77397L18.0669 2.6327C18.8479 1.85165 20.1143 1.85165 20.8953 2.6327L21.3665 3.10391C22.1476 3.88496 22.1476 5.15129 21.3665 5.93234L14.2252 13.0736C13.8347 13.4641 13.2016 13.4641 12.811 13.0736L10.9256 11.1882Z"
+                      fill="currentColor" />
+                    <path
+                      d="M8.82343 12.0064L8.08852 14.3348C7.8655 15.0414 8.46151 15.7366 9.19388 15.6242L11.8974 15.2092C12.4642 15.1222 12.6916 14.4278 12.2861 14.0223L9.98595 11.7221C9.61452 11.3507 8.98154 11.5055 8.82343 12.0064Z"
+                      fill="currentColor" />
+                  </svg></span>
+              </td>
+            </tr>
+            <!-- End haveSchoolAgeChildren-->
+
+            <!--Begin Reserva laboral-->
+            <tr *ngIf="currentTerminationContractType === 0">
+              <td>
+                <div class="form-check form-switch form-check-custom form-check-solid me-10">
+                  <input class="form-check-input h-20px w-30px" type="checkbox"
+                  (change)="isActiveControl('owedHistorySalaries')" id="owedHistorySalaries" />
+                  <label class="form-check-label" for="owedHistorySalaries">
+                    Reserva Laboral
+                  </label>
+                </div>
+                <p>Le apareceran los salarios anuales a los que aplica.</p>
+              </td>
+              <td>
+                <div *ngFor="let item of getYearsHistoryArray()" class="row mb-5">
+                 <div class="col-4">
+                   <input type="text" disabled="true" class="form-control form-control-solid" [value]="'Año '+item.year"/>
+                 </div>
+                 <div class="col-4">
+                   <input type="text" disabled="true" class="form-control form-control-solid" [value]="'L. '+item.salary.toFixed(2)"/>
+                 </div>
+                </div>
+             </td>
+             <td></td>
+              <td style="text-align:left; font-family: serif; font-weight: inherit;">
+                {{otherRights.severanceSavings.formula}}
+              </td>
+              <td>
+                <span> L . {{otherRights.severanceSavings.amount}}</span>
+              </td>
+              <td>
+              </td>
+            </tr>
+            <!--End Reserva Laboral-->
+
+             <!--Begin otherPayments-->
+             <tr>
+              <td>
+                <div class="form-check form-switch form-check-custom form-check-solid me-10">
+                  <input class="form-check-input h-20px w-30px" type="checkbox"
+                  (change)="isActiveControl('owedOtherPayments')" id="owedOtherPayments" />
+                  <label class="form-check-label" for="owedOtherPayments">
+                    Otros Pagos
+                  </label>
+                </div>
+              </td>
+              <td>
+                <p>{{getValueFormField('owedOtherPayments')}} </p>
+              </td>
+              <td>
+                <div class="col-sm-12 col-lg-6">
+
+                </div>
+              </td>
+              <td>
+                <span>{{otherRights.owedOtherPayments.formula}}</span>
+              </td>
+              <td>
+                <span> L . {{otherRights.owedOtherPayments.amount}} </span>
+              </td>
+              <td>
+                <span (click)="editPanel('owed-other-payment')" class="svg-icon svg-icon-primary svg-icon-2hx"><svg xmlns="http://www.w3.org/2000/svg" width="24"
+                    height="24" viewBox="0 0 12 36" fill="none">
+                    <path opacity="0.3" fill-rule="evenodd" clip-rule="evenodd"
+                      d="M2 4.63158C2 3.1782 3.1782 2 4.63158 2H13.47C14.0155 2 14.278 2.66919 13.8778 3.04006L12.4556 4.35821C11.9009 4.87228 11.1726 5.15789 10.4163 5.15789H7.1579C6.05333 5.15789 5.15789 6.05333 5.15789 7.1579V16.8421C5.15789 17.9467 6.05333 18.8421 7.1579 18.8421H16.8421C17.9467 18.8421 18.8421 17.9467 18.8421 16.8421V13.7518C18.8421 12.927 19.1817 12.1387 19.7809 11.572L20.9878 10.4308C21.3703 10.0691 22 10.3403 22 10.8668V19.3684C22 20.8218 20.8218 22 19.3684 22H4.63158C3.1782 22 2 20.8218 2 19.3684V4.63158Z"
+                      fill="currentColor" />
+                    <path
+                      d="M10.9256 11.1882C10.5351 10.7977 10.5351 10.1645 10.9256 9.77397L18.0669 2.6327C18.8479 1.85165 20.1143 1.85165 20.8953 2.6327L21.3665 3.10391C22.1476 3.88496 22.1476 5.15129 21.3665 5.93234L14.2252 13.0736C13.8347 13.4641 13.2016 13.4641 12.811 13.0736L10.9256 11.1882Z"
+                      fill="currentColor" />
+                    <path
+                      d="M8.82343 12.0064L8.08852 14.3348C7.8655 15.0414 8.46151 15.7366 9.19388 15.6242L11.8974 15.2092C12.4642 15.1222 12.6916 14.4278 12.2861 14.0223L9.98595 11.7221C9.61452 11.3507 8.98154 11.5055 8.82343 12.0064Z"
+                      fill="currentColor" />
+                  </svg></span>
+              </td>
+            </tr>
+            <tr #panelOwedOtherPayments class="owed-other-payment">
+              <td colspan="6">
+                <div class="panel">
+                  <td>
+                    <span>¿Recibe otros beneficios?</span>
+                  </td>
+
+                    <td>
+                      <div class="col-sm-12 col-lg-6">
+                        <input
+                          formControlName="owedOtherPayments"
+                          [class.is-valid]="isValidField('owedOtherPayments')"
+                          [class.is-invalid]="isInvalidField('owedOtherPayments')"
+                          type="text"
+                          class="form-control form-control-solid"
+                          />
+                        <p *ngIf="isInvalidField('owedOtherPayments')">
+                          <span
+                          *ngIf="getErrorField('owedOtherPayments', 'pattern')"
+                          class="text-danger"
+                          >Este campo es numerico.</span>
+                        </p>
+                      </div>
+                    </td>
+
+                    <button class="btn btn-primary btn-sm" (click)="validFieldButton(['owedOtherPayments'],'owed-other-payment')">Aceptar</button>
+                </div>
+              </td>
+            </tr>
+            <!--End otherpayment-->
+
+    </tbody>
+    </table>
+  </div>
+</div>
+<div class="row"></div>
+</div>
+<div class="card-footer d-flex justify-content-end gap-5">
+  <button type="button" class="btn btn-secondary" (click)="recalculo()">Recalcular</button>
+  <button type="button" class="btn btn-primary" (click)="nextStep()">Siguiente</button>
+</div>
 </div>
