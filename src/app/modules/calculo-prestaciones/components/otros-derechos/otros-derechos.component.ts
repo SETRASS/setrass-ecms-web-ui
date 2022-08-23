@@ -3,7 +3,7 @@ import {FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { CalculoPrestacionesService } from 'src/app/modules/services/calculo-prestaciones/calculo-prestaciones.service';
-import { getDataGender, getDataStore, scrollAnimationGoTo, setDataCacheStore, setDataSalaryCalculationStore } from 'src/app/utils/utils';
+import { getDataStore, scrollAnimationGoTo, setDataCacheStore } from 'src/app/utils/utils';
 import { OtherRights } from 'src/app/models/other-rights.model';
 import { TerminationContractType } from 'src/app/models/enums/termination-contract-type.enum';
 import { ToolbarService } from 'src/app/_metronic/layout/components/toolbar/toolbar.service';
@@ -567,7 +567,6 @@ export class OtrosDerechosComponent implements OnInit {
       this.calculoPrestacionesService
       .sendOtherRightsCompute(newRequest).subscribe((response: any) => {
         this.render2.removeClass(this.$overlay.nativeElement, 'active-overlay');
-        setDataSalaryCalculationStore(response);
         this.otherRightsResponseEvent.emit(response.otherRights);
       });
     }

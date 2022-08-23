@@ -22,8 +22,8 @@ export function scrollAnimationGoTo(fragmentLinkName: string) {
     });
 }
 
-export function setDataSalaryCalculationStore(data: object) {
-    localStorage.setItem('salary-calculation',JSON.stringify(data));
+export function setDataEmployeeStore(data: object) {
+    localStorage.setItem('employee',JSON.stringify(data));
 }
 
 export function getDataStore(item: string) {
@@ -47,5 +47,5 @@ export function clearCacheData(){
 }
 
 export function clearSalaryCalculationData(){
-    localStorage.removeItem('salary-calculation');
+    localStorage.removeItem('employee');
 }

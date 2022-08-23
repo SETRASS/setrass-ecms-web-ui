@@ -17,7 +17,7 @@ import { Locations} from 'src/app/models/locations.model';
 import { WorkerPersonEmployerRequestDto } from 'src/app/models/worker-person-employer-request-dto.model';
 import { EmployerDto } from 'src/app/models/employer-dto.model';
 import { WorkerPersonStore } from '../../state/workerperson-employer-request/workerperson-employer-request.store';
-import { clearCacheData, clearSalaryCalculationData, getDataStore, getYearSelect, scrollAnimationGoTo, setDataCacheStore, setDataGender, setDataSalaryCalculationStore } from 'src/app/utils/utils';
+import { getDataStore, getYearSelect, scrollAnimationGoTo, setDataCacheStore, setDataEmployeeStore, setDataGender } from 'src/app/utils/utils';
 import { format } from 'date-fns';
 import { CalculoPrestacionesRequestType } from 'src/app/models/enums/calculo-prestaciones-request-type.enum';
 import { TerminationContractType } from 'src/app/models/enums/termination-contract-type.enum';
@@ -388,9 +388,9 @@ export class DatosTrabajadorComponent implements OnInit {
         requestType: this.getCurrentRequestType(),
         terminationContractType: this.currentTerminationContractType
       }
-        
-      let req = getDataStore('cache');
+      setDataEmployeeStore(data);
       setDataGender(employeeData.employeeSex);
+      let req = getDataStore('cache');
       this.calculoPrestacionesService.sendEmployeeEmployerReq(data)
       .subscribe((response: any)=>{
         response ? this.render2.removeClass(this.$overlay.nativeElement, 'active-overlay') : null;
@@ -458,7 +458,6 @@ export class DatosTrabajadorComponent implements OnInit {
       setDataCacheStore(Object.assign(storeOld, data));
       this.calculoPrestacionesService.sendCompensationsRightsInfo(data).subscribe(response => {
         response ? this.render2.removeClass(this.$overlay.nativeElement, 'active-overlay') : null;
-        setDataSalaryCalculationStore(response);
         this.calculoResponseEvent.emit(response);
         setTimeout(() => scrollAnimationGoTo('calculo-salarial'), 550);
       }, (catchError) => console.warn(catchError));
