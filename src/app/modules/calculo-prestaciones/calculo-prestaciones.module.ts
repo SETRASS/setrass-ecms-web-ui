@@ -16,6 +16,8 @@ import { CalculoSalarialComponent } from './components/calculo-salarial/calculo-
 import { OtrosDerechosComponent } from './components/otros-derechos/otros-derechos.component';
 import { ServicesModule } from '../services/services.module';
 import { CalculoGeneradoComponent } from './components/calculo-generado/calculo-generado.component';
+import {NgxPrintModule} from "ngx-print";
+import {HttpClientModule} from "@angular/common/http";
 
 
 @NgModule({
@@ -37,7 +39,9 @@ import { CalculoGeneradoComponent } from './components/calculo-generado/calculo-
     ServicesModule,
     MatDatepickerModule,
     CalculoPrestacionesRoutingModule,
-    LayoutModule
+    LayoutModule,
+    HttpClientModule,
+    NgxPrintModule
   ],
   exports: [
     DatosTrabajadorComponent,

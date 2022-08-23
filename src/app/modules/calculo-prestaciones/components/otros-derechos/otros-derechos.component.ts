@@ -3,7 +3,7 @@ import {FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { CalculoPrestacionesService } from 'src/app/modules/services/calculo-prestaciones/calculo-prestaciones.service';
-import { getDataGender, getDataStore, scrollAnimationGoTo, setDataCacheStore, setDataSalaryCalculationStore } from 'src/app/utils/utils';
+import { getDataStore, scrollAnimationGoTo, setDataCacheStore } from 'src/app/utils/utils';
 import { OtherRights } from 'src/app/models/other-rights.model';
 import { TerminationContractType } from 'src/app/models/enums/termination-contract-type.enum';
 import { ToolbarService } from 'src/app/_metronic/layout/components/toolbar/toolbar.service';
@@ -34,7 +34,7 @@ export class OtrosDerechosComponent implements OnInit {
   @ViewChild('panelHaveSchoolAgeChildren') $panelHaveSchoolAgeChildren: ElementRef;
   @ViewChild('panelOwedHistorySalaries') $panelOwedHistorySalaries: ElementRef;
   @ViewChild('panelOwedOtherPayments') $panelOwedOtherPayments: ElementRef;
-  
+
   @Input() otherRights: OtherRights = {
     daysOffPreAndPostNatal: {
       amount: 0,
@@ -196,7 +196,7 @@ export class OtrosDerechosComponent implements OnInit {
   formOtherRights= new FormGroup({
     pregnancyStatus: new FormControl(0,[]),
     daysOffPregnancy: new FormControl (0,[]),
-    breastFeedingHours: new FormControl(0, []),  
+    breastFeedingHours: new FormControl(0, []),
     owedHolyDays: new FormControl (0),
     owedSeventhDay: new FormControl (0),
     owedPaidPendingVacations: new FormControl (0,[]),
@@ -214,7 +214,7 @@ export class OtrosDerechosComponent implements OnInit {
     owedOtherPayments: new FormControl(0,[])
   });
 
-  
+
 
   isActivePregnancyStatus: boolean = false;
   isActiveDaysOffPregnancy: boolean = false;
@@ -236,7 +236,7 @@ export class OtrosDerechosComponent implements OnInit {
 
   currentTerminationContractType: TerminationContractType;
 
-  constructor( 
+  constructor(
     private render2: Renderer2,
     private route: Router,
     private calculoPrestacionesService: CalculoPrestacionesService,
@@ -284,14 +284,14 @@ export class OtrosDerechosComponent implements OnInit {
     historySalaryArray.splice(historySalaryArray.length-2, 2):
     historySalaryArray;
   }
-  
+
   get currentSex(){
     return localStorage.gender;
-  }  
+  }
 
   getValueFormField(fieldName: string){
-    return this.formOtherRights.get(fieldName)?.value; 
-  } 
+    return this.formOtherRights.get(fieldName)?.value;
+  }
 
   validFieldButton(fieldArray: string[], classPanel: string) {
     let validateArray = fieldArray.map(field => this.formOtherRights.get(field)?.valid );
@@ -300,7 +300,7 @@ export class OtrosDerechosComponent implements OnInit {
       this.hiddenPanel(classPanel);
     }
   }
-  
+
   getYearsHistoryArray(){
     return getDataStore('cache').historySalaries;
   }
@@ -318,7 +318,7 @@ export class OtrosDerechosComponent implements OnInit {
         break;
       case 'daysOffPregnancy':
         this.isActiveDaysOffPregnancy =! this.isActiveDaysOffPregnancy;
-        this.isActiveDaysOffPregnancy? 
+        this.isActiveDaysOffPregnancy?
         this.render2.addClass(this.$panelDaysOffPregnancy.nativeElement, 'active'):
         this.render2.removeClass(this.$panelDaysOffPregnancy.nativeElement, 'active');
         this.isActiveDaysOffPregnancy?
@@ -327,7 +327,7 @@ export class OtrosDerechosComponent implements OnInit {
         break;
       case 'breastFeedingHours':
         this.isActiveBreastFeedingHours =! this.isActiveBreastFeedingHours;
-        this.isActiveBreastFeedingHours? 
+        this.isActiveBreastFeedingHours?
         this.render2.addClass(this.$panelBreastFeedingHours.nativeElement, 'active'):
         this.render2.removeClass(this.$panelBreastFeedingHours.nativeElement, 'active');
         this.isActiveBreastFeedingHours?
@@ -448,7 +448,7 @@ export class OtrosDerechosComponent implements OnInit {
         break;
       case 'owedHistorySalaries':
         this.isActiveOwedHistorySalaries =! this.isActiveOwedHistorySalaries;
-        break; 
+        break;
       case 'owedOtherPayments' :
         this.isActiveOwedOtherPayments =! this.isActiveOwedOtherPayments;
         if(this.isActiveOwedOtherPayments){
@@ -474,7 +474,7 @@ export class OtrosDerechosComponent implements OnInit {
   get owedFourteenthMonthValue(){
     return this.formOtherRights.get('owedFourteenthMonth')?.value;
   }
-  
+
   get owedFourteenthMonth2Value(){
     return this.formOtherRights.get('owedFourteenthMonth2')?.value;
   }
@@ -489,7 +489,7 @@ export class OtrosDerechosComponent implements OnInit {
       }
     });
   }
-  
+
   getOwedFourteenthMonthArray(){
     return this.getLastTwoYearsSalaryReadjustment().map((item: any, index: any) => {
       if(index === 0){
@@ -505,12 +505,12 @@ export class OtrosDerechosComponent implements OnInit {
     if(getDataStore('cache').requestId){
       this.render2.addClass(this.$overlay.nativeElement, 'active-overlay');
       let requestOld = getDataStore('cache');
-      let keyToDelete = 'compensationRightsRequest';      
+      let keyToDelete = 'compensationRightsRequest';
       const newRequest = Object.keys(requestOld)
-        .reduce((prev, next) => { 
+        .reduce((prev, next) => {
           return next === keyToDelete ? prev : {...prev, [next]: requestOld[next]}
         },{otherRightsRequest:{}});
-      
+
       newRequest.otherRightsRequest = {
         haveSchoolAgeChildren: this.isActiveHaveSchoolAgeChildren ,
         historySalaries: requestOld.historySalaries,
@@ -567,8 +567,7 @@ export class OtrosDerechosComponent implements OnInit {
       this.calculoPrestacionesService
       .sendOtherRightsCompute(newRequest).subscribe((response: any) => {
         this.render2.removeClass(this.$overlay.nativeElement, 'active-overlay');
-        setDataSalaryCalculationStore(response);
-        this.otherRightsResponseEvent.emit(response.otherRights);
+        this.otherRightsResponseEvent.emit(response);
       });
     }
   }

@@ -5,7 +5,7 @@ import {Subscription} from 'rxjs';
 import {CompensationRights} from 'src/app/models/compensation-rights.model';
 import {TerminationContractType} from 'src/app/models/enums/termination-contract-type.enum';
 import {CalculoPrestacionesService} from 'src/app/modules/services/calculo-prestaciones/calculo-prestaciones.service';
-import {getDataStore, scrollAnimationGoTo, setDataCacheStore, setDataSalaryCalculationStore} from 'src/app/utils/utils';
+import {getDataStore, scrollAnimationGoTo, setDataCacheStore} from 'src/app/utils/utils';
 import {ToolbarService} from 'src/app/_metronic/layout/components/toolbar/toolbar.service';
 import {CalculoPrestacionesComponent} from '../../pages/calculo-prestaciones/calculo-prestaciones.component';
 
@@ -117,8 +117,7 @@ export class DerechosIdemnizacionesComponent implements OnInit {
       this.calculoPrestacionesService.sendCompensationsRightsInfo(store)
         .subscribe((res: any) => {
           res ? this.render2.removeClass(this.$overlay.nativeElement, 'active-overlay') : null;
-          this.compensationRightsResponseEvent.emit(res.compensationRights);
-          console.log(`Compensation rights (from parent) > `, this.compensationRights);
+          this.compensationRightsResponseEvent.emit(res);
         });
     }
   }
