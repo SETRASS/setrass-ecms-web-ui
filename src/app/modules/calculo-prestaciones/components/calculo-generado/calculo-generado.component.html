@@ -48,7 +48,7 @@
           <!-- left side (#request, requestType) -->
           <div>
             <div>
-              <span class="fw-bold">No. cálculo:</span> {{requestInfo.requestId ?? ''}}
+              <span class="fw-bold">No. cálculo:</span> {{requestInfo?.requestId ?? ''}}
             </div>
             <div>
               <span class="fw-bold">Cálculo por:</span> {{terminationContractType}}
@@ -71,22 +71,22 @@
           <!-- left side (person name, employer, date start) -->
           <div>
             <div>
-              <span class="fw-bold">Nombre Trabajador(a):</span> {{requestEmployeeInfo.firstName ?? ''}} {{requestEmployeeInfo.lastName ?? ''}}
+              <span class="fw-bold">Nombre Trabajador(a):</span> {{requestEmployeeInfo?.firstName ?? ''}} {{requestEmployeeInfo?.lastName ?? ''}}
             </div>
             <div>
-              <span class="fw-bold">Nombre Empresa o Razón Social:</span> {{requestInfo.employer?.employerName ?? ''}}
+              <span class="fw-bold">Nombre Empresa o Razón Social:</span> {{requestInfo?.employer?.employerName ?? ''}}
             </div>
             <div>
-              <span class="fw-bold">Fecha de Inicio:</span> {{requestInfo.startDate ?? ''}}
+              <span class="fw-bold">Fecha de Inicio:</span> {{requestInfo?.startDate ?? ''}}
             </div>
           </div>
           <!-- right side (identification number, end date) -->
           <div class="d-flex flex-column align-items-end">
             <div>
-              <span class="fw-bold">N° identificación:</span> {{requestInfo.identificationNumber ?? ''}}
+              <span class="fw-bold">N° identificación:</span> {{requestInfo?.identificationNumber ?? ''}}
             </div>
             <div>
-              <span class="fw-bold">Fecha de Despido:</span> {{requestInfo.endDate ?? ''}}
+              <span class="fw-bold">Fecha de Despido:</span> {{requestInfo?.endDate ?? ''}}
             </div>
           </div>
         </div>

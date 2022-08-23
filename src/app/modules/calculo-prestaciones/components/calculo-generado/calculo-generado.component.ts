@@ -263,8 +263,8 @@ export class CalculoGeneradoComponent implements OnInit {
     this.todayDate = today.toLocaleDateString('es-HN');
     this.requestInfo = getDataStore('cache');
     this.requestEmployeeInfo = getDataStore('employee');
-    this.terminationContractType = this.terminationContractTypeGetter(this.requestEmployeeInfo.terminationContractType ?? -1);
-    this.requestType = this.requestTypeGetter(this.requestEmployeeInfo.requestType ?? -1);
+    this.terminationContractType = this.terminationContractTypeGetter(this.requestEmployeeInfo?.terminationContractType ?? -1);
+    this.requestType = this.requestTypeGetter(this.requestEmployeeInfo?.requestType ?? -1);
   }
 
   requestTypeGetter(requestType: number) : string {
