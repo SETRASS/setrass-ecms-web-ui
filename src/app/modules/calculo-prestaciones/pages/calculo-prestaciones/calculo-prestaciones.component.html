@@ -27,8 +27,9 @@
     (showCalculoGeneradoEvent)="showCalculoGeneradoListener($event)"
 ></ecms-otros-derechos>
 <br>
-<!-- [hidden]="!showExportPdf" -->
+
 <ecms-calculo-generado
+    [hidden]="!showExportPdf"
     [laborOld]="laborOld"
     [otherRights]="otherRights"
     [computedSalaries]="computedSalaries"
