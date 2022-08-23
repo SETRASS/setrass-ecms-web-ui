@@ -4,7 +4,7 @@ import { format } from 'date-fns';
 
 import {IStepperOptions, StepperComponent, ToggleComponent} from 'src/app/_metronic/kt/components';
 import {PersonType} from 'src/app/models/enums/person-type.enum';
-import { getDataStore, getYearSelect, scrollAnimationGoTo, setDataCacheStore, setDataGender, setDataSalaryCalculationStore } from '../../../../utils/utils';
+import { getDataStore, getYearSelect, scrollAnimationGoTo, setDataCacheStore, setDataEmployeeStore, setDataGender } from '../../../../utils/utils';
 
 import {LookupsService} from "../../../services/lookups/lookups.service";
 import {SalaryHistoryCatalogService} from "../../../services/salary-history-catalog/salary-history-catalog.service";
@@ -155,30 +155,30 @@ export class DatosEmpleadorComponent implements OnInit {
   private formBuild() {
     this.formEmployer = this.formBuilder.group({
       companyData: this.formBuilder.group({
-        companyName: ['La empresa SA', [Validators.required, Validators.minLength(5)]],
+        companyName: ['', [Validators.required, Validators.minLength(5)]],
         personType: ['JURIDICA', [Validators.required]],
-        rtnNumber: ['08011994058778', [Validators.required, Validators.minLength(14), Validators.maxLength(14), Validators.pattern(/^[0-9]+$/)]],
+        rtnNumber: ['', [Validators.required, Validators.minLength(14), Validators.maxLength(14), Validators.pattern(/^[0-9]+$/)]],
         dniNumber: ['', []],
         economicActivity: ['', [Validators.required,]],
         companySize: ['', [Validators.required, Validators.pattern(/^[0-9]+$/)]]
       }),
       employeeData: this.formBuilder.group({
         typeIdentity: ['DNI', [Validators.required]],
-        identityNumber: ["0801199405879", [Validators.required, Validators.minLength(13), Validators.maxLength(13), Validators.pattern(/^[0-9]+$/)]],
-        employeeName: ['Andrea Nicolle', [Validators.required, Validators.pattern(/^([Aa-zA-ZáéíóúÁÉÍÓÚÑñ]{2,}\s?){2,4}$/)]],
-        employeeLastname: ['Salazar', [Validators.required, Validators.pattern(/^([Aa-zA-ZáéíóúÁÉÍÓÚÑñ]{2,}\s?){2,4}$/)]],
-        employeeAge: [21, [Validators.required, Validators.min(14), Validators.max(85), Validators.pattern(/^[0-9]+$/)]],
+        identityNumber: ["", [Validators.required, Validators.minLength(13), Validators.maxLength(13), Validators.pattern(/^[0-9]+$/)]],
+        employeeName: ['', [Validators.required, Validators.pattern(/^([Aa-zA-ZáéíóúÁÉÍÓÚÑñ]{2,}\s?){2,4}$/)]],
+        employeeLastname: ['', [Validators.required, Validators.pattern(/^([Aa-zA-ZáéíóúÁÉÍÓÚÑñ]{2,}\s?){2,4}$/)]],
+        employeeAge: ['', [Validators.required, Validators.min(14), Validators.max(85), Validators.pattern(/^[0-9]+$/)]],
         employeeSex: ['F', [Validators.required]],
-        employeePhone: ['32876905', [Validators.required, Validators.minLength(8), Validators.maxLength(8)]],
-        employeeEmail: ['andrea.nicolle@mail.com', [Validators.required, Validators.email]],
+        employeePhone: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(8)]],
+        employeeEmail: ['', [Validators.required, Validators.email]],
         department: ['', [Validators.required]],
         municipality: ['', [Validators.required]],
       }),
       salaryData: this.formBuilder.group({
-        startDate: [this.getFutureDate(5), [Validators.required]],
-        endDate: ['2022-09-10', [Validators.required]],
+        startDate: ['2020-09-10', [Validators.required]],
+        endDate: [this.getFutureDate(), [Validators.required]],
         fixedSalary: ['SI', [Validators.required]],
-        salary: ['20000', [Validators.required]],
+        salary: ['', [Validators.required]],
         monthlySalaryAverage1: [0, []],
         monthlySalaryAverage2: [0, []],
         monthlySalaryAverage3: [0, []],
@@ -253,9 +253,6 @@ export class DatosEmpleadorComponent implements OnInit {
     
     this.formEmployer.get('speciesSalary.optionSpeciesSalary')?.valueChanges
     .subscribe(value => {
-      console.log(value);
-      console.log(this.formEmployer.get('speciesSalary.foodTime'));
-      console.log(this.formEmployer.get('speciesSalary'));
       if(value === 'FEED'){
         this.formEmployer.get('speciesSalary.foodTime')?.setValidators([Validators.required]);
       }else{
@@ -399,6 +396,7 @@ export class DatosEmpleadorComponent implements OnInit {
       requestType: this.getCurrentRequestType(),
       terminationContractType: this.getCurrentTerminationContract()
     }
+    setDataEmployeeStore(data);
     let req = getDataStore('cache');
     setDataGender(employeeData.employeeSex);
     this.calculoPrestacionesService.sendEmployeeEmployerReq(data)
@@ -470,7 +468,6 @@ export class DatosEmpleadorComponent implements OnInit {
       this.calculoPrestacionesService.sendCompensationsRightsInfo(data)
       .subscribe(value => {
         value ? this.render2.removeClass(this.$overlay.nativeElement, 'active-overlay') : null;
-        setDataSalaryCalculationStore(value);
         this.calculoResponseEvent.emit(value);
         setTimeout(() => scrollAnimationGoTo('calculo-salarial'), 550);
       }, (catchError) => console.warn(catchError));
