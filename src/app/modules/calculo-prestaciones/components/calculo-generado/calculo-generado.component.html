@@ -11,19 +11,21 @@
     <div class="row mb-5">
       <div class="col-sm-12 col-lg-8">
         <br>
-        <p>Su cálculo de prestaciones se ha generado exitosamente, haga clic en el boton de descarga.</p>
+        <p>Su cálculo de prestaciones se ha generado exitosamente</p>
       </div>
       <div class="col-sm-12 col-lg-4 d-flex justify-content-end">
         <button
-          type="button"
-          (click)="printDocument()"
           class="btn btn-primary"
+          [useExistingCss]="true"
+          styleSheetFile="assets/templates/custom-calc-prest-document.css"
+          printSectionId="gen-calc-document"
+          ngxPrint
         >
           Descargar cálculo de prestaciones
         </button>
       </div>
     </div>
-    <div class="row">
+    <div id="gen-calc-document" class="row">
       <div class="col-lg-12">
         <!-- header-title -->
         <div class="d-flex flex-row justify-content-between cdp-doc-header-title">
@@ -49,7 +51,7 @@
               <span class="fw-bold">No. cálculo:</span> {{requestInfo.requestId ?? ''}}
             </div>
             <div>
-              <span class="fw-bold">Cálculo por:</span> @terminationContractType
+              <span class="fw-bold">Cálculo por:</span> {{terminationContractType}}
             </div>
           </div>
           <!-- right side (dateOfCreation, CalculoPrestacionesRequestType) -->
@@ -58,7 +60,7 @@
               <span class="fw-bold">Fecha de emisión:</span> {{todayDate}}
             </div>
             <div>
-              <span class="fw-bold">Solicitante:</span> @requestType
+              <span class="fw-bold">Solicitante:</span> {{requestType}}
             </div>
           </div>
         </div>
@@ -69,7 +71,7 @@
           <!-- left side (person name, employer, date start) -->
           <div>
             <div>
-              <span class="fw-bold">Nombre Trabajador(a):</span> @firstName @lastName
+              <span class="fw-bold">Nombre Trabajador(a):</span> {{requestEmployeeInfo.firstName ?? ''}} {{requestEmployeeInfo.lastName ?? ''}}
             </div>
             <div>
               <span class="fw-bold">Nombre Empresa o Razón Social:</span> {{requestInfo.employer?.employerName ?? ''}}
@@ -81,7 +83,7 @@
           <!-- right side (identification number, end date) -->
           <div class="d-flex flex-column align-items-end">
             <div>
-              <span class="fw-bold">N° identificación:</span> @identificationType
+              <span class="fw-bold">N° identificación:</span> {{requestInfo.identificationNumber ?? ''}}
             </div>
             <div>
               <span class="fw-bold">Fecha de Despido:</span> {{requestInfo.endDate ?? ''}}
@@ -102,9 +104,9 @@
           <!-- column 2 -->
           <div>
             <p class="mb-0"><span class="fw-bold">Meses:</span> {{laborOld.months}}</p>
-            <p class="mb-0">L. {{computedSalaries.baseMonthSalary}}</p>
-            <p class="mb-0">L. {{computedSalaries.ordinaryAverageMonthlySalary}}</p>
-            <p class="mb-0">L. {{computedSalaries.averageMonthlySalary}}</p>
+            <p class="mb-0">L. {{computedSalaries.baseMonthSalary | number: '1.2'}}</p>
+            <p class="mb-0">L. {{computedSalaries.ordinaryAverageMonthlySalary | number: '1.2'}}</p>
+            <p class="mb-0">L. {{computedSalaries.averageMonthlySalary | number: '1.2'}}</p>
           </div>
           <!-- column 3 -->
           <div class="d-flex flex-column align-items-end">
@@ -116,9 +118,9 @@
           <!-- column 4 -->
           <div class="d-flex flex-column align-items-end">
             <p class="mb-0"><span class="fw-bold">Total días laborados:</span> {{laborOld.totalWorkedDays}}</p>
-            <p class="mb-0">L. {{computedSalaries.ordinaryDailySalary}}</p>
-            <p class="mb-0">L. {{computedSalaries.ordinaryAverageDailySalary}}</p>
-            <p class="mb-0">L. {{computedSalaries.averageDailySalary}}</p>
+            <p class="mb-0">L. {{computedSalaries.ordinaryDailySalary | number: '1.2'}}</p>
+            <p class="mb-0">L. {{computedSalaries.ordinaryAverageDailySalary | number: '1.2'}}</p>
+            <p class="mb-0">L. {{computedSalaries.averageDailySalary | number: '1.2'}}</p>
           </div>
         </div>
         <!-- end Old time employee and computed salaries -->
@@ -195,13 +197,13 @@
           <!-- right side -->
           <div class="d-flex flex-column align-items-end">
             <div>
-              L.25,000
+              L. {{compensationRightSubTotal | number: '1.2'}}
             </div>
             <div>
-              L.25,000
+              L. {{otherRightSubTotal | number: '1.2'}}
             </div>
             <div>
-              <span class="fw-bold">L.50,000.00</span>
+              <span class="fw-bold">L. {{compensationRightSubTotal +  otherRightSubTotal | number: '1.2'}}</span>
             </div>
           </div>
         </div>

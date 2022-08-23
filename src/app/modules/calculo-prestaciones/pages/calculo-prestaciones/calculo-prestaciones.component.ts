@@ -252,6 +252,9 @@ export class CalculoPrestacionesComponent implements OnInit, AfterViewInit {
     }
   };
 
+  compensationRightSubTotal = 0.00;
+  otherRightSubTotal = 0.00;
+
   constructor(public toolbarService: ToolbarService,
               public calculoPrestacionesService: CalculoPrestacionesService) {
   }
@@ -288,11 +291,13 @@ export class CalculoPrestacionesComponent implements OnInit, AfterViewInit {
   }
 
   compensationRightsListener(data: any) {
-    this.compensationRights = data;
+    this.compensationRights = data.compensationRights;
+    this.compensationRightSubTotal = data.compensationRightSubTotal;
   }
 
   otherRightsListener(data: any) {
-    this.otherRights = data;
+    this.otherRights = data.otherRights;
+    this.otherRightSubTotal = data.otherRightSubTotal;
   }
 
   showOtherRightsListener(data: boolean) {

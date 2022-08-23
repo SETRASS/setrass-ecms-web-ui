@@ -117,8 +117,7 @@ export class DerechosIdemnizacionesComponent implements OnInit {
       this.calculoPrestacionesService.sendCompensationsRightsInfo(store)
         .subscribe((res: any) => {
           res ? this.render2.removeClass(this.$overlay.nativeElement, 'active-overlay') : null;
-          this.compensationRightsResponseEvent.emit(res.compensationRights);
-          console.log(`Compensation rights (from parent) > `, this.compensationRights);
+          this.compensationRightsResponseEvent.emit(res);
         });
     }
   }

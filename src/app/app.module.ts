@@ -12,6 +12,7 @@ import { AppComponent } from './app.component';
 import { environment } from 'src/environments/environment';
 // #fake-start#
 import { FakeAPIService } from './_fake/fake-api.service';
+import {NgxPrintModule} from "ngx-print";
 // #fake-end#
 
 @NgModule({
@@ -22,6 +23,7 @@ import { FakeAPIService } from './_fake/fake-api.service';
     TranslateModule.forRoot(),
     HttpClientModule,
     ClipboardModule,
+    NgxPrintModule,
     // #fake-start#
     environment.isMockEnabled
       ? HttpClientInMemoryWebApiModule.forRoot(FakeAPIService, {

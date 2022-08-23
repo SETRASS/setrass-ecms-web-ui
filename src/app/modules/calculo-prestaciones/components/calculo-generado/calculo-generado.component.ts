@@ -1,6 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {DomSanitizer} from "@angular/platform-browser";
 import {ComputedSalaries} from "../../../../models/computed-salaries.model";
 import {LaborOld} from "../../../../models/labor-old.model";
 import {CompensationRights} from "../../../../models/compensation-rights.model";
@@ -243,54 +242,44 @@ export class CalculoGeneradoComponent implements OnInit {
       time: "string"
     }
   };
+  @Input() compensationRightSubTotal = 0.00;
+  @Input() otherRightSubTotal = 0.00;
+
   requestInfo: any = null;
+  requestEmployeeInfo: any = null;
   todayDate = '';
+  terminationContractType: string;
+  requestType: string;
 
   //files
   readonly assetsRoute: string = 'assets/templates';
   initialHtmlText = "";
   finalHtmlText: any;
 
-  constructor(private httpClient: HttpClient,
-              private sanitize: DomSanitizer) { }
+  constructor() { }
 
   ngOnInit(): void {
-    this.loadHtmlTemplate("calculo-de-prestaciones-doc.html");
     const today = new Date();
     this.todayDate = today.toLocaleDateString('es-HN');
     this.requestInfo = getDataStore('cache');
+    this.requestEmployeeInfo = getDataStore('employee');
+    this.terminationContractType = this.terminationContractTypeGetter(this.requestEmployeeInfo.terminationContractType ?? -1);
+    this.requestType = this.requestTypeGetter(this.requestEmployeeInfo.requestType ?? -1);
   }
 
-  loadHtmlTemplate(htmlTemplateName: string): void {
-    this.httpClient.get(`${this.assetsRoute}/${htmlTemplateName}`, { responseType: 'text' }).subscribe((data) => {
-      this.initialHtmlText = data;
-      this.sanitizeHtml();
-    });
+  requestTypeGetter(requestType: number) : string {
+    switch (requestType) {
+      case 0: return "TRABAJADOR";
+      case 1: return "EMPLEADOR";
+      default: return "";
+    }
   }
 
-  stringToHTML = (str: string) => {
-    const parser = new DOMParser();
-    const doc = parser.parseFromString(str, 'text/html');
-    return doc.body;
-  }
-
-  sanitizeHtml(): void {
-    this.finalHtmlText = this.sanitize.bypassSecurityTrustHtml(this.initialHtmlText);
-  }
-
-  printDocument(): void {
-    /*
-    this.requestInfo = getDataStore('cache');
-    console.log(this.requestInfo);
-    * */
-    const printWindow = window.open('', '', 'height=400,width=800');
-    // @ts-ignore
-    if (printWindow !== null) {
-      printWindow.document.write(this.finalHtmlText);
-      printWindow.document.close();
-      setTimeout(() => {
-        printWindow.print();
-      }, 1000)
+  terminationContractTypeGetter(terminationContractType: number) : string {
+    switch (terminationContractType) {
+      case 0: return "RENUNCIA";
+      case 1: return "DESPIDO";
+      default: return "";
     }
   }
 }
