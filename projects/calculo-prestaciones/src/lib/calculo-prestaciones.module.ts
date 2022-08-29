@@ -37,7 +37,6 @@ import { CalculoPrestacionesPage } from './pages/calculo-prestaciones/calculo-pr
     ReactiveFormsModule,
     WidgetsModule,
     ServicesModule,
-    LayoutModule,
     HttpClientModule,
     NgxPrintModule,
     CalculoPrestacionesRoutingModule
