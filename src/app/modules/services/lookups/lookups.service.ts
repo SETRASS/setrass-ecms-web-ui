@@ -3,7 +3,7 @@ import {BaseHttpService} from "../base-http.service";
 import {HttpClient} from "@angular/common/http";
 import {map, Observable, tap} from "rxjs";
 import {environment} from "../../../../environments/environment";
-import { LocationStore } from '../../calculo-prestaciones/state/locations/locations.store';
+import { LocationStore } from '../../../../../projects/calculo-prestaciones/src/lib/state/locations/locations.store';
 import { Locations } from 'src/app/models/locations.model';
 
 @Injectable()

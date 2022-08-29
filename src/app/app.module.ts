@@ -13,6 +13,7 @@ import { environment } from 'src/environments/environment';
 // #fake-start#
 import { FakeAPIService } from './_fake/fake-api.service';
 import {NgxPrintModule} from "ngx-print";
+import { CalculoPrestacionesModule } from './modules/calculo-prestaciones/calculo-prestaciones.module';
 // #fake-end#
 
 @NgModule({
@@ -35,6 +36,7 @@ import {NgxPrintModule} from "ngx-print";
     AppRoutingModule,
     InlineSVGModule.forRoot(),
     NgbModule,
+    CalculoPrestacionesModule
   ],
   providers: [
   ],

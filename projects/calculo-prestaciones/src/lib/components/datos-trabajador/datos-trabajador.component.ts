@@ -5,8 +5,8 @@ import {FormControl, FormGroup, Validators, FormBuilder, FormArray} from '@angul
 import {IStepperOptions, StepperComponent, ToggleComponent } from 'src/app/_metronic/kt/components';
 import {PersonType } from 'src/app/models/enums/person-type.enum';
 
-import {LookupsService} from "../../../services/lookups/lookups.service";
-import {SalaryHistoryCatalogService} from "../../../services/salary-history-catalog/salary-history-catalog.service";
+import {LookupsService} from "../../../../../../src/app/modules/services/lookups/lookups.service";
+import {SalaryHistoryCatalogService} from "../../../../../../src/app/modules/services/salary-history-catalog/salary-history-catalog.service";
 import {CalculoPrestacionesService} from 'src/app/modules/services/calculo-prestaciones/calculo-prestaciones.service';
 
 import { ToolbarService } from 'src/app/_metronic/layout/components/toolbar/toolbar.service';
@@ -27,7 +27,7 @@ import { SalaryCalculationQuery } from '../../state/salary-calculation/salary-ca
 @Component({
   selector: 'ecms-datos-trabajador',
   templateUrl: './datos-trabajador.component.html',
-  styleUrls: ['./datos-trabajador.component.scss'], 
+  styleUrls: ['./datos-trabajador.component.scss'],
 })
 
 export class DatosTrabajadorComponent implements OnInit {
@@ -52,10 +52,10 @@ export class DatosTrabajadorComponent implements OnInit {
   salaryOptions:String[] = ['SI', 'NO'];
   haveSalary: string = 'SI';
   economicActivityList:any []= [];
-  salaryRatesList: any[] = []; 
+  salaryRatesList: any[] = [];
   locations: any[] = [];
   companySizeList: any[] = [];
-  
+
   locationSelected:string;
   currentMunicipios: any[] = [];
   currentEconomicActivity: any[] = [];
@@ -71,7 +71,7 @@ export class DatosTrabajadorComponent implements OnInit {
 
   //locations$: Observable<Locations[]> = this.locationsQuery.selectAll();
   //isLocationsLoaded$: Observable<boolean> = this.locationsQuery.selectLoaded$;
-  
+
 
   @Output() calculoResponseEvent = new EventEmitter<any>();
 
@@ -86,31 +86,31 @@ export class DatosTrabajadorComponent implements OnInit {
                 private salaryCalculationStore: SalaryCalculationStore,
                 private salaryCalculationQuery: SalaryCalculationQuery)
                 {
-      this.formBuild();            
-      
+      this.formBuild();
+
     }
 
     ngAfterViewInit(): void{
-      this.stepperConfig();  
+      this.stepperConfig();
     }
-    
+
     ngOnInit(): void {
-    
+
     this.lookusService.getLocations().subscribe((data) =>{
       this.locations = data;
     }, ((error?: any)=> {
       const err = error.message | error;
       console.warn(err);
     }));
-    
+
     //economicActivityList
     this.salaryHistoryCatalogService.getEconomicActivities().subscribe((data)=> {
     this.economicActivityList = data;
     },((error)=> {
-    const err=error.message | error; 
+    const err=error.message | error;
     console.warn(err);
     }));
-    
+
     this.calculoPrestacionesService.terminationContractType$
     .subscribe((option:TerminationContractType) => {
       console.log(option);
@@ -122,26 +122,26 @@ export class DatosTrabajadorComponent implements OnInit {
     this.salaryCalculationQuery.getCache().subscribe(res => this.currentCacheData=res);
     }
 
-    
-    
+
+
     stepperConfig(){
     this.stepper1 = new StepperComponent(this.stepperSteps.nativeElement, this.stepperOptions);
     this.stepper1.on("kt.stepper.previous", () => this.stepper1.goPrev());
     this.stepper1.on("kt.stepper.next", () =>{
-    
+
     if(this.formEmployee.get('employeeData')?.valid && this.stepper1.getCurrentStepIndex() === 1){
-        return this.stepper1.goNext(); 
+        return this.stepper1.goNext();
     }
     if (this.formEmployee.get('companyData')?.valid && this.stepper1.getCurrentStepIndex() === 2) {
         this.postEmployeeAndEmployer();
         return this.stepper1.goNext();
     }
-    
+
     if(this.formEmployee.get('salaryData')?.valid && this.stepper1.getCurrentStepIndex() === 3) {
       this.addHistorySalaryFields();
       return this.stepper1.goNext();
     }
-    
+
     if(this.formEmployee.get('speciesSalary') ?.valid && this.stepper1.getCurrentStepIndex() === 4) {
       return this.stepper1.goNext();
     }
@@ -149,9 +149,9 @@ export class DatosTrabajadorComponent implements OnInit {
     if (this.formEmployee.get('historySalary')?.valid && this.stepper1.getCurrentStepIndex() === 5) {
       return this.stepper1.goNext();
     }
-    
+
     });
-    
+
     }
     private formBuild(){
     this.formEmployee= this.formBuilder.group({
@@ -172,7 +172,7 @@ export class DatosTrabajadorComponent implements OnInit {
         economicActivity: ['', [Validators.required,]],
         companySize:[,[ Validators.required, Validators.pattern(/^[0-9]+$/)]],
         personType: ['JURIDICA', [Validators.required]],
-      }), 
+      }),
       salaryData: this.formBuilder.group({
         startDate: ['2019-06-12', [Validators.required]],
         endDate: [this.getFutureDate(), [Validators.required]],
@@ -214,16 +214,16 @@ export class DatosTrabajadorComponent implements OnInit {
         optionSpeciesSalary: ['', [Validators.required]],
         foodTime: ['NONE', []]
       }),
-      historySalary: this.formBuilder.array([])    
+      historySalary: this.formBuilder.array([])
     });
-    
+
     this.formEmployee.get('salaryData.fixedSalary')?.valueChanges.
     subscribe(value => {
       console.log(value);
       if (value === 'NO') {
         for (let item =1; item<= 6; item++) {
           this.formEmployee.get(`salaryData.monthlySalaryAverage${item}`)?.setValidators([Validators.required, Validators.pattern(/^[0-9]+$/)]);
-        } 
+        }
         this.formEmployee.get('salaryData.salary')?.setValue(this.totalSalaryAverage);
         this.render2.setAttribute(this.salaryField.nativeElement, 'disabled', 'false');
         this.isSalaryFieldDisabled = true;
@@ -250,31 +250,31 @@ export class DatosTrabajadorComponent implements OnInit {
     });
 
     this.formEmployee.get('employeeData.identityNumber')?.setValidators([Validators.required, Validators.minLength(13), Validators.maxLength(13), Validators.pattern(/^[0-9]+$/)]);
-    
+
     this.formEmployee.get(`species.Salary.optionsSpeciesSalary`)?.valueChanges.subscribe(value => {
         if (value=== 'alimetacion'){
           return this.formEmployee.get('speciesSalary.foodTime')?.setValidators([Validators.required]);
         }
         this.formEmployee.get('speciesSalary.foodTime')?.setValidators([]);
     });
-    
+
     }
-    
+
     private createHistorySalaryFieldYear(anio: string, salary: any){
       return this.formBuilder.group({
         year: [anio],
         salary: [salary, [Validators.required]],
       });
     }
-    
+
     get salaryValue() {
     return this.formEmployee.get('salaryData.salary')?.value;
     }
-    
+
     get speciesSalaryValue() {
     return this.formEmployee.get('speciesSalary.optionSpeciesSalary')?.value;
     }
-    
+
     get isSpeciesSalaryValid() {
     return this.formEmployee.get('speciesSalary')?.valid;
     }
@@ -288,34 +288,34 @@ export class DatosTrabajadorComponent implements OnInit {
       console.log(this.getCompanyEmployeeWeight(event));
       this.currentEconomicActivity = this.getCompanyEmployeeWeight(event);
     }
-    
+
     totalySpeciesSalary(percentage: string) {
     if (percentage ==='20%') return (Number(this.salaryValue) * 0.20).toFixed(2);
     if (percentage === '30%') return (Number(this.salaryValue) * 0.30).toFixed(2);
     }
-    
+
     getErrorField(element: string, errorName: string) {
     return this.formEmployee.get(element)?.hasError(errorName);
     }
-    
+
     isValidField(formControlName: string) {
     return this.formEmployee.get(formControlName)?.touched &&
     this.formEmployee.get(formControlName)?.valid
     }
 
     isInvalidField(formControlName: string) {
-      return this.formEmployee.get(formControlName)?.touched && 
+      return this.formEmployee.get(formControlName)?.touched &&
       this.formEmployee.get(formControlName)?.invalid
     }
-    
+
     getMunicipios(id: string) {
     return this.locations.find(val => val.location.id === id).children;
     }
-    
+
     getCompanyEmployeeWeight(economicActivity: string) {
     return this.economicActivityList.filter(val => val.economicActivity === economicActivity);
     }
-    
+
     getLocation(event: any) {
     this.currentMunicipios = this.getMunicipios(event);
     }
@@ -348,7 +348,7 @@ export class DatosTrabajadorComponent implements OnInit {
     get historySalaryField(){
       return this.formEmployee.get('historySalary') as FormArray;
     }
-    
+
     getCurrentRequestType(){
       return this.toolbar.userTypeOf
     }
@@ -362,7 +362,7 @@ export class DatosTrabajadorComponent implements OnInit {
       const {salaryData, employeeData, companyData} = this.formEmployee.value;
 
        //this.workerPersonStore.add(employee);
-      
+
       let employer:EmployerDto = {
         companySize: companyData.companySize,
           economicActivity: companyData.economicActivity,
@@ -400,7 +400,7 @@ export class DatosTrabajadorComponent implements OnInit {
       })
 
     }
-    
+
     postSalaryInfoRequest() {
       this.render2.addClass(this.$overlay.nativeElement, 'active-overlay');
       const {salaryData, speciesSalary} = this.formEmployee.value;
@@ -451,10 +451,10 @@ export class DatosTrabajadorComponent implements OnInit {
           salaryData.extraHours.monthlyExtraHours5,
           salaryData.extraHours.monthlyExtraHours6
         ],
-        historySalaries: this.historySalaryValue    
+        historySalaries: this.historySalaryValue
       }
       let storeOld = getDataStore('cache');
-      storeOld.historySalaries = this.historySalaryValue; 
+      storeOld.historySalaries = this.historySalaryValue;
       setDataCacheStore(Object.assign(storeOld, data));
       this.calculoPrestacionesService.sendCompensationsRightsInfo(data).subscribe(response => {
         response ? this.render2.removeClass(this.$overlay.nativeElement, 'active-overlay') : null;
@@ -462,7 +462,7 @@ export class DatosTrabajadorComponent implements OnInit {
         setTimeout(() => scrollAnimationGoTo('calculo-salarial'), 550);
       }, (catchError) => console.warn(catchError));
     }
-  
+
     formDataSend() {
       this.postSalaryInfoRequest();
     }
@@ -483,8 +483,8 @@ export class DatosTrabajadorComponent implements OnInit {
     setMinDate(){
       this.minDate = this.formEmployee.get('salaryData.startDate')?.value;
     }
-    
-    addHistorySalaryFields(){ 
+
+    addHistorySalaryFields(){
       if(this.historySalaryField.controls.length > 0){
         this.historySalaryField.controls.splice(0,this.historySalaryField.controls.length);
       }
@@ -492,16 +492,16 @@ export class DatosTrabajadorComponent implements OnInit {
       this.formEmployee.get('salaryData.endDate')?.value);
       years.forEach((year:any) => this.historySalaryField.push(this.createHistorySalaryFieldYear(year,'')));
       const historySalaryElements : any = document.querySelectorAll('.historySalaryInput');
-      historySalaryElements.forEach((element:any) => element.setAttribute('disabled','true')); 
+      historySalaryElements.forEach((element:any) => element.setAttribute('disabled','true'));
     }
 
 }
 
 
 
-  
 
-  
+
+
 
 
 

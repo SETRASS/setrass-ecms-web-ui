@@ -1,13 +1,12 @@
 import {Component, ElementRef, EventEmitter, Input, OnInit, Output, Renderer2, ViewChild} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {ActivatedRoute, Router} from '@angular/router';
-import {Subscription} from 'rxjs';
+import {FormGroup} from '@angular/forms';
+import {Router} from '@angular/router';
 import {CompensationRights} from 'src/app/models/compensation-rights.model';
 import {TerminationContractType} from 'src/app/models/enums/termination-contract-type.enum';
 import {CalculoPrestacionesService} from 'src/app/modules/services/calculo-prestaciones/calculo-prestaciones.service';
 import {getDataStore, scrollAnimationGoTo, setDataCacheStore} from 'src/app/utils/utils';
 import {ToolbarService} from 'src/app/_metronic/layout/components/toolbar/toolbar.service';
-import {CalculoPrestacionesComponent} from '../../pages/calculo-prestaciones/calculo-prestaciones.component';
+//import {CalculoPrestacionesComponent} from '../../pages/calculo-prestaciones/calculo-prestaciones.component';
 
 
 @Component({

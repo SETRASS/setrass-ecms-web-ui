@@ -4,10 +4,10 @@ import { format } from 'date-fns';
 
 import {IStepperOptions, StepperComponent, ToggleComponent} from 'src/app/_metronic/kt/components';
 import {PersonType} from 'src/app/models/enums/person-type.enum';
-import { getDataStore, getYearSelect, scrollAnimationGoTo, setDataCacheStore, setDataEmployeeStore, setDataGender } from '../../../../utils/utils';
+import { getDataStore, getYearSelect, scrollAnimationGoTo, setDataCacheStore, setDataEmployeeStore, setDataGender } from '../../../../../../src/app/utils/utils';
 
-import {LookupsService} from "../../../services/lookups/lookups.service";
-import {SalaryHistoryCatalogService} from "../../../services/salary-history-catalog/salary-history-catalog.service";
+import {LookupsService} from "../../../../../../src/app/modules/services/lookups/lookups.service";
+import {SalaryHistoryCatalogService} from "../../../../../../src/app/modules/services/salary-history-catalog/salary-history-catalog.service";
 import {CalculoPrestacionesService} from 'src/app/modules/services/calculo-prestaciones/calculo-prestaciones.service';
 
 import {ToolbarService} from 'src/app/_metronic/layout/components/toolbar/toolbar.service';
@@ -91,10 +91,10 @@ export class DatosEmpleadorComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    
+
     // locations
-    this.lookupsService.getLocations().subscribe((data) => { 
-      this.locations = data;        
+    this.lookupsService.getLocations().subscribe((data) => {
+      this.locations = data;
     }, ((error?: any) => {
       const err = error.message | error;
       console.warn(err);
@@ -109,7 +109,7 @@ export class DatosEmpleadorComponent implements OnInit {
         const err = error.message | error;
         console.warn(err);
       });
-    
+
     this.calculoPrestacionesService.terminationContractType$
     .subscribe((option:TerminationContractType) => this.currentTerminationContractType = option);
     this.currentTerminationContractType = this.toolbarService.terminationContractType;
@@ -138,7 +138,7 @@ export class DatosEmpleadorComponent implements OnInit {
       if (this.formEmployer.get('speciesSalary')?.valid && this.stepper.getCurrentStepIndex() === 4) {
         return this.stepper.goNext();
       }
-      
+
       if (this.formEmployer.get('historySalary')?.valid && this.stepper.getCurrentStepIndex() === 5) {
         return this.stepper.goNext();
       }
@@ -250,7 +250,7 @@ export class DatosEmpleadorComponent implements OnInit {
           this.formEmployer.get('companyData.dniNumber')?.setValidators([]);
         }
       });
-    
+
     this.formEmployer.get('speciesSalary.optionSpeciesSalary')?.valueChanges
     .subscribe(value => {
       if(value === 'FEED'){
@@ -463,7 +463,7 @@ export class DatosEmpleadorComponent implements OnInit {
         }
       }
       let storeOld = getDataStore('cache');
-      storeOld.historySalaries = this.historySalaryValue; 
+      storeOld.historySalaries = this.historySalaryValue;
       setDataCacheStore(Object.assign(storeOld, data));
       this.calculoPrestacionesService.sendCompensationsRightsInfo(data)
       .subscribe(value => {
@@ -477,7 +477,7 @@ export class DatosEmpleadorComponent implements OnInit {
   getCurrentRequestType(){
     return this.toolbarService.userTypeOf
   }
-  
+
   getCurrentTerminationContract(){
     return this.toolbarService.terminationContractType;
   }
@@ -491,7 +491,7 @@ export class DatosEmpleadorComponent implements OnInit {
     years.forEach((year:any) => this.historySalaryField.push(this.createHistorySalaryFieldYear(year,'')));
     const historySalaryElements = document.querySelectorAll('.historySalaryInput');
     historySalaryElements.forEach((element:any) => element.setAttribute('disabled','true'));
-    
+
   }
 
   formDataSend() {

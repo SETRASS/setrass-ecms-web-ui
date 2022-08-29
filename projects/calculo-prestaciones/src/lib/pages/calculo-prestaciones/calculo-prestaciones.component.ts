@@ -10,11 +10,11 @@ import {setDataCacheStore, setDataGender} from 'src/app/utils/utils';
 import {ToolbarService} from 'src/app/_metronic/layout/components/toolbar/toolbar.service';
 
 @Component({
-  selector: 'app-calculo-prestaciones',
+  selector: 'ecms-calculo-prestaciones',
   templateUrl: './calculo-prestaciones.component.html',
   styleUrls: ['./calculo-prestaciones.component.scss']
 })
-export class CalculoPrestacionesComponent implements OnInit, AfterViewInit {
+export class CalculoPrestacionesPage implements OnInit, AfterViewInit {
 
   userType: CalculoPrestacionesRequestType;
   showSalaryCalculation: boolean = false;

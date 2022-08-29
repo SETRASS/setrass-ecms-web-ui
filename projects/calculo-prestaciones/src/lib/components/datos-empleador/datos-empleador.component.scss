@@ -1,4 +1,4 @@
-@import '../../../../../assets/sass/core/components/variables';
+@import '../../../../../../src/assets/sass/core/components/variables';
 
 .stepper-title{
     font-size: 15px !important;
@@ -60,7 +60,7 @@
     color: $gray-700;
 }
 
-.historySalaryLabel{ 
+.historySalaryLabel{
     display: flex;
     justify-content: flex-start;
     align-items: center;

@@ -15,7 +15,7 @@
       },
       "root": "",
       "sourceRoot": "src",
-      "prefix": "app",
+      "prefix": "ecms",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
@@ -98,6 +98,37 @@
             "assets": ["src/favicon.ico", "src/assets"],
             "styles": ["src/styles.scss"],
             "scripts": []
+          }
+        }
+      }
+    },
+    "calculo-prestaciones": {
+      "projectType": "library",
+      "root": "projects/calculo-prestaciones",
+      "sourceRoot": "projects/calculo-prestaciones/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/calculo-prestaciones/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/calculo-prestaciones/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/calculo-prestaciones/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/calculo-prestaciones/src/test.ts",
+            "tsConfig": "projects/calculo-prestaciones/tsconfig.spec.json",
+            "karmaConfig": "projects/calculo-prestaciones/karma.conf.js"
           }
         }
       }

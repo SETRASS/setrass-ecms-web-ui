@@ -1,7 +1,7 @@
 import { Component, ElementRef, Input, OnDestroy, OnInit, Renderer2, ViewChild } from '@angular/core';
 // { StepperComponent } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { getDataStore  } from '../../../../utils/utils';
+import { getDataStore  } from '../../../../../../src/app/utils/utils';
 
 
 
@@ -28,7 +28,7 @@ export class CalculoSalarialComponent implements OnInit {
     averageMonthlyCommissionsSalary: 0,
     averageMonthlyOvertimeSalary: 0,
     averageMonthlySalary: 0,
-    baseMonthSalary: 0, 
+    baseMonthSalary: 0,
     ordinaryAverageDailySalary: 0,
     ordinaryAverageMonthlySalary: 0,
     ordinaryDailySalary: 0,
@@ -40,7 +40,7 @@ export class CalculoSalarialComponent implements OnInit {
     totalWorkedDays: 0,
     years: 0
   };
-  
+
 
   constructor(
     private calculoPrestacionesService: CalculoPrestacionesService
@@ -48,9 +48,9 @@ export class CalculoSalarialComponent implements OnInit {
 
   ngAfterViewInit(): void {
   }
-  
+
   ngOnInit(): void {
-    
+
 
   }
 

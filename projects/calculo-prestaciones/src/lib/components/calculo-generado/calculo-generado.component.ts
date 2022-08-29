@@ -1,10 +1,10 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {ComputedSalaries} from "../../../../models/computed-salaries.model";
-import {LaborOld} from "../../../../models/labor-old.model";
-import {CompensationRights} from "../../../../models/compensation-rights.model";
-import {OtherRights} from "../../../../models/other-rights.model";
-import {getDataStore} from "../../../../utils/utils";
+import {ComputedSalaries} from "../../../../../../src/app/models/computed-salaries.model";
+import {LaborOld} from "../../../../../../src/app/models/labor-old.model";
+import {CompensationRights} from "../../../../../../src/app/models/compensation-rights.model";
+import {OtherRights} from "../../../../../../src/app/models/other-rights.model";
+import {getDataStore} from "../../../../../../src/app/utils/utils";
 
 @Component({
   selector: 'ecms-calculo-generado',
