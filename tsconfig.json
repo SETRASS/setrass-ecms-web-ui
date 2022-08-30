@@ -3,6 +3,12 @@
   "compileOnSave": false,
   "compilerOptions": {
     "baseUrl": "./",
+    "paths": {
+      "calculo-prestaciones": [
+        "dist/calculo-prestaciones/calculo-prestaciones",
+        "dist/calculo-prestaciones"
+      ]
+    },
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,
     "strict": true,
