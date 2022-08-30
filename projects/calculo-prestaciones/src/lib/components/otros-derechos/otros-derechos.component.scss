@@ -1,4 +1,4 @@
-@import '../../../../../assets/sass/core/components/variables';
+@import '../../../../../../src/assets/sass/core/components/variables';
 
 
 .stepper-title{
@@ -80,7 +80,7 @@ thead {
                 border-top-right-radius: 7px;
                 border-bottom-right-radius: 7px;
             }
-        } 
+        }
     }
 }
 
@@ -93,9 +93,9 @@ tbody {
             font-size: 15px;
         }
         &:nth-child(1){
-            
+
             font-weight: 500;
-            
+
         }
         &:nth-child(2){
             font-size: 17px;
@@ -145,7 +145,7 @@ tbody {
             }
             &:nth-child(2){
                 margin-left: 2rem !important;
-            } 
+            }
         }
     }
 }

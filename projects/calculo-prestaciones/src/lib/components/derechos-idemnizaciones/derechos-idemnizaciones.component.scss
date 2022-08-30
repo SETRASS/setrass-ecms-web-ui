@@ -1,4 +1,4 @@
-@import '../../../../../assets/sass/core/components/variables';
+@import '../../../../../../src/assets/sass/core/components/variables';
 
 .overlay{
     position: absolute;
@@ -33,7 +33,7 @@
 .active-overlay{
     display: flex;
 }
-  
+
 @keyframes rotation {
     0% {
       transform: rotate(0deg);
@@ -41,4 +41,4 @@
     100% {
       transform: rotate(360deg);
     }
-} 
+}
