@@ -1,0 +1,89 @@
+<div id="compensation-rights" class="card shadow-sm">
+    <div #overlay class="overlay"><div><span class="loader-recalulo"></span><h4>Recalculando...</h4></div></div>
+    <div class="card-header">
+        <h3 class="card-title">Derechos e Indemnizaciones</h3>
+        <!--<div class="card-toolbar">
+            <button type="button" class="btn btn-sm btn-light">
+                Action
+            </button>
+        </div>-->
+    </div>
+    <div class="card-body">
+        <div  class="row mb-5">
+            <p>Habilite los derechos e indenizaciones a los que usted goza.</p>
+        </div>
+        <div class="row">
+            <div class="col-sm-6 px-10">
+                <div class="d-flex justify-content-between mb-5">
+                    <div class="form-check form-switch form-check-custom form-check-solid me-10">
+                        <input #ForewarningNotice [(ngModel)]="hasForewarningNotice" class="form-check-input h-20px w-30px" type="checkbox" value="" id="flexSwitch20x30"/>
+                        <label class="form-check-label form-ecms-label" for="flexSwitch20x30">
+                            Preaviso
+                        </label>
+                    </div>
+                    <div>
+                        <span class="form-ecms-label">{{compensationRights.forewarningNotice.formula}} =</span>
+                        <span class="form-ecms-label">{{compensationRights.forewarningNotice.currency}} {{compensationRights.forewarningNotice.amount}}</span>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-between mb-5">
+                    <div class="form-check form-switch form-check-custom form-check-solid me-10">
+                        <input class="form-check-input h-20px w-30px" type="checkbox" checked disabled value="" id="flexSwitch20x30"/>
+                        <label class="form-check-label" for="flexSwitch20x30">
+                            Cesantía
+                        </label>
+                    </div>
+                    <span>{{compensationRights.unemploymentAid.formula}} =</span>
+                    <span>{{compensationRights.unemploymentAid.currency}} {{compensationRights.unemploymentAid.amount}}</span>
+                </div>
+                <div class="d-flex justify-content-between mb-5">
+                    <div class="form-check form-switch form-check-custom form-check-solid me-10">
+                        <input class="form-check-input h-20px w-30px" type="checkbox" checked disabled value="" id="flexSwitch20x30"/>
+                        <label class="form-check-label" for="flexSwitch20x30">
+                            Cesantía proporcional
+                        </label>
+                    </div>
+                    <span>{{compensationRights.unemploymentAidProportional.formula}} =</span>
+                    <span>{{compensationRights.unemploymentAidProportional.currency}} {{compensationRights.unemploymentAidProportional.amount}}</span>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="d-flex justify-content-between mb-5">
+                    <div class="form-check form-switch form-check-custom form-check-solid me-10">
+                        <input [(ngModel)]="hasProportionalVacationPay" class="form-check-input h-20px w-30px" type="checkbox" value="" id="flexSwitch20x30"/>
+                        <label class="form-check-label" for="flexSwitch20x30">
+                            Vacaciones proporcional
+                        </label>
+                    </div>
+                    <span>{{compensationRights.proportionalVacation.formula}} =</span>
+                    <span>{{compensationRights.proportionalVacation.currency}} {{compensationRights.proportionalVacation.amount}}</span>
+                </div>
+                <div class="d-flex justify-content-between mb-5">
+                    <div class="form-check form-switch form-check-custom form-check-solid me-10">
+                        <input class="form-check-input h-20px w-30px" type="checkbox" checked disabled value="" id="flexSwitch20x30"/>
+                        <label class="form-check-label" for="flexSwitch20x30">
+                            Treceavo mes proporcional
+                        </label>
+                    </div>
+                    <span>{{compensationRights.proportionalThirteenthMonthRight.formula}} =</span>
+                    <span>{{compensationRights.proportionalThirteenthMonthRight.currency}} {{compensationRights.proportionalThirteenthMonthRight.amount}}</span>
+                </div>
+                <div class="d-flex justify-content-between mb-5">
+                    <div class="form-check form-switch form-check-custom form-check-solid me-10">
+                        <input class="form-check-input h-20px w-30px" type="checkbox" checked disabled value="" id="flexSwitch20x30"/>
+                        <label class="form-check-label" for="flexSwitch20x30">
+                            Catorceavo mes proporcional
+                        </label>
+                    </div>
+                    <span>{{compensationRights.proportionalFourteenthMonthRight.formula}} =</span>
+                    <span>{{compensationRights.proportionalFourteenthMonthRight.currency}} {{compensationRights.proportionalFourteenthMonthRight.amount}}</span>
+                </div>
+            </div>
+        </div>
+        <div class="row"></div>
+    </div>
+    <div class="card-footer d-flex justify-content-end gap-5" >
+        <button type="button" class="btn btn-secondary" (click)="recalculo()">Recalcular</button>
+        <a type="button" class="btn btn-primary" (click)="nextStep()" >Siguiente</a>
+    </div>
+</div>

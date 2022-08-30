@@ -1,0 +1,40 @@
+<ecms-datos-empleador
+    *ngIf="toolbarService.userTypeOf === 1"
+    (calculoResponseEvent)="calculoResponseListener($event)"
+></ecms-datos-empleador>
+<ecms-datos-trabajador
+    *ngIf="toolbarService.userTypeOf === 0"
+    (calculoResponseEvent)="calculoResponseListener($event)"
+    ></ecms-datos-trabajador>
+<br>
+<ecms-calculo-salarial
+    [hidden]="!showSalaryCalculation"
+    [computedSalaries]="computedSalaries"
+    [laborOld]="laborOld"
+></ecms-calculo-salarial>
+<br>
+<ecms-derechos-idemnizaciones
+    [hidden]="!showCompensationRights"
+    [compensationRights]="compensationRights"
+    (compensationRightsResponseEvent)="compensationRightsListener($event)"
+    (showOtherRightsEvent)="showOtherRightsListener($event)"
+></ecms-derechos-idemnizaciones>
+<br>
+<ecms-otros-derechos
+    [hidden]="!showOtherRights"
+    [otherRights]="otherRights"
+    (otherRightsResponseEvent)="otherRightsListener($event)"
+    (showCalculoGeneradoEvent)="showCalculoGeneradoListener($event)"
+></ecms-otros-derechos>
+<br>
+<ecms-calculo-generado
+    [hidden]="!showExportPdf"
+    [laborOld]="laborOld"
+    [otherRights]="otherRights"
+    [computedSalaries]="computedSalaries"
+    [compensationRights]="compensationRights"
+    [otherRightSubTotal]="otherRightSubTotal"
+    [compensationRightSubTotal]="compensationRightSubTotal"
+></ecms-calculo-generado>
+<br>
+<!-- [hidden]="!showOtherRights" -->

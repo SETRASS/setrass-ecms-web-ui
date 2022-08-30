@@ -23,6 +23,7 @@ import { TopbarComponent } from './components/topbar/topbar.component';
 import { PageTitleComponent } from './components/header/page-title/page-title.component';
 import { HeaderMenuComponent } from './components/header/header-menu/header-menu.component';
 import {DropdownMenusModule} from '../partials';
+import { FormsModule } from '@angular/forms';
 
 
 const routes: Routes = [
@@ -50,6 +51,7 @@ const routes: Routes = [
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
+    FormsModule,
     TranslationModule,
     InlineSVGModule,
     NgbDropdownModule,
@@ -59,6 +61,6 @@ const routes: Routes = [
     NgbTooltipModule,
     TranslateModule,
   ],
-  exports: [RouterModule],
+  exports: [RouterModule, HeaderMenuComponent, LayoutComponent],
 })
 export class LayoutModule {}

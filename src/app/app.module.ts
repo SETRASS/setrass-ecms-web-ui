@@ -9,19 +9,22 @@ import { InlineSVGModule } from 'ng-inline-svg-2';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { environment } from 'src/environments/environment';
+import { environment } from 'projects/calculo-prestaciones/src/lib/environments/environment';
 // #fake-start#
 import { FakeAPIService } from './_fake/fake-api.service';
+import {NgxPrintModule} from "ngx-print";
+import { CalculoPrestacionesModule } from './modules/calculo-prestaciones/calculo-prestaciones.module';
 // #fake-end#
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent,],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     TranslateModule.forRoot(),
     HttpClientModule,
     ClipboardModule,
+    NgxPrintModule,
     // #fake-start#
     environment.isMockEnabled
       ? HttpClientInMemoryWebApiModule.forRoot(FakeAPIService, {
@@ -33,6 +36,7 @@ import { FakeAPIService } from './_fake/fake-api.service';
     AppRoutingModule,
     InlineSVGModule.forRoot(),
     NgbModule,
+    CalculoPrestacionesModule
   ],
   providers: [
   ],

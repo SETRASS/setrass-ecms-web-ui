@@ -1,14 +1,15 @@
 import { Routes } from '@angular/router';
+import { CalculoPrestacionesModule } from '../modules/calculo-prestaciones/calculo-prestaciones.module';
 
 const Routing: Routes = [
   {
-    path: 'dashboard',
-    loadChildren: () =>
-      import('./dashboard/dashboard.module').then((m) => m.DashboardModule),
+    path: "calculo-prestaciones",
+    loadChildren: () => CalculoPrestacionesModule
+    //loadChildren: () => import('./modules/calculo-prestaciones/calculo-prestaciones.module').then(m => m.CalculoPrestacionesModule)
   },
   {
     path: '',
-    redirectTo: '/dashboard',
+    redirectTo: '/calculo-prestaciones',
     pathMatch: 'full',
   },
   {

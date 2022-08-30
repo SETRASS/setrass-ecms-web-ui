@@ -13,9 +13,11 @@ $gray-400: 										    if(isDarkMode(), #474761, #B5B5C3) !default;
 $gray-500: 										    if(isDarkMode(), #565674, #A1A5B7) !default;
 $gray-600: 										    if(isDarkMode(), #6D6D80, #7E8299) !default;
 $gray-700: 										    if(isDarkMode(), #92929F, #5E6278) !default;
-$gray-800: 										    if(isDarkMode(), #CDCDDE, #3F4254) !default;
+$gray-800: 										    if(isDarkMode(), #CDCDDE, #4F4F4F) !default;
 $gray-900: 										    if(isDarkMode(), #FFFFFF, #181C32) !default;
 $text-muted:                                        $gray-500 !default;
+
+$secondary-local:                                   #EBEFF1;
 
 // Dark Mode
 $dark-mode-page-bg-color:                           #151521 !default;
@@ -70,8 +72,9 @@ $dark-light:          							    $gray-200 !default; // Custom variable
 $dark-inverse:         								if(isDarkMode(), $gray-100, $white) !default; // Custom variable
 
 // Primary colors
-$primary:       									#3699FF !default; // Bootstrap variable
-$primary-active:    								#187DE4 !default; // Custom variable
+$primary:       									#88CFE0 !default; // Bootstrap variable
+//$primary:       									#3699FF !default; // Bootstrap variable
+$primary-active:    								#25a8c9 !default; // Custom variable
 $primary-light:    								    if(isDarkMode(), #212E48, #F1FAFF) !default; // Custom variable
 $primary-inverse:  									$white !default;  // Custom variable
 

@@ -1,0 +1,230 @@
+<div id="export-pdf" class="card shadow-sm">
+  <div class="card-header">
+    <h3 class="card-title">Cálculo de prestaciones generado</h3>
+    <!--<div class="card-toolbar">
+      <button type="button" class="btn btn-sm btn-light">
+        Action
+      </button>
+    </div>-->
+  </div>
+  <div class="card-body">
+    <div class="row mb-5">
+      <div class="col-sm-12 col-lg-8">
+        <br>
+        <p>Su cálculo de prestaciones se ha generado exitosamente</p>
+      </div>
+      <div class="col-sm-12 col-lg-4 d-flex justify-content-end">
+        <button
+          class="btn btn-primary"
+          [useExistingCss]="true"
+          styleSheetFile="assets/templates/custom-calc-prest-document.css"
+          printSectionId="gen-calc-document"
+          ngxPrint
+        >
+          Descargar cálculo de prestaciones
+        </button>
+      </div>
+    </div>
+    <div id="gen-calc-document" class="row">
+      <div class="col-lg-12">
+        <!-- header-title -->
+        <div class="d-flex flex-row justify-content-between cdp-doc-header-title">
+          <div class="cdp-doc-header-title-logo"></div>
+          <!-- title and subTitle -->
+          <div class="d-flex flex-column align-self-center">
+            <div class="d-flex flex-row justify-content-center cdp-doc-header-title-text fw-bold">
+              DIRECCIÓN GENERAL DE INSPECCIÓN DEL TRABAJO
+            </div>
+            <div class="d-flex flex-row justify-content-center cdp-doc-header-subtitle-text fw-bold">
+              UNIDAD DE CALCULO DE PRESTACIONES E INDEMNIZACIONES LABORALES
+            </div>
+          </div>
+          <div class="cdp-doc-header-title-logo"></div>
+        </div>
+        <!-- end header-title-->
+
+        <!-- calculo overall-info-->
+        <div class="d-flex flex-row justify-content-between mt-1 small-font-size-text">
+          <!-- left side (#request, requestType) -->
+          <div>
+            <div>
+              <span class="fw-bold">No. cálculo:</span> {{requestInfo?.requestId ?? ''}}
+            </div>
+            <div>
+              <span class="fw-bold">Cálculo por:</span> {{terminationContractType}}
+            </div>
+          </div>
+          <!-- right side (dateOfCreation, CalculoPrestacionesRequestType) -->
+          <div class="d-flex flex-column align-items-end">
+            <div>
+              <span class="fw-bold">Fecha de emisión:</span> {{todayDate}}
+            </div>
+            <div>
+              <span class="fw-bold">Solicitante:</span> {{requestType}}
+            </div>
+          </div>
+        </div>
+        <!-- end calculo overall-info-->
+
+        <!-- Request person/employer data info -->
+        <div class="d-flex flex-row justify-content-between mt-2 border-box">
+          <!-- left side (person name, employer, date start) -->
+          <div>
+            <div>
+              <span class="fw-bold">Nombre Trabajador(a):</span> {{requestEmployeeInfo?.firstName ?? ''}} {{requestEmployeeInfo?.lastName ?? ''}}
+            </div>
+            <div>
+              <span class="fw-bold">Nombre Empresa o Razón Social:</span> {{requestInfo?.employer?.employerName ?? ''}}
+            </div>
+            <div>
+              <span class="fw-bold">Fecha de Inicio:</span> {{requestInfo?.startDate ?? ''}}
+            </div>
+          </div>
+          <!-- right side (identification number, end date) -->
+          <div class="d-flex flex-column align-items-end">
+            <div>
+              <span class="fw-bold">N° identificación:</span> {{requestInfo?.identificationNumber ?? ''}}
+            </div>
+            <div>
+              <span class="fw-bold">Fecha de Despido:</span> {{requestInfo?.endDate ?? ''}}
+            </div>
+          </div>
+        </div>
+        <!-- end Request person/employer data info -->
+
+        <!-- Old time employee and computed salaries -->
+        <div class="d-flex flex-row justify-content-between mt-2 border-box">
+          <!-- column 1 -->
+          <div class="d-flex flex-column align-self-start">
+            <p class="mb-0"><span class="fw-bold">Antiguedad:</span><span class="fw-bold"> Años:</span> {{laborOld.years}}</p>
+            <p class="mb-0"><span class="fw-bold">Salario Base Mensual:</span></p>
+            <p class="mb-0"><span class="fw-bold">Salario Base Promedio Mensual:</span></p>
+            <p class="mb-0"><span class="fw-bold">Salario Promedio Mensual:</span></p>
+          </div>
+          <!-- column 2 -->
+          <div>
+            <p class="mb-0"><span class="fw-bold">Meses:</span> {{laborOld.months}}</p>
+            <p class="mb-0">L. {{computedSalaries.baseMonthSalary | number: '1.2'}}</p>
+            <p class="mb-0">L. {{computedSalaries.ordinaryAverageMonthlySalary | number: '1.2'}}</p>
+            <p class="mb-0">L. {{computedSalaries.averageMonthlySalary | number: '1.2'}}</p>
+          </div>
+          <!-- column 3 -->
+          <div class="d-flex flex-column align-items-end">
+            <p class="mb-0"><span class="fw-bold">Días:</span> {{laborOld.days}}</p>
+            <p class="mb-0"><span class="fw-bold">Salario Base Diario:</span></p>
+            <p class="mb-0"><span class="fw-bold">Salario Base Promedio Diario:</span></p>
+            <p class="mb-0"><span class="fw-bold">Salario Promedio:</span></p>
+          </div>
+          <!-- column 4 -->
+          <div class="d-flex flex-column align-items-end">
+            <p class="mb-0"><span class="fw-bold">Total días laborados:</span> {{laborOld.totalWorkedDays}}</p>
+            <p class="mb-0">L. {{computedSalaries.ordinaryDailySalary | number: '1.2'}}</p>
+            <p class="mb-0">L. {{computedSalaries.ordinaryAverageDailySalary | number: '1.2'}}</p>
+            <p class="mb-0">L. {{computedSalaries.averageDailySalary | number: '1.2'}}</p>
+          </div>
+        </div>
+        <!-- end Old time employee and computed salaries -->
+
+        <!-- Compensation rights Table -->
+        <div class="mt-1">
+          <table class="table table-sm border border-dark small-font-size-text">
+            <thead>
+            <tr>
+              <th scope="col" class="fw-bold">Derechos e indemnizaciones</th>
+              <th scope="col" class="fw-bold">Tiempo</th>
+              <th scope="col" class="fw-bold">Valor</th>
+              <th scope="col" class="fw-bold">Cálculo</th>
+              <th scope="col" class="fw-bold">Valor Total</th>
+            </tr>
+            </thead>
+            <tbody class="table-item-titles">
+            <tr *ngFor="let item of compensationRights | keyvalue">
+              <th scope="row">{{compensationRights[item.key].itemName}}:</th>
+              <td>{{compensationRights[item.key].time}}</td>
+              <td>{{compensationRights[item.key].factorAmount | number : '1.2'}}</td>
+              <td>{{compensationRights[item.key].formula}}</td>
+              <td>{{compensationRights[item.key].currency}} {{compensationRights[item.key].amount | number: '1.2'}}</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+        <!-- end Compensation rights Table -->
+
+        <!-- Other rights table -->
+        <div>
+          <table class="table table-sm border border-dark small-font-size-text">
+            <thead>
+            <tr>
+              <th scope="col" class="fw-bold">Otros Derechos</th>
+              <th scope="col" class="fw-bold">Tiempo</th>
+              <th scope="col" class="fw-bold">Valor</th>
+              <th scope="col" class="fw-bold">Cálculo</th>
+              <th scope="col" class="fw-bold">Valor Total</th>
+            </tr>
+            </thead>
+            <tbody class="table-item-titles">
+            <tr *ngFor="let item of otherRights | keyvalue">
+              <th scope="row">{{otherRights[item.key].itemName}}:</th>
+              <td>{{otherRights[item.key].time}}</td>
+              <td>{{otherRights[item.key].factorAmount | number : '1.2'}}</td>
+              <td>{{otherRights[item.key].formula}}</td>
+              <td>{{otherRights[item.key].currency}} {{otherRights[item.key].amount | number: '1.2'}}</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+        <!-- end Other rights table -->
+
+        <!-- summary -->
+        <div class="d-flex flex-row justify-content-between mt-2 small-font-size-text">
+          <!-- left side -->
+          <div>
+            <div>
+              <span class="fw-bold">Subtotal, a pagar por Derechos e Indemnizaciones:</span>
+            </div>
+            <div>
+              <span class="fw-bold">Subtotal, a pagar por Otros Derechos:</span>
+            </div>
+            <div>
+              <span class="fw-bold">TOTAL, A PAGAR:</span>
+            </div>
+            <div>
+              <span class="fw-bold">Total en Letras:</span> Cuatrocientos veintidos mil trecientos ochenta y tres
+              lempiras y
+              55/100
+            </div>
+          </div>
+          <!-- right side -->
+          <div class="d-flex flex-column align-items-end">
+            <div>
+              L. {{compensationRightSubTotal | number: '1.2'}}
+            </div>
+            <div>
+              L. {{otherRightSubTotal | number: '1.2'}}
+            </div>
+            <div>
+              <span class="fw-bold">L. {{compensationRightSubTotal +  otherRightSubTotal | number: '1.2'}}</span>
+            </div>
+          </div>
+        </div>
+        <div class="border-box small-font-size-text mt-1">
+          <span class="fw-bold">OBSERVACIONES</span>
+        </div>
+        <!-- end summary -->
+        <!-- footer notes -->
+        <div class="small-font-size-text">
+          <p>Resultados emitidos estan calculados en base a los datos suministrados por el solicitante. En caso de
+            controversia
+            presentarse en las instalaciones de SETRASS.
+            Documento de caracter informativo, en caso de reclamo administrativo y/o judicial, se requiere validar por
+            un
+            inspector del trabajo, plasmando firma y sello de
+            la Secretaría del Trabajo y Seguridad Social.
+            <span class="fw-bold">http://www.trabajo.gob.hn/</span>
+          </p>
+        </div>
+        <!-- end footer notes -->
+      </div>
+    </div>
+  </div>
+</div>

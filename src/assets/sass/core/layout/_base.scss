@@ -10,8 +10,7 @@ body {
     padding: 0px;
     font-size: $root-font-size !important;
     font-weight: $font-weight-base;
-    font-family: $font-family-sans-serif;
-
+    font-family: 'Inter', sans-serif;
     // Tablet mode
     @include media-breakpoint-down(lg) {
         font-size: $root-font-size-lg !important;
@@ -38,6 +37,17 @@ body {
     color: $body-color;
 }
 
+h1, h2, h3, h4, h5, h6{
+  font-family: 'Pluto Sans Bold', sans-serif;
+}
+.btn{
+  font-family: 'Pluto Sans Bold', sans-serif;
+}
+
+.stepper-title{
+  font-family: 'Inter', sans-serif;
+}
+
 // Angular integration
 router-outlet {
     display: none;
@@ -46,3 +56,4 @@ router-outlet {
 canvas {
     user-select: none;
 }
+

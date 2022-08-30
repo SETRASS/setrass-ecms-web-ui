@@ -1,7 +1,14 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
+import { CalculoPrestacionesModule } from './modules/calculo-prestaciones/calculo-prestaciones.module';
+
 
 export const routes: Routes = [
+  /* {
+    path: "calculo-prestaciones",
+    loadChildren: () => CalculoPrestacionesModule
+    //loadChildren: () => import('./modules/calculo-prestaciones/calculo-prestaciones.module').then(m => m.CalculoPrestacionesModule)
+  }, */
   {
     path: 'error',
     loadChildren: () =>
@@ -16,7 +23,11 @@ export const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes,{
+    useHash: true,
+    enableTracing: false,
+    preloadingStrategy: PreloadAllModules
+  })],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}

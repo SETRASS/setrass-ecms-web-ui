@@ -1,0 +1,39 @@
+body {
+  margin: 10px 10px;
+}
+
+.cdp-doc-header-title-logo {
+  width: 60px;
+  height: 60px;
+  border: 1px solid;
+}
+
+.cdp-doc-header-title-text {
+  font-size: large;
+}
+
+.cdp-doc-header-subtitle-text {
+  font-size: 0.75rem;
+}
+
+.border-box {
+  font-size: 0.75rem;
+  border: 1px solid;
+  padding: 5px;
+}
+
+table {
+  border-spacing: 0px;
+}
+
+.table th, td {
+  text-align: center;
+}
+
+.table .table-item-titles tr th {
+  text-align: left;
+}
+
+.small-font-size-text {
+  font-size: 0.65rem;
+}
