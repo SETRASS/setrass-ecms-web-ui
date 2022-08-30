@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { environment } from 'src/environments/environment';
+import { environment } from 'projects/calculo-prestaciones/src/lib/environments/environment';
 import { BehaviorSubject } from 'rxjs';
 import * as objectPath from 'object-path';
 import {

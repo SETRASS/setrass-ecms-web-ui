@@ -1,11 +1,11 @@
 import {Component, Input, OnInit, AfterViewInit} from '@angular/core';
 import {Observable, of} from 'rxjs';
-import {CompensationRights} from 'src/app/models/compensation-rights.model';
-import {ComputedSalaries} from 'src/app/models/computed-salaries.model';
-import {CalculoPrestacionesRequestType} from 'src/app/models/enums/calculo-prestaciones-request-type.enum';
-import {LaborOld} from 'src/app/models/labor-old.model';
-import {OtherRights} from 'src/app/models/other-rights.model';
-import {CalculoPrestacionesService} from 'src/app/modules/services/calculo-prestaciones/calculo-prestaciones.service';
+import {CompensationRights} from 'projects/calculo-prestaciones/src/lib/models/compensation-rights.model';
+import {ComputedSalaries} from 'projects/calculo-prestaciones/src/lib/models/computed-salaries.model';
+import {CalculoPrestacionesRequestType} from 'projects/calculo-prestaciones/src/lib/models/enums/calculo-prestaciones-request-type.enum';
+import {LaborOld} from 'projects/calculo-prestaciones/src/lib/models/labor-old.model';
+import {OtherRights} from 'projects/calculo-prestaciones/src/lib/models/other-rights.model';
+import {CalculoPrestacionesService} from 'projects/calculo-prestaciones/src/lib/services/calculo-prestaciones/calculo-prestaciones.service';
 import {setDataCacheStore, setDataGender} from 'src/app/utils/utils';
 import {ToolbarService} from 'src/app/_metronic/layout/components/toolbar/toolbar.service';
 

@@ -2,9 +2,9 @@ import { Injectable } from '@angular/core';
 import {BaseHttpService} from "../base-http.service";
 import {HttpClient} from "@angular/common/http";
 import {map, Observable, tap} from "rxjs";
-import {environment} from "../../../../environments/environment";
-import { LocationStore } from '../../../../../projects/calculo-prestaciones/src/lib/state/locations/locations.store';
-import { Locations } from 'src/app/models/locations.model';
+import {environment} from "../../environments/environment";
+import { LocationStore } from '../../state/locations/locations.store';
+import { Locations } from 'projects/calculo-prestaciones/src/lib/models/locations.model';
 
 @Injectable()
 export class LookupsService extends BaseHttpService {

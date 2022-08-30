@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { EntityState, EntityStore, StoreConfig} from "@datorama/akita";
-import { WorkerPersonEmployerRequestDto } from "src/app/models/worker-person-employer-request-dto.model";
+import { WorkerPersonEmployerRequestDto } from "projects/calculo-prestaciones/src/lib/models/worker-person-employer-request-dto.model";
 
 export interface WorkerPersonState extends EntityState<WorkerPersonEmployerRequestDto, string> {
     isLoaded: boolean;

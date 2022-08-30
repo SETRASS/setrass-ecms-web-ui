@@ -9,7 +9,7 @@ import { InlineSVGModule } from 'ng-inline-svg-2';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { environment } from 'src/environments/environment';
+import { environment } from 'projects/calculo-prestaciones/src/lib/environments/environment';
 // #fake-start#
 import { FakeAPIService } from './_fake/fake-api.service';
 import {NgxPrintModule} from "ngx-print";

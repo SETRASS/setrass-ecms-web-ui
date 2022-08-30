@@ -5,12 +5,12 @@ import { getDataStore  } from '../../../../../../src/app/utils/utils';
 
 
 
-import { CalculoPrestacionesService } from 'src/app/modules/services/calculo-prestaciones/calculo-prestaciones.service';
+import { CalculoPrestacionesService } from 'projects/calculo-prestaciones/src/lib/services/calculo-prestaciones/calculo-prestaciones.service';
 
 import { ToolbarService } from 'src/app/_metronic/layout/components/toolbar/toolbar.service';
 import { Subscription } from 'rxjs';
-import { ComputedSalaries } from 'src/app/models/computed-salaries.model';
-import { LaborOld } from 'src/app/models/labor-old.model';
+import { ComputedSalaries } from 'projects/calculo-prestaciones/src/lib/models/computed-salaries.model';
+import { LaborOld } from 'projects/calculo-prestaciones/src/lib/models/labor-old.model';
 
 
 @Component({

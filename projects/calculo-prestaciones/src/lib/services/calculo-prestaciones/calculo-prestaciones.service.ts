@@ -1,15 +1,15 @@
 import { EventEmitter, Injectable } from '@angular/core';
 import {BaseHttpService} from "../base-http.service";
 import {HttpClient} from "@angular/common/http";
-import {environment} from "../../../../environments/environment";
+import {environment} from "../../environments/environment";
 import {Observable, map, tap, Subject} from "rxjs";
-import { TerminationContractType } from 'src/app/models/enums/termination-contract-type.enum';
-import { Gender } from 'src/app/models/enums/gender.enum';
-import { WorkerPersonEmployerRequestDto } from 'src/app/models/worker-person-employer-request-dto.model';
-import { WorkerPersonStore } from '../../../../../projects/calculo-prestaciones/src/lib/state/workerperson/workerperson.store';
-import { SalaryCalculationQuery } from '../../../../../projects/calculo-prestaciones/src/lib/state/salary-calculation/salary-calculation.query';
-import { SalaryCalculationStore } from '../../../../../projects/calculo-prestaciones/src/lib/state/salary-calculation/salary-calculation.store';
-import { CalculoPrestacionesRequestType } from 'src/app/models/enums/calculo-prestaciones-request-type.enum';
+import { TerminationContractType } from 'projects/calculo-prestaciones/src/lib/models/enums/termination-contract-type.enum';
+import { Gender } from 'projects/calculo-prestaciones/src/lib/models/enums/gender.enum';
+import { WorkerPersonEmployerRequestDto } from 'projects/calculo-prestaciones/src/lib/models/worker-person-employer-request-dto.model';
+import { WorkerPersonStore } from '../../state/workerperson/workerperson.store';
+import { SalaryCalculationQuery } from '../../state/salary-calculation/salary-calculation.query';
+import { SalaryCalculationStore } from '../../state/salary-calculation/salary-calculation.store';
+import { CalculoPrestacionesRequestType } from 'projects/calculo-prestaciones/src/lib/models/enums/calculo-prestaciones-request-type.enum';
 
 
 @Injectable({

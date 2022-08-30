@@ -5,7 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { NgxPrintModule } from 'ngx-print';
 import { CalculoPrestacionesRoutingModule } from 'src/app/modules/calculo-prestaciones/calculo-prestaciones-routing.module';
-import { ServicesModule } from 'src/app/modules/services/services.module';
+import { ServicesModule } from 'projects/calculo-prestaciones/src/lib/services/services.module';
 import { LayoutModule } from 'src/app/_metronic/layout';
 import { WidgetsModule } from 'src/app/_metronic/partials';
 import { CalculoPrestacionesComponent } from './calculo-prestaciones.component';

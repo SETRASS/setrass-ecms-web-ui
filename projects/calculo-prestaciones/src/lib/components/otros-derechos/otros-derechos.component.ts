@@ -2,10 +2,10 @@ import { Component, ElementRef, EventEmitter, Input, OnInit, Output, Renderer2, 
 import {FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
-import { CalculoPrestacionesService } from 'src/app/modules/services/calculo-prestaciones/calculo-prestaciones.service';
+import { CalculoPrestacionesService } from 'projects/calculo-prestaciones/src/lib/services/calculo-prestaciones/calculo-prestaciones.service';
 import { getDataStore, scrollAnimationGoTo, setDataCacheStore } from 'src/app/utils/utils';
-import { OtherRights } from 'src/app/models/other-rights.model';
-import { TerminationContractType } from 'src/app/models/enums/termination-contract-type.enum';
+import { OtherRights } from 'projects/calculo-prestaciones/src/lib/models/other-rights.model';
+import { TerminationContractType } from 'projects/calculo-prestaciones/src/lib/models/enums/termination-contract-type.enum';
 import { ToolbarService } from 'src/app/_metronic/layout/components/toolbar/toolbar.service';
 
 

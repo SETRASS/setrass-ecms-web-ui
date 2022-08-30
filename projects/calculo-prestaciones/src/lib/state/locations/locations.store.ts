@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { EntityState, EntityStore, Store, StoreConfig } from "@datorama/akita";
-import { Locations } from "src/app/models/locations.model";
+import { Locations } from "projects/calculo-prestaciones/src/lib/models/locations.model";
 
 export interface LocationState extends EntityState<Locations, string> {
     isLoaded: boolean;
@@ -10,7 +10,7 @@ export interface LocationState extends EntityState<Locations, string> {
 export function createInitialState(): LocationState {
     return {
         isLoaded: false,
-        locations: [] 
+        locations: []
     };
 }
 

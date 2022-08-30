@@ -3,23 +3,23 @@ import {FormControl, FormGroup, Validators, FormBuilder, FormArray} from '@angul
 import { format } from 'date-fns';
 
 import {IStepperOptions, StepperComponent, ToggleComponent} from 'src/app/_metronic/kt/components';
-import {PersonType} from 'src/app/models/enums/person-type.enum';
+import {PersonType} from 'projects/calculo-prestaciones/src/lib/models/enums/person-type.enum';
 import { getDataStore, getYearSelect, scrollAnimationGoTo, setDataCacheStore, setDataEmployeeStore, setDataGender } from '../../../../../../src/app/utils/utils';
 
-import {LookupsService} from "../../../../../../src/app/modules/services/lookups/lookups.service";
-import {SalaryHistoryCatalogService} from "../../../../../../src/app/modules/services/salary-history-catalog/salary-history-catalog.service";
-import {CalculoPrestacionesService} from 'src/app/modules/services/calculo-prestaciones/calculo-prestaciones.service';
+import {LookupsService} from "../../services/lookups/lookups.service";
+import {SalaryHistoryCatalogService} from "../../services/salary-history-catalog/salary-history-catalog.service";
+import {CalculoPrestacionesService} from 'projects/calculo-prestaciones/src/lib/services/calculo-prestaciones/calculo-prestaciones.service';
 
 import {ToolbarService} from 'src/app/_metronic/layout/components/toolbar/toolbar.service';
 import {catchError, Observable} from "rxjs";
 import { EmployerStore } from '../../state/employer/employers.store';
-import { EmployerDto } from 'src/app/models/employer-dto.model';
-import { IdentificationType } from 'src/app/models/enums/identification-type.enum';
+import { EmployerDto } from 'projects/calculo-prestaciones/src/lib/models/employer-dto.model';
+import { IdentificationType } from 'projects/calculo-prestaciones/src/lib/models/enums/identification-type.enum';
 import { LocationsQuery } from '../../state/locations/locations.query';
-import { Locations } from 'src/app/models/locations.model';
-import { CalculoPrestacionesRequestType } from 'src/app/models/enums/calculo-prestaciones-request-type.enum';
-import { WorkerPersonEmployerRequestDto } from 'src/app/models/worker-person-employer-request-dto.model';
-import { TerminationContractType } from 'src/app/models/enums/termination-contract-type.enum';
+import { Locations } from 'projects/calculo-prestaciones/src/lib/models/locations.model';
+import { CalculoPrestacionesRequestType } from 'projects/calculo-prestaciones/src/lib/models/enums/calculo-prestaciones-request-type.enum';
+import { WorkerPersonEmployerRequestDto } from 'projects/calculo-prestaciones/src/lib/models/worker-person-employer-request-dto.model';
+import { TerminationContractType } from 'projects/calculo-prestaciones/src/lib/models/enums/termination-contract-type.enum';
 import { Router } from '@angular/router';
 
 
