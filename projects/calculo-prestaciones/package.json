@@ -7,5 +7,20 @@
   },
   "dependencies": {
     "tslib": "^2.3.0"
-  }
+  },
+  "description": "This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.2.0.",
+  "main": "setup-jest.ts",
+  "scripts": {
+    "test": "yarn test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SETRASS/setrass-ecms-calculo-prestaciones-ui.git"
+  },
+  "author": "setrass-hn",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SETRASS/setrass-ecms-calculo-prestaciones-ui/issues"
+  },
+  "homepage": "https://github.com/SETRASS/setrass-ecms-calculo-prestaciones-ui#readme"
 }
