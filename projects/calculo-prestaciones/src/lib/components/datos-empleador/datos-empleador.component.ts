@@ -10,7 +10,7 @@ import {LookupsService} from "../../services/lookups/lookups.service";
 import {SalaryHistoryCatalogService} from "../../services/salary-history-catalog/salary-history-catalog.service";
 import {CalculoPrestacionesService} from 'projects/calculo-prestaciones/src/lib/services/calculo-prestaciones/calculo-prestaciones.service';
 
-import {ToolbarService} from 'src/app/_metronic/layout/components/toolbar/toolbar.service';
+import {ToolbarService} from 'src/app/modules/layout/components/toolbar/toolbar.service';
 import {catchError, Observable} from "rxjs";
 import { EmployerStore } from '../../state/employer/employers.store';
 import { EmployerDto } from 'projects/calculo-prestaciones/src/lib/models/employer-dto.model';

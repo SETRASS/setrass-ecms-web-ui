@@ -7,7 +7,7 @@ import { getDataStore  } from '../../../../../../src/app/utils/utils';
 
 import { CalculoPrestacionesService } from 'projects/calculo-prestaciones/src/lib/services/calculo-prestaciones/calculo-prestaciones.service';
 
-import { ToolbarService } from 'src/app/_metronic/layout/components/toolbar/toolbar.service';
+import { ToolbarService } from 'src/app/modules/layout/components/toolbar/toolbar.service';
 import { Subscription } from 'rxjs';
 import { ComputedSalaries } from 'projects/calculo-prestaciones/src/lib/models/computed-salaries.model';
 import { LaborOld } from 'projects/calculo-prestaciones/src/lib/models/labor-old.model';

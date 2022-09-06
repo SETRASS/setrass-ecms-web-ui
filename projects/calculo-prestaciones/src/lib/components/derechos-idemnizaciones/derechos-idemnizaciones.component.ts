@@ -5,7 +5,7 @@ import {CompensationRights} from 'projects/calculo-prestaciones/src/lib/models/c
 import {TerminationContractType} from 'projects/calculo-prestaciones/src/lib/models/enums/termination-contract-type.enum';
 import {CalculoPrestacionesService} from 'projects/calculo-prestaciones/src/lib/services/calculo-prestaciones/calculo-prestaciones.service';
 import {getDataStore, scrollAnimationGoTo, setDataCacheStore} from 'src/app/utils/utils';
-import {ToolbarService} from 'src/app/_metronic/layout/components/toolbar/toolbar.service';
+import {ToolbarService} from 'src/app/modules/layout/components/toolbar/toolbar.service';
 //import {CalculoPrestacionesComponent} from '../../pages/calculo-prestaciones/calculo-prestaciones.component';
 
 

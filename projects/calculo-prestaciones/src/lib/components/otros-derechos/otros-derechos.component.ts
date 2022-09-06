@@ -6,7 +6,7 @@ import { CalculoPrestacionesService } from 'projects/calculo-prestaciones/src/li
 import { getDataStore, scrollAnimationGoTo, setDataCacheStore } from 'src/app/utils/utils';
 import { OtherRights } from 'projects/calculo-prestaciones/src/lib/models/other-rights.model';
 import { TerminationContractType } from 'projects/calculo-prestaciones/src/lib/models/enums/termination-contract-type.enum';
-import { ToolbarService } from 'src/app/_metronic/layout/components/toolbar/toolbar.service';
+import { ToolbarService } from 'src/app/modules/layout/components/toolbar/toolbar.service';
 
 
 @Component({
