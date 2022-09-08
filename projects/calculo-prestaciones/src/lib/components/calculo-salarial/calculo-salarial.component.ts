@@ -1,13 +1,13 @@
 import { Component, ElementRef, Input, OnDestroy, OnInit, Renderer2, ViewChild } from '@angular/core';
 // { StepperComponent } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { getDataStore  } from '../../../../../../src/app/utils/utils';
+import { getDataStore  } from '../../utils/utils';
 
 
 
 import { CalculoPrestacionesService } from 'projects/calculo-prestaciones/src/lib/services/calculo-prestaciones/calculo-prestaciones.service';
 
-import { ToolbarService } from 'src/app/_metronic/layout/components/toolbar/toolbar.service';
+import { ToolbarService } from 'projects/calculo-prestaciones/src/lib/services/toolbar/toolbar.service';
 import { Subscription } from 'rxjs';
 import { ComputedSalaries } from 'projects/calculo-prestaciones/src/lib/models/computed-salaries.model';
 import { LaborOld } from 'projects/calculo-prestaciones/src/lib/models/labor-old.model';

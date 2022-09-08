@@ -4,7 +4,7 @@ import {ComputedSalaries} from "../../models/computed-salaries.model";
 import {LaborOld} from "../../models/labor-old.model";
 import {CompensationRights} from "../../models/compensation-rights.model";
 import {OtherRights} from "../../models/other-rights.model";
-import {getDataStore} from "../../../../../../src/app/utils/utils";
+import {getDataStore} from "../../utils/utils";
 
 @Component({
   selector: 'ecms-calculo-generado',
