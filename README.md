@@ -31,7 +31,7 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 1) Git checkout main, git fetch, git pull
 2) git tag -a X.Y.Z -m "vX.Y.Z"
 3) git push origin --tags
-4) Go to https://...
+4) Go to https://github.com/SETRASS/setrass-ecms-calculo-prestaciones-ui/releases/new
 5) Tag version -vX.Y.Z, Branch main
 - Release title: vX.Y.Z
 - Description: (Paste the generated CHANGELOG markdown)
