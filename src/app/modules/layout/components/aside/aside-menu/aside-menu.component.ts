@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { environment } from '../../../../../../../projects/calculo-prestaciones/src/lib/environments/environment';
+import { environment } from '../../../../../../environments/environment';
 
 @Component({
   selector: 'app-aside-menu',

@@ -1,6 +1,6 @@
 import { EventEmitter, Injectable } from '@angular/core';
-import { CalculoPrestacionesRequestType } from 'projects/calculo-prestaciones/src/lib/models/enums/calculo-prestaciones-request-type.enum';
-import { TerminationContractType } from 'projects/calculo-prestaciones/src/lib/models/enums/termination-contract-type.enum';
+import { CalculoPrestacionesRequestType } from '../../models/enums/calculo-prestaciones-request-type.enum';
+import { TerminationContractType } from '../../models/enums/termination-contract-type.enum';
 
 @Injectable({
   providedIn: 'root'

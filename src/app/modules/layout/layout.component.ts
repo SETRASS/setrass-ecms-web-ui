@@ -5,8 +5,7 @@ import {
   ElementRef,
   AfterViewInit,
 } from '@angular/core';
-import { LayoutService } from './core/layout.service';
-import { LayoutInitService } from './core/layout-init.service';
+import { LayoutService, LayoutInitService } from '@setrass-hn/layout-core';
 
 @Component({
   selector: 'app-layout',

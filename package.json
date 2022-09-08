@@ -46,9 +46,12 @@
     "prismjs": "1.27.0",
     "rxjs": "7.5.0",
     "socicon": "3.0.5",
+    "@setrass-hn/i18n": "1.0.4",
+    "@setrass-hn/kt": "1.0.1",
+    "@setrass-hn/layout-core": "1.0.2",
+    "@setrass-hn/partials": "1.0.1",
     "tslib": "2.3.0",
-    "zone.js": "0.11.4",
-    "@setrass-hn/metronic": "1.0.0"
+    "zone.js": "0.11.4"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "13.2.5",

@@ -8,21 +8,21 @@ import {
   NgbTooltipModule,
 } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateModule } from '@ngx-translate/core';
-import { TranslationModule } from '../i18n';
+import { TranslationModule } from '@setrass-hn/i18n';
 import { LayoutComponent } from './layout.component';
-import { ExtrasModule } from '@setrass-hn/metronic/partials/layout/extras/extras.module';
+import { ExtrasModule } from '@setrass-hn/partials';
 import { Routing } from '../../pages/routing';
 import { AsideComponent } from './components/aside/aside.component';
 import { HeaderComponent } from './components/header/header.component';
 import { ContentComponent } from './components/content/content.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { ScriptsInitComponent } from './components/scripts-init/scripts-init.component';
-import { ToolbarComponent } from './components/toolbar/toolbar.component';
+import { ToolbarComponent } from '../../../../projects/calculo-prestaciones/src/lib/services/toolbar/toolbar.component';
 import { AsideMenuComponent } from './components/aside/aside-menu/aside-menu.component';
 import { TopbarComponent } from './components/topbar/topbar.component';
 import { PageTitleComponent } from './components/header/page-title/page-title.component';
 import { HeaderMenuComponent } from './components/header/header-menu/header-menu.component';
-import {DropdownMenusModule} from '@setrass-hn/metronic/partials';
+import {DropdownMenusModule} from '@setrass-hn/partials';
 import { FormsModule } from '@angular/forms';
 
 

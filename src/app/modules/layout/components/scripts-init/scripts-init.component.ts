@@ -2,16 +2,10 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ResolveEnd, Router } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { Observable, Subscription } from 'rxjs';
-import { LayoutService, LayoutType } from '../../core/layout.service';
+import {LayoutService, PageInfoService, LayoutType} from '@setrass-hn/layout-core';
 import {
-  ToggleComponent,
-  ScrollTopComponent,
-  DrawerComponent,
-  StickyComponent,
-  MenuComponent,
-  ScrollComponent,
-} from '../../../../_metronic/kt/components';
-import { PageInfoService } from '../../core/page-info.service';
+  components
+} from '@setrass-hn/kt';
 
 @Component({
   selector: 'app-scripts-init',
@@ -49,12 +43,12 @@ export class ScriptsInitComponent implements OnInit, OnDestroy {
 
   pluginsInitialization() {
     setTimeout(() => {
-      ToggleComponent.bootstrap();
-      ScrollTopComponent.bootstrap();
-      DrawerComponent.bootstrap();
-      StickyComponent.bootstrap();
-      MenuComponent.bootstrap();
-      ScrollComponent.bootstrap();
+      components.ToggleComponent.bootstrap();
+      components.ScrollTopComponent.bootstrap();
+      components.DrawerComponent.bootstrap();
+      components.StickyComponent.bootstrap();
+      components.MenuComponent.bootstrap();
+      components.ScrollComponent.bootstrap();
     }, 200);
   }
 

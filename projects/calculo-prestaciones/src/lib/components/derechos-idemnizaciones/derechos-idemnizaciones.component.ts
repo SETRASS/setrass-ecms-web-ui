@@ -4,8 +4,8 @@ import {Router} from '@angular/router';
 import {CompensationRights} from 'projects/calculo-prestaciones/src/lib/models/compensation-rights.model';
 import {TerminationContractType} from 'projects/calculo-prestaciones/src/lib/models/enums/termination-contract-type.enum';
 import {CalculoPrestacionesService} from 'projects/calculo-prestaciones/src/lib/services/calculo-prestaciones/calculo-prestaciones.service';
-import {getDataStore, scrollAnimationGoTo, setDataCacheStore} from 'src/app/utils/utils';
-import {ToolbarService} from 'src/app/modules/layout/components/toolbar/toolbar.service';
+import {getDataStore, scrollAnimationGoTo, setDataCacheStore} from 'projects/calculo-prestaciones/src/lib/utils/utils';
+import {ToolbarService} from 'projects/calculo-prestaciones/src/lib/services/toolbar/toolbar.service';
 //import {CalculoPrestacionesComponent} from '../../pages/calculo-prestaciones/calculo-prestaciones.component';
 
 

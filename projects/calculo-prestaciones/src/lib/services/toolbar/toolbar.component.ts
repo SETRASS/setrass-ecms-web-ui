@@ -8,11 +8,11 @@ import {
 
 import { format } from 'date-fns';
 
-import { LayoutService } from '../../core/layout.service';
+import { LayoutService } from '@setrass-hn/layout-core';
 import { ToolbarService } from './toolbar.service';
-import { CalculoPrestacionesRequestType } from 'projects/calculo-prestaciones/src/lib/models/enums/calculo-prestaciones-request-type.enum';
-import { TerminationContractType } from 'projects/calculo-prestaciones/src/lib/models/enums/termination-contract-type.enum';
-import { CalculoPrestacionesService } from 'projects/calculo-prestaciones/src/lib/services/calculo-prestaciones/calculo-prestaciones.service';
+import { CalculoPrestacionesRequestType } from '../../models/enums/calculo-prestaciones-request-type.enum';
+import { TerminationContractType } from '../../models/enums/termination-contract-type.enum';
+import { CalculoPrestacionesService } from '../../services/calculo-prestaciones/calculo-prestaciones.service';
 
 
 @Component({

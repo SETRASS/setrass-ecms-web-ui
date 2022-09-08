@@ -7,14 +7,11 @@ import {
 } from '@angular/core';
 import { NavigationCancel, NavigationEnd, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { LayoutService } from '../../core/layout.service';
-import { environment } from '../../../../../../projects/calculo-prestaciones/src/lib/environments/environment';
+import { LayoutService } from '@setrass-hn/layout-core';
+import { environment } from './../../../../../environments/environment';
 import {
-  MenuComponent,
-  DrawerComponent,
-  ToggleComponent,
-  ScrollComponent,
-} from '../../../../_metronic/kt/components';
+  components
+} from '@setrass-hn/kt';
 
 @Component({
   selector: 'app-aside',
@@ -49,10 +46,10 @@ export class AsideComponent implements OnInit, OnDestroy {
 
   menuReinitialization() {
     setTimeout(() => {
-      MenuComponent.reinitialization();
-      DrawerComponent.reinitialization();
-      ToggleComponent.reinitialization();
-      ScrollComponent.reinitialization();
+      components.MenuComponent.reinitialization();
+      components.DrawerComponent.reinitialization();
+      components.ToggleComponent.reinitialization();
+      components.ScrollComponent.reinitialization();
       if (this.ktAsideScroll && this.ktAsideScroll.nativeElement) {
         this.ktAsideScroll.nativeElement.scrollTop = 0;
       }

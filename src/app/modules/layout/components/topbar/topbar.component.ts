@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { LayoutService } from '../../core/layout.service';
+import { LayoutService } from '@setrass-hn/layout-core';
 
 @Component({
   selector: 'app-topbar',

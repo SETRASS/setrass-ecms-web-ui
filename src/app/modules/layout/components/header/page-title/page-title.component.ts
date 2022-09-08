@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
-import { LayoutService } from '../../../core/layout.service';
-import { PageInfoService, PageLink } from '../../../core/page-info.service';
+import {LayoutService, PageInfoService, PageLink} from '@setrass-hn/layout-core';
+
 
 @Component({
   selector: 'app-page-title',

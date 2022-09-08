@@ -1,24 +1,20 @@
 import {Component, ElementRef, EventEmitter, OnInit, Output, Renderer2, ViewChild} from '@angular/core';
-import {FormControl, FormGroup, Validators, FormBuilder, FormArray} from '@angular/forms';
+import {FormGroup, Validators, FormBuilder, FormArray} from '@angular/forms';
 import { format } from 'date-fns';
 
-import {IStepperOptions, StepperComponent, ToggleComponent} from 'src/app/_metronic/kt/components';
+import {components} from '@setrass-hn/kt';
 import {PersonType} from 'projects/calculo-prestaciones/src/lib/models/enums/person-type.enum';
-import { getDataStore, getYearSelect, scrollAnimationGoTo, setDataCacheStore, setDataEmployeeStore, setDataGender } from '../../../../../../src/app/utils/utils';
+import { getDataStore, getYearSelect, scrollAnimationGoTo, setDataCacheStore, setDataEmployeeStore, setDataGender } from '../../utils/utils';
 
 import {LookupsService} from "../../services/lookups/lookups.service";
 import {SalaryHistoryCatalogService} from "../../services/salary-history-catalog/salary-history-catalog.service";
 import {CalculoPrestacionesService} from 'projects/calculo-prestaciones/src/lib/services/calculo-prestaciones/calculo-prestaciones.service';
 
-import {ToolbarService} from 'src/app/modules/layout/components/toolbar/toolbar.service';
-import {catchError, Observable} from "rxjs";
+import {ToolbarService} from 'projects/calculo-prestaciones/src/lib/services/toolbar/toolbar.service';
 import { EmployerStore } from '../../state/employer/employers.store';
 import { EmployerDto } from 'projects/calculo-prestaciones/src/lib/models/employer-dto.model';
 import { IdentificationType } from 'projects/calculo-prestaciones/src/lib/models/enums/identification-type.enum';
 import { LocationsQuery } from '../../state/locations/locations.query';
-import { Locations } from 'projects/calculo-prestaciones/src/lib/models/locations.model';
-import { CalculoPrestacionesRequestType } from 'projects/calculo-prestaciones/src/lib/models/enums/calculo-prestaciones-request-type.enum';
-import { WorkerPersonEmployerRequestDto } from 'projects/calculo-prestaciones/src/lib/models/worker-person-employer-request-dto.model';
 import { TerminationContractType } from 'projects/calculo-prestaciones/src/lib/models/enums/termination-contract-type.enum';
 import { Router } from '@angular/router';
 
@@ -40,7 +36,7 @@ export class DatosEmpleadorComponent implements OnInit {
   @Output() calculoResponseEvent = new EventEmitter<any>();
   stepper: any;
   formEmployer: FormGroup;
-  stepperOptions: IStepperOptions = {
+  stepperOptions: components.IStepperOptions = {
     startIndex: 1,
     animation: false,
     animationSpeed: '',
@@ -117,7 +113,7 @@ export class DatosEmpleadorComponent implements OnInit {
 
   stepperConfig() {
     //this.render2.setAttribute(this.btnSubmit.nativeElement, 'disabled', 'true');
-    this.stepper = new StepperComponent(this.stepperSteps.nativeElement, this.stepperOptions);
+    this.stepper = new components.StepperComponent(this.stepperSteps.nativeElement, this.stepperOptions);
     this.stepper.on("kt.stepper.previous", () => this.stepper.goPrev());
     this.stepper.on("kt.stepper.next", () => {
 

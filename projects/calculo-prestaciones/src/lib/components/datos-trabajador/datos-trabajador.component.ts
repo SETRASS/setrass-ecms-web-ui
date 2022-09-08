@@ -2,24 +2,21 @@ import { Component, ElementRef, EventEmitter, OnInit,Output,Renderer2, ViewChild
 import {FormControl, FormGroup, Validators, FormBuilder, FormArray} from '@angular/forms';
 
 
-import {IStepperOptions, StepperComponent, ToggleComponent } from 'src/app/_metronic/kt/components';
+import {components } from '@setrass-hn/kt';
 import {PersonType } from 'projects/calculo-prestaciones/src/lib/models/enums/person-type.enum';
 
 import {LookupsService} from "../../services/lookups/lookups.service";
 import {SalaryHistoryCatalogService} from "../../services/salary-history-catalog/salary-history-catalog.service";
 import {CalculoPrestacionesService} from 'projects/calculo-prestaciones/src/lib/services/calculo-prestaciones/calculo-prestaciones.service';
 
-import { ToolbarService } from 'src/app/modules/layout/components/toolbar/toolbar.service';
-import { catchError, Observable } from 'rxjs';
+import { ToolbarService } from 'projects/calculo-prestaciones/src/lib/services/toolbar/toolbar.service';
 import { IdentificationType } from 'projects/calculo-prestaciones/src/lib/models/enums/identification-type.enum';
 import { LocationsQuery } from '../../state/locations/locations.query';
-import { Locations} from 'projects/calculo-prestaciones/src/lib/models/locations.model';
 import { WorkerPersonEmployerRequestDto } from 'projects/calculo-prestaciones/src/lib/models/worker-person-employer-request-dto.model';
 import { EmployerDto } from 'projects/calculo-prestaciones/src/lib/models/employer-dto.model';
 import { WorkerPersonStore } from '../../state/workerperson-employer-request/workerperson-employer-request.store';
-import { getDataStore, getYearSelect, scrollAnimationGoTo, setDataCacheStore, setDataEmployeeStore, setDataGender } from 'src/app/utils/utils';
+import { getDataStore, getYearSelect, scrollAnimationGoTo, setDataCacheStore, setDataEmployeeStore, setDataGender } from 'projects/calculo-prestaciones/src/lib/utils/utils';
 import { format } from 'date-fns';
-import { CalculoPrestacionesRequestType } from 'projects/calculo-prestaciones/src/lib/models/enums/calculo-prestaciones-request-type.enum';
 import { TerminationContractType } from 'projects/calculo-prestaciones/src/lib/models/enums/termination-contract-type.enum';
 import { SalaryCalculationStore } from '../../state/salary-calculation/salary-calculation.store';
 import { SalaryCalculationQuery } from '../../state/salary-calculation/salary-calculation.query';
@@ -41,7 +38,7 @@ export class DatosTrabajadorComponent implements OnInit {
   formEmployee:FormGroup;
 
   //public currentStep : Number = 1;
-  stepperOptions: IStepperOptions = {
+  stepperOptions: components.IStepperOptions = {
     startIndex: 1,
     animation: false,
     animationSpeed: '',
@@ -125,7 +122,7 @@ export class DatosTrabajadorComponent implements OnInit {
 
 
     stepperConfig(){
-    this.stepper1 = new StepperComponent(this.stepperSteps.nativeElement, this.stepperOptions);
+    this.stepper1 = new components.StepperComponent(this.stepperSteps.nativeElement, this.stepperOptions);
     this.stepper1.on("kt.stepper.previous", () => this.stepper1.goPrev());
     this.stepper1.on("kt.stepper.next", () =>{
 

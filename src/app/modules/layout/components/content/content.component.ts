@@ -1,8 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NavigationCancel, NavigationEnd, Router } from '@angular/router';
 import { Subscription } from 'rxjs/internal/Subscription';
-import { DrawerComponent } from '../../../../_metronic/kt/components';
-import {LayoutService} from "../../core/layout.service";
+import {LayoutService} from "@setrass-hn/layout-core";
 @Component({
   selector: 'app-content',
   templateUrl: './content.component.html',

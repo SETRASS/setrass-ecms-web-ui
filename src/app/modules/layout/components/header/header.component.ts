@@ -1,8 +1,8 @@
 import {AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild,} from '@angular/core';
 import {NavigationCancel, NavigationEnd, Router} from '@angular/router';
 import {Subscription} from 'rxjs';
-import {LayoutService} from '../../core/layout.service';
-import {MenuComponent} from '../../../../_metronic/kt/components';
+import {LayoutService} from '@setrass-hn/layout-core';
+import {components} from '@setrass-hn/kt';
 
 @Component({
   selector: 'app-header',
@@ -47,7 +47,7 @@ export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
   routingChanges() {
     const routerSubscription = this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd || event instanceof NavigationCancel) {
-        MenuComponent.reinitialization();
+        components.MenuComponent.reinitialization();
       }
     });
     this.unsubscribe.push(routerSubscription);
