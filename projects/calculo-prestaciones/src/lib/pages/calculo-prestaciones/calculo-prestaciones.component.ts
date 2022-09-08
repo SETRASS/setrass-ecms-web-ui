@@ -6,8 +6,8 @@ import {CalculoPrestacionesRequestType} from 'projects/calculo-prestaciones/src/
 import {LaborOld} from 'projects/calculo-prestaciones/src/lib/models/labor-old.model';
 import {OtherRights} from 'projects/calculo-prestaciones/src/lib/models/other-rights.model';
 import {CalculoPrestacionesService} from 'projects/calculo-prestaciones/src/lib/services/calculo-prestaciones/calculo-prestaciones.service';
-import {setDataCacheStore, setDataGender} from 'src/app/utils/utils';
-import {ToolbarService} from 'src/app/_metronic/layout/components/toolbar/toolbar.service';
+import {setDataCacheStore, setDataGender} from 'projects/calculo-prestaciones/src/lib/utils/utils';
+import {ToolbarService} from 'projects/calculo-prestaciones/src/lib/services/toolbar/toolbar.service';
 
 @Component({
   selector: 'ecms-calculo-prestaciones',
