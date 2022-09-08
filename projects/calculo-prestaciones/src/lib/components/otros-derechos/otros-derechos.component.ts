@@ -3,10 +3,10 @@ import {FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { CalculoPrestacionesService } from 'projects/calculo-prestaciones/src/lib/services/calculo-prestaciones/calculo-prestaciones.service';
-import { getDataStore, scrollAnimationGoTo, setDataCacheStore } from 'src/app/utils/utils';
+import { getDataStore, scrollAnimationGoTo, setDataCacheStore } from 'projects/calculo-prestaciones/src/lib/utils/utils';
 import { OtherRights } from 'projects/calculo-prestaciones/src/lib/models/other-rights.model';
 import { TerminationContractType } from 'projects/calculo-prestaciones/src/lib/models/enums/termination-contract-type.enum';
-import { ToolbarService } from 'src/app/_metronic/layout/components/toolbar/toolbar.service';
+import { ToolbarService } from 'projects/calculo-prestaciones/src/lib/services/toolbar/toolbar.service';
 
 
 @Component({
