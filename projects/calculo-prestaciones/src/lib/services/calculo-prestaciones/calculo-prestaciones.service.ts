@@ -1,7 +1,7 @@
 import { EventEmitter, Injectable } from '@angular/core';
 import {BaseHttpService} from "../base-http.service";
 import {HttpClient} from "@angular/common/http";
-import {environment} from "../../../../../../src/environments/environment";
+import {environment} from "../../environments/environment";
 import {Observable, map, tap, Subject} from "rxjs";
 import { TerminationContractType } from 'projects/calculo-prestaciones/src/lib/models/enums/termination-contract-type.enum';
 import { Gender } from 'projects/calculo-prestaciones/src/lib/models/enums/gender.enum';
