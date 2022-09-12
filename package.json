@@ -7,8 +7,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "jest",
-    "test:watch": "jest --watchAll",
-    "publish-package": "ng build calculo-prestaciones --prod && cd dist/calculo-prestaciones && npm publish"
+    "test:watch": "jest --watchAll"
   },
   "private": true,
   "dependencies": {
@@ -47,6 +46,7 @@
     "prismjs": "1.27.0",
     "rxjs": "7.5.0",
     "socicon": "3.0.5",
+    "@setrass-hn/calculo-prestaciones": "0.1.1",
     "@setrass-hn/i18n": "1.0.4",
     "@setrass-hn/kt": "1.0.1",
     "@setrass-hn/layout-core": "1.0.2",
