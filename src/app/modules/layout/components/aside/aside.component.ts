@@ -8,7 +8,7 @@ import {
 import { NavigationCancel, NavigationEnd, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { LayoutService } from '@setrass-hn/layout-core';
-import { environment } from './../../../../../environments/environment';
+import { environment } from '../../../../../environments/environment';
 import {
   components
 } from '@setrass-hn/kt';

@@ -1,10 +1,10 @@
 import { Routes } from '@angular/router';
-// import { CalculoPrestacionesModule } from '../modules/calculo-prestaciones/calculo-prestaciones.module';
+import { CalculoPrestacionesModule } from '../modules/calculo-prestaciones/calculo-prestaciones.module';
 
 const Routing: Routes = [
   {
     path: "calculo-prestaciones",
-    loadChildren: () => import('../modules/calculo-prestaciones/calculo-prestaciones.module').then(m => m.CalculoPrestacionesModule)
+    loadChildren: () => CalculoPrestacionesModule
   },
   {
     path: '',
