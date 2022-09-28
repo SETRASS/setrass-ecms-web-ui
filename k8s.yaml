@@ -1,0 +1,46 @@
+#DEPLOYMENT
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kubernetes.io/change-cause: "Primer Implementación"
+  name: setrass-ecms-web-ui
+  labels:
+    app: web-ui
+# REPLICASET
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: web-ui
+#POD
+  template:
+    metadata:
+      labels:
+        app: web-ui
+    spec:
+      containers:
+      - name: web-ui
+        image: 648505502080.dkr.ecr.us-east-1.amazonaws.com/setrass-ecms-web-ui:0.0.1
+---
+#SERVICE
+apiVersion: v1
+kind: Service
+metadata:
+  name: setrass-ecms-web-ui-svc
+  labels:
+    app: web-ui
+spec:
+  type: LoadBalancer
+  selector:
+    app: web-ui
+  ports:
+    - name: http
+      port: 80
+      targetPort: 80
+
+
+
+
+
+
