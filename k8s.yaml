@@ -23,20 +23,20 @@ spec:
       - name: web-ui
         image: 648505502080.dkr.ecr.us-east-1.amazonaws.com/setrass-ecms-web-ui:0.0.2
 
----
+
 #SERVICE
 apiVersion: v1
 kind: Service
 metadata:
   name: setrass-ecms-web-ui-svc
   labels:
-    app: setrass-ecms-web-ui
+    app: web-ui
 spec:
   type: ClusterIP
   selector:
-    app: setrass-ecms-web-ui
+    app: web-ui
   ports:
-    - protocol: TCP
+    - name: TCP
       port: 80
       targetPort: 80
 
