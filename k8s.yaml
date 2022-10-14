@@ -28,7 +28,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: setrass-ecms-web-ui
+  name: setrass-ecms-web-ui-svc
   labels:
     app: setrass-ecms-web-ui
 spec:
