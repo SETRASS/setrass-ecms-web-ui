@@ -21,21 +21,22 @@ spec:
     spec:
       containers:
       - name: web-ui
-        image: 648505502080.dkr.ecr.us-east-1.amazonaws.com/setrass-ecms-web-ui:0.0.1
+        image: 648505502080.dkr.ecr.us-east-1.amazonaws.com/setrass-ecms-web-ui:0.0.2
+
 ---
 #SERVICE
 apiVersion: v1
 kind: Service
 metadata:
-  name: setrass-ecms-web-ui-svc
+  name: setrass-ecms-web-ui
   labels:
-    app: web-ui
+    app: setrass-ecms-web-ui
 spec:
-  type: LoadBalancer
+  type: ClusterIP
   selector:
-    app: web-ui
+    app: setrass-ecms-web-ui
   ports:
-    - name: http
+    - protocol: TCP
       port: 80
       targetPort: 80
 
