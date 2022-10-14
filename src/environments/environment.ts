@@ -2,21 +2,20 @@
 // `ng build` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
-//const API_BASE = "http://10.152.1.202:8080";
-const API_BASE = "http://a17bd4950f19a40b18ffd9647a722e2e-1174112288.us-east-1.elb.amazonaws.com"; // lookup
-const API_BASE_EA = "http://ab7c63455f57a43fabe15e7322039b62-695484959.us-east-1.elb.amazonaws.com"; // companyActivity
-const API_BASE_SIR = "http://development.svc-calc-prestaciones.ecms.trabajo.gob.hn"; // saveSalaryEmployeeInfo
-//const API_BASE_SIR = "http://ab7c63455f57a43fabe15e7322039b62-695484959.us-east-1.elb.amazonaws.com"; // saveSalaryEmployeeInfo
+const API_LOOKUPS = "http://development.svc-lookups.ecms.setrass.net"; // lookups
+const API_SALARY_HISTORY = "http://development.svc-salary-history.ecms.setrass.net"; // salary history
+const API_CALCULO_PRESTACIONES = "http://development.svc-calc-prestaciones.ecms.setrass.net"; // calculo-prestaciones
 
 export const environment = {
   production: false,
   appVersion: 'v0.0.2',
 
   API: {
-    LOOKUPS: `${API_BASE}/locations`,
-    ECONOMIC_ACTIVITY: `${API_BASE_EA}`,
-    SALARY_INFO_REQ: `${API_BASE_SIR}`
+    LOOKUPS_LOCATIONS: `${API_LOOKUPS}/locations`,
+    SALARY_HISTORY: `${API_SALARY_HISTORY}`,
+    CALCULO_PRESTACIONES: `${API_CALCULO_PRESTACIONES}`
   },
+
   USERDATA_KEY: 'authf649fc9a5f55',
   isMockEnabled: true,
   apiUrl: 'api',

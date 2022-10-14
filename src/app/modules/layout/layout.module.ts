@@ -17,7 +17,6 @@ import { HeaderComponent } from './components/header/header.component';
 import { ContentComponent } from './components/content/content.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { ScriptsInitComponent } from './components/scripts-init/scripts-init.component';
-import {CalculoPrestacionesModule} from '@setrass-hn/calculo-prestaciones';
 import { AsideMenuComponent } from './components/aside/aside-menu/aside-menu.component';
 import { PageTitleComponent } from './components/header/page-title/page-title.component';
 import { HeaderMenuComponent } from './components/header/header-menu/header-menu.component';
@@ -56,8 +55,7 @@ const routes: Routes = [
     ExtrasModule,
     DropdownMenusModule,
     NgbTooltipModule,
-    TranslateModule,
-    CalculoPrestacionesModule
+    TranslateModule
   ],
   exports: [RouterModule, HeaderMenuComponent, LayoutComponent],
 })
