@@ -11,7 +11,7 @@ pipeline {
                 // sh 'cat ~/.npmrc'
                 sh 'node -v'
                 sh 'npm cache clean --force'
-                sh 'npm list'
+                //sh 'npm list'
                 withNPM(npmrcConfig: 'artefacto-npmrc') { sh 'npm install' }
                 // sh 'npm run build'
                 // sh 'ls -l'
