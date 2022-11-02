@@ -16,7 +16,7 @@ pipeline {
                     }
 
                 sh 'ls -l'
-                stash includes: 'dist', name: 'app' 
+                stash includes: 'dist/**/*', name: 'app' 
             }
         }
 
