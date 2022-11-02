@@ -11,7 +11,9 @@ pipeline {
                 // sh 'cat ~/.npmrc'
                 sh 'node -v'
                 // sh 'npm list'
-                sh 'npm install'
+                withNPM(npmrcConfig: 'artefacto-npmrc') {
+                    sh 'npm install'
+                    }
                 sh 'npm run build'
                 sh 'ls -l'
                 // stash includes: 'target/*.jar', name: 'app' 
