@@ -10,6 +10,7 @@ pipeline {
                 //sh 'echo -e "@emanuel-sosa-setrass:registry=https://registry.npmjs.org/\n//registry.npmjs.org/:_authToken=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" > ~/.npmrc'
                 // sh 'cat ~/.npmrc'
                 sh 'node -v'
+                sh 'npm cache clean --force'
                 // sh 'npm list'
                 withNPM(npmrcConfig: 'artefacto-npmrc') {
                     sh 'npm install'
