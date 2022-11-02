@@ -10,7 +10,11 @@ pipeline {
                 sh 'node -v'
                 sh 'ls -l'
                 sh 'echo $NODE_OPTIONS'
-                withNPM(npmrcConfig: 'artefacto-npmrc') { sh 'npm install --legacy-peer-deps' }
+                withNPM(npmrcConfig: 'artefacto-npmrc') { 
+                    sh 'npm install --legacy-peer-deps' 
+                    sh 'npm run build'
+                    }
+
                 sh 'ls -l'
                 // sh 'npm run build'
                 // stash includes: 'target/*.jar', name: 'app' 
