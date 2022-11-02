@@ -7,7 +7,7 @@ pipeline {
         stage('Build dist') {
             agent any
             steps {
-                sh 'echo -e "@emanuel-sosa-setrass:registry=https://registry.npmjs.org/\n//registry.npmjs.org/:_authToken=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" > ~/.npmrc'
+                //sh 'echo -e "@emanuel-sosa-setrass:registry=https://registry.npmjs.org/\n//registry.npmjs.org/:_authToken=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" > ~/.npmrc'
                 sh 'cat ~/.npmrc'
                 sh 'node -v'
                 sh 'npm list'
