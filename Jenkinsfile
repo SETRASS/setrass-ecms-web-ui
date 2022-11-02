@@ -12,9 +12,9 @@ pipeline {
                 sh 'node -v'
                 // sh 'npm cache clean --force'
                 //sh 'npm list'
+                sh 'ls -l'
                 withNPM(npmrcConfig: 'artefacto-npmrc') { sh 'npm install' }
                 // sh 'npm run build'
-                // sh 'ls -l'
                 // stash includes: 'target/*.jar', name: 'app' 
             }
         }
