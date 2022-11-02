@@ -14,6 +14,7 @@ pipeline {
                 //sh 'npm list'
                 sh 'ls -l'
                 sh 'export NODE_OPTIONS="--max-old-space-size=8192"'
+                sh 'echo $NODE_OPTIONS'
                 withNPM(npmrcConfig: 'artefacto-npmrc') { sh 'yarn install' }
                 // sh 'npm run build'
                 // stash includes: 'target/*.jar', name: 'app' 
