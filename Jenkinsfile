@@ -11,7 +11,7 @@ pipeline {
                 // sh 'cat ~/.npmrc'
                 sh 'node -v'
                 sh 'npm cache clean --force'
-                sh 'npm install --save core-js@^3'
+                sh 'npm install -g @angular/cli@latest'
                 // sh 'npm list'
                 withNPM(npmrcConfig: 'artefacto-npmrc') {
                     sh 'npm install'
