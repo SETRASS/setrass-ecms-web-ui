@@ -16,8 +16,7 @@ pipeline {
                     }
 
                 sh 'ls -l'
-                // sh 'npm run build'
-                // stash includes: 'target/*.jar', name: 'app' 
+                stash includes: 'dist', name: 'app' 
             }
         }
 
