@@ -2,7 +2,7 @@
 pipeline {
     agent none
     environment { DEPLOY_VERSION = '0.1.6' }
-    //tools { nodejs 'node-12' }
+    tools { nodejs 'node-12' }
     stages {
         stage('Build dist') {
             agent any
@@ -11,13 +11,10 @@ pipeline {
                 // sh 'cat ~/.npmrc'
                 sh 'node -v'
                 sh 'npm cache clean --force'
-                sh 'npm install -g @angular/cli@latest'
-                // sh 'npm list'
-                withNPM(npmrcConfig: 'artefacto-npmrc') {
-                    sh 'npm install'
-                    }
-                sh 'npm run build'
-                sh 'ls -l'
+                sh 'npm list'
+                // withNPM(npmrcConfig: 'artefacto-npmrc') { sh 'npm install' }
+                // sh 'npm run build'
+                // sh 'ls -l'
                 // stash includes: 'target/*.jar', name: 'app' 
             }
         }
