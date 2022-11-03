@@ -25,7 +25,16 @@ pipeline {
             }
             steps {
                 unstash 'app' 
-                sh 'ls -l'
+                script{
+                    app = docker.build("devops_test", " -f Dockerfile.jenkins .")
+                    docker.withRegistry('https://648505502080.dkr.ecr.us-east-1.amazonaws.com', 'ecr:us-east-1:aws-credentials') {
+                    app.push("${env.DEPLOY_VERSION}")
+                    app.push("latest")
+                    }
+                sh 'curl -LO "https://storage.googleapis.com/kubernetes-release/release/v1.20.5/bin/linux/amd64/kubectl"'
+                sh 'chmod u+x ./kubectl'  
+                sh "./kubectl get pods -n ${env.ENTORNO}"
+                }
             }
             
         }
