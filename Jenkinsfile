@@ -19,6 +19,16 @@ pipeline {
                 stash includes: 'dist/**/*', name: 'app' 
             }
         }
+        stage('Build Docker, Save in ECR and Publish K8s') {
+            agent { 
+                label 'dind-agent'
+            }
+            steps {
+                unstash 'app' 
+                sh 'ls -l'
+            }
+            
+        }
 
     }
 }
