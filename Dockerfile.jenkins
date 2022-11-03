@@ -1,6 +1,7 @@
 FROM nginx as production-stage
 RUN mkdir /app
-COPY  dist /app
+ARG FOLDER_DIST
+COPY ${FOLDER_DIST} /app
 WORKDIR /app
 RUN mv $(ls -d */|head -n 1)/* .
 COPY nginx.conf /etc/nginx/nginx.conf

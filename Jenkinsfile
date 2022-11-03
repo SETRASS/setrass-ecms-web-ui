@@ -26,7 +26,7 @@ pipeline {
             steps {
                 unstash 'app' 
                 script{
-                    app = docker.build("devops_test", " -f Dockerfile.jenkins .")
+                    app = docker.build("devops_test",  "--build-arg FOLDER_DIST=./dist -f Dockerfile.jenkins .")
                     docker.withRegistry('https://648505502080.dkr.ecr.us-east-1.amazonaws.com', 'ecr:us-east-1:aws-credentials') {
                     app.push("${env.DEPLOY_VERSION}")
                     app.push("latest")
