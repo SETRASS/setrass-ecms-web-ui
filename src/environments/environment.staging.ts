@@ -2,9 +2,9 @@
 // `ng build` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
-const API_LOOKUPS = "http://development.svc-lookups.ecms.setrass.net"; // lookups
-const API_SALARY_HISTORY = "http://development.svc-salary-history.ecms.setrass.net"; // salary history
-const API_CALCULO_PRESTACIONES = "http://development.svc-calc-prestaciones.ecms.setrass.net"; // calculo-prestaciones
+const API_LOOKUPS = "https://development.svc-lookups.ecms.setrass.net"; // lookups
+const API_SALARY_HISTORY = "https://development.svc-salary-history.ecms.setrass.net"; // salary history
+const API_CALCULO_PRESTACIONES = "https://development.svc-calc-prestaciones.ecms.setrass.net"; // calculo-prestaciones
 
 export const environment = {
   production: true,
