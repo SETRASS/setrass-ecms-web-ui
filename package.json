@@ -34,7 +34,7 @@
     "@setrass-hn/kt": "1.0.1",
     "@setrass-hn/layout-core": "1.0.2",
     "@setrass-hn/partials": "1.0.1",
-    "@setrass-hn/patrono-empleador": "0.1.10",
+    "@setrass-hn/patrono-empleador": "0.1.9",
     "angular-datatables": "13.1.0",
     "angular-in-memory-web-api": "0.13.0",
     "animate.css": "4.1.1",
