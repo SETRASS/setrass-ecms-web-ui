@@ -1,4 +1,4 @@
-# Build the Vue app
+# Build the angular app
 FROM node:12.22.9-alpine3.15 as build-stage
 WORKDIR /app
 COPY package*.json ./
