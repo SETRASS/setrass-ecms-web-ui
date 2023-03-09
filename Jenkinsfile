@@ -1,7 +1,7 @@
 
 pipeline {
     agent none
-    environment { DEPLOY_VERSION = '0.1.11' }
+    environment { DEPLOY_VERSION = '1.0.0' }
     tools { nodejs 'node-12' }
     stages {
         stage('Build dist') {
