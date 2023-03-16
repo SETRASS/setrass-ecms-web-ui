@@ -1,6 +1,6 @@
 {
   "name": "setrass-ecms-calculo-prestaciones-ui",
-  "version": "0.1.9",
+  "version": "1.0.3",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -34,7 +34,7 @@
     "@setrass-hn/kt": "1.0.1",
     "@setrass-hn/layout-core": "1.0.2",
     "@setrass-hn/partials": "1.0.1",
-    "@setrass-hn/patrono-empleador": "0.1.12",
+    "@setrass-hn/patrono-empleador": "0.1.15",
     "angular-datatables": "13.1.0",
     "angular-in-memory-web-api": "0.13.0",
     "animate.css": "4.1.1",
