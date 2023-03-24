@@ -29,7 +29,7 @@
     "@ngx-translate/core": "14.0.0",
     "@ngx-translate/http-loader": "7.0.0",
     "@popperjs/core": "2.11.2",
-    "@setrass-hn/calculo-prestaciones": "0.1.19",
+    "@setrass-hn/calculo-prestaciones": "0.1.20",
     "@setrass-hn/i18n": "1.0.4",
     "@setrass-hn/kt": "1.0.1",
     "@setrass-hn/layout-core": "1.0.2",
