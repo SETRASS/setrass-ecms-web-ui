@@ -1,7 +1,7 @@
 
 pipeline {
     agent none
-    environment { DEPLOY_VERSION = '2.0.4' }
+    environment { DEPLOY_VERSION = '2.0.5' }
     tools { nodejs 'node-12' }
     stages {
         stage('Build dist') {
@@ -40,7 +40,7 @@ pipeline {
                     }
                 } else {
                     configFileProvider(
-                        [configFile(fileId: '4a6a1fe9-3181-4d06-8dd0-01c74acce756', targetLocation: 'prod.yml', variable: 'CLUSTER')]) 
+                        [configFile(fileId: '4a6a1fe9-3181-4d06-8dd0-01c74acce756', targetLocation: 'prod.yml', variable: 'CLUSTER')])
                         {
                             sh "./kubectl --kubeconfig $CLUSTER apply -f k8s.yml -n ${env.ENTORNO}"
                         }
