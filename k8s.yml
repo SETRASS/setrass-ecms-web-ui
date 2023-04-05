@@ -3,7 +3,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   annotations:
-    kubernetes.io/change-cause: "Primer Implementación"
+    kubernetes.io/change-cause: "Actualizando Staff a v1.0.2"
   name: setrass-ecms-web-ui
   labels:
     app: web-ui
