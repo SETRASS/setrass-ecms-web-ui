@@ -36,6 +36,7 @@
     "@setrass-hn/partials": "1.0.1",
     "@setrass-hn/patrono-empleador": "0.1.17",
     "@setrass-hn/staff": "1.0.2",
+    "@setrass-hn/inspeccion":"0.2.0",
     "angular-datatables": "13.1.0",
     "angular-in-memory-web-api": "0.13.0",
     "animate.css": "4.1.1",
