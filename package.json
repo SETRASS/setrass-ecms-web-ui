@@ -34,7 +34,7 @@
     "@setrass-hn/kt": "1.0.1",
     "@setrass-hn/layout-core": "1.0.2",
     "@setrass-hn/partials": "1.0.1",
-    "@setrass-hn/patrono-empleador": "0.1.18",
+    "@setrass-hn/patrono-empleador": "0.1.20",
     "@setrass-hn/staff": "1.0.2",
     "@setrass-hn/inspeccion":"0.2.1",
     "angular-datatables": "13.1.0",
