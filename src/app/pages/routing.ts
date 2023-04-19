@@ -1,10 +1,17 @@
 import { Routes } from '@angular/router';
+import { AuthGuard, RedirectGuard } from '@setrass-hn/auth';
+import { AuthModule } from '../modules/auth/auth.module';
 import { CalculoPrestacionesModule } from '../modules/calculo-prestaciones/calculo-prestaciones.module';
 import { InspeccionModule } from '../modules/inspeccion/inspeccion.module';
 import { PatronoEmpleadorModule } from '../modules/patrono-empleador/patrono-empleador.module';
 import { StaffModule } from '../modules/staff/staff.module';
 
 const Routing: Routes = [
+  {
+    path: 'auth',
+    loadChildren: () => AuthModule,
+    canActivate: [ RedirectGuard ]
+  },
   {
     path: 'inspeccion',
     loadChildren: () => InspeccionModule
@@ -15,7 +22,8 @@ const Routing: Routes = [
   },
   {
     path: 'patrono-empleador',
-    loadChildren: () => PatronoEmpleadorModule
+    loadChildren: () => PatronoEmpleadorModule,
+    canActivate: [ AuthGuard ]
   },
   {
     path: "calculo-prestaciones",
