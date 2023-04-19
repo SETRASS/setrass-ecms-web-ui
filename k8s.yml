@@ -7,7 +7,8 @@ metadata:
   name: setrass-ecms-web-ui
   labels:
     app: web-ui
-# REPLICASET
+
+#REPLICASET
 spec:
   replicas: 2
   selector:
@@ -39,9 +40,4 @@ spec:
     - protocol: TCP
       port: 80
       targetPort: 80
-
-
-
-
-
 
