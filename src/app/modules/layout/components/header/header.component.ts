@@ -3,6 +3,7 @@ import {NavigationCancel, NavigationEnd, Router} from '@angular/router';
 import {Subscription} from 'rxjs';
 import {LayoutService} from '@setrass-hn/layout-core';
 import {components} from '@setrass-hn/kt';
+import { AuthService } from '@setrass-hn/auth';
 
 @Component({
   selector: 'app-header',
@@ -20,8 +21,13 @@ export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('ktPageTitle', {static: true}) ktPageTitle: ElementRef;
 
   private unsubscribe: Subscription[] = [];
+  public isShowNavbar: boolean = false;
+  public currentUser: any = {};
 
-  constructor(private layout: LayoutService, private router: Router) {
+  constructor(
+    private layout: LayoutService,
+    private router: Router,
+    private authService: AuthService) {
     this.routingChanges();
   }
 
@@ -31,6 +37,13 @@ export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
     this.headerLeft = this.layout.getProp('header.left') as string;
     this.pageTitleCssClasses = this.layout.getStringCSSClasses('pageTitle');
     this.pageTitleAttributes = this.layout.getHTMLAttributes('pageTitle');
+    this.authService.checkAuth();
+    this.isShowNavbar = localStorage.getItem('current_user') ? true : false;
+    this.currentUser = this.authService.user;
+    this.authService.$user.subscribe((data) => {
+      console.log('Se hizo sesion',data);
+    })
+
   }
 
   ngAfterViewInit() {
@@ -53,6 +66,20 @@ export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
     this.unsubscribe.push(routerSubscription);
   }
 
+  get initialName(){
+    let names = this.authService.user.name ?
+    this.authService.user.name.split(' ') :
+    "Jorge Aguilar".split(" ");
+    return names[0][0]+names[1][0];
+  }
+
+  logout(): void{
+    this.authService.logout();
+    this.isShowNavbar = false;
+    this.router.navigate(['./auth/login']);
+  }
+
   ngOnDestroy() {
+
   }
 }
