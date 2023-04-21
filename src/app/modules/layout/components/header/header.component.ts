@@ -27,7 +27,7 @@ export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
   constructor(
     private layout: LayoutService,
     private router: Router,
-    private authService: AuthService) {
+    public authService: AuthService) {
     this.routingChanges();
   }
 
