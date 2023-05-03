@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
 import { CalculoPrestacionesModule } from './modules/calculo-prestaciones/calculo-prestaciones.module';
+import { AuthModule, RedirectGuard } from '@setrass-hn/auth';
 
 
 export const routes: Routes = [
@@ -9,6 +10,11 @@ export const routes: Routes = [
     loadChildren: () => CalculoPrestacionesModule
     //loadChildren: () => import('./modules/calculo-prestaciones/calculo-prestaciones.module').then(m => m.CalculoPrestacionesModule)
   }, */
+  {
+    path: 'auth',
+    loadChildren: () => AuthModule,
+    canActivate: [ RedirectGuard ]
+  },
   {
     path: 'error',
     loadChildren: () =>
