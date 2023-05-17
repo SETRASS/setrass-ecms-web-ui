@@ -3,7 +3,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   annotations:
-    kubernetes.io/change-cause: "Modulo de autenticación y patronos actualizado"
+    kubernetes.io/change-cause: "Actualización de patronos v0.1.24"
   name: setrass-ecms-web-ui
   labels:
     app: web-ui
@@ -22,7 +22,7 @@ spec:
     spec:
       containers:
       - name: web-ui
-        image: 648505502080.dkr.ecr.us-east-1.amazonaws.com/setrass-ecms-web-ui:2.0.18
+        image: 648505502080.dkr.ecr.us-east-1.amazonaws.com/setrass-ecms-web-ui:2.0.19
 
 ---
 #SERVICE
