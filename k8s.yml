@@ -3,7 +3,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   annotations:
-    kubernetes.io/change-cause: "Actualización de inspeccion v0.2.2"
+    kubernetes.io/change-cause: "Actualización de inspeccion v0.2.2 y patronos v0.1.27"
   name: setrass-ecms-web-ui
   labels:
     app: web-ui
