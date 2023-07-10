@@ -3,7 +3,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   annotations:
-    kubernetes.io/change-cause: "Actualización de clase en web ui v1.2.7"
+    kubernetes.io/change-cause: "Actualización de clase en web ui v1.2.7 y kubernetes v2.0.25"
   name: setrass-ecms-web-ui
   labels:
     app: web-ui
