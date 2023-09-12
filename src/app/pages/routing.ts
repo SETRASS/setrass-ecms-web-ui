@@ -5,6 +5,7 @@ import { CalculoPrestacionesModule } from '../modules/calculo-prestaciones/calcu
 import { InspeccionModule } from '../modules/inspeccion/inspeccion.module';
 import { PatronoEmpleadorModule } from '../modules/patrono-empleador/patrono-empleador.module';
 import { StaffModule } from '../modules/staff/staff.module';
+import { TrabajadoresModule } from '../modules/trabajadores/trabajadores.module';
 
 const Routing: Routes = [
   {
@@ -15,6 +16,10 @@ const Routing: Routes = [
   {
     path: 'inspeccion',
     loadChildren: () => InspeccionModule
+  },
+  {
+    path: 'trabajadores',
+    loadChildren: () => TrabajadoresModule
   },
   {
     path: 'staff',
