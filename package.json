@@ -1,6 +1,6 @@
 {
   "name": "setrass-ecms-web-ui",
-  "version": "1.3.6",
+  "version": "1.3.7",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -44,7 +44,7 @@
     "@setrass-hn/layout-core": "1.0.2",
     "@setrass-hn/partials": "1.0.1",
     "@setrass-hn/patrono-empleador": "0.1.30",
-    "@setrass-hn/staff": "1.0.8",
+    "@setrass-hn/staff": "1.0.9",
     "@setrass-hn/trabajadores": "0.0.3",
     "angular-datatables": "13.1.0",
     "angular-in-memory-web-api": "0.13.0",
