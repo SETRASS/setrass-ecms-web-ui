@@ -19,8 +19,67 @@
     </a>
   </div>
   <!--end::Header Logo-->
+
+  <!-- NAVBAR TEST -->
+  <nav class="navbar navbar-expand-lg ">
+
+    <div class="navbar" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item link">
+          <h5 class="nav-link text-white" routerLink="/dashboard">Inicio</h5>
+        </li>
+        <li class="nav-item link" *ngIf="inDashboard">
+          <h5 class="nav-link text-white" routerLink="/staff">Staff</h5>
+        </li>
+        <li class="nav-item link" *ngIf="inDashboard">
+          <h5 class="nav-link text-white" routerLink="/patrono-empleador">Patrono y Empleador</h5>
+        </li>
+        <!-- dropdown inspeccion -->
+        
+          <li class="nav-item link" *ngIf="inDashboard" ngbDropdown #Drop="ngbDropdown" display="dynamic">
+            <h5 class="nav-link text-white" id="filterBtn" ngbDropdownToggle>
+              Inspeccion                      
+            </h5>
+            
+            <div ngbDropdownMenu aria-labelledby="InspeccionBtn">
+              <p ngbDropdownItem class="nav-link" routerLink="/inspeccion">Inicio</p>
+              <p ngbDropdownItem class="nav-link" routerLink="/inspeccion/registro-fichas">Parametrizacion</p>
+              <p ngbDropdownItem class="nav-link" routerLink="/inspeccion/parametrizacion">Fichas</p>
+            </div>
+      
+          </li>
+        
+
+        <!-- dropdown inspeccion -->
+       
+      </ul>
+    </div>
+  </nav>
+
+
+  <!-- NAVBAR TEST -->
+
+
+
   <!--begin::Wrapper-->
-  <div class="d-flex align-items-stretch justify-content-between flex-lg-grow-1">
+  <div class="d-flex justify-content-end flex-lg-grow-1">
+    <!-- <div class="menu-item">
+      <a routerLink="/staff" class="menu-link">
+        <span class="text-white">Staff</span>
+      </a>
+    </div>
+
+    <div class="menu-item">
+      <a routerLink="/patrono-empleador" class="menu-link">
+        <span class="text-white">Patrono y empleador</span>
+      </a>
+    </div>
+
+    <div class="menu-item">
+      <a routerLink="/inspeccion" class="menu-link">
+        <span class="text-white">Inspeccion</span>
+      </a>
+    </div> -->
     <!--begin::Navbar-->
     <ng-container *ngIf="headerLeft === 'menu'">
       <div class="d-flex align-items-stretch" id="kt_header_nav">

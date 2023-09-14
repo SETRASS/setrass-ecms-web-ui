@@ -6,12 +6,17 @@ import { InspeccionModule } from '../modules/inspeccion/inspeccion.module';
 import { PatronoEmpleadorModule } from '../modules/patrono-empleador/patrono-empleador.module';
 import { StaffModule } from '../modules/staff/staff.module';
 import { TrabajadoresModule } from '../modules/trabajadores/trabajadores.module';
+import { DashboardModule } from '../modules/dashboard/dashboard.module';
 
 const Routing: Routes = [
   {
     path: 'auth',
     loadChildren: () => AuthModule,
     canActivate: [ RedirectGuard ]
+  },
+  {
+    path: 'dashboard',
+    loadChildren: () => DashboardModule
   },
   {
     path: 'inspeccion',
