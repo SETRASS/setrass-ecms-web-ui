@@ -1,0 +1,40 @@
+.footer{
+    .logo-sihcal{
+        width: 8rem;
+        margin-right: 1rem;
+    }
+} 
+.disclaimer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column-reverse;
+    gap: 1rem; 
+    .logo{
+        position: relative;
+        img{
+            width: 10rem;
+        }
+        small{
+            font-size: .6rem;
+            position: absolute;
+            font-weight: bold;
+            top: -.5rem;
+        }
+    }
+    p{
+        font-size: .8rem;
+        opacity: .8;
+        margin-bottom: 0 !important;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .disclaimer {
+        gap: 5rem;
+        flex-direction: row-reverse;
+        .logo img{
+            width: 8rem;
+        }
+    }
+}
