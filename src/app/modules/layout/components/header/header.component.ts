@@ -66,7 +66,8 @@ export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
 
   routingChanges() {
     const routerSubscription = this.router.events.subscribe((event) => {
-      this.inDashboard = this.router.url.includes("/dashboard")  ? true: false;    
+      console.log("this.router.url: ", this.router.url)
+      this.inDashboard = this.router.url == "/" ? true: false;    
       if (event instanceof NavigationEnd || event instanceof NavigationCancel) {
         components.MenuComponent.reinitialization();
       }

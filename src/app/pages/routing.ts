@@ -41,7 +41,7 @@ const Routing: Routes = [
   },
   {
     path: '',
-    redirectTo: '/calculo-prestaciones',
+    loadChildren: () => DashboardModule,
     pathMatch: 'full',
   },
   {
