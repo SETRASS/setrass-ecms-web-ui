@@ -9,7 +9,7 @@ import { LayoutService } from '@setrass-hn/layout-core';
 export class FooterComponent implements OnInit {
   footerContainerCssClasses: string = '';
   currentDateStr: string = new Date().getFullYear().toString();
-  systemName: string = 'Sistema Electrónico de Gestión de Casos Laborales';
+  systemName: string = 'Sistema Hondureño de Casos Laborales';
   constructor(private layout: LayoutService) {}
 
   ngOnInit(): void {
