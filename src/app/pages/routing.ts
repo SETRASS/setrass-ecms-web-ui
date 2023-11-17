@@ -6,6 +6,8 @@ import { InspeccionModule } from '../modules/inspeccion/inspeccion.module';
 import { PatronoEmpleadorModule } from '../modules/patrono-empleador/patrono-empleador.module';
 import { StaffModule } from '../modules/staff/staff.module';
 import { TrabajadoresModule } from '../modules/trabajadores/trabajadores.module';
+import { ParametrizacionModule } from '@setrass-hn/parametrizacion';
+import { AtencionesModule } from '@setrass-hn/atenciones';
 
 const Routing: Routes = [
   {
@@ -33,6 +35,14 @@ const Routing: Routes = [
   {
     path: "calculo-prestaciones",
     loadChildren: () => CalculoPrestacionesModule
+  },
+  {
+    path: "parametrizacion",
+    loadChildren: () => ParametrizacionModule
+  },
+  {
+    path: "atenciones",
+    loadChildren: () => AtencionesModule
   },
   {
     path: '',
