@@ -8,6 +8,7 @@ import { StaffModule } from '../modules/staff/staff.module';
 import { TrabajadoresModule } from '../modules/trabajadores/trabajadores.module';
 import { ParametrizacionModule } from '@setrass-hn/parametrizacion';
 import { AtencionesModule } from '@setrass-hn/atenciones';
+import { IndicadoresModule } from '@setrass-hn/indicadores';
 
 const Routing: Routes = [
   {
@@ -35,6 +36,10 @@ const Routing: Routes = [
   {
     path: "calculo-prestaciones",
     loadChildren: () => CalculoPrestacionesModule
+  },
+  {
+    path: "indicadores",
+    loadChildren: () => IndicadoresModule
   },
   {
     path: "parametrizacion",
