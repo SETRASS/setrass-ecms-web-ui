@@ -47,7 +47,7 @@
     "@setrass-hn/patrono-empleador": "0.1.30",
     "@setrass-hn/parametrizacion": "0.0.5",
     "@setrass-hn/indicadores": "0.0.1",
-    "@setrass-hn/atenciones": "0.0.3",
+    "@setrass-hn/atenciones": "0.0.4",
     "@setrass-hn/staff": "1.0.9",
     "@setrass-hn/trabajadores": "0.0.3",
     "angular-datatables": "13.1.0",
