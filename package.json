@@ -38,7 +38,7 @@
     "@ngx-translate/http-loader": "7.0.0",
     "@popperjs/core": "2.11.2",
     "@setrass-hn/atenciones": "0.0.1",
-    "@setrass-hn/auth": "file:../sihcal-auth-ui/dist/auth",
+    "@setrass-hn/auth": "^1.0.13",
     "@setrass-hn/calculo-prestaciones": "0.1.20",
     "@setrass-hn/i18n": "1.0.4",
     "@setrass-hn/indicadores": "0.0.1",
