@@ -40,7 +40,7 @@
     "@setrass-hn/auth": "1.0.12",
     "@setrass-hn/calculo-prestaciones": "0.1.20",
     "@setrass-hn/i18n": "1.0.4",
-    "@setrass-hn/inspeccion": "0.2.12",
+    "@setrass-hn/inspeccion": "0.2.13",
     "@setrass-hn/kt": "1.0.1",
     "@setrass-hn/layout-core": "1.0.2",
     "@setrass-hn/partials": "1.0.1",
