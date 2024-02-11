@@ -6,6 +6,7 @@ import { InspeccionModule } from '../modules/inspeccion/inspeccion.module';
 import { PatronoEmpleadorModule } from '../modules/patrono-empleador/patrono-empleador.module';
 import { StaffModule } from '../modules/staff/staff.module';
 import { TrabajadoresModule } from '../modules/trabajadores/trabajadores.module';
+import { DashboardModule } from '../modules/dashboard/dashboard.module';
 import { ParametrizacionModule } from '@setrass-hn/parametrizacion';
 import { AtencionesModule } from '@setrass-hn/atenciones';
 import { IndicadoresModule } from '@setrass-hn/indicadores';
@@ -17,6 +18,10 @@ const Routing: Routes = [
     canActivate: [ RedirectGuard ]
   },
   {
+    path: 'dashboard',
+    loadChildren: () => DashboardModule
+  },
+  {
     path: 'inspeccion',
     loadChildren: () => InspeccionModule
   },
@@ -26,7 +31,8 @@ const Routing: Routes = [
   },
   {
     path: 'staff',
-    loadChildren: () => StaffModule
+    loadChildren: () => StaffModule,
+    canActivate: [ AuthGuard ]
   },
   {
     path: 'patrono-empleador',
@@ -51,7 +57,7 @@ const Routing: Routes = [
   },
   {
     path: '',
-    redirectTo: '/calculo-prestaciones',
+    loadChildren: () => DashboardModule,
     pathMatch: 'full',
   },
   {

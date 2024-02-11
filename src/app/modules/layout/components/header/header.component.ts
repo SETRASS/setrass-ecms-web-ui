@@ -1,5 +1,5 @@
-import {AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild,} from '@angular/core';
-import {NavigationCancel, NavigationEnd, Router} from '@angular/router';
+import {AfterViewInit, ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, ViewChild,} from '@angular/core';
+import {ActivatedRoute, NavigationCancel, NavigationEnd, Router} from '@angular/router';
 import {Subscription} from 'rxjs';
 import {LayoutService} from '@setrass-hn/layout-core';
 import {components} from '@setrass-hn/kt';
@@ -23,11 +23,14 @@ export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
   private unsubscribe: Subscription[] = [];
   public isShowNavbar: boolean = false;
   public currentUser: any = {};
+  public inDashboard: boolean = false;
 
   constructor(
     private layout: LayoutService,
     private router: Router,
-    public authService: AuthService) {
+    public authService: AuthService,
+    private route: ActivatedRoute,
+    private ref: ChangeDetectorRef,) {
     this.routingChanges();
   }
 
@@ -40,10 +43,6 @@ export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
     this.authService.checkAuth();
     this.isShowNavbar = localStorage.getItem('current_user') ? true : false;
     this.currentUser = this.authService.user;
-    this.authService.$user.subscribe((data) => {
-      console.log('Se hizo sesion',data);
-    })
-
   }
 
   ngAfterViewInit() {
@@ -59,6 +58,7 @@ export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
 
   routingChanges() {
     const routerSubscription = this.router.events.subscribe((event) => {
+      this.inDashboard = this.router.url == "/" || this.router.url == "/dashboard" ? true: false;    
       if (event instanceof NavigationEnd || event instanceof NavigationCancel) {
         components.MenuComponent.reinitialization();
       }
@@ -76,7 +76,12 @@ export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
   logout(): void{
     this.authService.logout();
     this.isShowNavbar = false;
-    this.router.navigate(['./auth/login']);
+    
+    if(this.router.url.split('/').includes('patrono-empleador')){
+      this.router.navigate(['./auth/login']);
+    }else{
+      this.router.navigate(['./auth/personal/login']);
+    }
   }
 
   ngOnDestroy() {

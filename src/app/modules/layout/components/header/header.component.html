@@ -19,8 +19,26 @@
     </a>
   </div>
   <!--end::Header Logo-->
+
   <!--begin::Wrapper-->
-  <div class="d-flex align-items-stretch justify-content-between flex-lg-grow-1">
+  <div class="d-flex justify-content-end flex-lg-grow-1">
+    <!-- <div class="menu-item">
+      <a routerLink="/staff" class="menu-link">
+        <span class="text-white">Staff</span>
+      </a>
+    </div>
+
+    <div class="menu-item">
+      <a routerLink="/patrono-empleador" class="menu-link">
+        <span class="text-white">Patrono y empleador</span>
+      </a>
+    </div>
+
+    <div class="menu-item">
+      <a routerLink="/inspeccion" class="menu-link">
+        <span class="text-white">Inspeccion</span>
+      </a>
+    </div> -->
     <!--begin::Navbar-->
     <ng-container *ngIf="headerLeft === 'menu'">
       <div class="d-flex align-items-stretch" id="kt_header_nav">
@@ -29,10 +47,11 @@
           data-kt-drawer="true"
           data-kt-drawer-name="header-menu"
           data-kt-drawer-activate="{default: true, lg: false}"
-          data-kt-drawer-overlay="true"
+          data-kt-drawer-overlay="false"
           data-kt-drawer-width="{default:'200px', '300px': '250px'}"
           data-kt-drawer-direction="end"
           data-kt-drawer-toggle="#kt_header_menu_mobile_toggle"
+          data-kt-drawer-close="a"
           data-kt-swapper="true"
           data-kt-swapper-mode="prepend"
           data-kt-swapper-parent="{default: '#kt_body', lg: '#kt_header_nav'}"
@@ -138,7 +157,7 @@
                 <div class="d-flex flex-column w-100">
                   <div class="fw-bolder d-flex align-items-center fs-5">{{currentUser.name}}
                   <span class="badge badge-light-primary fw-bolder fs-8 px-2 py-1 ms-2"></span></div>
-                  <a class="fw-bold text-muted text-hover-primary fs-7">{{currentUser.sub}}</a>
+                  <a class="fw-bold text-muted text-hover-primary fs-7">{{currentUser.email}}</a>
                 </div>
                 <!--end::Username-->
               </div>
