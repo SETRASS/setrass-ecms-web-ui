@@ -43,11 +43,6 @@ export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
     this.authService.checkAuth();
     this.isShowNavbar = localStorage.getItem('current_user') ? true : false;
     this.currentUser = this.authService.user;
-    console.log("currentUser: ", this.currentUser)
-    this.authService.$user.subscribe((data) => {
-      console.log('Se hizo sesion',data);
-    })
-
   }
 
   ngAfterViewInit() {
@@ -59,16 +54,11 @@ export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
         }
       }
     }
-
-    //? Si estamos en el dashboard mostramos los navItems
-    console.log("this.router.url: ", this.router.url.includes("/dashboard"));
-
   }
 
   routingChanges() {
     const routerSubscription = this.router.events.subscribe((event) => {
-      console.log("this.router.url: ", this.router.url)
-      this.inDashboard = this.router.url == "/" ? true: false;    
+      this.inDashboard = this.router.url == "/" || this.router.url == "/dashboard" ? true: false;    
       if (event instanceof NavigationEnd || event instanceof NavigationCancel) {
         components.MenuComponent.reinitialization();
       }
@@ -86,7 +76,12 @@ export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
   logout(): void{
     this.authService.logout();
     this.isShowNavbar = false;
-    this.router.navigate(['./auth/login']);
+    
+    if(this.router.url.split('/').includes('patrono-empleador')){
+      this.router.navigate(['./auth/login']);
+    }else{
+      this.router.navigate(['./auth/personal/login']);
+    }
   }
 
   ngOnDestroy() {

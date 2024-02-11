@@ -1,6 +1,65 @@
 <!-- Dashboard -->
-<div class="menu-item me-lg-1">
-  <!--a class="menu-link py-3" routerLinkActive="active" routerLink="/dashboard">
-    <span class="menu-title" translate="MENU.CALCULO"></span>
-  </a-->
+<div *ngIf="!isMobile()">
+  <ng-container *ngTemplateOutlet="routes"></ng-container>
 </div>
+
+<div class="card w-100 rounded-0" *ngIf="isMobile()">
+  <!--begin::Card header-->
+  <div class="card-header pe-5">
+      <div class="card-title">
+          <div class="d-flex justify-content-center flex-column me-3">
+              <a href="#" class="fs-4 fw-bold text-gray-900 text-hover-primary me-1 lh-1">Menu</a>
+          </div>
+      </div>
+       <div class="card-toolbar">
+          <a class="btn btn-icon btn-active-light-primary" id="kt_drawer_example_basic_close">
+            <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12.7795 0.76V0.975999L8.62147 6.898L12.7795 12.766V13H9.30547L6.49747 8.878L3.68947 13H0.197469V12.766L4.35547 6.898L0.197469 0.975999V0.76H3.67147L6.49747 4.936L9.34147 0.76H12.7795Z" fill="#373737" fill-opacity="0.5"/>
+              </svg>
+          </a>
+      </div>
+  </div>
+  <!--end::Card header-->
+
+  <!--begin::Card body-->
+  <div class="card-body h-100">
+    <ng-container *ngTemplateOutlet="routes"></ng-container>
+  </div>
+  <!--end::Card body-->
+</div>
+
+
+<ng-template #routes>
+  <div [class]="getWindowWidthClass()">
+    <div class="menu-item" *ngIf="!isPatronos()">
+       <a class="menu-link" routerLink="/">
+         <span class="menu-title">Inicio</span>
+       </a>
+    </div>
+   
+     <div  class="menu-item" *ngFor="let item of navItems">
+       
+         <a class="menu-link py-3" *ngIf="item.childRoutes.length == 0 && searchAuthorization(item.role)">
+           <span class="menu-title" routerLink={{item.route}}>{{item.name}}</span>
+         </a>
+       
+       <!-- dropdown start -->
+       
+         <div class="menu-link py-3" *ngIf="item.childRoutes.length && searchAuthorization(item.role)" ngbDropdown #Drop="ngbDropdown" display="dynamic">
+           <span class="menu-title" ngbDropdownToggle>
+             {{item.name}}
+           </span>
+         
+           <div ngbDropdownMenu>
+             <a class="menu-link py-3"  ngbDropdownItem routerLink={{item.route}}> <span>Inicio</span> </a>
+             <div  *ngFor="let route of item.childRoutes">
+               <a class="menu-link py-3" ngbDropdownItem  *ngIf="searchAuthorization(route.role)" routerLink={{route.route}}> <span> {{route.name}} </span></a>
+             </div>     
+           </div>
+         </div>
+       
+       <!-- dropdown end -->
+     </div>       
+   </div>
+   
+</ng-template>

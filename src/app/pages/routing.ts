@@ -31,7 +31,8 @@ const Routing: Routes = [
   },
   {
     path: 'staff',
-    loadChildren: () => StaffModule
+    loadChildren: () => StaffModule,
+    canActivate: [ AuthGuard ]
   },
   {
     path: 'patrono-empleador',

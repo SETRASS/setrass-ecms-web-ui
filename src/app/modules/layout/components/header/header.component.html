@@ -20,47 +20,6 @@
   </div>
   <!--end::Header Logo-->
 
-  <!-- NAVBAR TEST -->
-  <nav class="navbar navbar-expand-lg ">
-
-    <div class="navbar" id="navbarSupportedContent">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item link">
-          <h5 class="nav-link text-white" routerLink="/">Inicio</h5>
-        </li>
-        <li class="nav-item link" *ngIf="inDashboard">
-          <h5 class="nav-link text-white" routerLink="/staff">Staff</h5>
-        </li>
-        <li class="nav-item link" *ngIf="inDashboard">
-          <h5 class="nav-link text-white" routerLink="/patrono-empleador">Patrono y Empleador</h5>
-        </li>
-        <!-- dropdown inspeccion -->
-        
-          <li class="nav-item link" *ngIf="inDashboard" ngbDropdown #Drop="ngbDropdown" display="dynamic">
-            <h5 class="nav-link text-white" id="filterBtn" ngbDropdownToggle>
-              Inspeccion                      
-            </h5>
-            
-            <div ngbDropdownMenu aria-labelledby="InspeccionBtn">
-              <p ngbDropdownItem class="nav-link" routerLink="/inspeccion">Inicio</p>
-              <p ngbDropdownItem class="nav-link" routerLink="/inspeccion/registro-fichas">Parametrizacion</p>
-              <p ngbDropdownItem class="nav-link" routerLink="/inspeccion/parametrizacion">Fichas</p>
-            </div>
-      
-          </li>
-        
-
-        <!-- dropdown inspeccion -->
-       
-      </ul>
-    </div>
-  </nav>
-
-
-  <!-- NAVBAR TEST -->
-
-
-
   <!--begin::Wrapper-->
   <div class="d-flex justify-content-end flex-lg-grow-1">
     <!-- <div class="menu-item">
@@ -88,10 +47,11 @@
           data-kt-drawer="true"
           data-kt-drawer-name="header-menu"
           data-kt-drawer-activate="{default: true, lg: false}"
-          data-kt-drawer-overlay="true"
+          data-kt-drawer-overlay="false"
           data-kt-drawer-width="{default:'200px', '300px': '250px'}"
           data-kt-drawer-direction="end"
           data-kt-drawer-toggle="#kt_header_menu_mobile_toggle"
+          data-kt-drawer-close="a"
           data-kt-swapper="true"
           data-kt-swapper-mode="prepend"
           data-kt-swapper-parent="{default: '#kt_body', lg: '#kt_header_nav'}"
