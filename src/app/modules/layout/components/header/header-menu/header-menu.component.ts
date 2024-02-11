@@ -68,6 +68,10 @@ export class HeaderMenuComponent implements OnInit {
     this.authService.checkAuth();
     this.isShowNavbar = localStorage.getItem('current_user') ? true : false;
     this.currentUser = this.authService.user;
+
+    if( Object.entries(this.currentUser).length === 0){
+      this.router.navigate(["auth/personal/login"]);
+    }
   }
 
   calculateMenuItemCssClass(url: string): string {
@@ -93,7 +97,7 @@ export class HeaderMenuComponent implements OnInit {
   }
 
   searchAuthorization(role: string | undefined): boolean {
-    if(typeof role === "string" && this.currentUser && !this.isPatronos()){      
+    if(typeof role === "string" && Object.entries(this.currentUser).length != 0 && !this.isPatronos()){      
       const hasRole:boolean = this.currentUser.aud.includes(role);
       return hasRole;
     }

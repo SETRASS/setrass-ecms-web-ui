@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthService } from '@setrass-hn/auth';
 
 @Component({
@@ -12,7 +13,8 @@ export class DashboardComponent implements OnInit {
   public userName:string = "Usuario";
 
   constructor(
-    public authService: AuthService
+    public authService: AuthService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
