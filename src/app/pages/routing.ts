@@ -57,7 +57,7 @@ const Routing: Routes = [
   },
   {
     path: '',
-    loadChildren: () => DashboardModule,
+    loadChildren: () => CalculoPrestacionesModule,
     pathMatch: 'full',
   },
   {

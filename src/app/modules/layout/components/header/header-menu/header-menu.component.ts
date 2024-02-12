@@ -69,9 +69,9 @@ export class HeaderMenuComponent implements OnInit {
     this.isShowNavbar = localStorage.getItem('current_user') ? true : false;
     this.currentUser = this.authService.user;
 
-    if( Object.entries(this.currentUser).length === 0){
-      this.router.navigate(["auth/personal/login"]);
-    }
+    // if( Object.entries(this.currentUser).length === 0){
+    //   this.router.navigate(["auth/personal/login"]);
+    // }
   }
 
   calculateMenuItemCssClass(url: string): string {

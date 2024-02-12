@@ -31,8 +31,8 @@
 
 <ng-template #routes>
   <div [class]="getWindowWidthClass()">
-    <div class="menu-item" *ngIf="!isPatronos()">
-       <a class="menu-link" routerLink="/">
+    <div class="menu-item" *ngIf="!isPatronos() && this.isShowNavbar">
+       <a class="menu-link" routerLink="/dashboard">
          <span class="menu-title">Inicio</span>
        </a>
     </div>
