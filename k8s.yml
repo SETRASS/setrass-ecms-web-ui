@@ -3,7 +3,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   annotations:
-    kubernetes.io/change-cause: "Actualizacion de auth-ui v1.0.15 y kubernetes v2.0.49"
+    kubernetes.io/change-cause: "Actualizacion de Inspeccion v0.2.19 y kubernetes v2.0.56"
   name: setrass-ecms-web-ui
   labels:
     app: web-ui
@@ -22,7 +22,7 @@ spec:
     spec:
       containers:
       - name: web-ui
-        image: 648505502080.dkr.ecr.us-east-1.amazonaws.com/setrass-ecms-web-ui:2.0.49
+        image: 648505502080.dkr.ecr.us-east-1.amazonaws.com/setrass-ecms-web-ui:2.0.56
 
 ---
 #SERVICE
