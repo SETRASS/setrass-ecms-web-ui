@@ -4,6 +4,7 @@ import {Subscription} from 'rxjs';
 import {LayoutService} from '@setrass-hn/layout-core';
 import {components} from '@setrass-hn/kt';
 import { AuthService } from '@setrass-hn/auth';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-header',
@@ -84,7 +85,39 @@ export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
 
+  changePassword(): void{
+    const frontendHost = window.location.href.split("//")[1].split("/")[0]
+    console.log("correo: ", this.currentUser.email)
+    console.log("url: ", frontendHost)
+    if( frontendHost && this.currentUser && this.currentUser.email){
+      //! mandamos el correo de actualizar contraseña
+      console.log("mandamos el correo")
+      const Toast = this.createToast();
+        let toastContent:any = {
+          icon: 'error',
+          title: "Ocurrio un error"
+        };
+
+        
+    }
+  }
+
   ngOnDestroy() {
 
+  }
+
+
+  createToast():any{
+    return Swal.mixin({
+      toast: true,
+      position: 'top-end',
+      showConfirmButton: false,
+      timer: 3000,
+      timerProgressBar: true,
+      didOpen: (toast) => {
+        toast.addEventListener('mouseenter', Swal.stopTimer)
+        toast.addEventListener('mouseleave', Swal.resumeTimer)
+      }
+    });
   }
 }
