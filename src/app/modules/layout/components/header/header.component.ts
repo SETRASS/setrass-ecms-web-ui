@@ -4,6 +4,7 @@ import {Subscription} from 'rxjs';
 import {LayoutService} from '@setrass-hn/layout-core';
 import {components} from '@setrass-hn/kt';
 import { AuthService } from '@setrass-hn/auth';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-header',
@@ -24,6 +25,7 @@ export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
   public isShowNavbar: boolean = false;
   public currentUser: any = {};
   public inDashboard: boolean = false;
+  
 
   constructor(
     private layout: LayoutService,
@@ -84,7 +86,73 @@ export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
 
+  changePassword(): void{
+    const frontendHost = window.location.href.split("//")[1].split("/")[0]
+    if( frontendHost && this.currentUser && this.currentUser.email){
+      let data:any = {
+        email: this.currentUser.email,
+        frontendHost: frontendHost
+      }
+
+      const Toast = this.createToast();
+      this.authService.sendPasswordChange(data).subscribe({
+        next:(res:any)=>{
+          console.log("res: ", res)
+
+          Toast.fire({
+            icon: 'success',
+            title: "Correo enviado exitosamente, revisar su bandeja de entrada o spam"
+          });
+          this.logout();
+        },
+        error:(error)=>{
+          
+          const err = error.message || error;
+          console.warn(err);
+          return Toast.fire({
+            icon: 'error',
+            title: err
+          });
+        }
+      });        
+    }
+  }
+
+  showAlertChangePassword() {
+    Swal.fire({
+      icon: 'warning',
+      title: `¿Estás seguro qué desea Cambiar su contraseña?`,
+      text: "Recibirá un enlace por correo para actualizar su contraseña",          
+      showCancelButton: true,
+      cancelButtonText: 'Cancelar',
+      confirmButtonText: `Si`,
+      customClass: {
+        confirmButton: 'btn btn-success',
+        cancelButton: 'btn btn-danger'
+      }
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.changePassword();
+      }
+    });
+  }
+
   ngOnDestroy() {
 
+  }
+
+
+  createToast():any{
+    return Swal.mixin({
+      toast: true,
+      position: 'top-end',
+      showConfirmButton: false,
+      timer: 3000,
+      timerProgressBar: true,
+      didOpen: (toast) => {
+        toast.addEventListener('mouseenter', Swal.stopTimer)
+        toast.addEventListener('mouseleave', Swal.resumeTimer)
+      }
+    });
   }
 }

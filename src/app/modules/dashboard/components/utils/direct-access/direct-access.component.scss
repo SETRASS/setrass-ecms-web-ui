@@ -1,9 +1,14 @@
-@keyframes fade {
-    0% { opacity: 1; }
-    50% { opacity: 0.5; }
-    100% { opacity: 1; }
-}
+// @keyframes fade {
+//     0% { opacity: 1; }
+//     50% { opacity: 0.5; }
+//     100% { opacity: 1; }
+// }
 
-circle {
-    animation: fade 2s infinite;
+// circle {
+//     animation: fade 2s infinite;
+// }
+
+.direct-access-text-color {
+    color: #88CFE0;
+    font-weight: bold;
 }

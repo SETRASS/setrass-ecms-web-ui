@@ -19,11 +19,13 @@ const Routing: Routes = [
   },
   {
     path: 'dashboard',
-    loadChildren: () => DashboardModule
+    loadChildren: () => DashboardModule,
+    canActivate: [ AuthGuard ]
   },
   {
     path: 'inspeccion',
-    loadChildren: () => InspeccionModule
+    loadChildren: () => InspeccionModule,
+    canActivate: [ AuthGuard ]
   },
   {
     path: 'trabajadores',
@@ -49,11 +51,13 @@ const Routing: Routes = [
   },
   {
     path: "parametrizacion",
-    loadChildren: () => ParametrizacionModule
+    loadChildren: () => ParametrizacionModule,
+    canActivate: [ AuthGuard ]
   },
   {
     path: "atenciones",
-    loadChildren: () => AtencionesModule
+    loadChildren: () => AtencionesModule,
+    canActivate: [ AuthGuard ]
   },
   {
     path: '',
