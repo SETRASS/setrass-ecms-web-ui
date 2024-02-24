@@ -88,8 +88,6 @@ export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
 
   changePassword(): void{
     const frontendHost = window.location.href.split("//")[1].split("/")[0]
-    console.log("correo: ", this.currentUser.email)
-    console.log("url: ", frontendHost)
     if( frontendHost && this.currentUser && this.currentUser.email){
       let data:any = {
         email: this.currentUser.email,
