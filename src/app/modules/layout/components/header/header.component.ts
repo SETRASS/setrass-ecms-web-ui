@@ -25,6 +25,7 @@ export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
   public isShowNavbar: boolean = false;
   public currentUser: any = {};
   public inDashboard: boolean = false;
+  
 
   constructor(
     private layout: LayoutService,
@@ -90,16 +91,52 @@ export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
     console.log("correo: ", this.currentUser.email)
     console.log("url: ", frontendHost)
     if( frontendHost && this.currentUser && this.currentUser.email){
-      //! mandamos el correo de actualizar contraseña
-      console.log("mandamos el correo")
-      const Toast = this.createToast();
-        let toastContent:any = {
-          icon: 'error',
-          title: "Ocurrio un error"
-        };
+      let data:any = {
+        email: this.currentUser.email,
+        frontendHost: frontendHost
+      }
 
-        
+      const Toast = this.createToast();
+      this.authService.sendPasswordChange(data).subscribe({
+        next:(res:any)=>{
+          console.log("res: ", res)
+
+          Toast.fire({
+            icon: 'success',
+            title: "Correo enviado exitosamente, revisar su bandeja de entrada o spam"
+          });
+          this.logout();
+        },
+        error:(error)=>{
+          
+          const err = error.message || error;
+          console.warn(err);
+          return Toast.fire({
+            icon: 'error',
+            title: err
+          });
+        }
+      });        
     }
+  }
+
+  showAlertChangePassword() {
+    Swal.fire({
+      icon: 'warning',
+      title: `¿Estás seguro qué desea Cambiar su contraseña?`,
+      text: "Recibirá un enlace por correo para actualizar su contraseña",          
+      showCancelButton: true,
+      cancelButtonText: 'Cancelar',
+      confirmButtonText: `Si`,
+      customClass: {
+        confirmButton: 'btn btn-success',
+        cancelButton: 'btn btn-danger'
+      }
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.changePassword();
+      }
+    });
   }
 
   ngOnDestroy() {
