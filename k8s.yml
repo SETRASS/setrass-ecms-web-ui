@@ -3,7 +3,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   annotations:
-    kubernetes.io/change-cause: "Actualizacion del módulo de parametrizacion v1.0.1 y kubernetes v2.0.60"
+    kubernetes.io/change-cause: "Actualizacion del módulo de atenciones v0.0.11 y kubernetes v2.0.61"
   name: setrass-ecms-web-ui
   labels:
     app: web-ui
@@ -22,7 +22,7 @@ spec:
     spec:
       containers:
       - name: web-ui
-        image: 648505502080.dkr.ecr.us-east-1.amazonaws.com/setrass-ecms-web-ui:2.0.60
+        image: 648505502080.dkr.ecr.us-east-1.amazonaws.com/setrass-ecms-web-ui:2.0.61
 
 ---
 #SERVICE
