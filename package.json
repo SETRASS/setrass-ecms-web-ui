@@ -1,6 +1,6 @@
 {
   "name": "setrass-ecms-web-ui",
-  "version": "1.3.21",
+  "version": "1.3.22",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -45,7 +45,7 @@
     "@setrass-hn/inspeccion": "0.2.20",
     "@setrass-hn/kt": "1.0.1",
     "@setrass-hn/layout-core": "1.0.2",
-    "@setrass-hn/parametrizacion": "0.0.5",
+    "@setrass-hn/parametrizacion": "1.0.1",
     "@setrass-hn/partials": "1.0.1",
     "@setrass-hn/patrono-empleador": "0.1.30",
     "@setrass-hn/staff": "1.0.11",
