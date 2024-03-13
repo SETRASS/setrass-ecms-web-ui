@@ -14,6 +14,7 @@ import { environment } from '../environments/environment';
 import { FakeAPIService } from './_fake/fake-api.service';
 import {NgxPrintModule} from "ngx-print";
 import { CalculoPrestacionesModule } from './modules/calculo-prestaciones/calculo-prestaciones.module';
+import { ServiceWorkerModule } from '@angular/service-worker';
 // #fake-end#
 
 @NgModule({
@@ -36,7 +37,13 @@ import { CalculoPrestacionesModule } from './modules/calculo-prestaciones/calcul
     AppRoutingModule,
     InlineSVGModule.forRoot(),
     NgbModule,
-    CalculoPrestacionesModule
+    CalculoPrestacionesModule,
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: environment.production,
+      // Register the ServiceWorker as soon as the application is stable
+      // or after 30 seconds (whichever comes first).
+      registrationStrategy: 'registerWhenStable:30000'
+    })
   ],
   providers: [
   ],
