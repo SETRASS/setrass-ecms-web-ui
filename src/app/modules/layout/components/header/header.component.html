@@ -68,7 +68,7 @@
               menu-state-icon-primary
               menu-state-bullet-primary
               menu-arrow-gray-400
-              fw-bold
+              fw-bolder
               my-5 my-lg-0
               align-items-stretch
             "
@@ -140,8 +140,8 @@
         <!--begin::User-->
         <div *ngIf="isShowNavbar" class="d-flex align-items-center me-n3 ms-1 ms-lg-3" id="kt_header_user_menu_toggle">
           <!--begin::Menu wrapper-->
-          <div class="btn btn-icon btn-active-light-primary btn btn-icon btn-active-light-primary btn-custom w-30px h-30px w-md-40px h-md-40px" data-kt-menu-trigger="click" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end">
-            <div class="symbol symbol-45px symbol-circle mb-5">
+          <div class="btn btn-icon btn-active-light-primary btn btn-icon btn-active-light-primary btn-custom w-30px h-30px w-md-40px h-md-40px m-5 m-md-0" data-kt-menu-trigger="click" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end">
+            <div class="symbol symbol-40px symbol-circle mb-1">
               <span class="symbol-label fs-1x fw-normal text-primary bg-light-primary">{{initialName}}</span>
             </div>
           </div>
@@ -152,7 +152,7 @@
               <div class="menu-content d-flex align-items-center px-3 gap-5">
                 <!--begin::Avatar-->
                 <div class="symbol symbol-50px symbol-circle">
-                  <span class="symbol-label fs-1x fw-normal text-primary bg-light-primary">{{initialName}}</span>
+                  <span class="symbol-label fs-3 fw-bolder text-primary bg-light-primary">{{initialName}}</span>
                 </div>
                 <div class="d-flex flex-column w-100">
                   <div class="fw-bolder d-flex align-items-center fs-5">{{currentUser.name}}
@@ -211,7 +211,7 @@
             <div class="menu-item px-5 my-1">
               <a (click)="showAlertChangePassword()" class="menu-link px-5">Cambiar Contraseña</a>
             </div>
-            
+
             <div class="menu-item px-5">
               <a (click)="logout()" class="menu-link px-5">Cerrar sesión</a>
             </div>

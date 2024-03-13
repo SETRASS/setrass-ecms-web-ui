@@ -36,30 +36,30 @@
          <span class="menu-title">Inicio</span>
        </a>
     </div>
-   
+
      <div  class="menu-item" *ngFor="let item of navItems">
-       
-         <a class="menu-link py-3" *ngIf="item.childRoutes.length == 0 && searchAuthorization(item.role)">
+
+         <a class="menu-link py-3 fw-bolder" *ngIf="item.childRoutes.length == 0 && searchAuthorization(item.role)">
            <span class="menu-title" routerLink={{item.route}}>{{item.name}}</span>
          </a>
-       
+
        <!-- dropdown start -->
-       
+
          <div class="menu-link py-3" *ngIf="item.childRoutes.length && searchAuthorization(item.role)" ngbDropdown #Drop="ngbDropdown" display="dynamic">
            <span class="menu-title" ngbDropdownToggle>
              {{item.name}}
            </span>
-         
+
            <div ngbDropdownMenu>
-             <a class="menu-link py-3"  ngbDropdownItem routerLink={{item.route}}> <span>Inicio</span> </a>
+             <a class="menu-link py-3 fw-bolder"  ngbDropdownItem routerLink={{item.route}}> <span>Inicio</span> </a>
              <div  *ngFor="let route of item.childRoutes">
-               <a class="menu-link py-3" ngbDropdownItem  *ngIf="searchAuthorization(route.role)" routerLink={{route.route}}> <span> {{route.name}} </span></a>
-             </div>     
+               <a class="menu-link py-3 fw-bolder" ngbDropdownItem  *ngIf="searchAuthorization(route.role)" routerLink={{route.route}}> <span> {{route.name}} </span></a>
+             </div>
            </div>
          </div>
-       
+
        <!-- dropdown end -->
-     </div>       
+     </div>
    </div>
-   
+
 </ng-template>
