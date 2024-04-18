@@ -1,6 +1,6 @@
 {
   "name": "setrass-ecms-web-ui",
-  "version": "2.0.82",
+  "version": "2.0.83",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -39,12 +39,12 @@
     "@ngx-translate/core": "14.0.0",
     "@ngx-translate/http-loader": "7.0.0",
     "@popperjs/core": "2.11.2",
-    "@setrass-hn/atenciones": "0.0.18",
+    "@setrass-hn/atenciones": "0.0.19",
     "@setrass-hn/auth": "^1.0.20",
     "@setrass-hn/calculo-prestaciones": "0.1.20",
     "@setrass-hn/i18n": "1.0.4",
     "@setrass-hn/indicadores": "0.0.3",
-    "@setrass-hn/inspeccion": "0.2.37",
+    "@setrass-hn/inspeccion": "0.2.39",
     "@setrass-hn/kt": "1.0.1",
     "@setrass-hn/layout-core": "1.0.2",
     "@setrass-hn/parametrizacion": "1.0.3",
