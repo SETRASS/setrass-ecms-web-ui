@@ -1,6 +1,6 @@
 {
   "name": "setrass-ecms-web-ui",
-  "version": "2.0.83",
+  "version": "2.0.84",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -103,7 +103,7 @@
     "@angular/cli": "13.3.0",
     "@angular/compiler-cli": "13.3.0",
     "@types/bootstrap": "5.1.9",
-    "@types/datatables.net": "^1.10.21",
+    "@types/datatables.net": "~1.10.21",
     "@types/datatables.net-buttons": "^1.4.7",
     "@types/jest": "^28.1.4",
     "@types/jquery": "^3.5.9",
