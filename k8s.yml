@@ -3,7 +3,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   annotations:
-    kubernetes.io/change-cause: "Actualización del módulo de inspeccion 0.2.40, y kubernetes v2.0.86"
+    kubernetes.io/change-cause: "Actualización del módulo de inspeccion 0.2.42, y kubernetes v2.0.87"
   name: setrass-ecms-web-ui
   labels:
     app: web-ui
@@ -22,7 +22,7 @@ spec:
     spec:
       containers:
       - name: web-ui
-        image: 648505502080.dkr.ecr.us-east-1.amazonaws.com/setrass-ecms-web-ui:2.0.86
+        image: 648505502080.dkr.ecr.us-east-1.amazonaws.com/setrass-ecms-web-ui:2.0.87
 
 ---
 #SERVICE
